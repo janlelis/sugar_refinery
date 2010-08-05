@@ -1,0 +1,15 @@
+unary:
+  summary: Easy conversion between strings and symbols.
+  why: Often, you do not care if you get a ⇧String⇧ or a ⇧Symbol⇧ as input - but you need one of both when analysing it.
+  methods:
+    String#+@: "+'was_string' # => 'was_string'"
+    String#-@: "-'was_string' # => :was_string"
+    Symbol#+@: "+:was_symbol  # => 'was_symbol'"
+    Symbol#-@: "-:was_symbol  # => :was_symbol"
+  package: default
+  info:
+  - Inspired by
+  versions:
+  - 1.9
+  - 1.8 (+:literal not possible)
+

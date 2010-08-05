@@ -1,0 +1,13 @@
+enumerable:
+  summary: ⇧Enumerable⇧ extensions.
+  methods:
+    Enumerable#mash: "[1,2,3].mash{|e| [e, e.to_s] } # => {1=>'1',2=>'2',3=>'3'}"
+  package: default
+  info:
+  - Inspired by Ruby Facets' mash
+  versions:
+  - 1.9
+  - 1.8
+  authors:
+  - Jan Lelis
+

@@ -1,0 +1,15 @@
+string:
+  summary: ⇧String⇧ extensions.
+  why: Strings cannot be comfortable enough ;)
+  methods:
+    String#^: "'Yes vs No'^3 # => 'Yes'"
+    String#lchomp: "'   Yes'.lchomp  # => 'Yes'"
+    String#lchomp!: "# mutable lchomp version"
+    String#ords: "'Hallo'.ords # => [72, 97, 108, 108, 111]"
+  package: default
+  versions:
+  - 1.9
+  - 1.8
+  authors:
+  - Jan Lelis
+

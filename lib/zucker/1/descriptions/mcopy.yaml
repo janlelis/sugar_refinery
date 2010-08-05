@@ -1,0 +1,14 @@
+mcopy:
+  summary: Adds ⇧Object#mcopy⇧ to create a deep copy using ⇧Marshal⇧.
+  why: Every Ruby book describes, you can do ⇧Marshal.load Marshal.dump object⇧ to create a deep copy... But who needs this verbose syntax in everyday coding?
+  methods:
+    Object#mcopy: |
+      a = %w[hello world]
+      b = a.mcopy
+  package: default
+  versions:
+  - 1.9
+  - 1.8
+  authors:
+  - Jan Lelis
+

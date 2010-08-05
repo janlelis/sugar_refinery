@@ -1,0 +1,12 @@
+dclone:
+  summary: Adds deep ⇧clon⇧/⇧dup⇧ methods
+  why: Sometimes you need real copies
+  methods:
+    Object#dclone: 123
+  package: default
+  versions:
+  - 1.9
+  - 1.8
+  authors:
+  - Jan Lelis
+

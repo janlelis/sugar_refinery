@@ -1,0 +1,14 @@
+blank:
+  summary: Does pretty the same as in ActiveSupport (Every object can be asked if it is blank)
+  why: It's too familiar ;)
+  methods:
+    Object#blank?: "'an object'.blank? # => false"
+  package: default
+  info:
+  - See ActiveSupport
+  versions:
+  - 1.9
+  - 1.8
+  authors:
+  - Jan Lelis (this implementation)
+
