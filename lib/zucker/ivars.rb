@@ -1,7 +1,7 @@
 def instance_variables_from(obj, *only)
   iter =
   if    obj.is_a? Binding
-    obj.eval('local_variables').map{|e| [obj.eval(e), e] }
+    obj.eval('local_variables').map{|e| [obj.eval("#{e}"), e] }
   elsif obj.is_a? Hash
     obj.map{|k,v| [v,k] }
   else
