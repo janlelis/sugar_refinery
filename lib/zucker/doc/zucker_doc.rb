@@ -13,7 +13,8 @@ class ZuckerDoc
     'versions' => 'Compatibility',
     'authors'  => 'Authors',
   }
-  ORDER   = %w|summary why methods info spec source versions|
+  ORDER    = %w|summary why methods info spec source versions|
+  PACKAGES = %w|default debug|
 
   # template vars
   @version = 1
@@ -35,8 +36,8 @@ class ZuckerDoc
       output = 'zucker_doc.html'
       result = DATA.read
 
-      cubes_html = cubes.sort.map{ |name, hash|
-        cube name, hash
+      cubes_html = PACKAGES.map{ |pkg_name|
+        package pkg_name, cubes.select{|name, hash| hash['package'] == pkg_name }
       }.join
 
       # insert cubes
@@ -47,7 +48,7 @@ class ZuckerDoc
       result.gsub! /⇧(.+?)⇧/, '<code>\1</code>'
       # strong
       result.gsub! /●(.+?)●/, '<strong>\1</strong>'
-      # hyper!links
+      # hyper→links
       result.gsub! /→(.+?)→(.+?)→/, '<a href="\2">\1</a>'
 
       File.open output, 'w' do |file|
@@ -56,6 +57,18 @@ class ZuckerDoc
     end
 
   protected
+
+    def package(name, cubes)
+      cube_html = cubes.sort.map{ |name, hash|
+        cube name, hash
+      }.join
+
+      %{
+      <h2 title="require 'zucker/#{name}'">Cubes[#{name}]</h2>
+        <div class="cubes">
+        #{cube_html}
+        </div> }
+    end
 
     def cube(name, hash)
       @cube_name = name
@@ -475,10 +488,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <p class="text">You can also lock your require to a specific version of Zucker by simply putting the version before the cube name in this way:
       <code>require 'zucker/1/egonil'</code>. Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs).</p>
 
-      <h2 title="require 'zucker/all'">Cubes</h2>
-      <div class="cubes">
-        ....
-      </div>
+       ....
 <br/>
     </div>
   <div id="foot">
