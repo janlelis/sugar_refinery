@@ -323,10 +323,10 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 
       <h2 title="require 'zucker/all'">Cubes</h2>
       <div class="cubes">
-         <h3 title="require 'zucker/1/D'">D</h3>
+         <h3 title="require 'zucker/D'">D</h3>
          <table class="cube_table"
                 id="D_cube"
-                title="require 'zucker/1/D'"> <tr><th>Summary</th>    <td>Easy debug printing with the <code>p</code> alternative <code>.D</code>. It outputs to stdout and returns <code>self</code>. Accepts a block.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#D</h5><pre class="usage source" style="display:block">some.<span class="co">D</span>.methods.<span class="co">D</span>.noone.<span class="co">D</span>.knows.<span class="co">D</span>
+                title="require 'zucker/D'"> <tr><th>Summary</th>    <td>Easy debug printing with the <code>p</code> alternative <code>.D</code>. It outputs to stdout and returns <code>self</code>. Accepts a block.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#D</h5><pre class="usage source" style="display:block">some.<span class="co">D</span>.methods.<span class="co">D</span>.noone.<span class="co">D</span>.knows.<span class="co">D</span>
 <span class="c"># ...outputs 4 lines with the inspected objects</span>
 <span class="c"># =&gt; (result)</span>
 
@@ -338,8 +338,8 @@ name = <span class="s"><span class="dl">'</span><span class="k">Earth</span><spa
 <span class="s"><span class="dl">'</span><span class="k">Hello </span><span class="dl">'</span></span> + name.<span class="co">D</span>{|e| <span class="s"><span class="dl">&quot;</span><span class="k">The length is: </span><span class="il"><span class="idl">#{</span>e.size<span class="idl">}</span></span><span class="dl">&quot;</span></span>}
 <span class="c"># outputs &quot;The length is: 5&quot;</span>
 <span class="c"># =&gt; 'Hello Earth'</span>
-</pre></td></tr><tr><th>Further information</th>    <td>This is inspired by the funny <a href="http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions"><code>.tap</code> method</a></td></tr><tr><th>Specification</th>    <td> <span id="show_D_specification">(<a href="javascript:show('D_specification')">show</a>)</span>
-         <pre class="source" id="D_specification">require <span class="s"><span class="dl">'</span><span class="k">D</span><span class="dl">'</span></span>
+</pre></td></tr><tr><th>Further information</th>    <td>This is inspired by the funny <a href="http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions"><code>.tap</code> method</a></td></tr><tr><th>Specification</th>    <td> <span id="show_D_spec">(<a href="javascript:show('D_spec')">show</a>)</span>
+         <pre class="source" id="D_spec">require <span class="s"><span class="dl">'</span><span class="k">D</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Object#D</span><span class="dl">'</span></span> <span class="r">do</span>
 
@@ -382,11 +382,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#D</span
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/aliases'">aliases</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/aliases'">aliases</h3>
          <table class="cube_table"
                 id="aliases_cube"
-                title="require 'zucker/1/aliases'"> <tr><th>Summary</th>    <td>Some convenient aliases (and constants) for existing methods.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#is_an?</h5><pre class="usage source" style="display:block"><span class="co">Object</span>.is_a?</pre><h5>Enumerable#with</h5><pre class="usage source" style="display:block"><span class="co">Enumerable</span><span class="c">#zip</span></pre><h5>Enumerable#%</h5><pre class="usage source" style="display:block"><span class="co">Enumerable</span><span class="c">#zip</span></pre><h5>Array#**</h5><pre class="usage source" style="display:block"><span class="co">Array</span><span class="c">#product</span></pre><h5>Hash#+</h5><pre class="usage source" style="display:block"><span class="co">Hash</span><span class="c">#merge</span></pre><h5>Binding#[]</h5><pre class="usage source" style="display:block"><span class="co">Binding</span><span class="c">#eval</span></pre><h5>Infinity</h5><pre class="usage source" style="display:block"><span class="fl">1.0</span> / <span class="fl">0.0</span></pre><h5>NaN</h5><pre class="usage source" style="display:block"><span class="fl">0.0</span> / <span class="fl">0.0</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_aliases_specification">(<a href="javascript:show('aliases_specification')">show</a>)</span>
-         <pre class="source" id="aliases_specification">require <span class="s"><span class="dl">'</span><span class="k">aliases</span><span class="dl">'</span></span>
+                title="require 'zucker/aliases'"> <tr><th>Summary</th>    <td>Some convenient aliases (and constants) for existing methods.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#is_an?</h5><pre class="usage source" style="display:block"><span class="co">Object</span>.is_a?</pre><h5>Enumerable#with</h5><pre class="usage source" style="display:block"><span class="co">Enumerable</span><span class="c">#zip</span></pre><h5>Enumerable#%</h5><pre class="usage source" style="display:block"><span class="co">Enumerable</span><span class="c">#zip</span></pre><h5>Array#**</h5><pre class="usage source" style="display:block"><span class="co">Array</span><span class="c">#product</span></pre><h5>Hash#+</h5><pre class="usage source" style="display:block"><span class="co">Hash</span><span class="c">#merge</span></pre><h5>Binding#[]</h5><pre class="usage source" style="display:block"><span class="co">Binding</span><span class="c">#eval</span></pre><h5>Infinity</h5><pre class="usage source" style="display:block"><span class="fl">1.0</span> / <span class="fl">0.0</span></pre><h5>NaN</h5><pre class="usage source" style="display:block"><span class="fl">0.0</span> / <span class="fl">0.0</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_aliases_spec">(<a href="javascript:show('aliases_spec')">show</a>)</span>
+         <pre class="source" id="aliases_spec">require <span class="s"><span class="dl">'</span><span class="k">aliases</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">(aliases)</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should create these aliases [ sorry, no real spec for this one :P ] </span><span class="dl">'</span></span> <span class="r">do</span>
@@ -445,11 +445,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">(aliases)</spa
 <span class="co">Infinity</span> = <span class="fl">1.0</span> / <span class="fl">0.0</span> <span class="c"># or 2*Float::MAX</span>
 <span class="co">NaN</span>      = <span class="fl">0.0</span> / <span class="fl">0.0</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/array'">array</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/array'">array</h3>
          <table class="cube_table"
                 id="array_cube"
-                title="require 'zucker/1/array'"> <tr><th>Summary</th>    <td>Methods one could miss for <code>Array</code>.</td></tr><tr><th>Why?</th>    <td><p><code>Array</code> has <code>&</code> and <code>|</code>, but why does it not have <code>^</code>?</p><p><code>sum</code> is an alias for <code>inject(:+)</code>, but it is just needed pretty often!</p></td></tr><tr><th>Methods/Usage</th>    <td><h5>Array#^</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>] ^ [<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>,<span class="i">6</span>]  <span class="c"># =&gt; [1,2,5,6]</span></pre><h5>Array#sum</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>].sum  <span class="c"># =&gt; 15</span></pre><h5>Array#chrs</h5><pre class="usage source" style="display:block">[<span class="i">72</span>, <span class="i">97</span>, <span class="i">108</span>, <span class="i">108</span>, <span class="i">111</span>].chrs  <span class="c"># =&gt; 'Hallo'</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_array_specification">(<a href="javascript:show('array_specification')">show</a>)</span>
-         <pre class="source" id="array_specification">require <span class="s"><span class="dl">'</span><span class="k">array</span><span class="dl">'</span></span>
+                title="require 'zucker/array'"> <tr><th>Summary</th>    <td>Methods one could miss for <code>Array</code>.</td></tr><tr><th>Why?</th>    <td><p><code>Array</code> has <code>&</code> and <code>|</code>, but why does it not have <code>^</code>?</p><p><code>sum</code> is an alias for <code>inject(:+)</code>, but it is just needed pretty often!</p></td></tr><tr><th>Methods/Usage</th>    <td><h5>Array#^</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>] ^ [<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>,<span class="i">6</span>]  <span class="c"># =&gt; [1,2,5,6]</span></pre><h5>Array#sum</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>].sum  <span class="c"># =&gt; 15</span></pre><h5>Array#chrs</h5><pre class="usage source" style="display:block">[<span class="i">72</span>, <span class="i">97</span>, <span class="i">108</span>, <span class="i">108</span>, <span class="i">111</span>].chrs  <span class="c"># =&gt; 'Hallo'</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_array_spec">(<a href="javascript:show('array_spec')">show</a>)</span>
+         <pre class="source" id="array_spec">require <span class="s"><span class="dl">'</span><span class="k">array</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Array#^</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should do an exclusive or</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -486,11 +486,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">Array#chrs</sp
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/array2proc'">array2proc</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/array2proc'">array2proc</h3>
          <table class="cube_table"
                 id="array2proc_cube"
-                title="require 'zucker/1/array2proc'"> <tr><th>Summary</th>    <td>Calls the method named by the first paramenter and passes the other elements as paramaters.</td></tr><tr><th>Why?</th>    <td>When using <code>Symbol#to_proc</code>, you often wish to pass parameters.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Array#to_proc</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map( &amp;[<span class="sy">:to_s</span>, <span class="i">2</span>] )  <span class="c"># =&gt; [&quot;1&quot;, &quot;10&quot;, &quot;11&quot;, &quot;100&quot;]</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by <a href="http://www.sanityinc.com/articles/adding-array-to-proc-to-ruby">this article</a>.<br/>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_array2proc_specification">(<a href="javascript:show('array2proc_specification')">show</a>)</span>
-         <pre class="source" id="array2proc_specification">require <span class="s"><span class="dl">'</span><span class="k">array2proc</span><span class="dl">'</span></span>
+                title="require 'zucker/array2proc'"> <tr><th>Summary</th>    <td>Calls the method named by the first paramenter and passes the other elements as paramaters.</td></tr><tr><th>Why?</th>    <td>When using <code>Symbol#to_proc</code>, you often wish to pass parameters.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Array#to_proc</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map( &amp;[<span class="sy">:to_s</span>, <span class="i">2</span>] )  <span class="c"># =&gt; [&quot;1&quot;, &quot;10&quot;, &quot;11&quot;, &quot;100&quot;]</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by <a href="http://www.sanityinc.com/articles/adding-array-to-proc-to-ruby">this article</a>.<br/>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_array2proc_spec">(<a href="javascript:show('array2proc_spec')">show</a>)</span>
+         <pre class="source" id="array2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">array2proc</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Array#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should call the method of the first symbol, using the remaining elements as paramaters</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -505,11 +505,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">Array#to_proc<
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/binding'">binding</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/binding'">binding</h3>
          <table class="cube_table"
                 id="binding_cube"
-                title="require 'zucker/1/binding'"> <tr><th>Summary</th>    <td>Adds a verbose Binding#inspect</td></tr><tr><th>Why?</th>    <td>It gives you information about the current environment</td></tr><tr><th>Methods/Usage</th>    <td><h5>Binding#inspect</h5><pre class="usage source" style="display:block">binding.inspect</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_binding_specification">(<a href="javascript:show('binding_specification')">show</a>)</span>
-         <pre class="source" id="binding_specification">require <span class="s"><span class="dl">'</span><span class="k">binding</span><span class="dl">'</span></span>
+                title="require 'zucker/binding'"> <tr><th>Summary</th>    <td>Adds a verbose Binding#inspect</td></tr><tr><th>Why?</th>    <td>It gives you information about the current environment</td></tr><tr><th>Methods/Usage</th>    <td><h5>Binding#inspect</h5><pre class="usage source" style="display:block">binding.inspect</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_binding_spec">(<a href="javascript:show('binding_spec')">show</a>)</span>
+         <pre class="source" id="binding_spec">require <span class="s"><span class="dl">'</span><span class="k">binding</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Binding#inspect</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should output the current environment</span><span class="dl">'</span></span>
@@ -537,11 +537,11 @@ block_given?
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/blank'">blank</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/blank'">blank</h3>
          <table class="cube_table"
                 id="blank_cube"
-                title="require 'zucker/1/blank'"> <tr><th>Summary</th>    <td>Does pretty the same as in ActiveSupport (Every object can be asked if it is blank)</td></tr><tr><th>Why?</th>    <td>It's too familiar ;)</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#blank?</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">an object</span><span class="dl">'</span></span>.blank? <span class="c"># =&gt; false</span></pre></td></tr><tr><th>Further information</th>    <td>See ActiveSupport</td></tr><tr><th>Specification</th>    <td> <span id="show_blank_specification">(<a href="javascript:show('blank_specification')">show</a>)</span>
-         <pre class="source" id="blank_specification">require <span class="s"><span class="dl">'</span><span class="k">blank</span><span class="dl">'</span></span>
+                title="require 'zucker/blank'"> <tr><th>Summary</th>    <td>Does pretty the same as in ActiveSupport (Every object can be asked if it is blank)</td></tr><tr><th>Why?</th>    <td>It's too familiar ;)</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#blank?</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">an object</span><span class="dl">'</span></span>.blank? <span class="c"># =&gt; false</span></pre></td></tr><tr><th>Further information</th>    <td>See ActiveSupport</td></tr><tr><th>Specification</th>    <td> <span id="show_blank_spec">(<a href="javascript:show('blank_spec')">show</a>)</span>
+         <pre class="source" id="blank_spec">require <span class="s"><span class="dl">'</span><span class="k">blank</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Object#blank?</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should be blank for blank values</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -584,11 +584,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#blank?<
   }
 }
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/class2proc'">class2proc</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/class2proc'">class2proc</h3>
          <table class="cube_table"
                 id="class2proc_cube"
-                title="require 'zucker/1/class2proc'"> <tr><th>Summary</th>    <td>Creates a new instance of the class.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Class#to_proc</h5><pre class="usage source" style="display:block">[ [<span class="i">1</span>,<span class="i">2</span>],[<span class="i">3</span>,<span class="i">5</span>,<span class="i">6</span>,<span class="i">7</span>,<span class="i">3</span>] ].map(&amp;<span class="co">Set</span>) <span class="c"># =&gt; [ Set[1,2], Set[5,6,7,3] ]</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by Ruby Facets.<br/>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_class2proc_specification">(<a href="javascript:show('class2proc_specification')">show</a>)</span>
-         <pre class="source" id="class2proc_specification">require <span class="s"><span class="dl">'</span><span class="k">class2proc</span><span class="dl">'</span></span>
+                title="require 'zucker/class2proc'"> <tr><th>Summary</th>    <td>Creates a new instance of the class.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Class#to_proc</h5><pre class="usage source" style="display:block">[ [<span class="i">1</span>,<span class="i">2</span>],[<span class="i">3</span>,<span class="i">5</span>,<span class="i">6</span>,<span class="i">7</span>,<span class="i">3</span>] ].map(&amp;<span class="co">Set</span>) <span class="c"># =&gt; [ Set[1,2], Set[5,6,7,3] ]</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by Ruby Facets.<br/>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_class2proc_spec">(<a href="javascript:show('class2proc_spec')">show</a>)</span>
+         <pre class="source" id="class2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">class2proc</span><span class="dl">'</span></span>
 require <span class="s"><span class="dl">'</span><span class="k">set</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Class#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -604,17 +604,17 @@ describe <span class="s"><span class="dl">'</span><span class="k">Class#to_proc<
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/egonil'">egonil</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/egonil'">egonil</h3>
          <table class="cube_table"
                 id="egonil_cube"
-                title="require 'zucker/1/egonil'"> <tr><th>Summary</th>    <td>Creates a block, where <code>nil</code> does not raise <code>NoMethodError</code>s.</td></tr><tr><th>Methods/Usage</th>    <td><h5>egonil, nn</h5><pre class="usage source" style="display:block">egonil <span class="r">do</span>
+                title="require 'zucker/egonil'"> <tr><th>Summary</th>    <td>Creates a block, where <code>nil</code> does not raise <code>NoMethodError</code>s.</td></tr><tr><th>Methods/Usage</th>    <td><h5>egonil, nn</h5><pre class="usage source" style="display:block">egonil <span class="r">do</span>
   <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist
 <span class="r">end</span> <span class="c"># =&gt; nil</span>
 
 nn(<span class="i">5</span>){ <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist }
 <span class="c"># =&gt; 5</span>
-</pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://rbjl.net/26-the-28-bytes-of-ruby-joy">this post</a> for more information and discussion</td></tr><tr><th>Specification</th>    <td> <span id="show_egonil_specification">(<a href="javascript:show('egonil_specification')">show</a>)</span>
-         <pre class="source" id="egonil_specification">require <span class="s"><span class="dl">'</span><span class="k">egonil</span><span class="dl">'</span></span>
+</pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://rbjl.net/26-the-28-bytes-of-ruby-joy">this post</a> for more information and discussion</td></tr><tr><th>Specification</th>    <td> <span id="show_egonil_spec">(<a href="javascript:show('egonil_spec')">show</a>)</span>
+         <pre class="source" id="egonil_spec">require <span class="s"><span class="dl">'</span><span class="k">egonil</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">egonil</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should not raise nil exceptions in the block</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -655,11 +655,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">egonil</span><
 
 <span class="r">alias</span> <span class="fu">nn</span> <span class="fu">egonil</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/enumerable'">enumerable</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/enumerable'">enumerable</h3>
          <table class="cube_table"
                 id="enumerable_cube"
-                title="require 'zucker/1/enumerable'"> <tr><th>Summary</th>    <td><code>Enumerable</code> extensions.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Enumerable#mash</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>].mash{|e| [e, e.to_s] } <span class="c"># =&gt; {1=&gt;'1',2=&gt;'2',3=&gt;'3'}</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by Ruby Facets' mash</td></tr><tr><th>Specification</th>    <td> <span id="show_enumerable_specification">(<a href="javascript:show('enumerable_specification')">show</a>)</span>
-         <pre class="source" id="enumerable_specification">require <span class="s"><span class="dl">'</span><span class="k">enumerable</span><span class="dl">'</span></span>
+                title="require 'zucker/enumerable'"> <tr><th>Summary</th>    <td><code>Enumerable</code> extensions.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Enumerable#mash</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>].mash{|e| [e, e.to_s] } <span class="c"># =&gt; {1=&gt;'1',2=&gt;'2',3=&gt;'3'}</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by Ruby Facets' mash</td></tr><tr><th>Specification</th>    <td> <span id="show_enumerable_spec">(<a href="javascript:show('enumerable_spec')">show</a>)</span>
+         <pre class="source" id="enumerable_spec">require <span class="s"><span class="dl">'</span><span class="k">enumerable</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Enumerable#mash</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should &quot;map&quot; a hash</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -676,11 +676,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">Enumerable#mas
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/hash'">hash</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/hash'">hash</h3>
          <table class="cube_table"
                 id="hash_cube"
-                title="require 'zucker/1/hash'"> <tr><th>Summary</th>    <td>Some sugar for dealing with hashs.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Hash.zip</h5><pre class="usage source" style="display:block"><span class="co">Hash</span>.zip [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>], [<span class="i">4</span>,<span class="i">5</span>,<span class="i">6</span>] <span class="c"># =&gt; {1 =&gt; 4, 2 =&gt; 5, 3 =&gt; 6}</span></pre><h5>Hash#<<</h5><pre class="usage source" style="display:block">{<span class="i">1</span> =&gt; <span class="i">2</span>} &lt;&lt; [<span class="i">3</span>, <span class="i">4</span>] <span class="c"># =&gt; {1 =&gt; 2, 3 =&gt; 4}</span></pre></td></tr><tr><th>Further information</th>    <td>Some of the operators are inspired by Ruby Facets</td></tr><tr><th>Specification</th>    <td> <span id="show_hash_specification">(<a href="javascript:show('hash_specification')">show</a>)</span>
-         <pre class="source" id="hash_specification">require <span class="s"><span class="dl">'</span><span class="k">hash</span><span class="dl">'</span></span>
+                title="require 'zucker/hash'"> <tr><th>Summary</th>    <td>Some sugar for dealing with hashs.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Hash.zip</h5><pre class="usage source" style="display:block"><span class="co">Hash</span>.zip [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>], [<span class="i">4</span>,<span class="i">5</span>,<span class="i">6</span>] <span class="c"># =&gt; {1 =&gt; 4, 2 =&gt; 5, 3 =&gt; 6}</span></pre><h5>Hash#<<</h5><pre class="usage source" style="display:block">{<span class="i">1</span> =&gt; <span class="i">2</span>} &lt;&lt; [<span class="i">3</span>, <span class="i">4</span>] <span class="c"># =&gt; {1 =&gt; 2, 3 =&gt; 4}</span></pre></td></tr><tr><th>Further information</th>    <td>Some of the operators are inspired by Ruby Facets</td></tr><tr><th>Specification</th>    <td> <span id="show_hash_spec">(<a href="javascript:show('hash_spec')">show</a>)</span>
+         <pre class="source" id="hash_spec">require <span class="s"><span class="dl">'</span><span class="k">hash</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Hash.zip</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should zip together both given enumerables and take them as key=&gt;values for a new hash</span><span class="dl">'</span></span>
@@ -706,14 +706,14 @@ describe <span class="s"><span class="dl">'</span><span class="k">Hash#&lt;&lt;<
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/hash2proc'">hash2proc</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/hash2proc'">hash2proc</h3>
          <table class="cube_table"
                 id="hash2proc_cube"
-                title="require 'zucker/1/hash2proc'"> <tr><th>Summary</th>    <td>Use a hash to apply procs to specific objects.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Hash#to_proc</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map(&amp;{
+                title="require 'zucker/hash2proc'"> <tr><th>Summary</th>    <td>Use a hash to apply procs to specific objects.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Hash#to_proc</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map(&amp;{
 <span class="i">2</span> =&gt; lambda {|e| e + <span class="i">1000</span>},
 <span class="i">4</span> =&gt; <span class="sy">:to_s</span>,
-}) <span class="c"># =&gt; [1, 1002, 3, '4']</span></pre></td></tr><tr><th>Further information</th>    <td>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_hash2proc_specification">(<a href="javascript:show('hash2proc_specification')">show</a>)</span>
-         <pre class="source" id="hash2proc_specification">require <span class="s"><span class="dl">'</span><span class="k">hash2proc</span><span class="dl">'</span></span>
+}) <span class="c"># =&gt; [1, 1002, 3, '4']</span></pre></td></tr><tr><th>Further information</th>    <td>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_hash2proc_spec">(<a href="javascript:show('hash2proc_spec')">show</a>)</span>
+         <pre class="source" id="hash2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">hash2proc</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Hash#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should run the proc given in the value for a key in the hash</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -736,18 +736,18 @@ describe <span class="s"><span class="dl">'</span><span class="k">Hash#to_proc</
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/iterate'">iterate</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/iterate'">iterate</h3>
          <table class="cube_table"
                 id="iterate_cube"
-                title="require 'zucker/1/iterate'"> <tr><th>Summary</th>    <td>Iterate over one or more collections.</td></tr><tr><th>Why?</th>    <td>It's like <code>.each</code> with two differences: It feels more like a control structure and you can easily iterate over multiple objects.</td></tr><tr><th>Methods/Usage</th>    <td><h5>iterate</h5><pre class="usage source" style="display:block">iterate [<span class="i">1</span>,<span class="i">2</span>], [<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>] <span class="r">do</span> |e,f|
+                title="require 'zucker/iterate'"> <tr><th>Summary</th>    <td>Iterate over one or more collections.</td></tr><tr><th>Why?</th>    <td>It's like <code>.each</code> with two differences: It feels more like a control structure and you can easily iterate over multiple objects.</td></tr><tr><th>Methods/Usage</th>    <td><h5>iterate</h5><pre class="usage source" style="display:block">iterate [<span class="i">1</span>,<span class="i">2</span>], [<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>] <span class="r">do</span> |e,f|
   puts <span class="s"><span class="dl">&quot;</span><span class="il"><span class="idl">#{</span>e<span class="idl">}</span></span><span class="k">,</span><span class="il"><span class="idl">#{</span>f<span class="idl">}</span></span><span class="dl">&quot;</span></span>
 <span class="r">end</span>
 <span class="c"># outputs</span>
 <span class="c">#  1,3</span>
 <span class="c">#  2,4</span>
 <span class="c">#  ,5</span>
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_iterate_specification">(<a href="javascript:show('iterate_specification')">show</a>)</span>
-         <pre class="source" id="iterate_specification">require <span class="s"><span class="dl">'</span><span class="k">iterate</span><span class="dl">'</span></span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_iterate_spec">(<a href="javascript:show('iterate_spec')">show</a>)</span>
+         <pre class="source" id="iterate_spec">require <span class="s"><span class="dl">'</span><span class="k">iterate</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Object#iterate</span><span class="dl">'</span></span> <span class="r">do</span>
   let <span class="sy">:a</span>   <span class="r">do</span> [<span class="i">1</span>, <span class="i">2</span>, <span class="i">3</span>]     <span class="r">end</span>
@@ -821,17 +821,17 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#iterate
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/ivars'">ivars</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/ivars'">ivars</h3>
          <table class="cube_table"
                 id="ivars_cube"
-                title="require 'zucker/1/ivars'"> <tr><th>Summary</th>    <td>This method lets you easily assign lots of instance variables.</td></tr><tr><th>Why?</th>    <td>Often, you have to write boilerplate code for assigning instance varialbles, for example this one:<br/><code>def initialize(variable1, variable2)<br/>  @variable1, @variable2 = variable1, variable2<br/>end</code><br/></td></tr><tr><th>Methods/Usage</th>    <td><h5>instance_variables_from, ivars</h5><pre class="usage source" style="display:block"><span class="r">def</span> <span class="fu">a_method</span>(a = <span class="i">1</span>, b = <span class="i">2</span>)
+                title="require 'zucker/ivars'"> <tr><th>Summary</th>    <td>This method lets you easily assign lots of instance variables.</td></tr><tr><th>Why?</th>    <td>Often, you have to write boilerplate code for assigning instance varialbles, for example this one:<br/><code>def initialize(variable1, variable2)<br/>  @variable1, @variable2 = variable1, variable2<br/>end</code><br/></td></tr><tr><th>Methods/Usage</th>    <td><h5>instance_variables_from, ivars</h5><pre class="usage source" style="display:block"><span class="r">def</span> <span class="fu">a_method</span>(a = <span class="i">1</span>, b = <span class="i">2</span>)
   instance_variables_from binding <span class="c"># assigns @a and @b</span>
 
   params = {<span class="sy">:c</span> =&gt; <span class="i">3</span>, <span class="sy">:d</span> =&gt; <span class="i">4</span>}
   instance_variables_from params <span class="c"># # assigns @c and @d</span>
 <span class="r">end</span>
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_ivars_specification">(<a href="javascript:show('ivars_specification')">show</a>)</span>
-         <pre class="source" id="ivars_specification">require <span class="s"><span class="dl">'</span><span class="k">ivars</span><span class="dl">'</span></span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_ivars_spec">(<a href="javascript:show('ivars_spec')">show</a>)</span>
+         <pre class="source" id="ivars_spec">require <span class="s"><span class="dl">'</span><span class="k">ivars</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">instance_variables_from</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should tansform the given parameter to instance variables</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -874,11 +874,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">instance_varia
 <span class="r">end</span>
 <span class="r">alias</span> <span class="fu">ivars</span> <span class="fu">instance_variables_from</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/kernel'">kernel</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/kernel'">kernel</h3>
          <table class="cube_table"
                 id="kernel_cube"
-                title="require 'zucker/1/kernel'"> <tr><th>Summary</th>    <td>Some useful general shortcut methods</td></tr><tr><th>Why?</th>    <td>Readability</td></tr><tr><th>Methods/Usage</th>    <td><h5>activate_warnings!</h5><pre class="usage source" style="display:block">activate_warnings! <span class="c"># sets $VERBOSE to 1</span></pre><h5>deactivate_warnings!</h5><pre class="usage source" style="display:block">deactivate_warnings! <span class="c"># sets $VERBOSE to 0</span></pre><h5>library?</h5><pre class="usage source" style="display:block">library? <span class="c"># checks, if the current file is ran directly</span></pre><h5>ignore_sigint!</h5><pre class="usage source" style="display:block">ignore_sigint! <span class="c"># blocks CTRL+C</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_kernel_specification">(<a href="javascript:show('kernel_specification')">show</a>)</span>
-         <pre class="source" id="kernel_specification">require <span class="s"><span class="dl">'</span><span class="k">kernel</span><span class="dl">'</span></span>
+                title="require 'zucker/kernel'"> <tr><th>Summary</th>    <td>Some useful general shortcut methods</td></tr><tr><th>Why?</th>    <td>Readability</td></tr><tr><th>Methods/Usage</th>    <td><h5>activate_warnings!</h5><pre class="usage source" style="display:block">activate_warnings! <span class="c"># sets $VERBOSE to 1</span></pre><h5>deactivate_warnings!</h5><pre class="usage source" style="display:block">deactivate_warnings! <span class="c"># sets $VERBOSE to 0</span></pre><h5>library?</h5><pre class="usage source" style="display:block">library? <span class="c"># checks, if the current file is ran directly</span></pre><h5>ignore_sigint!</h5><pre class="usage source" style="display:block">ignore_sigint! <span class="c"># blocks CTRL+C</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_kernel_spec">(<a href="javascript:show('kernel_spec')">show</a>)</span>
+         <pre class="source" id="kernel_spec">require <span class="s"><span class="dl">'</span><span class="k">kernel</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">activate_warnings!</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should set $VERBOSE to true</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -929,13 +929,13 @@ describe <span class="s"><span class="dl">'</span><span class="k">ignore_sigint!
 
 <span class="r">def</span> <span class="fu">ignore_sigint!</span> <span class="c"># ctrl+c</span>
    <span class="co">Signal</span>.trap *<span class="s"><span class="dl">%w|</span><span class="k">SIGINT IGNORE</span><span class="dl">|</span></span>
-<span class="r">end</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/mcopy'">mcopy</h3>
+<span class="r">end</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/mcopy'">mcopy</h3>
          <table class="cube_table"
                 id="mcopy_cube"
-                title="require 'zucker/1/mcopy'"> <tr><th>Summary</th>    <td>Adds <code>Object#mcopy</code> to create a deep copy using <code>Marshal</code>.</td></tr><tr><th>Why?</th>    <td>Every Ruby book describes, you can do <code>Marshal.load Marshal.dump object</code> to create a deep copy... But who needs this verbose syntax in everyday coding?</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#mcopy</h5><pre class="usage source" style="display:block">a = <span class="s"><span class="dl">%w[</span><span class="k">hello world</span><span class="dl">]</span></span>
+                title="require 'zucker/mcopy'"> <tr><th>Summary</th>    <td>Adds <code>Object#mcopy</code> to create a deep copy using <code>Marshal</code>.</td></tr><tr><th>Why?</th>    <td>Every Ruby book describes, you can do <code>Marshal.load Marshal.dump object</code> to create a deep copy... But who needs this verbose syntax in everyday coding?</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#mcopy</h5><pre class="usage source" style="display:block">a = <span class="s"><span class="dl">%w[</span><span class="k">hello world</span><span class="dl">]</span></span>
 b = a.mcopy
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_mcopy_specification">(<a href="javascript:show('mcopy_specification')">show</a>)</span>
-         <pre class="source" id="mcopy_specification">require <span class="s"><span class="dl">'</span><span class="k">mcopy</span><span class="dl">'</span></span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_mcopy_spec">(<a href="javascript:show('mcopy_spec')">show</a>)</span>
+         <pre class="source" id="mcopy_spec">require <span class="s"><span class="dl">'</span><span class="k">mcopy</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Object#mcopy</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">create a (deep) copy via marshalling</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -954,11 +954,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#mcopy</
   <span class="c"># alias copy mcopy</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/mm'">mm</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/mm'">mm</h3>
          <table class="cube_table"
                 id="mm_cube"
-                title="require 'zucker/1/mm'"> <tr><th>Summary</th>    <td><code>mm</code> displays an ordered public method list.</td></tr><tr><th>Why?</th>    <td>See some object's methods without those rarely used inherited methods</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#method_list, Object#mm</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">test</span><span class="dl">'</span></span>.mm <span class="i">2</span> <span class="c"># outputs the list (2 levels deep)</span></pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://rbjl.net/31-the-multi-mega-method-list">this article</a> for more information</td></tr><tr><th>Specification</th>    <td> <span id="show_mm_specification">(<a href="javascript:show('mm_specification')">show</a>)</span>
-         <pre class="source" id="mm_specification">require <span class="s"><span class="dl">'</span><span class="k">mm</span><span class="dl">'</span></span>
+                title="require 'zucker/mm'"> <tr><th>Summary</th>    <td><code>mm</code> displays an ordered public method list.</td></tr><tr><th>Why?</th>    <td>See some object's methods without those rarely used inherited methods</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#method_list, Object#mm</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">test</span><span class="dl">'</span></span>.mm <span class="i">2</span> <span class="c"># outputs the list (2 levels deep)</span></pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://rbjl.net/31-the-multi-mega-method-list">this article</a> for more information</td></tr><tr><th>Specification</th>    <td> <span id="show_mm_spec">(<a href="javascript:show('mm_spec')">show</a>)</span>
+         <pre class="source" id="mm_spec">require <span class="s"><span class="dl">'</span><span class="k">mm</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Object#method_list</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should display an ordered method list</span><span class="dl">'</span></span>
@@ -992,13 +992,13 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#method_
   <span class="r">alias</span> <span class="fu">mm</span> <span class="fu">method_list</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/regexp2proc'">regexp2proc</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/regexp2proc'">regexp2proc</h3>
          <table class="cube_table"
                 id="regexp2proc_cube"
-                title="require 'zucker/1/regexp2proc'"> <tr><th>Summary</th>    <td>Use &/regex/ to match it against strings</td></tr><tr><th>Methods/Usage</th>    <td><h5>Regexp#to_proc</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.map    &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>  <span class="c"># =&gt; [&quot;j&quot;, nil, nil, &quot;y&quot;]</span>
+                title="require 'zucker/regexp2proc'"> <tr><th>Summary</th>    <td>Use &/regex/ to match it against strings</td></tr><tr><th>Methods/Usage</th>    <td><h5>Regexp#to_proc</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.map    &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>  <span class="c"># =&gt; [&quot;j&quot;, nil, nil, &quot;y&quot;]</span>
 <span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.select &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>  <span class="c"># =&gt; [&quot;just&quot;, &quot;array&quot;]</span>
-</pre></td></tr><tr><th>Further information</th>    <td>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_regexp2proc_specification">(<a href="javascript:show('regexp2proc_specification')">show</a>)</span>
-         <pre class="source" id="regexp2proc_specification">require <span class="s"><span class="dl">'</span><span class="k">regexp2proc</span><span class="dl">'</span></span>
+</pre></td></tr><tr><th>Further information</th>    <td>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_regexp2proc_spec">(<a href="javascript:show('regexp2proc_spec')">show</a>)</span>
+         <pre class="source" id="regexp2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">regexp2proc</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Regexp#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should match the regex</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -1014,15 +1014,15 @@ describe <span class="s"><span class="dl">'</span><span class="k">Regexp#to_proc
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/sandbox'">sandbox</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/sandbox'">sandbox</h3>
          <table class="cube_table"
                 id="sandbox_cube"
-                title="require 'zucker/1/sandbox'"> <tr><th>Summary</th>    <td>Creates a sandbox area.</td></tr><tr><th>Why?</th>    <td>Ruby comes with sandboxes, but they are hidden (--> integrated) in the <code>$SAFE</code> concept</td></tr><tr><th>Methods/Usage</th>    <td><h5>sandbox</h5><pre class="usage source" style="display:block">sandbox <span class="r">do</span>
+                title="require 'zucker/sandbox'"> <tr><th>Summary</th>    <td>Creates a sandbox area.</td></tr><tr><th>Why?</th>    <td>Ruby comes with sandboxes, but they are hidden (--> integrated) in the <code>$SAFE</code> concept</td></tr><tr><th>Methods/Usage</th>    <td><h5>sandbox</h5><pre class="usage source" style="display:block">sandbox <span class="r">do</span>
   <span class="c"># dangerous commands throw SecurityErrors ($SAFE=4)</span>
 <span class="r">end</span>
 <span class="c"># everything's normal again</span>
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_sandbox_specification">(<a href="javascript:show('sandbox_specification')">show</a>)</span>
-         <pre class="source" id="sandbox_specification">require <span class="s"><span class="dl">'</span><span class="k">sandbox</span><span class="dl">'</span></span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_sandbox_spec">(<a href="javascript:show('sandbox_spec')">show</a>)</span>
+         <pre class="source" id="sandbox_spec">require <span class="s"><span class="dl">'</span><span class="k">sandbox</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">sandbox</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should throw a SecurityError if bad commands are issued</span><span class="dl">'</span></span>
@@ -1041,10 +1041,10 @@ describe <span class="s"><span class="dl">'</span><span class="k">sandbox</span>
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/square_brackets_for'">square_brackets_for</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/square_brackets_for'">square_brackets_for</h3>
          <table class="cube_table"
                 id="square_brackets_for_cube"
-                title="require 'zucker/1/square_brackets_for'"> <tr><th>Summary</th>    <td>This helper methods defines <code>[]</code> and <code>[]=</code> for accesing an instance variable.</td></tr><tr><th>Methods/Usage</th>    <td><h5>square_brackets_for</h5><pre class="usage source" style="display:block"><span class="r">class</span> <span class="cl">Klass</span>
+                title="require 'zucker/square_brackets_for'"> <tr><th>Summary</th>    <td>This helper methods defines <code>[]</code> and <code>[]=</code> for accesing an instance variable.</td></tr><tr><th>Methods/Usage</th>    <td><h5>square_brackets_for</h5><pre class="usage source" style="display:block"><span class="r">class</span> <span class="cl">Klass</span>
   <span class="r">def</span> <span class="fu">initialize</span>
     <span class="iv">@var</span> = {
       <span class="sy">:a_key</span> =&gt; <span class="i">1</span>,
@@ -1058,8 +1058,8 @@ describe <span class="s"><span class="dl">'</span><span class="k">sandbox</span>
 
 a = <span class="co">Klass</span>.new
 a[<span class="sy">:a_key</span>] <span class="c"># =&gt; 1</span>
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_square_brackets_for_specification">(<a href="javascript:show('square_brackets_for_specification')">show</a>)</span>
-         <pre class="source" id="square_brackets_for_specification">require <span class="s"><span class="dl">'</span><span class="k">square_brackets_for</span><span class="dl">'</span></span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_square_brackets_for_spec">(<a href="javascript:show('square_brackets_for_spec')">show</a>)</span>
+         <pre class="source" id="square_brackets_for_spec">require <span class="s"><span class="dl">'</span><span class="k">square_brackets_for</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">square_brackets_for</span><span class="dl">'</span></span> <span class="r">do</span>
 
@@ -1135,11 +1135,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">square_bracket
 
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/string'">string</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/string'">string</h3>
          <table class="cube_table"
                 id="string_cube"
-                title="require 'zucker/1/string'"> <tr><th>Summary</th>    <td><code>String</code> extensions.</td></tr><tr><th>Why?</th>    <td>Strings cannot be comfortable enough ;)</td></tr><tr><th>Methods/Usage</th>    <td><h5>String#^</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Yes vs No</span><span class="dl">'</span></span>^<span class="i">3</span> <span class="c"># =&gt; 'Yes'</span></pre><h5>String#lchomp</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">   Yes</span><span class="dl">'</span></span>.lchomp  <span class="c"># =&gt; 'Yes'</span></pre><h5>String#lchomp!</h5><pre class="usage source" style="display:block"><span class="c"># mutable lchomp version</span></pre><h5>String#ords</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Hallo</span><span class="dl">'</span></span>.ords <span class="c"># =&gt; [72, 97, 108, 108, 111]</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_string_specification">(<a href="javascript:show('string_specification')">show</a>)</span>
-         <pre class="source" id="string_specification">require <span class="s"><span class="dl">'</span><span class="k">string</span><span class="dl">'</span></span>
+                title="require 'zucker/string'"> <tr><th>Summary</th>    <td><code>String</code> extensions.</td></tr><tr><th>Why?</th>    <td>Strings cannot be comfortable enough ;)</td></tr><tr><th>Methods/Usage</th>    <td><h5>String#^</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Yes vs No</span><span class="dl">'</span></span>^<span class="i">3</span> <span class="c"># =&gt; 'Yes'</span></pre><h5>String#lchomp</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">   Yes</span><span class="dl">'</span></span>.lchomp  <span class="c"># =&gt; 'Yes'</span></pre><h5>String#lchomp!</h5><pre class="usage source" style="display:block"><span class="c"># mutable lchomp version</span></pre><h5>String#ords</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Hallo</span><span class="dl">'</span></span>.ords <span class="c"># =&gt; [72, 97, 108, 108, 111]</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_string_spec">(<a href="javascript:show('string_spec')">show</a>)</span>
+         <pre class="source" id="string_spec">require <span class="s"><span class="dl">'</span><span class="k">string</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">String#^</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should give C-like substring access to strings</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -1190,11 +1190,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#ords</s
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/1/unary'">unary</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/unary'">unary</h3>
          <table class="cube_table"
                 id="unary_cube"
-                title="require 'zucker/1/unary'"> <tr><th>Summary</th>    <td>Easy conversion between strings and symbols.</td></tr><tr><th>Why?</th>    <td>Sometimes, you do not care if you get a <code>String</code> or <code>Symbol</code> as input - but when analysing it, you often need to choose one format. A concise possibility for this conversion is using the unary operators <code>String#-@</code> and <code>Symbol#+@</code></td></tr><tr><th>Methods/Usage</th>    <td><h5>String#+@</h5><pre class="usage source" style="display:block">+<span class="s"><span class="dl">'</span><span class="k">was_string</span><span class="dl">'</span></span> <span class="c"># =&gt; 'was_string'</span></pre><h5>String#-@</h5><pre class="usage source" style="display:block">-<span class="s"><span class="dl">'</span><span class="k">was_string</span><span class="dl">'</span></span> <span class="c"># =&gt; :was_string</span></pre><h5>Symbol#+@</h5><pre class="usage source" style="display:block">+<span class="sy">:was_symbol</span>  <span class="c"># =&gt; 'was_symbol'</span></pre><h5>Symbol#-@</h5><pre class="usage source" style="display:block">-<span class="sy">:was_symbol</span>  <span class="c"># =&gt; :was_symbol</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by (I've seen the unary + for Symbol somewhere on the net... but cannot remember where...)</td></tr><tr><th>Specification</th>    <td> <span id="show_unary_specification">(<a href="javascript:show('unary_specification')">show</a>)</span>
-         <pre class="source" id="unary_specification">require <span class="s"><span class="dl">'</span><span class="k">unary</span><span class="dl">'</span></span>
+                title="require 'zucker/unary'"> <tr><th>Summary</th>    <td>Easy conversion between strings and symbols.</td></tr><tr><th>Why?</th>    <td>Sometimes, you do not care if you get a <code>String</code> or <code>Symbol</code> as input - but when analysing it, you often need to choose one format. A concise possibility for this conversion is using the unary operators <code>String#-@</code> and <code>Symbol#+@</code></td></tr><tr><th>Methods/Usage</th>    <td><h5>String#+@</h5><pre class="usage source" style="display:block">+<span class="s"><span class="dl">'</span><span class="k">was_string</span><span class="dl">'</span></span> <span class="c"># =&gt; 'was_string'</span></pre><h5>String#-@</h5><pre class="usage source" style="display:block">-<span class="s"><span class="dl">'</span><span class="k">was_string</span><span class="dl">'</span></span> <span class="c"># =&gt; :was_string</span></pre><h5>Symbol#+@</h5><pre class="usage source" style="display:block">+<span class="sy">:was_symbol</span>  <span class="c"># =&gt; 'was_symbol'</span></pre><h5>Symbol#-@</h5><pre class="usage source" style="display:block">-<span class="sy">:was_symbol</span>  <span class="c"># =&gt; :was_symbol</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by (I've seen the unary + for Symbol somewhere on the net... but cannot remember where...)</td></tr><tr><th>Specification</th>    <td> <span id="show_unary_spec">(<a href="javascript:show('unary_spec')">show</a>)</span>
+         <pre class="source" id="unary_spec">require <span class="s"><span class="dl">'</span><span class="k">unary</span><span class="dl">'</span></span>
 
 describe <span class="co">Symbol</span>, <span class="s"><span class="dl">'</span><span class="k">#+@</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should convert to_s</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -1239,14 +1239,14 @@ describe <span class="co">String</span>, <span class="s"><span class="dl">'</spa
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8 (+:literal not possible)</td></tr></table> <h3 title="require 'zucker/1/union'">union</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8 (+:literal not possible)</td></tr></table> <h3 title="require 'zucker/union'">union</h3>
          <table class="cube_table"
                 id="union_cube"
-                title="require 'zucker/1/union'"> <tr><th>Summary</th>    <td>Easy creation of <code>Regexp.union</code>s</td></tr><tr><th>Methods/Usage</th>    <td><h5>Regexp#|, String#|</h5><pre class="usage source" style="display:block"><span class="rx"><span class="dl">/</span><span class="k">Ruby</span><span class="ch">\d</span><span class="dl">/</span></span> | <span class="rx"><span class="dl">/</span><span class="k">test</span><span class="dl">/</span><span class="mod">i</span></span> | <span class="s"><span class="dl">&quot;</span><span class="k">cheat</span><span class="dl">&quot;</span></span>
+                title="require 'zucker/union'"> <tr><th>Summary</th>    <td>Easy creation of <code>Regexp.union</code>s</td></tr><tr><th>Methods/Usage</th>    <td><h5>Regexp#|, String#|</h5><pre class="usage source" style="display:block"><span class="rx"><span class="dl">/</span><span class="k">Ruby</span><span class="ch">\d</span><span class="dl">/</span></span> | <span class="rx"><span class="dl">/</span><span class="k">test</span><span class="dl">/</span><span class="mod">i</span></span> | <span class="s"><span class="dl">&quot;</span><span class="k">cheat</span><span class="dl">&quot;</span></span>
 <span class="c"># creates a Regexp similar to:</span>
 <span class="c"># /(Ruby\d|[tT][eE][sS][tT]|cheat)/</span>
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_union_specification">(<a href="javascript:show('union_specification')">show</a>)</span>
-         <pre class="source" id="union_specification">require <span class="s"><span class="dl">'</span><span class="k">union</span><span class="dl">'</span></span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_union_spec">(<a href="javascript:show('union_spec')">show</a>)</span>
+         <pre class="source" id="union_spec">require <span class="s"><span class="dl">'</span><span class="k">union</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Regexp#|</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should create an Regexp.union of both operands</span><span class="dl">'</span></span> <span class="r">do</span>

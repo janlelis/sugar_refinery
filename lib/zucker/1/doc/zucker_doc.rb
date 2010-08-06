@@ -8,12 +8,12 @@ class ZuckerDoc
     'why'      => 'Why?',
     'methods'  => 'Methods/Usage',
     'info'     => 'Further information',
-    'specification'     => 'Specification',
+    'spec'     => 'Specification',
     'source'   => 'Source',
     'versions' => 'Compatibility',
     'authors'  => 'Authors',
   }
-  ORDER   = %w|summary why methods info specification source versions|
+  ORDER   = %w|summary why methods info spec source versions|
 
   # template vars
   @version = 1
@@ -21,8 +21,7 @@ class ZuckerDoc
   class << self
     def generate
 
-
-      cubes = Dir['../descriptions/*'].inject({}) do |res, cube_file; a|
+      cubes = Dir['../desc/*'].inject({}) do |res, cube_file; a|
         a = YAML.load_file cube_file
         if a.instance_of? Hash
           res.merge a
@@ -66,7 +65,7 @@ class ZuckerDoc
                 title="require 'zucker/#{name}'"> } +
 
       ORDER.map{ |th|
-        if th == 'specification'   ||
+        if th == 'spec'   ||
            th == 'source' ||
            td = hash[th]
 
@@ -110,8 +109,8 @@ class ZuckerDoc
       v.join ', '
     end
 
-    def specification(s)
-      source_helper(:specification, '../specification/', '_spec')
+    def spec(s)
+      source_helper(:spec, '../spec/', '_spec')
     end
 
     def source(s)
