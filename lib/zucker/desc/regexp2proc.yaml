@@ -1,0 +1,13 @@
+regexp2proc:
+  summary: Use &/regex/ to match it against strings
+  methods:
+    Regexp#to_proc: |
+      %w|just another string array|.map    &/[jy]/  # => ["j", nil, nil, "y"]
+      %w|just another string array|.select &/[jy]/  # => ["just", "array"]
+  package: default
+  info:
+  - "More about →to_proc→http://rbjl.net/29-become-a-proc-star→."
+  versions:
+  - 1.9
+  - 1.8
+

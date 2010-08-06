@@ -1,0 +1,20 @@
+ivars:
+  summary: This method lets you easily assign lots of instance variables.
+  why: |
+   Often, you have to write boilerplate code for assigning instance varialbles, for example this one:
+   ⇧def initialize(variable1, variable2)
+     @variable1, @variable2 = variable1, variable2
+   end⇧
+  methods:
+    instance_variables_from, ivars: |
+      def a_method(a = 1, b = 2)
+        instance_variables_from binding # assigns @a and @b
+
+        params = {:c => 3, :d => 4}
+        instance_variables_from params # # assigns @c and @d
+      end
+  package: default
+  versions:
+  - 1.9
+  - 1.8
+
