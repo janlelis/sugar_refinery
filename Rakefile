@@ -1,12 +1,17 @@
 require 'rake'
+# require 'rubygems'
 require 'rake/gempackagetask'
-require 'rubygems'
 require 'spec/rake/spectask'
+
+desc 'Build documentation'
+task 'doc' do
+  zucker_path = "#{ Rake.application.find_rakefile_location[1] }/lib/zucker"
+  ruby File.join(zucker_path, 'doc/zucker_doc.rb'), zucker_path
+end
 
 Spec::Rake::SpecTask.new('spec') do |t|
   t.spec_files = FileList['lib/zucker/spec/**/*.rb']
 end
-
 
 # gem
 PKG_FILES = FileList[ '[a-zA-Z]*', 'lib/**/*' ]

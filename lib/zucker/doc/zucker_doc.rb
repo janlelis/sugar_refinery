@@ -1,8 +1,12 @@
 # Ruby 1.9, encoding: utf-8
+#  creates the documentation for Zucker
+
 require 'yaml'
 require 'coderay'
 
 class ZuckerDoc
+  PACKAGES     = %w|default debug|
+  ORDER        = %w|summary why methods info spec source versions|
   DESCRIPTIONS = {
     'summary'  => 'Summary',
     'why'      => 'Why?',
@@ -13,16 +17,14 @@ class ZuckerDoc
     'versions' => 'Compatibility',
     'authors'  => 'Authors',
   }
-  ORDER    = %w|summary why methods info spec source versions|
-  PACKAGES = %w|default debug|
 
   # template vars
   @version = 1
 
   class << self
-    def generate
+    def generate(path = '../', version = 'edge')
 
-      cubes = Dir['../desc/*'].inject({}) do |res, cube_file; a|
+      cubes = Dir[ File.join(path, 'desc', '*') ].inject({}) do |res, cube_file; a|
         a = YAML.load_file cube_file
         if a.instance_of? Hash
           res.merge a
@@ -31,9 +33,8 @@ class ZuckerDoc
         end
       end
 
-      @meta = YAML.load_file 'meta.yaml'
+      output_path = File.join(path, 'doc', version != 'edge' ? version.to_i : '',  'zucker_doc.html')
 
-      output = 'zucker_doc.html'
       result = DATA.read
 
       cubes_html = PACKAGES.map{ |pkg_name|
@@ -51,7 +52,7 @@ class ZuckerDoc
       # hyper→links
       result.gsub! /→(.+?)→(.+?)→/, '<a href="\2">\1</a>'
 
-      File.open output, 'w' do |file|
+      File.open output_path, 'w' do |file|
         file.puts result
       end
     end
@@ -162,7 +163,7 @@ class ZuckerDoc
   end
 end
 
-ZuckerDoc.generate
+ZuckerDoc.generate *ARGV
 
 __END__
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
