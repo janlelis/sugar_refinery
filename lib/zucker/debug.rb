@@ -1,4 +1,4 @@
-require 'zucker/1/D'
-require 'zucker/1/mm'
-require 'zucker/1/binding'
+require 'zucker/D'
+require 'zucker/mm'
+require 'zucker/binding'
 

@@ -1,4 +1,4 @@
-require 'enumerable'
+require 'zucker/enumerable'
 
 describe 'Enumerable#mash' do
   it 'should "map" a hash' do

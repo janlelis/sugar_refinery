@@ -1,4 +1,4 @@
-require 'hash'
+require 'zucker/hash'
 
 describe 'Hash.zip' do
   it 'should zip together both given enumerables and take them as key=>values for a new hash'

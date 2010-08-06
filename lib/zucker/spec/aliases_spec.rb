@@ -1,4 +1,4 @@
-require 'aliases'
+require 'zucker/aliases'
 
 describe '(aliases)' do
   it 'should create these aliases [ sorry, no real spec for this one :P ] ' do

@@ -1,4 +1,4 @@
-require 'blank'
+require 'zucker/blank'
 
 describe 'Object#blank?' do
   it 'should be blank for blank values' do

@@ -1,4 +1,4 @@
-require 'mcopy'
+require 'zucker/mcopy'
 
 describe 'Object#mcopy' do
   it 'create a (deep) copy via marshalling' do

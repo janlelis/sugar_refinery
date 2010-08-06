@@ -1,4 +1,4 @@
-require 'unary'
+require 'zucker/unary'
 
 describe Symbol, '#+@' do
   it 'should convert to_s' do

@@ -1,4 +1,4 @@
-require 'sandbox'
+require 'zucker/sandbox'
 
 describe 'sandbox' do
   it 'should throw a SecurityError if bad commands are issued'

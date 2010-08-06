@@ -1,4 +1,4 @@
-require 'array'
+require 'zucker/array'
 
 describe 'Array#^' do
   it 'should do an exclusive or' do

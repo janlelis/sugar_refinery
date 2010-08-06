@@ -1,4 +1,4 @@
-require 'iterate'
+require 'zucker/iterate'
 
 describe 'Object#iterate' do
   let :a   do [1, 2, 3]     end

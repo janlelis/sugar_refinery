@@ -1,4 +1,4 @@
-require 'square_brackets_for'
+require 'zucker/square_brackets_for'
 
 describe 'square_brackets_for' do
 

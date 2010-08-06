@@ -1,4 +1,4 @@
-require 'array2proc'
+require 'zucker/array2proc'
 
 describe 'Array#to_proc' do
   it 'should call the method of the first symbol, using the remaining elements as paramaters' do

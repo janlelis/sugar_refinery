@@ -1,15 +1,15 @@
-require 'string'
+require 'zucker/string'
 
 describe 'String#^' do
   it 'should give C-like substring access to strings' do
     string = 'Theoretische Informatik ist voll geil!'
 
-    (string|0).should  == 'Theoretische Informatik ist voll geil!'
-    (string|1).should  == 'heoretische Informatik ist voll geil!'
-    (string|13).should == 'Informatik ist voll geil!'
-    (string|-1).should == 'Theoretische Informatik ist voll geil'
-    (string|38).should == ''
-    (string|99).should == nil
+    (string^0).should  == 'Theoretische Informatik ist voll geil!'
+    (string^1).should  == 'heoretische Informatik ist voll geil!'
+    (string^13).should == 'Informatik ist voll geil!'
+    (string^-1).should == 'Theoretische Informatik ist voll geil'
+    (string^38).should == ''
+    (string^99).should == nil
   end
 end
 

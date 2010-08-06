@@ -1,4 +1,4 @@
-require 'ivars'
+require 'zucker/ivars'
 
 describe 'instance_variables_from' do
   it 'should tansform the given parameter to instance variables' do

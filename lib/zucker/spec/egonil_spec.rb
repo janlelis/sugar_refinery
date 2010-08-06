@@ -1,4 +1,4 @@
-require 'egonil'
+require 'zucker/egonil'
 
 describe 'egonil' do
   it 'should not raise nil exceptions in the block' do

@@ -1,4 +1,4 @@
-require 'class2proc'
+require 'zucker/class2proc'
 require 'set'
 
 describe 'Class#to_proc' do

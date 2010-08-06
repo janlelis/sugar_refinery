@@ -21,5 +21,5 @@ unary
 union
 |
 
-zucker.each{|rb| require "zucker/1/#{rb}"}
+zucker.each{|rb| require "zucker/#{rb}"}
 

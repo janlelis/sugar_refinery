@@ -3,6 +3,11 @@ require 'rake/gempackagetask'
 require 'rubygems'
 require 'spec/rake/spectask'
 
+Spec::Rake::SpecTask.new('spec') do |t|
+  t.spec_files = FileList['lib/zucker/spec/**/*.rb']
+end
+
+
 # gem
 PKG_FILES = FileList[ '[a-zA-Z]*', 'lib/**/*' ]
 spec = Gem::Specification.new do |s|

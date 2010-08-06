@@ -4,6 +4,7 @@ kernel:
   methods:
     activate_warnings!: "activate_warnings! # sets $VERBOSE to 1"
     deactivate_warnings!: "deactivate_warnings! # sets $VERBOSE to 0"
+    warnings_activated?!: "warnings_activated? # displays $VERBOSE"
     library?: "library? # checks, if the current file is ran directly"
     ignore_sigint!: "ignore_sigint! # blocks CTRL+C"
   package: default

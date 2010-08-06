@@ -1,4 +1,4 @@
-require 'D'
+require 'zucker/D'
 
 describe 'Object#D' do
 
