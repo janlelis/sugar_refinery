@@ -1,5 +1,9 @@
+module Zucker
+  VERSION = '1'
+end
+
 # nothing is done here
-# to use zucker:
+#  to use zucker:
 
 # require 'zucker/default'
 
@@ -8,3 +12,4 @@
 # require 'zucker/debug'
 
 #  or cherry-pick the cubes you want ;)
+

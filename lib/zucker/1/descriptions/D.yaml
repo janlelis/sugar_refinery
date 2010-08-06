@@ -3,7 +3,7 @@ D:
   methods:
     Object#D: |
       some.D.methods.D.noone.D.knows.D
-      # ...outputs 4 lines with the inspected object
+      # ...outputs 4 lines with the inspected objects
       # => (result)
 
       21+Math.sin(42).D
@@ -16,10 +16,8 @@ D:
       # => 'Hello Earth'
   package: debug
   info:
-  - "This is inspired by the funny ⇧.tap⇧ method: http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions"
+  - "This is inspired by the funny →⇧.tap⇧ method→http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions→"
   versions:
   - 1.9
   - 1.8
-  authors:
-  - Jan Lelis
 

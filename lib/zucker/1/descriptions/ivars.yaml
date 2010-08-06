@@ -11,12 +11,10 @@ ivars:
         instance_variables_from binding # assigns @a and @b
 
         params = {:c => 3, :d => 4}
-        ivars params # # assigns @c and @d
+        instance_variables_from params # # assigns @c and @d
       end
   package: default
   versions:
   - 1.9
   - 1.8
-  authors:
-  - Jan Lelis
 

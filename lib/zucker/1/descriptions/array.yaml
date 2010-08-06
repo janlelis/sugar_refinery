@@ -1,5 +1,5 @@
 array:
-  summary: Methods one could miss for ⇧Array⇧
+  summary: Methods one could miss for ⇧Array⇧.
   why:
   - ⇧Array⇧ has ⇧&⇧ and ⇧|⇧, but why does it not have ⇧^⇧?
   - ⇧sum⇧ is an alias for ⇧inject(:+)⇧, but it is just needed pretty often!
@@ -11,6 +11,4 @@ array:
   versions:
   - 1.9
   - 1.8
-  authors:
-  - Jan Lelis
 
