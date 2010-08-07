@@ -1,7 +1,13 @@
 class Array
   def to_proc
     Proc.new{ |obj|
-      obj.send *self
+      if self.first.is_a? Array
+        self.inject(obj){ |result, nested_array|
+          nested_array.to_proc.call result
+        }
+      else
+        obj.send *self
+      end
     }
   end
 end
