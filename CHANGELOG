@@ -1,0 +1,14 @@
+2010-08-08 | Zucker 2
+* added info cube
+* added chaining for array2proc
+* fixed Hash.zip
+* fixed instance_variables_from binding for 1.9
+* more specs
+
+
+2010-08-06 | Zucker 1
+* initial release
+
+
+2010-08-05 | Zucker 0
+* pre-release for rug-b talk
