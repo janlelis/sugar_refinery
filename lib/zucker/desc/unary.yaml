@@ -1,6 +1,6 @@
 unary:
   summary: Easy conversion between strings and symbols.
-  why: "Sometimes, you do not care if you get a ⇧String⇧ or ⇧Symbol⇧ as input - but when analysing it, you often need to choose one format. A concise possibility for this conversion is using the unary operators ⇧String#-@⇧ and ⇧Symbol#+@⇧"
+  why: "Sometimes, you do not care if you get a ⇧String⇧ or ⇧Symbol⇧ as input - but when analysing it, you often need to choose one format. A concise possibility for this conversion is using the unary operators ⇧String#-@⇧ and ⇧Symbol#+@⇧."
   methods:
     String#+@: "+'was_string' # => 'was_string'"
     String#-@: "-'was_string' # => :was_string"
@@ -11,5 +11,5 @@ unary:
   - "Inspired by (I've seen the unary + for Symbol somewhere on the net... but cannot remember where...)"
   versions:
   - 1.9
-  - 1.8 (+:literal not possible)
+  - 1.8 (⇧+:literal⇧ not possible)
 

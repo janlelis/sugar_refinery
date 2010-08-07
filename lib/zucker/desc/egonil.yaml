@@ -10,7 +10,7 @@ egonil:
       # => 5
   package: default
   info:
-  - See →this post→http://rbjl.net/26-the-28-bytes-of-ruby-joy→ for more information and discussion
+  - See →this post→http://rbjl.net/26-the-28-bytes-of-ruby-joy→ for more information and discussion.
   versions:
   - 1.9
   - 1.8

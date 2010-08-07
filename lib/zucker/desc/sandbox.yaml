@@ -1,6 +1,6 @@
 sandbox:
   summary: Creates a sandbox area.
-  why: Ruby comes with sandboxes, but they are hidden (--> integrated) in the ⇧$SAFE⇧ concept
+  why: Ruby comes with sandboxes, but they are hidden (-> integrated) in the ⇧$SAFE⇧ concept.
   methods:
     sandbox: |
       sandbox do

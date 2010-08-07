@@ -1,6 +1,6 @@
 string:
   summary: ⇧String⇧ extensions.
-  why: Strings cannot be comfortable enough ;)
+  why: Strings cannot be comfortable enough ;).
   methods:
     String#^: "'Yes vs No'^3 # => 'Yes'"
     String#lchomp: "'   Yes'.lchomp  # => 'Yes'"

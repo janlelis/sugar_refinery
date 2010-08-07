@@ -22,7 +22,8 @@ class ZuckerDoc
   @version = 1
 
   class << self
-    def generate(path = '../', version = 'edge')
+    def generate(path = '../')
+      @path = path
 
       cubes = Dir[ File.join(path, 'desc', '*') ].inject({}) do |res, cube_file; a|
         a = YAML.load_file cube_file
@@ -33,7 +34,7 @@ class ZuckerDoc
         end
       end
 
-      output_path = File.join(path, 'doc', version != 'edge' ? version.to_i : '',  'zucker_doc.html')
+      output_path = File.join(path, 'doc', 'zucker_doc.html')
 
       result = DATA.read
 
@@ -124,17 +125,17 @@ class ZuckerDoc
     end
 
     def spec(s)
-      source_helper(:spec, '../spec/', '_spec')
+      source_helper(:spec, File.join( @path, 'spec/' ), '_spec')
     end
 
     def source(s)
-      source_helper(:source, '../')
+      source_helper(:source, @path)
     end
 
     def source_helper(kind, file_prefix, suffix='')
       %{ <span id="show_#{@cube_name}_#{kind}">(<a href="javascript:show('#{@cube_name}_#{kind}')">show</a>)</span>
          <pre class="source" id="#{@cube_name}_#{kind}">#{
-           get_source_file( file_prefix + @cube_name + suffix + '.rb' )
+           get_source_file( File.join file_prefix, ( @cube_name + suffix + '.rb' ) )
          }</pre> }
     end
 

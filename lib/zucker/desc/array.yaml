@@ -2,7 +2,7 @@ array:
   summary: Methods one could miss for ⇧Array⇧.
   why:
   - ⇧Array⇧ has ⇧&⇧ and ⇧|⇧, but why does it not have ⇧^⇧?
-  - ⇧sum⇧ is an alias for ⇧inject(:+)⇧, but it is just needed pretty often!
+  - ⇧sum⇧ is just an alias for ⇧inject(:+)⇧, but it is needed pretty often..
   methods:
     Array#^: "[1,2,3,4] ^ [3,4,5,6]  # => [1,2,5,6]"
     Array#sum: "[1,2,3,4,5].sum  # => 15"

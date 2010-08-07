@@ -1,5 +1,5 @@
 info:
-  summary: Access environment information with the ⇧Info⇧ module
+  summary: Access environment information with the ⇧Info⇧ module.
   why: "You don't need to remember in which global variable, constant or special method the information you are searching for is hidden."
   methods:
     Info: |

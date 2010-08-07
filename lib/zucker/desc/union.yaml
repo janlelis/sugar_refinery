@@ -1,5 +1,5 @@
 union:
-  summary: Easy creation of ⇧Regexp.union⇧s
+  summary: Easy creation of ⇧Regexp.union⇧s.
   methods:
     Regexp#|, String#|: |
       /Ruby\d/ | /test/i | "cheat"

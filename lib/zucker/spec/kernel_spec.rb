@@ -1,4 +1,4 @@
-require 'kernel'
+require 'zucker/kernel'
 
 describe 'activate_warnings!' do
   it 'should set $VERBOSE to true' do
