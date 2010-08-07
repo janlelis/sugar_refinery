@@ -7,8 +7,15 @@ sandbox:
         # dangerous commands throw SecurityErrors ($SAFE=4)
       end
       # everything's normal again
+
+      sandbox( lambda{} ) do
+        # no Exception is thrown, if non-nil parameter is passed
+      end
+      # if it is a proc, it will be run instead, if an SecurityError gets raised
   package: default
   versions:
   - 1.9
   - 1.8
+
+git commit -m 'slightly updated sandbox(+spec)'
 
