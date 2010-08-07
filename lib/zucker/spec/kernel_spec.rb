@@ -1,4 +1,4 @@
-require 'zucker/kernel'
+require 'kernel'
 
 describe 'activate_warnings!' do
   it 'should set $VERBOSE to true' do
@@ -11,12 +11,6 @@ describe 'deactivate_warnings!' do
   it 'should set $VERBOSE to false' do
     deactivate_warnings!
     $VERBOSE.should == false
-  end
-end
-
-describe 'warnings_activated?' do
-  it 'should return $VERBOSE' do
-    warnings_activated?.should == $VERBOSE
   end
 end
 

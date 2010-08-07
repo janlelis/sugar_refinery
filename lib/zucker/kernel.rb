@@ -6,10 +6,6 @@ def deactivate_warnings!
   $VERBOSE = false
 end
 
-def warnings_activated?
-  $VERBOSE
-end
-
 def library?
   __FILE__ != $PROGRAM_NAME
 end
