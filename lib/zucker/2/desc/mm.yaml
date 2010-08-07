@@ -1,0 +1,12 @@
+mm:
+  summary: ⇧mm⇧ displays an ordered public method list.
+  why: See one object's methods without those rarely used inherited methods.
+  methods:
+    Object#method_list, Object#mm: "'test'.mm 2 # outputs the list (2 levels deep)"
+  package: debug
+  info:
+  - See →this article→http://rbjl.net/31-the-multi-mega-method-list→ for more information.
+  versions:
+  - 1.9
+  - 1.8 (returns strings instead of symbols)
+
