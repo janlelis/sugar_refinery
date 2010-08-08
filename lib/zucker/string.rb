@@ -19,6 +19,10 @@ class String
   def ords
     self.unpack 'C*'
   end
+
+  def constantize
+    Object.const_get(self)
+  end
 end
 
 # J-_-L
