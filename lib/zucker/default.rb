@@ -11,6 +11,7 @@ hash
 hash2proc
 iterate
 ivars
+info
 kernel
 mcopy
 regexp2proc
