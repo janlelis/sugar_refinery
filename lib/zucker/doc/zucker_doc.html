@@ -1199,8 +1199,14 @@ describe <span class="s"><span class="dl">'</span><span class="k">square_bracket
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/string'">string</h3>
          <table class="cube_table"
                 id="string_cube"
-                title="require 'zucker/string'"> <tr><th>Summary</th>    <td><code>String</code> extensions.</td></tr><tr><th>Why?</th>    <td>Strings cannot be comfortable enough ;).</td></tr><tr><th>Methods/Usage</th>    <td><h5>String#^</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Yes vs No</span><span class="dl">'</span></span>^<span class="i">3</span> <span class="c"># =&gt; 'Yes'</span></pre><h5>String#lchomp</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">   Yes</span><span class="dl">'</span></span>.lchomp  <span class="c"># =&gt; 'Yes'</span></pre><h5>String#lchomp!</h5><pre class="usage source" style="display:block"><span class="c"># mutable lchomp version</span></pre><h5>String#ords</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Hallo</span><span class="dl">'</span></span>.ords <span class="c"># =&gt; [72, 97, 108, 108, 111]</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_string_spec">(<a href="javascript:show('string_spec')">show</a>)</span>
-         <pre class="source" id="string_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/string</span><span class="dl">'</span></span>
+                title="require 'zucker/string'"> <tr><th>Summary</th>    <td><code>String</code> extensions.</td></tr><tr><th>Why?</th>    <td>Strings cannot be comfortable enough ;).</td></tr><tr><th>Methods/Usage</th>    <td><h5>String#^</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Yes vs No</span><span class="dl">'</span></span>^<span class="i">3</span> <span class="c"># =&gt; 'Yes'</span></pre><h5>String#lchomp</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">   Yes</span><span class="dl">'</span></span>.lchomp  <span class="c"># =&gt; 'Yes'</span></pre><h5>String#lchomp!</h5><pre class="usage source" style="display:block"><span class="c"># mutable lchomp version</span></pre><h5>String#ords</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Hallo</span><span class="dl">'</span></span>.ords <span class="c"># =&gt; [72, 97, 108, 108, 111]</span></pre><h5>String#constantize</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Object</span><span class="dl">'</span></span>.constantize <span class="c"># =&gt; Object</span>
+<span class="c"># you can also pass a parameter or block to define what happens, when constant does not exist</span>
+<span class="s"><span class="dl">'</span><span class="k">IdontExist</span><span class="dl">'</span></span>.constantize(<span class="co">Array</span>) <span class="c"># =&gt; Array</span>
+<span class="s"><span class="dl">'</span><span class="k">String5</span><span class="dl">'</span></span>.constantize <span class="r">do</span> |string|
+  string.chop.constantize
+<span class="r">end</span> <span class="c"># =&gt; String</span>
+</pre></td></tr><tr><th>Further information</th>    <td><code>constantize</code> is an improved version of ActiveSupport's one</td></tr><tr><th>Specification</th>    <td> <span id="show_string_spec">(<a href="javascript:show('string_spec')">show</a>)</span>
+         <pre class="source" id="string_spec">require <span class="s"><span class="dl">'</span><span class="k">string</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">String#^</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should give C-like substring access to strings</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -1227,6 +1233,32 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#ords</s
     string = <span class="s"><span class="dl">'</span><span class="k">Theoretische Informatik ist voll geil!</span><span class="dl">'</span></span>
     string.ords.should  == [<span class="i">84</span>, <span class="i">104</span>, <span class="i">101</span>, <span class="i">111</span>, <span class="i">114</span>, <span class="i">101</span>, <span class="i">116</span>, <span class="i">105</span>, <span class="i">115</span>, <span class="i">99</span>, <span class="i">104</span>, <span class="i">101</span>, <span class="i">32</span>, <span class="i">73</span>, <span class="i">110</span>, <span class="i">102</span>, <span class="i">111</span>, <span class="i">114</span>, <span class="i">109</span>, <span class="i">97</span>, <span class="i">116</span>, <span class="i">105</span>, <span class="i">107</span>, <span class="i">32</span>, <span class="i">105</span>, <span class="i">115</span>, <span class="i">116</span>, <span class="i">32</span>, <span class="i">118</span>, <span class="i">111</span>, <span class="i">108</span>, <span class="i">108</span>, <span class="i">32</span>, <span class="i">103</span>, <span class="i">101</span>, <span class="i">105</span>, <span class="i">108</span>, <span class="i">33</span>]
   <span class="r">end</span>
+
+  describe <span class="s"><span class="dl">'</span><span class="k">String#constantize</span><span class="dl">'</span></span> <span class="r">do</span>
+    it <span class="s"><span class="dl">'</span><span class="k">should return the constant with that name</span><span class="dl">'</span></span> <span class="r">do</span>
+      <span class="s"><span class="dl">'</span><span class="k">Object</span><span class="dl">'</span></span>.constantize.should == <span class="co">Object</span>
+    <span class="r">end</span>
+
+    it <span class="s"><span class="dl">'</span><span class="k">should throw name error if constant does not exist (and no parameter is given)</span><span class="dl">'</span></span> <span class="r">do</span>
+      proc <span class="r">do</span>
+        <span class="s"><span class="dl">'</span><span class="k">ObfsefsefsefafesafaefRubyZuckerafdfselijfesject</span><span class="dl">'</span></span>.constantize
+      <span class="r">end</span>.should raise_exception <span class="co">NameError</span>
+    <span class="r">end</span>
+
+    it <span class="s"><span class="dl">'</span><span class="k">should call the block (and not raise an error) if constant does not exist and block given</span><span class="dl">'</span></span> <span class="r">do</span>
+      proc <span class="r">do</span>
+        <span class="s"><span class="dl">'</span><span class="k">ObfsefsefsefafesafaefRubyZuckerafdfselijfesject</span><span class="dl">'</span></span>.constantize <span class="r">do</span> |string|
+           <span class="co">Default</span> = [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>]
+        <span class="r">end</span>.should == [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>]
+      <span class="r">end</span>.should_not raise_exception <span class="co">NameError</span>
+    <span class="r">end</span>
+
+    it <span class="s"><span class="dl">'</span><span class="k">should return the second parameter (and not raise an error) if constant does not exist and parameter given</span><span class="dl">'</span></span> <span class="r">do</span>
+      proc <span class="r">do</span>
+        <span class="s"><span class="dl">'</span><span class="k">ObfsefsefsefafesafaefRubyZuckerafdfselijfesject</span><span class="dl">'</span></span>.constantize(<span class="co">Array</span>).should == <span class="co">Array</span>
+      <span class="r">end</span>.should_not raise_exception <span class="co">NameError</span>
+    <span class="r">end</span>
+  <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_string_source">(<a href="javascript:show('string_source')">show</a>)</span>
          <pre class="source" id="string_source"><span class="r">class</span> <span class="cl">String</span>
   <span class="r">def</span> <span class="fu">^</span>(pos)
@@ -1238,17 +1270,34 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#ords</s
     <span class="r">end</span>
   <span class="r">end</span>
 
-  <span class="r">def</span> <span class="fu">lchomp</span>(arg=<span class="gv">$/</span>)
+  <span class="r">def</span> <span class="fu">lchomp</span>(arg = <span class="gv">$/</span>)
     <span class="pc">self</span>.reverse.chomp(arg).reverse
   <span class="r">end</span>
 
-  <span class="r">def</span> <span class="fu">lchomp!</span>(arg=<span class="gv">$/</span>)
+  <span class="r">def</span> <span class="fu">lchomp!</span>(arg = <span class="gv">$/</span>)
     <span class="pc">self</span>.reverse.chomp!(arg).reverse
   <span class="r">end</span>
 
   <span class="r">def</span> <span class="fu">ords</span>
     <span class="pc">self</span>.unpack <span class="s"><span class="dl">'</span><span class="k">C*</span><span class="dl">'</span></span>
   <span class="r">end</span>
+
+  <span class="r">def</span> <span class="fu">constantize</span>(default_value = <span class="pc">nil</span>)
+    <span class="r">if</span> !default_value &amp;&amp; !block_given?
+      <span class="co">Object</span>.const_get(<span class="pc">self</span>)
+    <span class="r">else</span>
+      <span class="r">begin</span>
+        <span class="co">Object</span>.const_get(<span class="pc">self</span>)
+      <span class="r">rescue</span> <span class="co">NameError</span>
+        <span class="r">if</span> block_given?
+          <span class="r">yield</span> <span class="pc">self</span>
+        <span class="r">else</span>
+          default_value
+        <span class="r">end</span>
+      <span class="r">end</span>
+    <span class="r">end</span>
+  <span class="r">end</span>
+
 <span class="r">end</span>
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr></table> <h3 title="require 'zucker/unary'">unary</h3>
