@@ -17,7 +17,7 @@ end
 PKG_FILES = FileList[ '[a-zA-Z]*', 'lib/**/*' ]
 spec = Gem::Specification.new do |s|
   s.name = 'zucker'
-  s.version = '2'
+  s.version = '2.next'
   s.date = '2010-08-08'
   s.authors = ['Jan Lelis']
   s.email = 'mail@janlelis.de'
