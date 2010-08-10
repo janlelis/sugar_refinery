@@ -25,7 +25,7 @@ class ZuckerDoc
     def generate(path = '../')
       @path = path
 
-      cubes = Dir[ File.join(path, 'desc', '*') ].inject({}) do |res, cube_file; a|
+      cubes = Dir[ File.join(path, 'desc', '*.yaml') ].inject({}) do |res, cube_file; a|
         a = YAML.load_file cube_file
         if a.instance_of? Hash
           res.merge a
@@ -129,7 +129,7 @@ class ZuckerDoc
     end
 
     def source(s)
-      source_helper(:source, @path)
+      source_helper(:source, File.join( @path, 'lib/zucker') )
     end
 
     def source_helper(kind, file_prefix, suffix='')

@@ -1,4 +1,4 @@
-require 'string'
+require 'zucker/string'
 
 describe 'String#^' do
   it 'should give C-like substring access to strings' do

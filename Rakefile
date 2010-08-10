@@ -5,12 +5,12 @@ require 'spec/rake/spectask'
 
 desc 'Build documentation'
 task 'doc' do
-  zucker_path = "#{ Rake.application.find_rakefile_location[1] }/lib/zucker"
+  zucker_path = Rake.application.find_rakefile_location[1]
   ruby File.join(zucker_path, 'doc/zucker_doc.rb'), zucker_path
 end
 
 Spec::Rake::SpecTask.new('spec') do |t|
-  t.spec_files = FileList['lib/zucker/spec/**/*.rb']
+  t.spec_files = FileList['spec/*.rb']
 end
 
 # gem

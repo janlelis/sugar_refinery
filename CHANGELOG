@@ -1,3 +1,8 @@
+Zucker 2.next
+* changed directory layout (no changes for requiring)
+* added String#constantize (improved AS version)
+
+
 2010-08-08 | Zucker 2
 * added info cube
 * added chaining for array2proc
@@ -12,3 +17,4 @@
 
 2010-08-05 | Zucker 0
 * pre-release for rug-b talk
+
