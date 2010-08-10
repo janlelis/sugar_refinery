@@ -6,7 +6,7 @@ require 'coderay'
 
 class ZuckerDoc
   PACKAGES     = %w|default debug|
-  ORDER        = %w|summary why methods info spec source versions|
+  ORDER        = %w|summary why methods info spec source versions discussion|
   DESCRIPTIONS = {
     'summary'  => 'Summary',
     'why'      => 'Why?',
@@ -16,6 +16,7 @@ class ZuckerDoc
     'source'   => 'Source',
     'versions' => 'Compatibility',
     'authors'  => 'Authors',
+    'discussion'  => 'Discussion',
   }
 
 
@@ -83,10 +84,7 @@ class ZuckerDoc
                 title="require 'zucker/#{name}'"> } +
 
       ORDER.map{ |th|
-        if th == 'spec'   ||
-           th == 'source' ||
-           td = hash[th]
-
+        if %w|spec source discussion|.include?(th) || td = hash[th]
           "<tr><th>#{ DESCRIPTIONS[th] }</th>" +
           "    <td>#{ send th, td      }</td></tr>"
         end
@@ -127,11 +125,15 @@ class ZuckerDoc
       v.join ', '
     end
 
-    def spec(s)
+    def discussion(_)
+      "→github wiki→http://wiki.github.com/janlelis/zucker/#{@cube_name}→ (please create a new page if it does not exist)"
+    end
+
+    def spec(_)
       source_helper(:spec, File.join( @path, 'spec/' ), '_spec')
     end
 
-    def source(s)
+    def source(_)
       source_helper(:source, File.join( @path, 'lib/zucker') )
     end
 
