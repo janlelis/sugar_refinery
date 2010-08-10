@@ -18,12 +18,15 @@ class ZuckerDoc
     'authors'  => 'Authors',
   }
 
-  # template vars
-  @version = 2
 
   class << self
     def generate(path = '../')
       @path = path
+
+      # template vars
+      require File.join( @path, 'lib/zucker' ) # version
+      @version = Zucker::VERSION
+
 
       cubes = Dir[ File.join(path, 'desc', '*.yaml') ].inject({}) do |res, cube_file; a|
         a = YAML.load_file cube_file

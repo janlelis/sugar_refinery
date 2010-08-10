@@ -1,4 +1,8 @@
-# nothing is done here
+module Zucker
+  VERSION = '2.next'
+end
+
+# nothing further is done here
 #  to use zucker:
 
 # require 'zucker/default'

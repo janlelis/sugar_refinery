@@ -1,3 +1,5 @@
+require 'zucker'
+
 # default
 zucker = %w|
 aliases
@@ -22,5 +24,5 @@ unary
 union
 |
 
-zucker.each{|rb| require "zucker/#{rb}"}
+zucker.each{|rb| require File.join( 'zucker', rb )}
 

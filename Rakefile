@@ -3,6 +3,8 @@ require 'rake'
 require 'rake/gempackagetask'
 require 'spec/rake/spectask'
 
+require 'lib/zucker' # version
+
 desc 'Build documentation'
 task 'doc' do
   zucker_path = Rake.application.find_rakefile_location[1]
@@ -17,7 +19,7 @@ end
 PKG_FILES = FileList[ '[a-zA-Z]*', 'lib/**/*' ]
 spec = Gem::Specification.new do |s|
   s.name = 'zucker'
-  s.version = '2.next'
+  s.version = Zucker::VERSION
   s.date = '2010-08-08'
   s.authors = ['Jan Lelis']
   s.email = 'mail@janlelis.de'
