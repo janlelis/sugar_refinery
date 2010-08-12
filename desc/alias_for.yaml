@@ -1,0 +1,13 @@
+alias_for:
+  summary: 'A different way to create aliases: Different order and you can pass multiple alias names'
+  methods:
+    alias_for, aliases_for: |
+      alias_for :methods, :ms # creates an alias for the method :methods with the name ms
+      module Enumerable
+        aliases_for :zip, :with, :%
+      end # creates multiple aliases
+  package: default
+  versions:
+  - 1.9
+  - 1.8
+

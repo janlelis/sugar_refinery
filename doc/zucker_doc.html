@@ -317,7 +317,80 @@ table.source td { padding: 2px 4px; vertical-align: top; }
        
       <h2 title="require 'zucker/default'">Cubes[default]</h2>
         <div class="cubes">
-         <h3 title="require 'zucker/aliases'">aliases</h3>
+         <h3 title="require 'zucker/alias_for'">alias_for</h3>
+         <table class="cube_table"
+                id="alias_for_cube"
+                title="require 'zucker/alias_for'"> <tr><th>Summary</th>    <td>A different way to create aliases: Different order and you can pass multiple alias names</td></tr><tr><th>Methods/Usage</th>    <td><h5>alias_for, aliases_for</h5><pre class="usage source" style="display:block">alias_for <span class="sy">:methods</span>, <span class="sy">:ms</span> <span class="c"># creates an alias for the method :methods with the name ms</span>
+<span class="r">module</span> <span class="cl">Enumerable</span>
+  aliases_for <span class="sy">:zip</span>, <span class="sy">:with</span>, <span class="sy">:%</span>
+<span class="r">end</span> <span class="c"># creates multiple aliases</span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_alias_for_spec">(<a href="javascript:show('alias_for_spec')">show</a>)</span>
+         <pre class="source" id="alias_for_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/alias_for</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">alias_for</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should create an alias for global methods</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="c"># rspec bug? </span>
+    <span class="c"># def m1</span>
+    <span class="c">#   1</span>
+    <span class="c"># end</span>
+    <span class="c"># alias_for :m1, :a1</span>
+    <span class="c">#</span>
+    <span class="c"># proc do</span>
+    <span class="c">#   a1.should == 1</span>
+    <span class="c"># end.should_not raise_exception</span>
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should create an alias for instance methods</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="r">class</span> <span class="cl">Array</span>
+      <span class="r">def</span> <span class="fu">m2</span>
+        <span class="i">2</span>
+      <span class="r">end</span>
+      alias_for <span class="sy">:m2</span>, <span class="sy">:a2</span>
+    <span class="r">end</span>
+    proc <span class="r">do</span>
+
+      [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>].a2.should == <span class="i">2</span>
+    <span class="r">end</span>.should_not raise_exception
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should create an alias for class (singleton) methods</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="r">class</span> <span class="cl">Array</span>
+      <span class="r">class</span> &lt;&lt; <span class="cl">Array</span>
+        <span class="r">def</span> <span class="fu">m3</span>
+          <span class="i">3</span>
+        <span class="r">end</span>
+        alias_for <span class="sy">:m3</span>, <span class="sy">:a3</span>
+      <span class="r">end</span>
+    <span class="r">end</span>
+
+    proc <span class="r">do</span>
+      <span class="co">Array</span>.a3.should == <span class="i">3</span>
+    <span class="r">end</span>.should_not raise_exception
+  <span class="r">end</span>
+
+
+  it <span class="s"><span class="dl">'</span><span class="k">should create aliases for the first argument with all other arguments</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="r">class</span> <span class="cl">Object</span>
+      <span class="r">def</span> <span class="fu">m4</span>
+        <span class="i">4</span>
+      <span class="r">end</span>
+    alias_for <span class="sy">:m4</span>, <span class="sy">:ma</span>, <span class="sy">:mb</span>, <span class="sy">:mc</span>
+    <span class="r">end</span>
+    proc <span class="r">do</span>
+      <span class="i">1</span>.ma.should   == <span class="i">4</span>
+      <span class="s"><span class="dl">&quot;</span><span class="k">1</span><span class="dl">&quot;</span></span>.mb.should == <span class="i">4</span>
+      [<span class="i">1</span>].mc.should == <span class="i">4</span>
+    <span class="r">end</span>.should_not raise_exception
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_alias_for_source">(<a href="javascript:show('alias_for_source')">show</a>)</span>
+         <pre class="source" id="alias_for_source"><span class="r">def</span> <span class="fu">alias_for</span>(m, *aliases)
+  aliases.each{ |a|
+    class_eval <span class="s"><span class="dl">&quot;</span><span class="k">alias </span><span class="il"><span class="idl">#{</span>a<span class="idl">}</span></span><span class="k"> </span><span class="il"><span class="idl">#{</span>m<span class="idl">}</span></span><span class="dl">&quot;</span></span>
+  }
+<span class="r">end</span>
+<span class="r">alias</span> <span class="fu">aliases_for</span> <span class="fu">alias_for</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/alias_for">github wiki</a> (please create a new page if it does not exist)</td></tr></table> <h3 title="require 'zucker/aliases'">aliases</h3>
          <table class="cube_table"
                 id="aliases_cube"
                 title="require 'zucker/aliases'"> <tr><th>Summary</th>    <td>Some convenient aliases (and constants) for existing methods.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#is_an?</h5><pre class="usage source" style="display:block"><span class="co">Object</span>.is_a?</pre><h5>Enumerable#with</h5><pre class="usage source" style="display:block"><span class="co">Enumerable</span><span class="c">#zip</span></pre><h5>Enumerable#%</h5><pre class="usage source" style="display:block"><span class="co">Enumerable</span><span class="c">#zip</span></pre><h5>Array#**</h5><pre class="usage source" style="display:block"><span class="co">Array</span><span class="c">#product</span></pre><h5>Hash#+</h5><pre class="usage source" style="display:block"><span class="co">Hash</span><span class="c">#merge</span></pre><h5>Binding#[]</h5><pre class="usage source" style="display:block"><span class="co">Binding</span><span class="c">#eval</span></pre><h5>Infinity</h5><pre class="usage source" style="display:block"><span class="fl">1.0</span> / <span class="fl">0.0</span></pre><h5>NaN</h5><pre class="usage source" style="display:block"><span class="fl">0.0</span> / <span class="fl">0.0</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_aliases_spec">(<a href="javascript:show('aliases_spec')">show</a>)</span>
