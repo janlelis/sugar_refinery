@@ -3,7 +3,11 @@ require 'rake'
 require 'rake/gempackagetask'
 require 'spec/rake/spectask'
 
-require 'lib/zucker' # version
+if RUBY_VERSION >= '1.9.2'
+  require_relative 'lib/zucker'
+else
+  require 'lib/zucker'
+end
 
 desc 'Build documentation'
 task 'doc' do
@@ -11,6 +15,7 @@ task 'doc' do
   ruby File.join(zucker_path, 'doc/zucker_doc.rb'), zucker_path
 end
 
+task 'default' => 'spec'
 Spec::Rake::SpecTask.new('spec') do |t|
   t.spec_files = FileList['spec/*.rb']
 end
