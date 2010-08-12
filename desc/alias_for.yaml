@@ -6,6 +6,10 @@ alias_for:
       module Enumerable
         aliases_for :zip, :with, :%
       end # creates multiple aliases
+    method_alias_for, method_aliases_for: |
+      # same as alias_for, but using Module#alias_method instead of alias
+  info: 
+  - Thanks to Kristian Mandrup for the idea and module_alias specs.
   package: default
   versions:
   - 1.9

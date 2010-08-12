@@ -5,4 +5,13 @@ def alias_for(m, *aliases)
 end
 alias aliases_for alias_for
 
+def alias_method_for(m, *alias_methods)
+  alias_methods.each{ |a|
+    class_eval do
+      alias_method a.to_sym, m.to_sym
+    end
+  }
+end
+alias alias_methods_for alias_method_for
+
 # J-_-L

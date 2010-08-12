@@ -324,7 +324,8 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 <span class="r">module</span> <span class="cl">Enumerable</span>
   aliases_for <span class="sy">:zip</span>, <span class="sy">:with</span>, <span class="sy">:%</span>
 <span class="r">end</span> <span class="c"># creates multiple aliases</span>
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_alias_for_spec">(<a href="javascript:show('alias_for_spec')">show</a>)</span>
+</pre><h5>method_alias_for, method_aliases_for</h5><pre class="usage source" style="display:block"><span class="c"># same as alias_for, but using Module#alias_method instead of alias</span>
+</pre></td></tr><tr><th>Further information</th>    <td>Thanks to Kristian Mandrup for the idea and module_alias specs.</td></tr><tr><th>Specification</th>    <td> <span id="show_alias_for_spec">(<a href="javascript:show('alias_for_spec')">show</a>)</span>
          <pre class="source" id="alias_for_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/alias_for</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">alias_for</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -382,6 +383,65 @@ describe <span class="s"><span class="dl">'</span><span class="k">alias_for</spa
       [<span class="i">1</span>].mc.should == <span class="i">4</span>
     <span class="r">end</span>.should_not raise_exception
   <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="c"># alias_method</span>
+<span class="r">module</span> <span class="cl">Blip</span>
+  <span class="r">def</span> <span class="fu">blip</span>
+    <span class="s"><span class="dl">'</span><span class="k">blip</span><span class="dl">'</span></span>
+  <span class="r">end</span>
+  alias_methods_for <span class="sy">:blip</span>, <span class="sy">:blap</span>, <span class="sy">:blup</span>
+  
+  <span class="r">class</span> &lt;&lt; <span class="cl">self</span>
+    <span class="r">def</span> <span class="fu">self_blip</span>
+      <span class="s"><span class="dl">'</span><span class="k">blip</span><span class="dl">'</span></span>
+    <span class="r">end</span>
+    alias_methods_for <span class="sy">:self_blip</span>, <span class="sy">:self_blap</span>, <span class="sy">:self_blup</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="r">class</span> <span class="cl">Hello</span>
+  include <span class="co">Blip</span>
+  
+  <span class="r">def</span> <span class="fu">hello</span>
+    <span class="s"><span class="dl">'</span><span class="k">hello</span><span class="dl">'</span></span>
+  <span class="r">end</span>
+  alias_methods_for <span class="sy">:hello</span>, <span class="sy">:hi</span>, <span class="sy">:howdy</span>
+  
+  <span class="r">class</span> &lt;&lt; <span class="cl">self</span>
+    <span class="r">def</span> <span class="fu">self_hello</span>
+      <span class="s"><span class="dl">'</span><span class="k">hello</span><span class="dl">'</span></span>
+    <span class="r">end</span>
+    alias_methods_for <span class="sy">:self_hello</span>, <span class="sy">:self_hi</span>, <span class="sy">:self_howdy</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">alias_methods_for</span><span class="dl">'</span></span> <span class="r">do</span>
+  let(<span class="sy">:h</span>) { <span class="co">Hello</span>.new }
+
+  context <span class="s"><span class="dl">&quot;</span><span class="k">module context</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+    it <span class="s"><span class="dl">&quot;</span><span class="k">should alias instance methods</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+      h.blap.should == h.blip
+      h.blup.should == h.blip
+    <span class="r">end</span>
+
+    it <span class="s"><span class="dl">&quot;</span><span class="k">should alias class methods</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+      <span class="co">Blip</span>.self_blap.should == <span class="co">Blip</span>.self_blip
+      <span class="co">Blip</span>.self_blup.should == <span class="co">Blip</span>.self_blip
+    <span class="r">end</span>
+  <span class="r">end</span>
+
+  context <span class="s"><span class="dl">&quot;</span><span class="k">class context</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+    it <span class="s"><span class="dl">&quot;</span><span class="k">should alias instance methods</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+      h.hi.should == h.hello
+      h.howdy.should == h.hello
+    <span class="r">end</span>
+
+    it <span class="s"><span class="dl">&quot;</span><span class="k">should alias class methods</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+      <span class="co">Hello</span>.self_hi.should == <span class="co">Hello</span>.self_hello
+      <span class="co">Hello</span>.self_howdy.should == <span class="co">Hello</span>.self_hello
+    <span class="r">end</span>
+  <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_alias_for_source">(<a href="javascript:show('alias_for_source')">show</a>)</span>
          <pre class="source" id="alias_for_source"><span class="r">def</span> <span class="fu">alias_for</span>(m, *aliases)
   aliases.each{ |a|
@@ -389,6 +449,15 @@ describe <span class="s"><span class="dl">'</span><span class="k">alias_for</spa
   }
 <span class="r">end</span>
 <span class="r">alias</span> <span class="fu">aliases_for</span> <span class="fu">alias_for</span>
+
+<span class="r">def</span> <span class="fu">alias_method_for</span>(m, *alias_methods)
+  alias_methods.each{ |a|
+    class_eval <span class="r">do</span>
+      alias_method a.to_sym, m.to_sym
+    <span class="r">end</span>
+  }
+<span class="r">end</span>
+<span class="r">alias</span> <span class="fu">alias_methods_for</span> <span class="fu">alias_method_for</span>
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/alias_for">github wiki</a> (please create a new page if it does not exist)</td></tr></table> <h3 title="require 'zucker/aliases'">aliases</h3>
          <table class="cube_table"

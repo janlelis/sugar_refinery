@@ -1,4 +1,5 @@
 Zucker 2.next
+* added alias_for for an alternative alias syntax
 * changed directory layout (no changes for requiring)
 * added String#constantize (improved AS version)
 
