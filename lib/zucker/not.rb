@@ -8,7 +8,7 @@ class Object
       @receiver = receiver
     end
     
-    def method_missing( m, *args, &block )
+    def method_missing(m, *args, &block)
       not @receiver.public_send( m, *args, &block )
     end
   end

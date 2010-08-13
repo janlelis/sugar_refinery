@@ -2,6 +2,7 @@ require 'zucker'
 
 # default
 zucker = %w|
+alias_for
 aliases
 array
 array2proc
@@ -16,6 +17,7 @@ ivars
 info
 kernel
 mcopy
+not
 regexp2proc
 sandbox
 square_brackets_for
@@ -25,4 +27,3 @@ union
 |
 
 zucker.each{|rb| require File.join( 'zucker', rb )}
-
