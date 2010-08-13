@@ -1167,7 +1167,29 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#mcopy</
   <span class="c"># alias copy mcopy</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mcopy">github wiki</a> (please create a new page if it does not exist)</td></tr></table> <h3 title="require 'zucker/regexp2proc'">regexp2proc</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mcopy">github wiki</a> (please create a new page if it does not exist)</td></tr></table> <h3 title="require 'zucker/not'">not</h3>
+         <table class="cube_table"
+                id="not_cube"
+                title="require 'zucker/not'"> <tr><th>Summary</th>    <td><code>not</code> returns an object on which all methods are redirected to it's receiver object, but returns inverted boolean.</td></tr><tr><th>Why?</th>    <td>Better readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#not</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>].not.empty? <span class="c"># true</span>
+</pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://blog.jayfields.com/2007/08/ruby-adding-not-method-for-readability.html">this article by Jay Field</a> for more information.</td></tr><tr><th>Specification</th>    <td> <span id="show_not_spec">(<a href="javascript:show('not_spec')">show</a>)</span>
+         <pre class="source" id="not_spec"><em>FIXME: missing</em></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_not_source">(<a href="javascript:show('not_source')">show</a>)</span>
+         <pre class="source" id="not_source"><span class="r">class</span> <span class="cl">Object</span>
+  <span class="r">def</span> <span class="fu">not</span>
+    <span class="co">NotClass</span>.new <span class="pc">self</span>
+  <span class="r">end</span>
+
+  <span class="r">class</span> <span class="cl">NotClass</span> &lt; <span class="co">BasicObject</span>
+    <span class="r">def</span> <span class="fu">initialize</span>(receiver)
+      <span class="iv">@receiver</span> = receiver
+    <span class="r">end</span>
+    
+    <span class="r">def</span> <span class="fu">method_missing</span>( m, *args, &amp;block )
+      <span class="r">not</span> <span class="iv">@receiver</span>.public_send( m, *args, &amp;block )
+    <span class="r">end</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/not">github wiki</a> (please create a new page if it does not exist)</td></tr></table> <h3 title="require 'zucker/regexp2proc'">regexp2proc</h3>
          <table class="cube_table"
                 id="regexp2proc_cube"
                 title="require 'zucker/regexp2proc'"> <tr><th>Summary</th>    <td>Use &/regex/ to match it against strings.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Regexp#to_proc</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.map    &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>  <span class="c"># =&gt; [&quot;j&quot;, nil, nil, &quot;y&quot;]</span>
@@ -1502,6 +1524,8 @@ describe <span class="co">String</span>, <span class="s"><span class="dl">'</spa
 
 shared_examples_for <span class="s"><span class="dl">&quot;</span><span class="k">Regexp.union operator</span><span class="dl">&quot;</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">&quot;</span><span class="k">should create an Regexp.union of both operands</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+    (<span class="rx"><span class="dl">/</span><span class="k">Ruby</span><span class="ch">\d</span><span class="dl">/</span></span> | <span class="rx"><span class="dl">/</span><span class="k">test</span><span class="dl">/</span><span class="mod">i</span></span> | <span class="s"><span class="dl">&quot;</span><span class="k">cheat</span><span class="dl">&quot;</span></span>).should ==
+      <span class="co">Regexp</span>.union( <span class="co">Regexp</span>.union( <span class="rx"><span class="dl">/</span><span class="k">Ruby</span><span class="ch">\d</span><span class="dl">/</span></span>, <span class="rx"><span class="dl">/</span><span class="k">test</span><span class="dl">/</span><span class="mod">i</span></span> ), <span class="s"><span class="dl">&quot;</span><span class="k">cheat</span><span class="dl">&quot;</span></span> )
   <span class="r">end</span>
 <span class="r">end</span>
 
