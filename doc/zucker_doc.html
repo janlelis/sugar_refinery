@@ -320,7 +320,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
          <h3 title="require 'zucker/alias_for'">alias_for</h3>
          <table class="cube_table"
                 id="alias_for_cube"
-                title="require 'zucker/alias_for'"> <tr><th>Summary</th>    <td>A different way to create aliases: Different order and you can pass multiple alias names</td></tr><tr><th>Methods/Usage</th>    <td><h5>alias_for, aliases_for</h5><pre class="usage source" style="display:block">alias_for <span class="sy">:methods</span>, <span class="sy">:ms</span> <span class="c"># creates an alias for the method :methods with the name ms</span>
+                title="require 'zucker/alias_for'"> <tr><th>Summary</th>    <td>A different way to create aliases: Different order and you can pass multiple alias names</td></tr><tr><th>Why?</th>    <td>It's clearer in which order to put the arguments</td></tr><tr><th>Methods/Usage</th>    <td><h5>alias_for, aliases_for</h5><pre class="usage source" style="display:block">alias_for <span class="sy">:methods</span>, <span class="sy">:ms</span> <span class="c"># creates an alias for the method :methods with the name ms</span>
 <span class="r">module</span> <span class="cl">Enumerable</span>
   aliases_for <span class="sy">:zip</span>, <span class="sy">:with</span>, <span class="sy">:%</span>
 <span class="r">end</span> <span class="c"># creates multiple aliases</span>
@@ -1164,7 +1164,6 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#mcopy</
   <span class="r">def</span> <span class="fu">mcopy</span>
     <span class="co">Marshal</span>.load <span class="co">Marshal</span>.dump <span class="pc">self</span>
   <span class="r">end</span>
-  <span class="c"># alias copy mcopy</span>
 <span class="r">end</span>
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mcopy">github wiki</a> (please create a new page if it does not exist)</td></tr></table> <h3 title="require 'zucker/not'">not</h3>
@@ -1183,7 +1182,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#mcopy</
       <span class="iv">@receiver</span> = receiver
     <span class="r">end</span>
     
-    <span class="r">def</span> <span class="fu">method_missing</span>( m, *args, &amp;block )
+    <span class="r">def</span> <span class="fu">method_missing</span>(m, *args, &amp;block)
       <span class="r">not</span> <span class="iv">@receiver</span>.public_send( m, *args, &amp;block )
     <span class="r">end</span>
   <span class="r">end</span>
@@ -1464,7 +1463,44 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#ords</s
 
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/string">github wiki</a> (please create a new page if it does not exist)</td></tr></table> <h3 title="require 'zucker/unary'">unary</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/string">github wiki</a> (please create a new page if it does not exist)</td></tr></table> <h3 title="require 'zucker/tap'">tap</h3>
+         <table class="cube_table"
+                id="tap_cube"
+                title="require 'zucker/tap'"> <tr><th>Summary</th>    <td>This cube adds the two <code>tap</code> variants <code>tap_on</code> (known as <code>returning</code> in ActiveSupport) and <code>make_new</code>.</td></tr><tr><th>Methods/Usage</th>    <td><h5>tap_on</h5><pre class="usage source" style="display:block">tap_on [<span class="i">1</span>,<span class="i">2</span>] <span class="r">do</span> |obj|
+  obj[<span class="i">4</span>] =&gt; <span class="i">5</span>
+<span class="r">end</span> <span class="c">#=&gt; [1, 2, nil, nil, 5]</span>
+</pre><h5>make_new</h5><pre class="usage source" style="display:block">make_new <span class="co">Hash</span> <span class="r">do</span> |obj|
+  obj[<span class="i">1</span>] = <span class="i">2</span>
+<span class="r">end</span> <span class="c">#=&gt; {1 =&gt; 2}</span>
+</pre></td></tr><tr><th>Further information</th>    <td>Read more about using tap on the <a href="http://blog.rubybestpractices.com/posts/gregory/011-tap-that-hash.html">⇧ruby best practises</a> blog.</td></tr><tr><th>Specification</th>    <td> <span id="show_tap_spec">(<a href="javascript:show('tap_spec')">show</a>)</span>
+         <pre class="source" id="tap_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/tap</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">tap_on</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should call tap on the argument and apply the block</span><span class="dl">'</span></span> <span class="r">do</span>
+    obj = <span class="s"><span class="dl">&quot;</span><span class="k">an_object</span><span class="dl">&quot;</span></span>
+    block = <span class="sy">:reverse</span>.to_proc
+
+    tap_on( obj, &amp;block ).should == obj.tap( &amp;block )
+  <span class="r">end</span>
+<span class="r">end</span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">make_new</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should create a new instance of the class given as argument, apply the block on it and return result</span><span class="dl">'</span></span> <span class="r">do</span>
+    res = make_new <span class="co">Hash</span> <span class="r">do</span> |obj|
+      obj[<span class="i">1</span>] = <span class="i">2</span>
+    <span class="r">end</span>
+    res.should == { <span class="i">1</span>=&gt;<span class="i">2</span> }
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_tap_source">(<a href="javascript:show('tap_source')">show</a>)</span>
+         <pre class="source" id="tap_source"><span class="r">def</span> <span class="fu">tap_on</span>(obj, &amp;block)
+  obj.tap &amp;block
+<span class="r">end</span>
+
+<span class="r">def</span> <span class="fu">make_new</span>(what, *args, &amp;block)
+  what.new(*args).tap &amp;block
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/tap">github wiki</a> (please create a new page if it does not exist)</td></tr></table> <h3 title="require 'zucker/unary'">unary</h3>
          <table class="cube_table"
                 id="unary_cube"
                 title="require 'zucker/unary'"> <tr><th>Summary</th>    <td>Easy conversion between strings and symbols.</td></tr><tr><th>Why?</th>    <td>Sometimes, you do not care if you get a <code>String</code> or <code>Symbol</code> as input - but when analysing it, you often need to choose one format. A concise possibility for this conversion is using the unary operators <code>String#-@</code> and <code>Symbol#+@</code>.</td></tr><tr><th>Methods/Usage</th>    <td><h5>String#+@</h5><pre class="usage source" style="display:block">+<span class="s"><span class="dl">'</span><span class="k">was_string</span><span class="dl">'</span></span> <span class="c"># =&gt; 'was_string'</span></pre><h5>String#-@</h5><pre class="usage source" style="display:block">-<span class="s"><span class="dl">'</span><span class="k">was_string</span><span class="dl">'</span></span> <span class="c"># =&gt; :was_string</span></pre><h5>Symbol#+@</h5><pre class="usage source" style="display:block">+<span class="sy">:was_symbol</span>  <span class="c"># =&gt; 'was_symbol'</span></pre><h5>Symbol#-@</h5><pre class="usage source" style="display:block">-<span class="sy">:was_symbol</span>  <span class="c"># =&gt; :was_symbol</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by (I've seen the unary + for Symbol somewhere on the net... but cannot remember where...)</td></tr><tr><th>Specification</th>    <td> <span id="show_unary_spec">(<a href="javascript:show('unary_spec')">show</a>)</span>
@@ -1567,7 +1603,7 @@ name = <span class="s"><span class="dl">'</span><span class="k">Earth</span><spa
 <span class="s"><span class="dl">'</span><span class="k">Hello </span><span class="dl">'</span></span> + name.<span class="co">D</span>{|e| <span class="s"><span class="dl">&quot;</span><span class="k">The length is: </span><span class="il"><span class="idl">#{</span>e.size<span class="idl">}</span></span><span class="dl">&quot;</span></span>}
 <span class="c"># outputs &quot;The length is: 5&quot;</span>
 <span class="c"># =&gt; 'Hello Earth'</span>
-</pre></td></tr><tr><th>Further information</th>    <td>This is inspired by the funny <a href="http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions"><code>.tap</code> method</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_D_spec">(<a href="javascript:show('D_spec')">show</a>)</span>
+</pre></td></tr><tr><th>Further information</th>    <td>This is inspired by the <a href="http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions"><code>.tap</code> method</a>.<br/>There is also <code>tap</code> cube with more <code>tap</code> methods.</td></tr><tr><th>Specification</th>    <td> <span id="show_D_spec">(<a href="javascript:show('D_spec')">show</a>)</span>
          <pre class="source" id="D_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/D</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Object#D</span><span class="dl">'</span></span> <span class="r">do</span>
