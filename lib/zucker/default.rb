@@ -22,6 +22,7 @@ regexp2proc
 sandbox
 square_brackets_for
 string
+tap
 unary
 union
 |

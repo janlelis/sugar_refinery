@@ -3,6 +3,11 @@ info:
   why: "You don't need to remember in which global variable, constant or special method the information you are searching for is hidden."
   methods:
     Info: |
+      # for example
+      Info.current_file      # __FILE__
+      Info.working_directory # Dir.pwd
+      Info.load_path         # $:
+      Info.platform          # RUBY_PLATFORM
       # see the source file for the list of accessors
       # you could also add them to the global namespace with: include Info
   package: default

@@ -24,11 +24,25 @@ class ZuckerDoc
     def generate(path = '../')
       @path = path
 
-      # template vars
-      require File.join( @path, 'lib/zucker' ) # version
+      # get version
+      require File.join( @path, 'lib/zucker' )
       @version = Zucker::VERSION
 
+      # include + format changelog
+      @changelog = File.read File.join( @path, 'CHANGELOG' )
+      @changelog.gsub! /\| Zucker (?<version>\d+)/ do
+        version = $~[:version].to_i
+        if version && version > 0
+          %{| <a href="http://rubyzucker.info/#{version}/">Zucker #{version}</a>}
+        elsif version && version == 0
+          %{| <a href="http://rubyzucker.info/rubyzucker.pdf">Zucker 0<a>}
+        else
+          $& # no changes
+        end
+      end
 
+
+      # collect description files and turn them to html
       cubes = Dir[ File.join(path, 'desc', '*.yaml') ].inject({}) do |res, cube_file; a|
         a = YAML.load_file cube_file
         if a.instance_of? Hash
@@ -126,7 +140,7 @@ class ZuckerDoc
     end
 
     def discussion(_)
-      "→github wiki→http://wiki.github.com/janlelis/zucker/#{@cube_name}→ (please create a new page if it does not exist)"
+      "→github wiki→http://wiki.github.com/janlelis/zucker/#{@cube_name}→"
     end
 
     def spec(_)
@@ -319,26 +333,6 @@ code, pre{
   color: #000;
 }
 
-#/*railscasts*/
-#.source .an { color:#E7BE69 }                      /* html attribute */
-#.source .c  { color:#BC9358; font-style: italic; } /* comment */
-#.source .ch { color:#509E4F }                      /* escaped character */
-#.source .cl { color:#FFF }                         /* class */
-#.source .co { color:#FFF }                         /* constant */
-#.source .fl { color:#A4C260 }                      /* float */
-#.source .fu { color:#FFC56D }                      /* function */
-#.source .gv { color:#D0CFFE }                      /* global variable */
-#.source .i  { color:#A4C260 }                      /* integer */
-#.source .il { background:#151515 }                 /* inline code */
-#.source .iv { color:#D0CFFE }                      /* instance variable */
-#.source .pp { color:#E7BE69 }                      /* doctype */
-#.source .r  { color:#CB7832 }                      /* keyword */
-#.source .rx { color:#A4C260 }                      /* regex */
-#.source .s  { color:#A4C260 }                      /* string */
-#.source .sy { color:#6C9CBD }                      /* symbol */
-#.source .ta { color:#E7BE69 }                      /* html tag */
-#.source .pc { color:#6C9CBD }                      /* boolean */
-
 # http://coderay.rubychan.de/
 .source pre { margin: 0px; }
 
@@ -489,6 +483,10 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <code>require 'zucker/1/egonil'</code>. Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs).</p>
 
        ....
+      <h2>Changelog</h2>
+      <div class="cubes">
+        <pre class="scode">..changelog..</pre>
+      </div>
 <br/>
     </div>
   <div id="foot">

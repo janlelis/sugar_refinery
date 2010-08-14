@@ -1,8 +1,10 @@
-Zucker 2.next
+2010-08-14 | Zucker 3
+* added tap cube
 * added Object#not
 * added alias_for for an alternative alias syntax
-* changed directory layout (no changes for requiring)
 * added String#constantize (improved AS version)
+* improved docs
+* changed directory layout (no changes for requiring)
 
 
 2010-08-08 | Zucker 2
@@ -19,4 +21,3 @@ Zucker 2.next
 
 2010-08-05 | Zucker 0
 * pre-release for rug-b talk
-

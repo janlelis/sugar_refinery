@@ -1,5 +1,5 @@
 regexp2proc:
-  summary: Use &/regex/ to match it against strings.
+  summary: Use ⇧&/regex/⇧ to match it against strings.
   methods:
     Regexp#to_proc: |
       %w|just another string array|.map    &/[jy]/  # => ["j", nil, nil, "y"]
