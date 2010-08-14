@@ -4,9 +4,10 @@
 * added alias_for for an alternative alias syntax
 * added String#constantize (improved AS version)
 * improved Info module
+* made Array#sum Rails compatibile
 * improved docs
 * changed directory layout (no changes for requiring)
-* many small changes
+* more small changes
 
 
 2010-08-08 | Zucker 2

@@ -4,9 +4,13 @@ class Array
     (other - self)
   end
 
-  if !respond_to?(:sum)
-    def sum # sry, you just need this one too often
-      inject :+
+  # can take an argument & block to be Rails compatible
+  def sum(identity = 0, &block)
+    # inject(:+)
+    if block_given?
+      map(&block).sum( identity )
+    else
+      inject(:+) || identity
     end
   end
 
