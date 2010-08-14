@@ -3,6 +3,7 @@
 * added Object#not
 * added alias_for for an alternative alias syntax
 * added String#constantize (improved AS version)
+* improved Info module
 * improved docs
 * changed directory layout (no changes for requiring)
 

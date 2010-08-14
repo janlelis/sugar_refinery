@@ -5,7 +5,10 @@ module Info
       send what
     end
 
-    # TODO: maybe add a descriptions method
+    # list available info methods
+    def list
+      singleton_methods - [:[], :list, '[]', 'list']
+    end
   end
 
   module_function
@@ -124,7 +127,7 @@ module Info
 
   # defined objects
   def global_variables
-    global_variables
+    Object.send :global_variables
   end
 
   def global_constants

@@ -8,8 +8,9 @@ info:
       Info.working_directory # Dir.pwd
       Info.load_path         # $:
       Info.platform          # RUBY_PLATFORM
-      # see the source file for the list of accessors
       # you could also add them to the global namespace with: include Info
+      # see the source file for the list of accessors or
+      Info.list
   package: default
   versions:
   - 1.9
