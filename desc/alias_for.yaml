@@ -1,5 +1,6 @@
 alias_for:
   summary: 'A different way to create aliases: Different order and you can pass multiple alias names'
+  why: "It's clearer in which order to put the arguments"
   methods:
     alias_for, aliases_for: |
       alias_for :methods, :ms # creates an alias for the method :methods with the name ms
