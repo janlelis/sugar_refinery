@@ -12,9 +12,9 @@ egonil
 enumerable
 hash
 hash2proc
+info
 iterate
 ivars
-info
 kernel
 mcopy
 not

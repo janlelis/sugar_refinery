@@ -770,8 +770,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Hash#to_proc</
 <span class="co">Info</span>.working_directory <span class="c"># Dir.pwd</span>
 <span class="co">Info</span>.load_path         <span class="c"># $:</span>
 <span class="co">Info</span>.platform          <span class="c"># RUBY_PLATFORM</span>
-<span class="c"># see the source file for the list of accessors</span>
 <span class="c"># you could also add them to the global namespace with: include Info</span>
+<span class="c"># see the source file for the list of accessors or</span>
+<span class="co">Info</span>.list
 </pre></td></tr><tr><th>Specification</th>    <td> <span id="show_info_spec">(<a href="javascript:show('info_spec')">show</a>)</span>
          <pre class="source" id="info_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/info</span><span class="dl">'</span></span>
 
@@ -787,7 +788,10 @@ describe <span class="s"><span class="dl">'</span><span class="k">Info</span><sp
       send what
     <span class="r">end</span>
 
-    <span class="c"># TODO: maybe add a descriptions method</span>
+    <span class="c"># list available info methods</span>
+    <span class="r">def</span> <span class="fu">list</span>
+      singleton_methods - [<span class="sy">:[]</span>, <span class="sy">:list</span>, <span class="s"><span class="dl">'</span><span class="k">[]</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">list</span><span class="dl">'</span></span>]
+    <span class="r">end</span>
   <span class="r">end</span>
 
   module_function
@@ -906,7 +910,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Info</span><sp
 
   <span class="c"># defined objects</span>
   <span class="r">def</span> <span class="fu">global_variables</span>
-    global_variables
+    <span class="co">Object</span>.send <span class="sy">:global_variables</span>
   <span class="r">end</span>
 
   <span class="r">def</span> <span class="fu">global_constants</span>
@@ -1643,7 +1647,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#D</span
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/D">github wiki</a></td></tr></table> <h3 title="require 'zucker/binding'">binding</h3>
          <table class="cube_table"
                 id="binding_cube"
-                title="require 'zucker/binding'"> <tr><th>Summary</th>    <td>Adds a verbose <code>Binding#inspect</code>.</td></tr><tr><th>Why?</th>    <td>It gives you information about the current environment.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Binding#inspect</h5><pre class="usage source" style="display:block">binding.inspect</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_binding_spec">(<a href="javascript:show('binding_spec')">show</a>)</span>
+                title="require 'zucker/binding'"> <tr><th>Summary</th>    <td>Adds a verbose <code>Binding#inspect</code>.</td></tr><tr><th>Why?</th>    <td>It gives you information about the current environment.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Binding#inspect</h5><pre class="usage source" style="display:block">binding.inspect <span class="c"># shows your current environment</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_binding_spec">(<a href="javascript:show('binding_spec')">show</a>)</span>
          <pre class="source" id="binding_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/binding</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Binding#inspect</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -1723,6 +1727,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#method_
 * added Object#not
 * added alias_for for an alternative alias syntax
 * added String#constantize (improved AS version)
+* improved Info module
 * improved docs
 * changed directory layout (no changes for requiring)
 
