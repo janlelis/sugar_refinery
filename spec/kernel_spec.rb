@@ -20,6 +20,12 @@ describe 'library?' do
   end
 end
 
+describe 'executed_directly?' do
+  it 'should return true if the file is invoked directly' do
+    executed_directly?.should == ( __FILE__ == $PROGRAM_NAME )
+  end
+end
+
 describe 'ignore_sigint!' do
   it 'should catch ctrl+c signals' do
     # ...
