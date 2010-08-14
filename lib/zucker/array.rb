@@ -4,8 +4,10 @@ class Array
     (other - self)
   end
 
-  def sum # sry, you just need this one too often
-    inject :+
+  if !respond_to?(:sum)
+    def sum # sry, you just need this one too often
+      inject :+
+    end
   end
 
   def chrs

@@ -24,9 +24,10 @@ class ZuckerDoc
     def generate(path = '../')
       @path = path
 
-      # get version
+      # get version / date
       require File.join( @path, 'lib/zucker' )
       @version = Zucker::VERSION
+      @date    = Zucker::DATE
 
       # include + format changelog
       @changelog = File.read File.join( @path, 'CHANGELOG' )
@@ -461,7 +462,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 
     <h1>Ruby Zucker ..version..</h1>
       <h2>What is it?</h2>
-      <p class="text">Zucker is the German word for sugar (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>). It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for a little introduction.</p>
+      <p class="text">Zucker is the German word for sugar (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>). It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for a little introduction. Discussion is possible at the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a>.</p>
 
       <h2>Install</h2>
       <p class="text">
@@ -491,7 +492,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
     </div>
   <div id="foot">
     <div id="smile"><a href="http://rbjl.net">J-_-L</a></div>
-    This is the Ruby Zucker ..version.. documentation.
+    This is the Ruby Zucker ..version.. documentation (..date..).
     The current version is always available at <a href="http://rubyzucker.info">rubyzucker.info</a>.
     Gem source can be found at <a href="http://github.com/janlelis/zucker">github</a>.
   </div>

@@ -1,6 +1,6 @@
 module Zucker
   VERSION = '3'
-  DATE    = '2010-08.14'
+  DATE    = '2010-08-14'
 end
 
 # nothing further is done here
@@ -14,3 +14,4 @@ end
 
 #  or cherry-pick the cubes you want ;)
 
+# eg. require 'zucker/egonil'

@@ -5,7 +5,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
-  <title>Ruby Zucker 2.next</title>
+  <title>Ruby Zucker 3</title>
   <script type="text/javascript">
     var show = function(snippet){
       document.getElementById( snippet ).style.display = 'block'
@@ -271,9 +271,9 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 <body>
   <div id="world">
 
-    <h1>Ruby Zucker 2.next</h1>
+    <h1>Ruby Zucker 3</h1>
       <h2>What is it?</h2>
-      <p class="text">Zucker is the German word for sugar (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>). It adds syntactical sugar in the form of independent, small scripts that make Ruby even more sweet. Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for a little introduction.</p>
+      <p class="text">Zucker is the German word for sugar (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>). It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for a little introduction. Discussion is possible at the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a>.</p>
 
       <h2>Install</h2>
       <p class="text">
@@ -513,8 +513,10 @@ describe <span class="s"><span class="dl">'</span><span class="k">Array#chrs</sp
     (other - <span class="pc">self</span>)
   <span class="r">end</span>
 
-  <span class="r">def</span> <span class="fu">sum</span> <span class="c"># sry, you just need this one too often</span>
-    inject <span class="sy">:+</span>
+  <span class="r">if</span> !respond_to?(<span class="sy">:sum</span>)
+    <span class="r">def</span> <span class="fu">sum</span> <span class="c"># sry, you just need this one too often</span>
+      inject <span class="sy">:+</span>
+    <span class="r">end</span>
   <span class="r">end</span>
 
   <span class="r">def</span> <span class="fu">chrs</span>
@@ -1087,7 +1089,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">instance_varia
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/ivars">github wiki</a></td></tr></table> <h3 title="require 'zucker/kernel'">kernel</h3>
          <table class="cube_table"
                 id="kernel_cube"
-                title="require 'zucker/kernel'"> <tr><th>Summary</th>    <td>Some useful general shortcut methods.</td></tr><tr><th>Why?</th>    <td>Readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>activate_warnings!</h5><pre class="usage source" style="display:block">activate_warnings! <span class="c"># sets $VERBOSE to 1</span></pre><h5>deactivate_warnings!</h5><pre class="usage source" style="display:block">deactivate_warnings! <span class="c"># sets $VERBOSE to 0</span></pre><h5>library?</h5><pre class="usage source" style="display:block">library? <span class="c"># checks, if the current file is ran directly</span></pre><h5>ignore_sigint!</h5><pre class="usage source" style="display:block">ignore_sigint! <span class="c"># blocks CTRL+C</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_kernel_spec">(<a href="javascript:show('kernel_spec')">show</a>)</span>
+                title="require 'zucker/kernel'"> <tr><th>Summary</th>    <td>Some useful general shortcut methods.</td></tr><tr><th>Why?</th>    <td>Readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>activate_warnings!</h5><pre class="usage source" style="display:block">activate_warnings! <span class="c"># sets $VERBOSE to 1</span></pre><h5>deactivate_warnings!</h5><pre class="usage source" style="display:block">deactivate_warnings! <span class="c"># sets $VERBOSE to 0</span></pre><h5>executed_directly?, standalone?</h5><pre class="usage source" style="display:block">executed_directly? <span class="c"># checks, if the current file is run directly -&gt; true</span></pre><h5>library?</h5><pre class="usage source" style="display:block">library? <span class="c"># checks, if the current file is run directly -&gt; false</span></pre><h5>ignore_sigint!</h5><pre class="usage source" style="display:block">ignore_sigint! <span class="c"># blocks CTRL+C</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_kernel_spec">(<a href="javascript:show('kernel_spec')">show</a>)</span>
          <pre class="source" id="kernel_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/kernel</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">activate_warnings!</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -1110,6 +1112,12 @@ describe <span class="s"><span class="dl">'</span><span class="k">library?</span
   <span class="r">end</span>
 <span class="r">end</span>
 
+describe <span class="s"><span class="dl">'</span><span class="k">executed_directly?</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should return true if the file is invoked directly</span><span class="dl">'</span></span> <span class="r">do</span>
+    executed_directly?.should == ( <span class="pc">__FILE__</span> == <span class="gv">$PROGRAM_NAME</span> )
+  <span class="r">end</span>
+<span class="r">end</span>
+
 describe <span class="s"><span class="dl">'</span><span class="k">ignore_sigint!</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should catch ctrl+c signals</span><span class="dl">'</span></span> <span class="r">do</span>
     <span class="c"># ...</span>
@@ -1126,6 +1134,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">ignore_sigint!
 <span class="r">def</span> <span class="fu">library?</span>
   <span class="pc">__FILE__</span> != <span class="gv">$PROGRAM_NAME</span>
 <span class="r">end</span>
+
+<span class="r">def</span> <span class="fu">executed_directly?</span>
+  <span class="pc">__FILE__</span> == <span class="gv">$PROGRAM_NAME</span>
+<span class="r">end</span>
+<span class="r">alias</span> <span class="fu">standalone?</span> <span class="fu">executed_directly?</span>
 
 <span class="r">def</span> <span class="fu">ignore_sigint!</span> <span class="c"># ctrl+c</span>
    <span class="co">Signal</span>.trap *<span class="s"><span class="dl">%w|</span><span class="k">SIGINT IGNORE</span><span class="dl">|</span></span>
@@ -1652,7 +1665,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#D</span
 
 describe <span class="s"><span class="dl">'</span><span class="k">Binding#inspect</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should output the current environment</span><span class="dl">'</span></span> <span class="r">do</span>
-    pending <span class="s"><span class="dl">'</span><span class="k">#TODO: write spec</span><span class="dl">'</span></span>
+    <span class="c">#pending '#TODO: write spec'</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_binding_source">(<a href="javascript:show('binding_source')">show</a>)</span>
          <pre class="source" id="binding_source"><span class="r">class</span> <span class="cl">Binding</span>
@@ -1686,7 +1699,7 @@ block_given?
 
 describe <span class="s"><span class="dl">'</span><span class="k">Object#method_list</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should display an ordered method list</span><span class="dl">'</span></span> <span class="r">do</span>
-    pending <span class="s"><span class="dl">'</span><span class="k">#TODO: write spec</span><span class="dl">'</span></span>
+    <span class="c">#pending '#TODO: write spec'</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_mm_source">(<a href="javascript:show('mm_source')">show</a>)</span>
          <pre class="source" id="mm_source"><span class="r">module</span> <span class="cl">Kernel</span>
@@ -1730,6 +1743,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#method_
 * improved Info module
 * improved docs
 * changed directory layout (no changes for requiring)
+* many small changes
 
 
 2010-08-08 | <a href="http://rubyzucker.info/2/">Zucker 2</a>
@@ -1752,7 +1766,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#method_
     </div>
   <div id="foot">
     <div id="smile"><a href="http://rbjl.net">J-_-L</a></div>
-    This is the Ruby Zucker 2.next documentation.
+    This is the Ruby Zucker 3 documentation (2010-08-14).
     The current version is always available at <a href="http://rubyzucker.info">rubyzucker.info</a>.
     Gem source can be found at <a href="http://github.com/janlelis/zucker">github</a>.
   </div>

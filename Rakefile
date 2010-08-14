@@ -26,12 +26,15 @@ spec = Gem::Specification.new do |s|
   s.name = 'zucker'
   s.version = Zucker::VERSION
   s.date = Zucker::DATE
-  s.authors = ['Jan Lelis', 'Influenced by thoughts of many people ;)']
+  s.authors = ['Based on the thoughts of many people ;)', 'Jan Lelis']
   s.email = 'mail@janlelis.de'
-  s.summary = 'Make your Ruby code even sweeter with this syntactic sugar: http://rubyzucker.info :)'
+  s.summary = "Make your Ruby code even sweeter with syntactic sugar :)
+Adds lots of little helpers that you never want to miss again.
+See http://rubyzucker.info"
   s.homepage = 'http://rubyzucker.info'
   s.files = PKG_FILES.to_a
-  s.require_paths = [".","lib"]
+  s.require_paths = ["lib"]
+  s.required_ruby_version = '>= 1.8.7' # 1.9 recommended
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
