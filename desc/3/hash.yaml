@@ -1,0 +1,14 @@
+hash:
+  summary: Some sugar for dealing with hashs.
+  methods:
+    Hash.zip: "Hash.zip [1,2,3], [4,5,6] # => {1 => 4, 2 => 5, 3 => 6}"
+    Hash#<<: |
+      {1 => 2} << [3, 4]   # => { 1 => 2, 3 => 4 }
+      {1 => 2} << { 5=>6 } # => { 1 => 2, 5 => 6 }
+  package: default
+  info:
+  - Some of the operators are inspired by Ruby Facets.
+  versions:
+  - 1.9
+  - 1.8
+
