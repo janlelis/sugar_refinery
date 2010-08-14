@@ -31,6 +31,10 @@ describe 'String#ords' do
       'Object'.constantize.should == Object
     end
 
+    it 'should also work for nested constants' do
+      'Spec::VERSION'.constantize.should == Spec::VERSION
+    end
+
     it 'should throw name error if constant does not exist (and no parameter is given)' do
       proc do
         'ObfsefsefsefafesafaefRubyZuckerafdfselijfesject'.constantize

@@ -1365,6 +1365,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">square_bracket
          <table class="cube_table"
                 id="string_cube"
                 title="require 'zucker/string'"> <tr><th>Summary</th>    <td><code>String</code> extensions.</td></tr><tr><th>Why?</th>    <td>Strings cannot be comfortable enough ;).</td></tr><tr><th>Methods/Usage</th>    <td><h5>String#^</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Yes vs No</span><span class="dl">'</span></span>^<span class="i">3</span> <span class="c"># =&gt; 'Yes'</span></pre><h5>String#lchomp</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">   Yes</span><span class="dl">'</span></span>.lchomp  <span class="c"># =&gt; 'Yes'</span></pre><h5>String#lchomp!</h5><pre class="usage source" style="display:block"><span class="c"># mutable lchomp version</span></pre><h5>String#ords</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Hallo</span><span class="dl">'</span></span>.ords <span class="c"># =&gt; [72, 97, 108, 108, 111]</span></pre><h5>String#constantize</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">Object</span><span class="dl">'</span></span>.constantize <span class="c"># =&gt; Object</span>
+<span class="s"><span class="dl">'</span><span class="k">Spec::VERSION</span><span class="dl">'</span></span>.constantize <span class="c"># =&gt; Spec::VERSION if rspec is loaded</span>
 <span class="c"># you can also pass a parameter or block to define what happens, when constant does not exist</span>
 <span class="s"><span class="dl">'</span><span class="k">IdontExist</span><span class="dl">'</span></span>.constantize(<span class="co">Array</span>) <span class="c"># =&gt; Array</span>
 <span class="s"><span class="dl">'</span><span class="k">String5</span><span class="dl">'</span></span>.constantize <span class="r">do</span> |string|
@@ -1402,6 +1403,10 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#ords</s
   describe <span class="s"><span class="dl">'</span><span class="k">String#constantize</span><span class="dl">'</span></span> <span class="r">do</span>
     it <span class="s"><span class="dl">'</span><span class="k">should return the constant with that name</span><span class="dl">'</span></span> <span class="r">do</span>
       <span class="s"><span class="dl">'</span><span class="k">Object</span><span class="dl">'</span></span>.constantize.should == <span class="co">Object</span>
+    <span class="r">end</span>
+
+    it <span class="s"><span class="dl">'</span><span class="k">should also work for nested constants</span><span class="dl">'</span></span> <span class="r">do</span>
+      <span class="s"><span class="dl">'</span><span class="k">Spec::VERSION</span><span class="dl">'</span></span>.constantize.should == <span class="co">Spec</span>::<span class="co">VERSION</span>
     <span class="r">end</span>
 
     it <span class="s"><span class="dl">'</span><span class="k">should throw name error if constant does not exist (and no parameter is given)</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -1447,12 +1452,18 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#ords</s
     <span class="pc">self</span>.unpack <span class="s"><span class="dl">'</span><span class="k">C*</span><span class="dl">'</span></span>
   <span class="r">end</span>
 
-  <span class="r">def</span> <span class="fu">constantize</span>(default_value = <span class="pc">nil</span>)
+  <span class="r">def</span> <span class="fu">constantize</span>(default_value = <span class="pc">nil</span>) <span class="c"># always uses global scope as in AS... is this good?</span>
+    get_constant = lambda{
+      <span class="pc">self</span>.split(<span class="rx"><span class="dl">/</span><span class="k">::</span><span class="dl">/</span></span>).inject( <span class="co">Object</span> ){ |base_constant, current_constant|
+        base_constant.const_get current_constant
+      }      
+    }
+
     <span class="r">if</span> !default_value &amp;&amp; !block_given?
-      <span class="co">Object</span>.const_get(<span class="pc">self</span>)
+      get_constant.call
     <span class="r">else</span>
       <span class="r">begin</span>
-        <span class="co">Object</span>.const_get(<span class="pc">self</span>)
+        get_constant.call
       <span class="r">rescue</span> <span class="co">NameError</span>
         <span class="r">if</span> block_given?
           <span class="r">yield</span> <span class="pc">self</span>
@@ -1462,7 +1473,6 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#ords</s
       <span class="r">end</span>
     <span class="r">end</span>
   <span class="r">end</span>
-
 <span class="r">end</span>
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/string">github wiki</a></td></tr></table> <h3 title="require 'zucker/tap'">tap</h3>

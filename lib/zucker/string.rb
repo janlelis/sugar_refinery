@@ -20,12 +20,18 @@ class String
     self.unpack 'C*'
   end
 
-  def constantize(default_value = nil)
+  def constantize(default_value = nil) # always uses global scope as in AS... is this good?
+    get_constant = lambda{
+      self.split(/::/).inject( Object ){ |base_constant, current_constant|
+        base_constant.const_get current_constant
+      }      
+    }
+
     if !default_value && !block_given?
-      Object.const_get(self)
+      get_constant.call
     else
       begin
-        Object.const_get(self)
+        get_constant.call
       rescue NameError
         if block_given?
           yield self
@@ -35,7 +41,6 @@ class String
       end
     end
   end
-
 end
 
 # J-_-L
