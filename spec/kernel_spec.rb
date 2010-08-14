@@ -32,3 +32,14 @@ describe 'ignore_sigint!' do
   end
 end
 
+describe 'ruby_1_8? and ruby_1_9?' do
+  it 'should return true if run with the right ruby version' do
+    # ...
+  end
+end
+
+describe 'ruby_1_8! and ruby_1_9!' do
+  it 'should throw a NotImplementedError if run with the wrong ruby version' do
+    # ...
+  end
+end
