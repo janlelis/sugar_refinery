@@ -462,7 +462,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 
     <h1>Ruby Zucker ..version..</h1>
       <h2>What is it?</h2>
-      <p class="text">Zucker is the German word for sugar (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>). It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for a little introduction. Discussion is possible at the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a>.</p>
+      <p class="text">Zucker is the German word for sugar (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>). It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for a little introduction. See the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a> for discussion and information about contributing.</p>
 
       <h2>Install</h2>
       <p class="text">

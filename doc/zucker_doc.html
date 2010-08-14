@@ -273,7 +273,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 
     <h1>Ruby Zucker 3</h1>
       <h2>What is it?</h2>
-      <p class="text">Zucker is the German word for sugar (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>). It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for a little introduction. Discussion is possible at the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a>.</p>
+      <p class="text">Zucker is the German word for sugar (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>). It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for a little introduction. See the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a> for discussion and information about contributing.</p>
 
       <h2>Install</h2>
       <p class="text">
@@ -300,11 +300,11 @@ table.source td { padding: 2px 4px; vertical-align: top; }
          <h3 title="require 'zucker/alias_for'">alias_for</h3>
          <table class="cube_table"
                 id="alias_for_cube"
-                title="require 'zucker/alias_for'"> <tr><th>Summary</th>    <td>A different way to create aliases: Different order and you can pass multiple alias names.</td></tr><tr><th>Why?</th>    <td>It's clearer in which order to put the arguments.</td></tr><tr><th>Methods/Usage</th>    <td><h5>alias_for, aliases_for</h5><pre class="usage source" style="display:block">alias_for <span class="sy">:methods</span>, <span class="sy">:ms</span> <span class="c"># creates an alias for the method :methods with the name ms</span>
+                title="require 'zucker/alias_for'"> <tr><th>Summary</th>    <td>A different way to create aliases: Reversed order and you can pass multiple alias names.</td></tr><tr><th>Why?</th>    <td>It's clearer in which order to put the arguments.</td></tr><tr><th>Methods/Usage</th>    <td><h5>alias_for, aliases_for</h5><pre class="usage source" style="display:block">alias_for <span class="sy">:methods</span>, <span class="sy">:ms</span> <span class="c"># creates an alias for the method :methods with the name ms</span>
 <span class="r">module</span> <span class="cl">Enumerable</span>
   aliases_for <span class="sy">:zip</span>, <span class="sy">:with</span>, <span class="sy">:%</span>
 <span class="r">end</span> <span class="c"># creates multiple aliases</span>
-</pre><h5>method_alias_for, method_aliases_for</h5><pre class="usage source" style="display:block"><span class="c"># same as alias_for, but using Module#alias_method instead of alias</span>
+</pre><h5>Module#method_alias_for, Module#method_aliases_for</h5><pre class="usage source" style="display:block"><span class="c"># same as alias_for, but using Module#alias_method instead of alias</span>
 </pre></td></tr><tr><th>Further information</th>    <td>Thanks to Kristian Mandrup for the idea and alias method specs.</td></tr><tr><th>Specification</th>    <td> <span id="show_alias_for_spec">(<a href="javascript:show('alias_for_spec')">show</a>)</span>
          <pre class="source" id="alias_for_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/alias_for</span><span class="dl">'</span></span>
 
@@ -430,14 +430,16 @@ describe <span class="s"><span class="dl">'</span><span class="k">alias_methods_
 <span class="r">end</span>
 <span class="r">alias</span> <span class="fu">aliases_for</span> <span class="fu">alias_for</span>
 
-<span class="r">def</span> <span class="fu">alias_method_for</span>(m, *alias_methods)
-  alias_methods.each{ |a|
-    class_eval <span class="r">do</span>
-      alias_method a.to_sym, m.to_sym
-    <span class="r">end</span>
-  }
+<span class="r">class</span> <span class="cl">Module</span>
+  <span class="r">def</span> <span class="fu">alias_method_for</span>(m, *alias_methods)
+    alias_methods.each{ |a|
+      class_eval <span class="r">do</span>
+        alias_method a.to_sym, m.to_sym
+      <span class="r">end</span>
+    }
+  <span class="r">end</span>
+  <span class="r">alias</span> <span class="fu">alias_methods_for</span> <span class="fu">alias_method_for</span>
 <span class="r">end</span>
-<span class="r">alias</span> <span class="fu">alias_methods_for</span> <span class="fu">alias_method_for</span>
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/alias_for">github wiki</a></td></tr></table> <h3 title="require 'zucker/aliases'">aliases</h3>
          <table class="cube_table"
@@ -484,7 +486,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">(aliases)</spa
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/aliases">github wiki</a></td></tr></table> <h3 title="require 'zucker/array'">array</h3>
          <table class="cube_table"
                 id="array_cube"
-                title="require 'zucker/array'"> <tr><th>Summary</th>    <td>Methods one could miss for <code>Array</code>.</td></tr><tr><th>Why?</th>    <td><p><code>Array</code> has <code>&</code> and <code>|</code>, but why does it not have <code>^</code>?</p><p><code>sum</code> is just an alias for <code>inject(:+)</code>, but it is needed pretty often..</p></td></tr><tr><th>Methods/Usage</th>    <td><h5>Array#^</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>] ^ [<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>,<span class="i">6</span>]  <span class="c"># =&gt; [1,2,5,6]</span></pre><h5>Array#sum</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>].sum  <span class="c"># =&gt; 15</span></pre><h5>Array#chrs</h5><pre class="usage source" style="display:block">[<span class="i">72</span>, <span class="i">97</span>, <span class="i">108</span>, <span class="i">108</span>, <span class="i">111</span>].chrs  <span class="c"># =&gt; 'Hallo'</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_array_spec">(<a href="javascript:show('array_spec')">show</a>)</span>
+                title="require 'zucker/array'"> <tr><th>Summary</th>    <td>Methods one could miss for <code>Array</code>.</td></tr><tr><th>Why?</th>    <td><p><code>Array</code> has <code>&</code> and <code>|</code>, but why does it not have <code>^</code>?</p><p><code>sum</code> is just needed pretty often..</p></td></tr><tr><th>Methods/Usage</th>    <td><h5>Array#^</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>] ^ [<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>,<span class="i">6</span>]  <span class="c"># =&gt; [1,2,5,6]</span></pre><h5>Array#sum</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>].sum  <span class="c"># =&gt; 15</span></pre><h5>Array#chrs</h5><pre class="usage source" style="display:block">[<span class="i">72</span>, <span class="i">97</span>, <span class="i">108</span>, <span class="i">108</span>, <span class="i">111</span>].chrs  <span class="c"># =&gt; 'Hallo'</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_array_spec">(<a href="javascript:show('array_spec')">show</a>)</span>
          <pre class="source" id="array_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/array</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Array#^</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -513,9 +515,13 @@ describe <span class="s"><span class="dl">'</span><span class="k">Array#chrs</sp
     (other - <span class="pc">self</span>)
   <span class="r">end</span>
 
-  <span class="r">if</span> !respond_to?(<span class="sy">:sum</span>)
-    <span class="r">def</span> <span class="fu">sum</span> <span class="c"># sry, you just need this one too often</span>
-      inject <span class="sy">:+</span>
+  <span class="c"># can take an argument &amp; block to be Rails compatible</span>
+  <span class="r">def</span> <span class="fu">sum</span>(identity = <span class="i">0</span>, &amp;block)
+    <span class="c"># inject(:+)</span>
+    <span class="r">if</span> block_given?
+      map(&amp;block).sum( identity )
+    <span class="r">else</span>
+      inject(<span class="sy">:+</span>) || identity
     <span class="r">end</span>
   <span class="r">end</span>
 
@@ -1089,7 +1095,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">instance_varia
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/ivars">github wiki</a></td></tr></table> <h3 title="require 'zucker/kernel'">kernel</h3>
          <table class="cube_table"
                 id="kernel_cube"
-                title="require 'zucker/kernel'"> <tr><th>Summary</th>    <td>Some useful general shortcut methods.</td></tr><tr><th>Why?</th>    <td>Readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>activate_warnings!</h5><pre class="usage source" style="display:block">activate_warnings! <span class="c"># sets $VERBOSE to 1</span></pre><h5>deactivate_warnings!</h5><pre class="usage source" style="display:block">deactivate_warnings! <span class="c"># sets $VERBOSE to 0</span></pre><h5>executed_directly?, standalone?</h5><pre class="usage source" style="display:block">executed_directly? <span class="c"># checks, if the current file is run directly -&gt; true</span></pre><h5>library?</h5><pre class="usage source" style="display:block">library? <span class="c"># checks, if the current file is run directly -&gt; false</span></pre><h5>ignore_sigint!</h5><pre class="usage source" style="display:block">ignore_sigint! <span class="c"># blocks CTRL+C</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_kernel_spec">(<a href="javascript:show('kernel_spec')">show</a>)</span>
+                title="require 'zucker/kernel'"> <tr><th>Summary</th>    <td>Some useful general shortcut methods.</td></tr><tr><th>Why?</th>    <td>Readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>activate_warnings!</h5><pre class="usage source" style="display:block">activate_warnings! <span class="c"># sets $VERBOSE to 1</span></pre><h5>deactivate_warnings!</h5><pre class="usage source" style="display:block">deactivate_warnings! <span class="c"># sets $VERBOSE to 0</span></pre><h5>executed_directly?, standalone?</h5><pre class="usage source" style="display:block">executed_directly? <span class="c"># checks, if the current file is run directly -&gt; true</span></pre><h5>library?</h5><pre class="usage source" style="display:block">library? <span class="c"># checks, if the current file is run directly -&gt; false</span></pre><h5>ignore_sigint!</h5><pre class="usage source" style="display:block">ignore_sigint! <span class="c"># blocks CTRL+C</span></pre><h5>ruby_1_8?</h5><pre class="usage source" style="display:block">ruby_1_8? <span class="c"># returns true for 1.8.x</span></pre><h5>ruby_1_9?</h5><pre class="usage source" style="display:block">ruby_1_9? <span class="c"># returns true for 1.9.x</span></pre><h5>ruby_1_8!, ruby_1_9!</h5><pre class="usage source" style="display:block"><span class="c"># raises a NotImplementedError if not executed with the right ruby version</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_kernel_spec">(<a href="javascript:show('kernel_spec')">show</a>)</span>
          <pre class="source" id="kernel_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/kernel</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">activate_warnings!</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -1122,26 +1128,63 @@ describe <span class="s"><span class="dl">'</span><span class="k">ignore_sigint!
   it <span class="s"><span class="dl">'</span><span class="k">should catch ctrl+c signals</span><span class="dl">'</span></span> <span class="r">do</span>
     <span class="c"># ...</span>
   <span class="r">end</span>
+<span class="r">end</span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">ruby_1_8? and ruby_1_9?</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should return true if run with the right ruby version</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="c"># ...</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">ruby_1_8! and ruby_1_9!</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should throw a NotImplementedError if run with the wrong ruby version</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="c"># ...</span>
+  <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_kernel_source">(<a href="javascript:show('kernel_source')">show</a>)</span>
-         <pre class="source" id="kernel_source"><span class="r">def</span> <span class="fu">activate_warnings!</span>
-  <span class="gv">$VERBOSE</span> = <span class="pc">true</span>
-<span class="r">end</span>
+         <pre class="source" id="kernel_source"><span class="r">module</span> <span class="cl">Kernel</span>
+  <span class="r">def</span> <span class="fu">activate_warnings!</span>
+    <span class="gv">$VERBOSE</span> = <span class="pc">true</span>
+  <span class="r">end</span>
+  
+  <span class="r">def</span> <span class="fu">deactivate_warnings!</span>
+    <span class="gv">$VERBOSE</span> = <span class="pc">false</span>
+  <span class="r">end</span>
+  
+  <span class="r">def</span> <span class="fu">library?</span>
+    <span class="pc">__FILE__</span> != <span class="gv">$PROGRAM_NAME</span>
+  <span class="r">end</span>
+  
+  <span class="r">def</span> <span class="fu">executed_directly?</span>
+    <span class="pc">__FILE__</span> == <span class="gv">$PROGRAM_NAME</span>
+  <span class="r">end</span>
+  <span class="r">alias</span> <span class="fu">standalone?</span> <span class="fu">executed_directly?</span>
+  
+  <span class="r">def</span> <span class="fu">ignore_sigint!</span> <span class="c"># ctrl+c</span>
+     <span class="co">Signal</span>.trap *<span class="s"><span class="dl">%w|</span><span class="k">SIGINT IGNORE</span><span class="dl">|</span></span>
+  <span class="r">end</span>
 
-<span class="r">def</span> <span class="fu">deactivate_warnings!</span>
-  <span class="gv">$VERBOSE</span> = <span class="pc">false</span>
-<span class="r">end</span>
+  <span class="c"># version getter  </span>
+  <span class="r">def</span> <span class="fu">ruby_1_9?</span>
+    <span class="co">RUBY_VERSION</span>[<span class="i">2</span>,<span class="i">1</span>] == <span class="s"><span class="dl">'</span><span class="k">9</span><span class="dl">'</span></span>
+  <span class="r">end</span>
 
-<span class="r">def</span> <span class="fu">library?</span>
-  <span class="pc">__FILE__</span> != <span class="gv">$PROGRAM_NAME</span>
-<span class="r">end</span>
+  <span class="r">def</span> <span class="fu">ruby_1_8?</span>
+    <span class="co">RUBY_VERSION</span>[<span class="i">2</span>,<span class="i">1</span>] == <span class="s"><span class="dl">'</span><span class="k">8</span><span class="dl">'</span></span>
+  <span class="r">end</span>
 
-<span class="r">def</span> <span class="fu">executed_directly?</span>
-  <span class="pc">__FILE__</span> == <span class="gv">$PROGRAM_NAME</span>
-<span class="r">end</span>
-<span class="r">alias</span> <span class="fu">standalone?</span> <span class="fu">executed_directly?</span>
+  <span class="r">def</span> <span class="fu">ruby_1_9!</span>
+    <span class="r">if</span> <span class="co">RUBY_VERSION</span>[<span class="i">2</span>,<span class="i">1</span>] != <span class="s"><span class="dl">'</span><span class="k">9</span><span class="dl">'</span></span>
+      fail <span class="co">NotImplementedError</span>, <span class="s"><span class="dl">&quot;</span><span class="k">Sorry, this script requires Ruby 1.9, but was executed with a different Ruby version!</span><span class="dl">&quot;</span></span>
+    <span class="r">end</span>
+    <span class="pc">true</span>
+  <span class="r">end</span>
 
-<span class="r">def</span> <span class="fu">ignore_sigint!</span> <span class="c"># ctrl+c</span>
-   <span class="co">Signal</span>.trap *<span class="s"><span class="dl">%w|</span><span class="k">SIGINT IGNORE</span><span class="dl">|</span></span>
+  <span class="r">def</span> <span class="fu">ruby_1_8!</span>
+    <span class="r">if</span> <span class="co">RUBY_VERSION</span>[<span class="i">2</span>,<span class="i">1</span>] != <span class="s"><span class="dl">'</span><span class="k">8</span><span class="dl">'</span></span>
+      fail <span class="co">NotImplementedError</span>, <span class="s"><span class="dl">&quot;</span><span class="k">Sorry, this script requires Ruby 1.8, but was executed with a different Ruby version!</span><span class="dl">&quot;</span></span>
+    <span class="r">end</span>
+    <span class="pc">true</span>
+  <span class="r">end</span>
 <span class="r">end</span>
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/kernel">github wiki</a></td></tr></table> <h3 title="require 'zucker/mcopy'">mcopy</h3>
@@ -1751,9 +1794,10 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#method_
 * added alias_for for an alternative alias syntax
 * added String#constantize (improved AS version)
 * improved Info module
+* made Array#sum Rails compatibile
 * improved docs
 * changed directory layout (no changes for requiring)
-* many small changes
+* more small changes
 
 
 2010-08-08 | <a href="http://rubyzucker.info/2/">Zucker 2</a>
