@@ -1,4 +1,8 @@
 class String
+  def -(rem)
+    gsub( Regexp === rem ? rem : rem.to_s, '' )
+  end
+
   def ^(pos)
     pos = pos.to_i
     if pos >= 0

@@ -1,6 +1,6 @@
 module Zucker
-  VERSION = '3'
-  DATE    = '2010-08-14'
+  VERSION = '3.next'
+  DATE    = '2010-08-14' # version 3
 end
 
 # nothing further is done here

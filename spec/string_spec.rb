@@ -1,5 +1,11 @@
 require 'zucker/string'
 
+describe 'String#-' do
+  it 'should remove the applied Regexp or String from self via gsub' do
+    ('1234abc5678' - 'b' - /\d/).should == 'ac'
+  end
+end
+
 describe 'String#^' do
   it 'should give C-like substring access to strings' do
     string = 'Theoretische Informatik ist voll geil!'

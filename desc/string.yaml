@@ -2,6 +2,7 @@ string:
   summary: ⇧String⇧ extensions.
   why: Strings cannot be comfortable enough ;).
   methods:
+    String#-: "'1234abc5678' - 'b' - /\d/ # => ac"
     String#^: "'Yes vs No'^3 # => 'Yes'"
     String#lchomp: "'   Yes'.lchomp  # => 'Yes'"
     String#lchomp!: "# mutable lchomp version"
