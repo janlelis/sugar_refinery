@@ -17,7 +17,7 @@ string:
       end # => String
   package: default
   info:
-  - "⇧constantize⇧ is an improved version of ActiveSupport's one"
+  - "⇧constantize⇧ is an improved version of ActiveSupport's one."
   versions:
   - 1.9
   - 1.8
