@@ -13,15 +13,16 @@ class String
   end
 
   def lchomp(arg = $/)
-    self.reverse.chomp(arg).reverse
+    reverse.chomp(arg).reverse
   end
 
   def lchomp!(arg = $/)
-    self.reverse.chomp!(arg).reverse
+    reverse.chomp!(arg).reverse
   end
 
   def ords
-    self.unpack 'C*'
+    unpack 'C*'
+   # bytes.to_a
   end
 
   def constantize(default_value = nil) # always uses global scope as in AS... is this good?

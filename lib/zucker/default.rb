@@ -18,6 +18,7 @@ ivars
 kernel
 mcopy
 not
+os
 regexp2proc
 sandbox
 square_brackets_for

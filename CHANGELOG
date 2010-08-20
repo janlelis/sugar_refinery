@@ -1,3 +1,9 @@
+Zucker 3.next
+
+* added OS detection cube
+* added q debug method
+* added String#-
+
 2010-08-14 | Zucker 3
 * added tap cube
 * added Object#not
@@ -24,3 +30,4 @@
 
 2010-08-05 | Zucker 0
 * pre-release for rug-b talk
+
