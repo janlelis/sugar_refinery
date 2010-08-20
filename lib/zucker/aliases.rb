@@ -7,6 +7,11 @@ end
 
 class Array
   alias ** product
+  alias contains? include?
+end
+
+class String
+  alias contains? include?
 end
 
 class Hash
@@ -21,7 +26,7 @@ class Binding
 end
 
 # constants - who would use these in real-world code for other things?
-Infinity = 1.0 / 0.0 # or 2*Float::MAX
+Infinity = 1.0 / 0.0 # or 2*Float::MAX or Float::INFINITY
 NaN      = 0.0 / 0.0
 
 # J-_-L
