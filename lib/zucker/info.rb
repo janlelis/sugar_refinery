@@ -70,6 +70,10 @@ module Info
     ::RUBY_PLATFORM
   end
 
+  def os
+    RbConfig::CONFIG['host_os']
+  end
+
   def process_id
     $$
   end
