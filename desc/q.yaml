@@ -5,7 +5,7 @@ q:
       q "zucker",'', {6=>7}, 5, 2.3, :o # outputs "zucker"  ""  {6=>7}  5  2.3  :o
   package: debug
   info:
-  - Inspired by →rdp→http://github.com/rdp/sane/blob/master/lib/sane/pps.rb→
+  - Inspired by →rdp→http://github.com/rdp/sane/blob/master/lib/sane/pps.rb→.
   versions:
   - 1.9
   - 1.8

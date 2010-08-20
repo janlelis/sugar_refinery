@@ -1,18 +1,18 @@
 os:
-  summary: Some useful general shortcut methods.
-  why: Checking for ⇧RUBY_PLATFORM⇧ does not report the os when using JRuby and for better readability.
+  summary: Detect the operating system.
+  why: Checking for ⇧RUBY_PLATFORM⇧ does not report the OS when using JRuby and for better readability.
   methods:
     OS.linux?: "OS.linux? # true if you are on a linux machine"
     OS.mac?: "OS.mac? # true for macs"
     OS.bsd?: "OS.bsd? # true for bsds"
-    OS.windows?: "Include OS; windows? # different way of checking possible"
+    OS.windows?: "include OS; windows? # different way of checking is possible"
     OS.solaris?: "OS.solaris? # true for solaris/sunos"
     OS.posix?: "OS.posix? # true if system is posix compatible"
     OS.is?: "OS.is? /win/ # matches the regex against the os string"
   package: default
   info:
   - Please note - this depends on system information and may not be 100% accurate.
-  - Syntax inspired by →Roger Packs os gem→http://github.com/rdp/os→.
+  - "Syntax and semantic inspired by Roger Pack's →os gem→http://github.com/rdp/os→."
   versions:
   - 1.9
   - 1.8

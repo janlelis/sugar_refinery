@@ -13,7 +13,7 @@ describe 'Kernel#q' do
     end.chop.should ==
     capture_stdout do
       p 1, "1", 2..5, [], {:hallo => :du}, nil, true
-    end.chop.gsub( "\n", ' ' )
+    end.chop.gsub( "\n", '  ' )
   end
 end
 
