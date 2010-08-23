@@ -26,6 +26,7 @@ string
 tap
 unary
 union
+version
 |
 
 # remove 1.9 if 1.8

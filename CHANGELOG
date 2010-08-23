@@ -1,5 +1,6 @@
 Zucker 3.next
 
+* added ruby version constant
 * added OS detection cube
 * added q debug method
 * added String#-
