@@ -163,7 +163,7 @@ class ZuckerDoc
       if File.file? filename
         syntax_highlight( File.read(filename).strip )
       else
-        '<em>FIXME: missing</em>'
+        '<em>FIXME: missing (please create a <a href="http://github.com/janlelis/zucker/issues">github issue</a>)</em>'
       end
     end
 
@@ -462,15 +462,16 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 
     <h1>Ruby Zucker ..version..</h1>
       <h2>What is it?</h2>
-      <p class="text">Zucker is the German word for sugar (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>). It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for a little introduction. See the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a> for discussion and information about contributing.</p>
+      <p class="text">Zucker (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>) is the German word for sugar. It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. It adds a lot of useful helper methods for an improved readability and usage. Everything is documented on this page.</p>
+      <p class="text">Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for some more examples. See the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a> for discussion and information about contributing.</p>
 
       <h2>Install</h2>
       <p class="text">
         <code class="scode">gem install zucker # might need sudo</code>
       </p>
 
-      <h2>Usage / Organisation</h2>
-      <p class="text">The gem consists of many small snippets, called <em>cubes</em>, which are bundled in <em>packages</em>. Currently, there are two packages available: <strong>default</strong> and <strong>debug</strong>. You can use a package be requiring it in this way:
+      <h2>Usage / organisation</h2>
+      <p class="text">The gem consists of many small snippets, called <em>cubes</em>, which are bundled in <em>packages</em>. Currently, there are two packages available: <strong>default</strong> and <strong>debug</strong>. You can use a package by requiring it in this way:
       <code class="scode">require 'zucker/default'</code>
       and
       <code class="scode">require 'zucker/debug'</code>
@@ -480,7 +481,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <code class="scode">require 'zucker/egonil'</code>
       </p>
 
-      <p class="text">You can also lock your require to a specific version of Zucker by simply putting the version before the cube name in this way:
+      <p class="text">You can also lock your ⇧require⇧ to a specific version of Zucker by simply putting the version before the cube name in this way:
       <code>require 'zucker/1/egonil'</code>. Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs).</p>
 
        ....

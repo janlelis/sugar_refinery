@@ -5,6 +5,10 @@ module OS
     def is?(regex)
       !!( RbConfig::CONFIG['host_os'] =~ regex )
     end
+
+    def to_s
+      RbConfig::CONFIG['host_os']
+    end
   end
 
 module_function

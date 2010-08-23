@@ -273,15 +273,16 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 
     <h1>Ruby Zucker 3.next</h1>
       <h2>What is it?</h2>
-      <p class="text">Zucker is the German word for sugar (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>). It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for a little introduction. See the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a> for discussion and information about contributing.</p>
+      <p class="text">Zucker (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>) is the German word for sugar. It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. It adds a lot of useful helper methods for an improved readability and usage. Everything is documented on this page.</p>
+      <p class="text">Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for some more examples. See the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a> for discussion and information about contributing.</p>
 
       <h2>Install</h2>
       <p class="text">
         <code class="scode">gem install zucker # might need sudo</code>
       </p>
 
-      <h2>Usage / Organisation</h2>
-      <p class="text">The gem consists of many small snippets, called <em>cubes</em>, which are bundled in <em>packages</em>. Currently, there are two packages available: <strong>default</strong> and <strong>debug</strong>. You can use a package be requiring it in this way:
+      <h2>Usage / organisation</h2>
+      <p class="text">The gem consists of many small snippets, called <em>cubes</em>, which are bundled in <em>packages</em>. Currently, there are two packages available: <strong>default</strong> and <strong>debug</strong>. You can use a package by requiring it in this way:
       <code class="scode">require 'zucker/default'</code>
       and
       <code class="scode">require 'zucker/debug'</code>
@@ -291,7 +292,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <code class="scode">require 'zucker/egonil'</code>
       </p>
 
-      <p class="text">You can also lock your require to a specific version of Zucker by simply putting the version before the cube name in this way:
+      <p class="text">You can also lock your <code>require</code> to a specific version of Zucker by simply putting the version before the cube name in this way:
       <code>require 'zucker/1/egonil'</code>. Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs).</p>
 
        
@@ -1104,7 +1105,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">instance_varia
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/ivars">github wiki</a></td></tr></table> <h3 title="require 'zucker/kernel'">kernel</h3>
          <table class="cube_table"
                 id="kernel_cube"
-                title="require 'zucker/kernel'"> <tr><th>Summary</th>    <td>Some useful general shortcut methods.</td></tr><tr><th>Why?</th>    <td>Readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>activate_warnings!</h5><pre class="usage source" style="display:block">activate_warnings! <span class="c"># sets $VERBOSE to 1</span></pre><h5>deactivate_warnings!</h5><pre class="usage source" style="display:block">deactivate_warnings! <span class="c"># sets $VERBOSE to 0</span></pre><h5>executed_directly?, standalone?</h5><pre class="usage source" style="display:block">executed_directly? <span class="c"># checks, if the current file is run directly -&gt; true</span></pre><h5>library?</h5><pre class="usage source" style="display:block">library? <span class="c"># checks, if the current file is run directly -&gt; false</span></pre><h5>ignore_sigint!</h5><pre class="usage source" style="display:block">ignore_sigint! <span class="c"># blocks CTRL+C</span></pre><h5>ruby_1_8?</h5><pre class="usage source" style="display:block">ruby_1_8? <span class="c"># returns true for 1.8.x</span></pre><h5>ruby_1_9?</h5><pre class="usage source" style="display:block">ruby_1_9? <span class="c"># returns true for 1.9.x</span></pre><h5>ruby_1_8!, ruby_1_9!</h5><pre class="usage source" style="display:block"><span class="c"># raises a NotImplementedError if not executed with the right ruby version</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_kernel_spec">(<a href="javascript:show('kernel_spec')">show</a>)</span>
+                title="require 'zucker/kernel'"> <tr><th>Summary</th>    <td>Some useful general shortcut methods.</td></tr><tr><th>Why?</th>    <td>Readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>activate_warnings!</h5><pre class="usage source" style="display:block">activate_warnings! <span class="c"># sets $VERBOSE to 1</span></pre><h5>deactivate_warnings!</h5><pre class="usage source" style="display:block">deactivate_warnings! <span class="c"># sets $VERBOSE to 0</span></pre><h5>executed_directly?, standalone?</h5><pre class="usage source" style="display:block">executed_directly? <span class="c"># checks, if the current file is run directly -&gt; true</span></pre><h5>library?</h5><pre class="usage source" style="display:block">library? <span class="c"># checks, if the current file is run directly -&gt; false</span></pre><h5>ignore_sigint!</h5><pre class="usage source" style="display:block">ignore_sigint! <span class="c"># blocks CTRL+C</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_kernel_spec">(<a href="javascript:show('kernel_spec')">show</a>)</span>
          <pre class="source" id="kernel_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/kernel</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">activate_warnings!</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -1139,60 +1140,27 @@ describe <span class="s"><span class="dl">'</span><span class="k">ignore_sigint!
   <span class="r">end</span>
 <span class="r">end</span>
 
-describe <span class="s"><span class="dl">'</span><span class="k">ruby_1_8? and ruby_1_9?</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should return true if run with the right ruby version</span><span class="dl">'</span></span> <span class="r">do</span>
-    <span class="c"># ...</span>
-  <span class="r">end</span>
-<span class="r">end</span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">ruby_1_8! and ruby_1_9!</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should throw a NotImplementedError if run with the wrong ruby version</span><span class="dl">'</span></span> <span class="r">do</span>
-    <span class="c"># ...</span>
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_kernel_source">(<a href="javascript:show('kernel_source')">show</a>)</span>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_kernel_source">(<a href="javascript:show('kernel_source')">show</a>)</span>
          <pre class="source" id="kernel_source"><span class="r">module</span> <span class="cl">Kernel</span>
   <span class="r">def</span> <span class="fu">activate_warnings!</span>
     <span class="gv">$VERBOSE</span> = <span class="pc">true</span>
   <span class="r">end</span>
-  
+
   <span class="r">def</span> <span class="fu">deactivate_warnings!</span>
     <span class="gv">$VERBOSE</span> = <span class="pc">false</span>
   <span class="r">end</span>
-  
+
   <span class="r">def</span> <span class="fu">library?</span>
     <span class="pc">__FILE__</span> != <span class="gv">$PROGRAM_NAME</span>
   <span class="r">end</span>
-  
+
   <span class="r">def</span> <span class="fu">executed_directly?</span>
     <span class="pc">__FILE__</span> == <span class="gv">$PROGRAM_NAME</span>
   <span class="r">end</span>
   <span class="r">alias</span> <span class="fu">standalone?</span> <span class="fu">executed_directly?</span>
-  
+
   <span class="r">def</span> <span class="fu">ignore_sigint!</span> <span class="c"># ctrl+c</span>
      <span class="co">Signal</span>.trap *<span class="s"><span class="dl">%w|</span><span class="k">SIGINT IGNORE</span><span class="dl">|</span></span>
-  <span class="r">end</span>
-
-  <span class="c"># version getter  </span>
-  <span class="r">def</span> <span class="fu">ruby_1_9?</span>
-    <span class="co">RUBY_VERSION</span>[<span class="i">2</span>,<span class="i">1</span>] == <span class="s"><span class="dl">'</span><span class="k">9</span><span class="dl">'</span></span>
-  <span class="r">end</span>
-
-  <span class="r">def</span> <span class="fu">ruby_1_8?</span>
-    <span class="co">RUBY_VERSION</span>[<span class="i">2</span>,<span class="i">1</span>] == <span class="s"><span class="dl">'</span><span class="k">8</span><span class="dl">'</span></span>
-  <span class="r">end</span>
-
-  <span class="r">def</span> <span class="fu">ruby_1_9!</span>
-    <span class="r">if</span> <span class="co">RUBY_VERSION</span>[<span class="i">2</span>,<span class="i">1</span>] != <span class="s"><span class="dl">'</span><span class="k">9</span><span class="dl">'</span></span>
-      fail <span class="co">NotImplementedError</span>, <span class="s"><span class="dl">&quot;</span><span class="k">Sorry, this script requires Ruby 1.9, but was executed with a different Ruby version!</span><span class="dl">&quot;</span></span>
-    <span class="r">end</span>
-    <span class="pc">true</span>
-  <span class="r">end</span>
-
-  <span class="r">def</span> <span class="fu">ruby_1_8!</span>
-    <span class="r">if</span> <span class="co">RUBY_VERSION</span>[<span class="i">2</span>,<span class="i">1</span>] != <span class="s"><span class="dl">'</span><span class="k">8</span><span class="dl">'</span></span>
-      fail <span class="co">NotImplementedError</span>, <span class="s"><span class="dl">&quot;</span><span class="k">Sorry, this script requires Ruby 1.8, but was executed with a different Ruby version!</span><span class="dl">&quot;</span></span>
-    <span class="r">end</span>
-    <span class="pc">true</span>
   <span class="r">end</span>
 <span class="r">end</span>
 
@@ -1291,6 +1259,10 @@ describe <span class="s"><span class="dl">'</span><span class="k">OS.is?</span><
   <span class="r">class</span> &lt;&lt; <span class="cl">OS</span>
     <span class="r">def</span> <span class="fu">is?</span>(regex)
       !!( <span class="co">RbConfig</span>::<span class="co">CONFIG</span>[<span class="s"><span class="dl">'</span><span class="k">host_os</span><span class="dl">'</span></span>] =~ regex )
+    <span class="r">end</span>
+
+    <span class="r">def</span> <span class="fu">to_s</span>
+      <span class="co">RbConfig</span>::<span class="co">CONFIG</span>[<span class="s"><span class="dl">'</span><span class="k">host_os</span><span class="dl">'</span></span>]
     <span class="r">end</span>
   <span class="r">end</span>
 
@@ -1586,15 +1558,16 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#ords</s
   <span class="r">end</span>
 
   <span class="r">def</span> <span class="fu">lchomp</span>(arg = <span class="gv">$/</span>)
-    <span class="pc">self</span>.reverse.chomp(arg).reverse
+    reverse.chomp(arg).reverse
   <span class="r">end</span>
 
   <span class="r">def</span> <span class="fu">lchomp!</span>(arg = <span class="gv">$/</span>)
-    <span class="pc">self</span>.reverse.chomp!(arg).reverse
+    reverse.chomp!(arg).reverse
   <span class="r">end</span>
 
   <span class="r">def</span> <span class="fu">ords</span>
-    <span class="pc">self</span>.unpack <span class="s"><span class="dl">'</span><span class="k">C*</span><span class="dl">'</span></span>
+    unpack <span class="s"><span class="dl">'</span><span class="k">C*</span><span class="dl">'</span></span>
+   <span class="c"># bytes.to_a</span>
   <span class="r">end</span>
 
   <span class="r">def</span> <span class="fu">constantize</span>(default_value = <span class="pc">nil</span>) <span class="c"># always uses global scope as in AS... is this good?</span>
@@ -1741,7 +1714,198 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#|</span
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/union">github wiki</a></td></tr></table>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/union">github wiki</a></td></tr></table> <h3 title="require 'zucker/version'">version</h3>
+         <table class="cube_table"
+                id="version_cube"
+                title="require 'zucker/version'"> <tr><th>Summary</th>    <td>Adds a RubyVersion constant for easy compability checks.</td></tr><tr><th>Methods/Usage</th>    <td><h5>RubyVersion</h5><pre class="usage source" style="display:block"><span class="c"># return RUBY_VERSION</span>
+<span class="co">RubyVersion</span>
+<span class="c"># check for the main version with a Float</span>
+<span class="co">RubyVersion</span>.is? <span class="fl">1.8</span>
+<span class="c"># use strings for exacter checking</span>
+<span class="co">RubyVersion</span>.is.above <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span>
+<span class="co">RubyVersion</span>.is.at_least <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span> <span class="c"># or exactly, below, at_most</span>
+<span class="c"># you can use the common comparison operators</span>
+<span class="co">RubyVersion</span>.is &gt;= <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span>
+<span class="co">RubyVersion</span>.is.between? <span class="s"><span class="dl">'</span><span class="k">1.8.6</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span>
+<span class="c"># relase date checks</span>
+<span class="co">RubyVersion</span>.is.older_than <span class="co">Date</span>.today
+<span class="co">RubyVersion</span>.is.newer_than <span class="s"><span class="dl">'</span><span class="k">2009-08-19</span><span class="dl">'</span></span>
+<span class="c"># accessors</span>
+<span class="co">RubyVersion</span>.major <span class="c"># e.g. =&gt; 1</span>
+<span class="co">RubyVersion</span>.minor <span class="c"># e.g. =&gt; 8</span>
+<span class="co">RubyVersion</span>.tiny  <span class="c"># e.g. =&gt; 7</span>
+<span class="co">RubyVersion</span>.patchlevel <span class="c"># e.g. =&gt; 249</span>
+<span class="co">RubyVersion</span>.description <span class="c"># e.g. =&gt; &quot;ruby 1.8.7 (2010-01-10 patchlevel 249) [i486-linux]&quot;</span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_version_spec">(<a href="javascript:show('version_spec')">show</a>)</span>
+         <pre class="source" id="version_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/version</span><span class="dl">'</span></span>
+require <span class="s"><span class="dl">'</span><span class="k">date</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">RubyVersion</span><span class="dl">'</span></span> <span class="r">do</span>
+  before <span class="sy">:all</span> <span class="r">do</span>
+    <span class="iv">@remember_version</span> = <span class="co">RUBY_VERSION</span>
+    <span class="co">RUBY_VERSION</span> = <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span>
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should display RUBY_VERSION if called directly (to_s)</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="co">RubyVersion</span>.to_s.should == <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span>
+  <span class="r">end</span>
+
+  context <span class="s"><span class="dl">'</span><span class="k">using is method with parameter</span><span class="dl">'</span></span> <span class="r">do</span>
+    it <span class="s"><span class="dl">'</span><span class="k">should check for main version (1.8 or 1.9) when Float paramater is given</span><span class="dl">'</span></span> <span class="r">do</span>
+      <span class="co">RubyVersion</span>.is?( <span class="fl">1.8</span> ).should == <span class="pc">true</span>
+      <span class="co">RubyVersion</span>.is?( <span class="fl">1.9</span> ).should == <span class="pc">false</span>
+    <span class="r">end</span>
+
+    it <span class="s"><span class="dl">'</span><span class="k">should check with string comparison if parameter is not Float</span><span class="dl">'</span></span> <span class="r">do</span>
+      <span class="co">RubyVersion</span>.is?( <span class="s"><span class="dl">'</span><span class="k">1.8</span><span class="dl">'</span></span> ).should == <span class="pc">false</span>
+    <span class="r">end</span>
+  <span class="r">end</span>
+
+  context <span class="s"><span class="dl">'</span><span class="k">using is method without parameter but method chaining</span><span class="dl">'</span></span> <span class="r">do</span>
+    it <span class="s"><span class="dl">'</span><span class="k">should return a string for usage with comparison operators</span><span class="dl">'</span></span> <span class="r">do</span>
+      (<span class="co">RubyVersion</span>.is &gt; <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span>).should == <span class="pc">false</span>
+      (<span class="co">RubyVersion</span>.is &lt;= <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span>).should == <span class="pc">true</span>
+      (<span class="co">RubyVersion</span>.is.between? <span class="s"><span class="dl">'</span><span class="k">1.8.6</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span>).should == <span class="pc">true</span>
+    <span class="r">end</span>
+
+    it <span class="s"><span class="dl">'</span><span class="k">should create some handy compare aliases</span><span class="dl">'</span></span> <span class="r">do</span>
+      <span class="co">RubyVersion</span>.is.above( <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span> ).should == <span class="pc">false</span>
+      <span class="co">RubyVersion</span>.is.at_least( <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span> ).should == <span class="pc">true</span>
+      <span class="co">RubyVersion</span>.is.exactly( <span class="s"><span class="dl">'</span><span class="k">1.8.7</span><span class="dl">'</span></span> ).should == <span class="pc">true</span>
+    <span class="r">end</span>
+
+    it <span class="s"><span class="dl">'</span><span class="k">also allows to check for the release dates</span><span class="dl">'</span></span> <span class="r">do</span>
+      <span class="co">RubyVersion</span>.is.older_than( <span class="co">Date</span>.today ).should == <span class="pc">true</span>
+      <span class="co">RubyVersion</span>.is.newer_than( <span class="s"><span class="dl">'</span><span class="k">2000-01-01</span><span class="dl">'</span></span> ).should == <span class="pc">true</span>
+    <span class="r">end</span>
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should define some accessors</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="co">RubyVersion</span>.major.should == <span class="i">1</span>
+    <span class="co">RubyVersion</span>.minor.should == <span class="i">8</span>
+    <span class="co">RubyVersion</span>.tiny.should == <span class="i">7</span>
+    <span class="c"># RubyVersion.patchlevel  # =&gt; RUBY_PATCHLEVEL</span>
+    <span class="c"># RubyVersion.description # =&gt; RUBY_DESCRIPTION</span>
+  <span class="r">end</span>
+
+  after <span class="sy">:all</span> <span class="r">do</span>
+    <span class="co">RUBY_VERSION</span> = <span class="iv">@remember_version</span>
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_version_source">(<a href="javascript:show('version_source')">show</a>)</span>
+         <pre class="source" id="version_source"><span class="r">module</span> <span class="cl">RubyVersion</span>
+  <span class="r">class</span> &lt;&lt; <span class="cl">self</span>
+
+    <span class="r">def</span> <span class="fu">to_s</span>
+      <span class="co">RUBY_VERSION</span>
+    <span class="r">end</span>
+
+    <span class="r">def</span> <span class="fu">is</span>(other_version = <span class="pc">nil</span>)
+      compare other_version
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">is?</span> <span class="fu">is</span>
+
+    <span class="c"># accessors</span>
+
+    <span class="r">def</span> <span class="fu">major</span>
+      <span class="co">RUBY_VERSION</span>.to_i
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">main</span> <span class="fu">major</span>
+
+    <span class="r">def</span> <span class="fu">minor</span>
+      <span class="co">RUBY_VERSION</span>.split(<span class="s"><span class="dl">'</span><span class="k">.</span><span class="dl">'</span></span>)[<span class="i">1</span>].to_i
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">mini</span> <span class="fu">minor</span>
+
+    <span class="r">def</span> <span class="fu">tiny</span>
+      <span class="co">RUBY_VERSION</span>.split(<span class="s"><span class="dl">'</span><span class="k">.</span><span class="dl">'</span></span>)[<span class="i">2</span>].to_i
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">teeny</span> <span class="fu">tiny</span>
+
+    <span class="r">def</span> <span class="fu">patchlevel</span>
+      <span class="co">RUBY_PATCHLEVEL</span>
+    <span class="r">end</span>
+
+    <span class="r">def</span> <span class="fu">platform</span>
+      <span class="co">RUBY_PLATFORM</span>
+    <span class="r">end</span>
+
+    <span class="r">def</span> <span class="fu">release_date</span>
+      <span class="co">Date</span>.parse <span class="co">RUBY_RELEASE_DATE</span>
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">date</span> <span class="fu">release_date</span>
+
+    <span class="r">def</span> <span class="fu">description</span>
+      <span class="co">RUBY_DESCRIPTION</span>
+    <span class="r">end</span>
+
+  private
+
+    <span class="r">def</span> <span class="fu">compare</span>(other_version)
+      <span class="r">case</span> other_version
+      <span class="r">when</span> <span class="pc">nil</span>
+        matcher
+      <span class="r">when</span> <span class="co">Float</span>
+        other_version == <span class="co">RUBY_VERSION</span>.to_f
+      <span class="r">else</span>
+        other_version.to_s == <span class="co">RUBY_VERSION</span>
+      <span class="r">end</span>
+    <span class="r">end</span>
+
+
+    <span class="r">def</span> <span class="fu">matcher</span>
+      <span class="r">return</span> <span class="iv">@ruby</span> <span class="r">if</span> <span class="iv">@ruby</span>
+
+      <span class="iv">@ruby</span> = <span class="co">RUBY_VERSION</span>.dup
+      <span class="iv">@ruby</span>.instance_eval <span class="r">do</span>
+        <span class="r">alias</span> <span class="fu">below</span>     <span class="fu">&lt;</span>
+        <span class="r">alias</span> <span class="fu">below?</span>    <span class="fu">&lt;</span>
+        <span class="r">alias</span> <span class="fu">at_most</span>   <span class="fu">&lt;=</span>
+        <span class="r">alias</span> <span class="fu">at_most?</span>  <span class="fu">&lt;=</span>
+        <span class="r">alias</span> <span class="fu">above</span>     <span class="fu">&gt;</span>
+        <span class="r">alias</span> <span class="fu">above?</span>    <span class="fu">&gt;</span>
+        <span class="r">alias</span> <span class="fu">at_least</span>  <span class="fu">&gt;=</span>
+        <span class="r">alias</span> <span class="fu">at_least?</span> <span class="fu">&gt;=</span>
+        <span class="r">alias</span> <span class="fu">exactly</span>   <span class="fu">==</span>
+        <span class="r">alias</span> <span class="fu">exactly?</span>  <span class="fu">==</span>
+        <span class="r">def</span> <span class="fu">not</span>(other)
+          <span class="pc">self</span> != other
+        <span class="r">end</span>
+        <span class="r">alias</span> <span class="fu">not?</span>     <span class="fu">not</span>
+        <span class="r">alias</span> <span class="fu">between</span> <span class="fu">between?</span>
+
+        <span class="r">def</span> <span class="fu">newer_than</span>(other)
+          <span class="r">case</span> other.class
+          <span class="r">when</span> <span class="co">Date</span>, <span class="co">Time</span>
+            other.class.parse(<span class="co">RUBY_RELEASE_DATE</span>) &gt; other
+          <span class="r">else</span>
+            <span class="co">RUBY_RELEASE_DATE</span> &gt; other.to_s
+          <span class="r">end</span>
+        <span class="r">end</span>
+        <span class="r">alias</span> <span class="fu">newer_than?</span> <span class="fu">newer_than</span>
+
+        <span class="r">def</span> <span class="fu">older_than</span>(other)
+          <span class="r">case</span> other.class
+          <span class="r">when</span> <span class="co">Date</span>, <span class="co">Time</span>
+            other.class.parse(<span class="co">RUBY_RELEASE_DATE</span>) &lt; other
+          <span class="r">else</span>
+            <span class="co">RUBY_RELEASE_DATE</span> &lt; other.to_s
+          <span class="r">end</span>
+        <span class="r">end</span>
+        <span class="r">alias</span> <span class="fu">older_than?</span> <span class="fu">older_than</span>
+
+        <span class="r">def</span> <span class="fu">released_today</span>
+          <span class="co">RubyVersion</span>.date == <span class="co">Date</span>.today
+        <span class="r">end</span>
+        <span class="r">alias</span> <span class="fu">released_today?</span> <span class="fu">released_today</span>
+      <span class="r">end</span>
+
+      <span class="iv">@ruby</span>.freeze
+    <span class="r">end</span>
+
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/version">github wiki</a></td></tr></table>
         </div> 
       <h2 title="require 'zucker/debug'">Cubes[debug]</h2>
         <div class="cubes">
@@ -1917,7 +2081,13 @@ describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span
         </div> 
       <h2>Changelog</h2>
       <div class="cubes">
-        <pre class="scode">2010-08-14 | <a href="http://rubyzucker.info/3/">Zucker 3</a>
+        <pre class="scode">Zucker 3.next
+
+* added OS detection cube
+* added q debug method
+* added String#-
+
+2010-08-14 | <a href="http://rubyzucker.info/3/">Zucker 3</a>
 * added tap cube
 * added Object#not
 * added alias_for for an alternative alias syntax
@@ -1943,6 +2113,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span
 
 2010-08-05 | <a href="http://rubyzucker.info/rubyzucker.pdf">Zucker 0<a>
 * pre-release for rug-b talk
+
 </pre>
       </div>
 <br/>
