@@ -686,7 +686,97 @@ describe <span class="s"><span class="dl">'</span><span class="k">egonil</span><
 
 <span class="r">alias</span> <span class="fu">nn</span> <span class="fu">egonil</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/egonil">github wiki</a></td></tr></table> <h3 title="require 'zucker/enumerable'">enumerable</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/egonil">github wiki</a></td></tr></table> <h3 title="require 'zucker/engine'">engine</h3>
+         <table class="cube_table"
+                id="engine_cube"
+                title="require 'zucker/engine'"> <tr><th>Summary</th>    <td>Adds a <code>RubyEngine</code> class for easy compability checks.</td></tr><tr><th>Methods/Usage</th>    <td><h5>RubyVersion</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span> <span class="c"># outputs the interpreter name</span>
+<span class="c"># there are lots of alias methods you can use to ask for a specific interpreter</span>
+<span class="co">RubyEngine</span>.mri?
+<span class="co">RubyEngine</span>.jruby?
+<span class="co">RubyEngine</span>.rubinius?
+<span class="co">RubyEngine</span>.ree?
+<span class="co">RubyEngine</span>.ironruby?
+<span class="co">RubyEngine</span>.maglev?
+<span class="co">RubyEngine</span>.cardinal?
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_engine_spec">(<a href="javascript:show('engine_spec')">show</a>)</span>
+         <pre class="source" id="engine_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/engine</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">RubyEngine</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should display the current ruby interpreter (to_s)</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="co">RubyEngine</span>
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should create many method aliases for asking for a specific interpreter</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="c"># see the source</span>
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_engine_source">(<a href="javascript:show('engine_source')">show</a>)</span>
+         <pre class="source" id="engine_source"><span class="r">module</span> <span class="cl">RubyEngine</span>
+  <span class="r">class</span> &lt;&lt; <span class="cl">self</span>
+    <span class="c"># try to guess it</span>
+    <span class="iv">@interpreter</span> = <span class="r">case</span>
+    <span class="r">when</span> <span class="co">RUBY_PLATFORM</span> == <span class="s"><span class="dl">'</span><span class="k">parrot</span><span class="dl">'</span></span>
+      <span class="s"><span class="dl">'</span><span class="k">cardinal</span><span class="dl">'</span></span>
+    <span class="r">when</span> <span class="co">Object</span>.constants.include?( <span class="sy">:RUBY_ENGINE</span> ) ||
+         <span class="co">Object</span>.constants.include?( <span class="s"><span class="dl">'</span><span class="k">RUBY_ENGINE</span><span class="dl">'</span></span>  )
+      <span class="r">if</span> <span class="co">RUBY_ENGINE</span> == <span class="s"><span class="dl">'</span><span class="k">ruby</span><span class="dl">'</span></span>
+        <span class="r">if</span> <span class="co">RUBY_DESCRIPTION</span> =~ <span class="rx"><span class="dl">/</span><span class="k">Enterprise</span><span class="dl">/</span></span>
+          <span class="s"><span class="dl">'</span><span class="k">ree</span><span class="dl">'</span></span>
+        <span class="r">else</span>
+          <span class="s"><span class="dl">'</span><span class="k">mri</span><span class="dl">'</span></span>
+        <span class="r">end</span>
+      <span class="r">else</span>
+        <span class="co">RUBY_ENGINE</span>.to_sym <span class="c"># jruby, rbx, ironruby, macruby, etc.</span>
+      <span class="r">end</span>
+    <span class="r">else</span> <span class="c"># probably 1.8</span>
+      <span class="s"><span class="dl">'</span><span class="k">mri</span><span class="dl">'</span></span>
+    <span class="r">end</span>
+
+    <span class="r">def</span> <span class="fu">is?</span>(what)
+      what === <span class="iv">@interpreter</span>
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">is</span> <span class="fu">is?</span>
+
+    <span class="r">def</span> <span class="fu">to_s</span>
+      <span class="iv">@interpreter</span>
+    <span class="r">end</span>
+  <span class="r">end</span>
+
+module_function
+
+  <span class="r">def</span> <span class="fu">mri?</span>
+    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">mri</span><span class="dl">'</span></span>
+  <span class="r">end</span>
+  <span class="r">alias</span> <span class="fu">official_ruby?</span> <span class="fu">mri?</span>
+  <span class="r">alias</span> <span class="fu">ruby?</span> <span class="fu">mri?</span>
+
+  <span class="r">def</span> <span class="fu">jruby?</span>
+    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">jruby</span><span class="dl">'</span></span>
+  <span class="r">end</span>
+  <span class="r">alias</span> <span class="fu">java?</span> <span class="fu">jruby?</span>
+
+  <span class="r">def</span> <span class="fu">rubinius?</span>
+    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">rbx</span><span class="dl">'</span></span>
+  <span class="r">end</span>
+  <span class="r">alias</span> <span class="fu">rbx?</span> <span class="fu">rubinius?</span>
+
+  <span class="r">def</span> <span class="fu">ree?</span>
+    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">ree</span><span class="dl">'</span></span>
+  <span class="r">end</span>
+  <span class="r">alias</span> <span class="fu">enterprise?</span> <span class="fu">ree?</span>
+
+  <span class="r">def</span> <span class="fu">ironruby?</span>
+    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">ironruby</span><span class="dl">'</span></span>
+  <span class="r">end</span>
+  <span class="r">alias</span> <span class="fu">iron_ruby?</span> <span class="fu">ironruby?</span>
+
+  <span class="r">def</span> <span class="fu">cardinal?</span>
+    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">cardinal</span><span class="dl">'</span></span>
+  <span class="r">end</span>
+  <span class="r">alias</span> <span class="fu">parrot?</span> <span class="fu">cardinal?</span>
+  <span class="r">alias</span> <span class="fu">perl?</span> <span class="fu">cardinal?</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/engine">github wiki</a></td></tr></table> <h3 title="require 'zucker/enumerable'">enumerable</h3>
          <table class="cube_table"
                 id="enumerable_cube"
                 title="require 'zucker/enumerable'"> <tr><th>Summary</th>    <td><code>Enumerable</code> extensions.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Enumerable#mash</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>].mash{|e| [e, e.to_s] } <span class="c"># =&gt; {1=&gt;'1',2=&gt;'2',3=&gt;'3'}</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by Ruby Facets' <code>mash</code>.</td></tr><tr><th>Specification</th>    <td> <span id="show_enumerable_spec">(<a href="javascript:show('enumerable_spec')">show</a>)</span>
@@ -1223,6 +1313,10 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#not</sp
                 title="require 'zucker/os'"> <tr><th>Summary</th>    <td>Detect the operating system.</td></tr><tr><th>Why?</th>    <td>Checking for <code>RUBY_PLATFORM</code> does not report the OS when using JRuby and for better readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>OS.linux?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.linux? <span class="c"># true if you are on a linux machine</span></pre><h5>OS.mac?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.mac? <span class="c"># true for macs</span></pre><h5>OS.bsd?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.bsd? <span class="c"># true for bsds</span></pre><h5>OS.windows?</h5><pre class="usage source" style="display:block">include <span class="co">OS</span>; windows? <span class="c"># different way of checking is possible</span></pre><h5>OS.solaris?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.solaris? <span class="c"># true for solaris/sunos</span></pre><h5>OS.posix?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.posix? <span class="c"># true if system is posix compatible</span></pre><h5>OS.is?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.is? <span class="rx"><span class="dl">/</span><span class="k">win</span><span class="dl">/</span></span> <span class="c"># matches the regex against the os string</span></pre></td></tr><tr><th>Further information</th>    <td>Please note - this depends on system information and may not be 100% accurate.<br/>Syntax and semantic inspired by Roger Pack's <a href="http://github.com/rdp/os">os gem</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_os_spec">(<a href="javascript:show('os_spec')">show</a>)</span>
          <pre class="source" id="os_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/os</span><span class="dl">'</span></span>
 
+describe <span class="s"><span class="dl">'</span><span class="k">OS</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should display the used operation system (to_s)</span><span class="dl">'</span></span> <span class="r">do</span>; <span class="r">end</span>
+<span class="r">end</span>
+
 describe <span class="s"><span class="dl">'</span><span class="k">linux?</span><span class="dl">'</span></span> <span class="r">do</span>
   it <span class="s"><span class="dl">'</span><span class="k">should return true if OS is a linux</span><span class="dl">'</span></span> <span class="r">do</span>; <span class="r">end</span>
 <span class="r">end</span>
@@ -1253,13 +1347,14 @@ describe <span class="s"><span class="dl">'</span><span class="k">OS.is?</span><
     !!( <span class="co">RbConfig</span>::<span class="co">CONFIG</span>[<span class="s"><span class="dl">'</span><span class="k">host_os</span><span class="dl">'</span></span>] =~ <span class="rx"><span class="dl">/</span><span class="k">linux</span><span class="dl">/</span></span> )
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_os_source">(<a href="javascript:show('os_source')">show</a>)</span>
-         <pre class="source" id="os_source">require <span class="s"><span class="dl">'</span><span class="k">rbconfig</span><span class="dl">'</span></span> <span class="c"># I think it's required by default, but I am not 100% sure..</span>
+         <pre class="source" id="os_source">require <span class="s"><span class="dl">'</span><span class="k">rbconfig</span><span class="dl">'</span></span>
 
 <span class="r">module</span> <span class="cl">OS</span>
   <span class="r">class</span> &lt;&lt; <span class="cl">OS</span>
-    <span class="r">def</span> <span class="fu">is?</span>(regex)
-      !!( <span class="co">RbConfig</span>::<span class="co">CONFIG</span>[<span class="s"><span class="dl">'</span><span class="k">host_os</span><span class="dl">'</span></span>] =~ regex )
+    <span class="r">def</span> <span class="fu">is?</span>(what)
+      what === <span class="co">RbConfig</span>::<span class="co">CONFIG</span>[<span class="s"><span class="dl">'</span><span class="k">host_os</span><span class="dl">'</span></span>]
     <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">is</span> <span class="fu">is?</span>
 
     <span class="r">def</span> <span class="fu">to_s</span>
       <span class="co">RbConfig</span>::<span class="co">CONFIG</span>[<span class="s"><span class="dl">'</span><span class="k">host_os</span><span class="dl">'</span></span>]
@@ -1295,7 +1390,9 @@ module_function
   <span class="c">#def symbian?</span>
     <span class="c">#TODO who knows what symbian returns?</span>
   <span class="c">#end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/os">github wiki</a></td></tr></table> <h3 title="require 'zucker/regexp2proc'">regexp2proc</h3>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/os">github wiki</a></td></tr></table> <h3 title="require 'zucker/regexp2proc'">regexp2proc</h3>
          <table class="cube_table"
                 id="regexp2proc_cube"
                 title="require 'zucker/regexp2proc'"> <tr><th>Summary</th>    <td>Use <code>&/regex/</code> to match it against strings.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Regexp#to_proc</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.map    &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>  <span class="c"># =&gt; [&quot;j&quot;, nil, nil, &quot;y&quot;]</span>
@@ -1794,15 +1891,14 @@ describe <span class="s"><span class="dl">'</span><span class="k">RubyVersion</s
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_version_source">(<a href="javascript:show('version_source')">show</a>)</span>
          <pre class="source" id="version_source"><span class="r">module</span> <span class="cl">RubyVersion</span>
   <span class="r">class</span> &lt;&lt; <span class="cl">self</span>
-
     <span class="r">def</span> <span class="fu">to_s</span>
       <span class="co">RUBY_VERSION</span>
     <span class="r">end</span>
 
-    <span class="r">def</span> <span class="fu">is</span>(other_version = <span class="pc">nil</span>)
+    <span class="r">def</span> <span class="fu">is?</span>(other_version = <span class="pc">nil</span>)
       compare other_version
     <span class="r">end</span>
-    <span class="r">alias</span> <span class="fu">is?</span> <span class="fu">is</span>
+    <span class="r">alias</span> <span class="fu">is</span> <span class="fu">is?</span>
 
     <span class="c"># accessors</span>
 
@@ -2083,6 +2179,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span
       <div class="cubes">
         <pre class="scode">Zucker 3.next
 
+* added ruby version constant
 * added OS detection cube
 * added q debug method
 * added String#-

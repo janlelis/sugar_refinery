@@ -1,10 +1,11 @@
-require 'rbconfig' # I think it's required by default, but I am not 100% sure..
+require 'rbconfig'
 
 module OS
   class << OS
-    def is?(regex)
-      !!( RbConfig::CONFIG['host_os'] =~ regex )
+    def is?(what)
+      what === RbConfig::CONFIG['host_os']
     end
+    alias is is?
 
     def to_s
       RbConfig::CONFIG['host_os']
@@ -42,3 +43,4 @@ module_function
   #end
 end
 
+# J-_-L

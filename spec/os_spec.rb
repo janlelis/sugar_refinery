@@ -1,5 +1,9 @@
 require 'zucker/os'
 
+describe 'OS' do
+  it 'should display the used operation system (to_s)' do; end
+end
+
 describe 'linux?' do
   it 'should return true if OS is a linux' do; end
 end

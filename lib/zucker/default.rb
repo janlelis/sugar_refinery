@@ -9,6 +9,7 @@ array2proc
 blank
 class2proc
 egonil
+engine
 enumerable
 hash
 hash2proc

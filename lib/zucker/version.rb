@@ -1,14 +1,13 @@
 module RubyVersion
   class << self
-
     def to_s
       RUBY_VERSION
     end
 
-    def is(other_version = nil)
+    def is?(other_version = nil)
       compare other_version
     end
-    alias is? is
+    alias is is?
 
     # accessors
 
