@@ -5,7 +5,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
-  <title>Ruby Zucker 3.next</title>
+  <title>Ruby Zucker 4</title>
   <script type="text/javascript">
     var show = function(snippet){
       document.getElementById( snippet ).style.display = 'block'
@@ -271,7 +271,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 <body>
   <div id="world">
 
-    <h1>Ruby Zucker 3.next</h1>
+    <h1>Ruby Zucker 4</h1>
       <h2>What is it?</h2>
       <p class="text">Zucker (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>) is the German word for sugar. It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. It adds a lot of useful helper methods for an improved readability and usage. Everything is documented on this page.</p>
       <p class="text">Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for some more examples. See the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a> for discussion and information about contributing.</p>
@@ -290,10 +290,18 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       Since there aren't any dependencies within the gem, you could also pick only the cubes you want:
 
       <code class="scode">require 'zucker/egonil'</code>
-      </p>
 
-      <p class="text">You can also lock your <code>require</code> to a specific version of Zucker by simply putting the version before the cube name in this way:
-      <code>require 'zucker/1/egonil'</code>. Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs).</p>
+      You can also lock your <code>require</code> to a specific version of Zucker by simply putting the version before the cube name in this way:
+
+      <code class="scode">require 'zucker/1/egonil'</code>
+
+      Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs)</p>
+
+      <h3 style="padding-left:1.2em">What methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
+      <p class="text">
+
+      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, square_brackets_for</code>
+      </p>
 
        
       <h2 title="require 'zucker/default'">Cubes[default]</h2>
@@ -689,16 +697,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">egonil</span><
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/egonil">github wiki</a></td></tr></table> <h3 title="require 'zucker/engine'">engine</h3>
          <table class="cube_table"
                 id="engine_cube"
-                title="require 'zucker/engine'"> <tr><th>Summary</th>    <td>Adds a <code>RubyEngine</code> class for easy compability checks.</td></tr><tr><th>Methods/Usage</th>    <td><h5>RubyVersion</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span> <span class="c"># outputs the interpreter name</span>
-<span class="c"># there are lots of alias methods you can use to ask for a specific interpreter</span>
-<span class="co">RubyEngine</span>.mri?
-<span class="co">RubyEngine</span>.jruby?
-<span class="co">RubyEngine</span>.rubinius?
-<span class="co">RubyEngine</span>.ree?
-<span class="co">RubyEngine</span>.ironruby?
-<span class="co">RubyEngine</span>.maglev?
-<span class="co">RubyEngine</span>.cardinal?
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_engine_spec">(<a href="javascript:show('engine_spec')">show</a>)</span>
+                title="require 'zucker/engine'"> <tr><th>Summary</th>    <td>Adds a <code>RubyEngine</code> class for easy compability checks.</td></tr><tr><th>Methods/Usage</th>    <td><h5>RubyEngine</h5><pre class="usage source" style="display:block"><span class="c"># outputs the interpreter name</span></pre><h5>RubyEngine.mri?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.mri? <span class="c"># true if using the official Ruby interpreter</span></pre><h5>RubyEngine.jruby?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.jruby? <span class="c"># true if using JRuby</span></pre><h5>RubyEngine.rubinius?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.rubinius? <span class="c"># true if using rubinius</span></pre><h5>RubyEngine.ree?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.ree? <span class="c"># true if using enterprise edition</span></pre><h5>RubyEngine.ironruby?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.ironruby? <span class="c"># true if using IronRuby</span></pre><h5>RubyEngine.macruby?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.macruby? <span class="c"># true if using MacRuby</span></pre><h5>RubyEngine.cardinal?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.cardinal? <span class="c"># true if using parrot</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_engine_spec">(<a href="javascript:show('engine_spec')">show</a>)</span>
          <pre class="source" id="engine_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/engine</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">RubyEngine</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -707,7 +706,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">RubyEngine</sp
   <span class="r">end</span>
 
   it <span class="s"><span class="dl">'</span><span class="k">should create many method aliases for asking for a specific interpreter</span><span class="dl">'</span></span> <span class="r">do</span>
-    <span class="c"># see the source</span>
+    <span class="c"># please see the source or description file</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_engine_source">(<a href="javascript:show('engine_source')">show</a>)</span>
          <pre class="source" id="engine_source"><span class="r">module</span> <span class="cl">RubyEngine</span>
@@ -1310,7 +1309,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#not</sp
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/not">github wiki</a></td></tr></table> <h3 title="require 'zucker/os'">os</h3>
          <table class="cube_table"
                 id="os_cube"
-                title="require 'zucker/os'"> <tr><th>Summary</th>    <td>Detect the operating system.</td></tr><tr><th>Why?</th>    <td>Checking for <code>RUBY_PLATFORM</code> does not report the OS when using JRuby and for better readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>OS.linux?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.linux? <span class="c"># true if you are on a linux machine</span></pre><h5>OS.mac?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.mac? <span class="c"># true for macs</span></pre><h5>OS.bsd?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.bsd? <span class="c"># true for bsds</span></pre><h5>OS.windows?</h5><pre class="usage source" style="display:block">include <span class="co">OS</span>; windows? <span class="c"># different way of checking is possible</span></pre><h5>OS.solaris?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.solaris? <span class="c"># true for solaris/sunos</span></pre><h5>OS.posix?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.posix? <span class="c"># true if system is posix compatible</span></pre><h5>OS.is?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.is? <span class="rx"><span class="dl">/</span><span class="k">win</span><span class="dl">/</span></span> <span class="c"># matches the regex against the os string</span></pre></td></tr><tr><th>Further information</th>    <td>Please note - this depends on system information and may not be 100% accurate.<br/>Syntax and semantic inspired by Roger Pack's <a href="http://github.com/rdp/os">os gem</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_os_spec">(<a href="javascript:show('os_spec')">show</a>)</span>
+                title="require 'zucker/os'"> <tr><th>Summary</th>    <td>Detect the operating system.</td></tr><tr><th>Why?</th>    <td>Checking for <code>RUBY_PLATFORM</code> does not report the OS when using JRuby and for better readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>OS</h5><pre class="usage source" style="display:block"><span class="c"># displays the operating system</span></pre><h5>OS.linux?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.linux? <span class="c"># true if you are on a linux machine</span></pre><h5>OS.mac?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.mac? <span class="c"># true for macs</span></pre><h5>OS.bsd?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.bsd? <span class="c"># true for bsds</span></pre><h5>OS.windows?</h5><pre class="usage source" style="display:block">include <span class="co">OS</span>; windows? <span class="c"># true for windows. Example of including OS to get the os methods into the global namespace</span></pre><h5>OS.solaris?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.solaris? <span class="c"># true for solaris/sunos</span></pre><h5>OS.posix?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.posix? <span class="c"># true if system is posix compatible</span></pre><h5>OS.is?</h5><pre class="usage source" style="display:block"><span class="co">OS</span>.is? <span class="rx"><span class="dl">/</span><span class="k">win</span><span class="dl">/</span></span> <span class="c"># matches the regex against the os string</span></pre></td></tr><tr><th>Further information</th>    <td>This cube depends on system information and may not be 100% accurate.<br/>Syntax and semantic inspired by Roger Pack's <a href="http://github.com/rdp/os">os gem</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_os_spec">(<a href="javascript:show('os_spec')">show</a>)</span>
          <pre class="source" id="os_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/os</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">OS</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -1814,7 +1813,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#|</span
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/union">github wiki</a></td></tr></table> <h3 title="require 'zucker/version'">version</h3>
          <table class="cube_table"
                 id="version_cube"
-                title="require 'zucker/version'"> <tr><th>Summary</th>    <td>Adds a RubyVersion constant for easy compability checks.</td></tr><tr><th>Methods/Usage</th>    <td><h5>RubyVersion</h5><pre class="usage source" style="display:block"><span class="c"># return RUBY_VERSION</span>
+                title="require 'zucker/version'"> <tr><th>Summary</th>    <td>Adds a <code>RubyVersion</code> class for easy compability checks.</td></tr><tr><th>Methods/Usage</th>    <td><h5>RubyVersion</h5><pre class="usage source" style="display:block"><span class="c"># return RUBY_VERSION</span>
 <span class="co">RubyVersion</span>
 <span class="c"># check for the main version with a Float</span>
 <span class="co">RubyVersion</span>.is? <span class="fl">1.8</span>
@@ -2175,13 +2174,15 @@ describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/q">github wiki</a></td></tr></table>
         </div> 
+
       <h2>Changelog</h2>
       <div class="cubes">
-        <pre class="scode">Zucker 3.next
+        <pre class="scode">2010-09-01 | <a href="http://rubyzucker.info/4/">Zucker 4</a>
 
-* added ruby version constant
-* added OS detection cube
-* added q debug method
+* added RubyEngine constant
+* added RubyVersion constant
+* added OS constant
+* added q debug method (like p but on one line)
 * added String#-
 
 2010-08-14 | <a href="http://rubyzucker.info/3/">Zucker 3</a>
@@ -2217,7 +2218,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span
     </div>
   <div id="foot">
     <div id="smile"><a href="http://rbjl.net">J-_-L</a></div>
-    This is the Ruby Zucker 3.next documentation (2010-08-14).
+    This is the Ruby Zucker 4 documentation (2010-09-01).
     The current version is always available at <a href="http://rubyzucker.info">rubyzucker.info</a>.
     Gem source can be found at <a href="http://github.com/janlelis/zucker">github</a>.
   </div>

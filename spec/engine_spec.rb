@@ -6,6 +6,6 @@ describe 'RubyEngine' do
   end
 
   it 'should create many method aliases for asking for a specific interpreter' do
-    # see the source
+    # please see the source or description file
   end
 end

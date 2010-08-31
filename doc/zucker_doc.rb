@@ -479,12 +479,21 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       Since there aren't any dependencies within the gem, you could also pick only the cubes you want:
 
       <code class="scode">require 'zucker/egonil'</code>
+
+      You can also lock your ⇧require⇧ to a specific version of Zucker by simply putting the version before the cube name in this way:
+
+      <code class="scode">require 'zucker/1/egonil'</code>
+
+      Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs)</p>
+
+      <h3 style="padding-left:1.2em">What methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
+      <p class="text">
+
+      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, square_brackets_for</code>
       </p>
 
-      <p class="text">You can also lock your ⇧require⇧ to a specific version of Zucker by simply putting the version before the cube name in this way:
-      <code>require 'zucker/1/egonil'</code>. Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs).</p>
-
        ....
+
       <h2>Changelog</h2>
       <div class="cubes">
         <pre class="scode">..changelog..</pre>

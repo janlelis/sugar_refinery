@@ -1,8 +1,9 @@
-Zucker 3.next
+2010-09-01 | Zucker 4
 
-* added ruby version constant
-* added OS detection cube
-* added q debug method
+* added RubyEngine constant
+* added RubyVersion constant
+* added OS constant
+* added q debug method (like p but on one line)
 * added String#-
 
 2010-08-14 | Zucker 3
