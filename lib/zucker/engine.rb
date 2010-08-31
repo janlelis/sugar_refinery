@@ -1,6 +1,5 @@
 module RubyEngine
-  class << self
-    # try to guess it
+    # try to guess the interpreter
     @interpreter = case
     when RUBY_PLATFORM == 'parrot'
       'cardinal'
@@ -19,49 +18,50 @@ module RubyEngine
       'mri'
     end
 
+  class << self
     def is?(what)
       what === @interpreter
     end
     alias is is?
 
     def to_s
-      @interpreter
+      @interpreter.to_s
     end
-  end
 
-module_function
+    # ask methods
 
-  def mri?
-    RubyEngine.is? 'mri'
-  end
-  alias official_ruby? mri?
-  alias ruby? mri?
+    def mri?
+      RubyEngine.is? 'mri'
+    end
+    alias official_ruby? mri?
+    alias ruby? mri?
 
-  def jruby?
-    RubyEngine.is? 'jruby'
-  end
-  alias java? jruby?
+    def jruby?
+      RubyEngine.is? 'jruby'
+    end
+    alias java? jruby?
 
-  def rubinius?
-    RubyEngine.is? 'rbx'
-  end
-  alias rbx? rubinius?
+    def rubinius?
+      RubyEngine.is? 'rbx'
+    end
+    alias rbx? rubinius?
 
-  def ree?
-    RubyEngine.is? 'ree'
-  end
-  alias enterprise? ree?
+    def ree?
+      RubyEngine.is? 'ree'
+    end
+    alias enterprise? ree?
 
-  def ironruby?
-    RubyEngine.is? 'ironruby'
-  end
-  alias iron_ruby? ironruby?
+    def ironruby?
+      RubyEngine.is? 'ironruby'
+    end
+    alias iron_ruby? ironruby?
 
-  def cardinal?
-    RubyEngine.is? 'cardinal'
+    def cardinal?
+      RubyEngine.is? 'cardinal'
+    end
+    alias parrot? cardinal?
+    alias perl? cardinal?
   end
-  alias parrot? cardinal?
-  alias perl? cardinal?
 end
 
 # J-_-L
