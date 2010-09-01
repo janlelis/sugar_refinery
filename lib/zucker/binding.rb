@@ -4,7 +4,11 @@ class Binding
       if array.empty?
         ' - none'
       else
-        array.map{|e| " - #{e}: #{ self.eval '#{e}'}"}*"\n"
+        array.map{|e|
+          val = self.eval "#{e}"
+          val = val.is_a?( Binding ) ? val.to_s : val.inspect
+          " - #{e}: #{ val }"
+        }.join "\n"
       end
     }
 
