@@ -1,0 +1,10 @@
+planned
+[5] Hash operators
+[5] make docs ri-compatible (declaration of methods/usage as ri/rdoc comment)
+
+maybe
+* File
+* dclone
+* more debug fun
+
+also see edge/ideas/*
