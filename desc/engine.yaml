@@ -1,5 +1,5 @@
 engine:
-  summary: Adds a ⇧RubyEngine⇧ class for easy compability checks.
+  summary: Adds a ⇧RubyEngine⇧ class for easy compatibility checks.
   methods:
     RubyEngine: |
     RubyEngine: "# outputs the interpreter name"
