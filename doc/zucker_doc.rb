@@ -221,7 +221,7 @@ h1, h2, h3, h4, h5, h6{
 
 h1{
   color:#222;
-  text-align:center;
+  text-align:left;
   padding:0.5em;
 }
 h2{
@@ -453,15 +453,20 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 .source .chg .chg { color: #66f; }
 .source .head .head { color: #f4f; }
 
-
+.rubylogo{
+  margin-left:20px;
+  margin-top:10px;
+  margin-right:15px;
+  float:left;
+}
 
   </style>
 </head>
 <body>
   <div id="world">
-
+    <img src="ruby.png" class="rubylogo" />
     <h1>Ruby Zucker ..version..</h1>
-      <h2>What is it?</h2>
+      <h2 style="clear:both">What is it?</h2>
       <p class="text">Zucker (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>) is the German word for sugar. It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. It adds a lot of useful helper methods for an improved readability and usage. Everything is documented on this page.</p>
       <p class="text">Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for some more examples. See the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a> for discussion and information about contributing.</p>
 
@@ -486,10 +491,10 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 
       Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs)</p>
 
-      <h3 style="padding-left:1.2em">What methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
+      <h3 style="padding-left:1.3em">What methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
       <p class="text">
 
-      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, square_brackets_for</code>
+      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, square_brackets_for, tap_on, make_new</code>
       </p>
 
        ....
@@ -504,7 +509,8 @@ table.source td { padding: 2px 4px; vertical-align: top; }
     <div id="smile"><a href="http://rbjl.net">J-_-L</a></div>
     This is the Ruby Zucker ..version.. documentation (..date..).
     The current version is always available at <a href="http://rubyzucker.info">rubyzucker.info</a>.
-    Gem source can be found at <a href="http://github.com/janlelis/zucker">github</a>.
+    Source at <a href="http://github.com/janlelis/zucker">github</a>.
+    Ruby Logo CC-BY-SA Yukihiro Matsumoto.
   </div>
 
 </body>
