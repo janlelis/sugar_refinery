@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6{
 
 h1{
   color:#222;
-  text-align:center;
+  text-align:left;
   padding:0.5em;
 }
 h2{
@@ -264,15 +264,20 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 .source .chg .chg { color: #66f; }
 .source .head .head { color: #f4f; }
 
-
+.rubylogo{
+  margin-left:20px;
+  margin-top:10px;
+  margin-right:15px;
+  float:left;
+}
 
   </style>
 </head>
 <body>
   <div id="world">
-
+    <img src="ruby.png" class="rubylogo" />
     <h1>Ruby Zucker 4</h1>
-      <h2>What is it?</h2>
+      <h2 style="clear:both">What is it?</h2>
       <p class="text">Zucker (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>) is the German word for sugar. It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. It adds a lot of useful helper methods for an improved readability and usage. Everything is documented on this page.</p>
       <p class="text">Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for some more examples. See the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a> for discussion and information about contributing.</p>
 
@@ -297,10 +302,10 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 
       Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs)</p>
 
-      <h3 style="padding-left:1.2em">What methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
+      <h3 style="padding-left:1.3em">What methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
       <p class="text">
 
-      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, square_brackets_for</code>
+      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, square_brackets_for, tap_on, make_new</code>
       </p>
 
        
@@ -697,7 +702,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">egonil</span><
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/egonil">github wiki</a></td></tr></table> <h3 title="require 'zucker/engine'">engine</h3>
          <table class="cube_table"
                 id="engine_cube"
-                title="require 'zucker/engine'"> <tr><th>Summary</th>    <td>Adds a <code>RubyEngine</code> class for easy compability checks.</td></tr><tr><th>Methods/Usage</th>    <td><h5>RubyEngine</h5><pre class="usage source" style="display:block"><span class="c"># outputs the interpreter name</span></pre><h5>RubyEngine.mri?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.mri? <span class="c"># true if using the official Ruby interpreter</span></pre><h5>RubyEngine.jruby?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.jruby? <span class="c"># true if using JRuby</span></pre><h5>RubyEngine.rubinius?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.rubinius? <span class="c"># true if using rubinius</span></pre><h5>RubyEngine.ree?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.ree? <span class="c"># true if using enterprise edition</span></pre><h5>RubyEngine.ironruby?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.ironruby? <span class="c"># true if using IronRuby</span></pre><h5>RubyEngine.macruby?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.macruby? <span class="c"># true if using MacRuby</span></pre><h5>RubyEngine.cardinal?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.cardinal? <span class="c"># true if using parrot</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_engine_spec">(<a href="javascript:show('engine_spec')">show</a>)</span>
+                title="require 'zucker/engine'"> <tr><th>Summary</th>    <td>Adds a <code>RubyEngine</code> class for easy compatibility checks.</td></tr><tr><th>Methods/Usage</th>    <td><h5>RubyEngine</h5><pre class="usage source" style="display:block"><span class="c"># outputs the interpreter name</span></pre><h5>RubyEngine.mri?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.mri? <span class="c"># true if using the official Ruby interpreter</span></pre><h5>RubyEngine.jruby?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.jruby? <span class="c"># true if using JRuby</span></pre><h5>RubyEngine.rubinius?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.rubinius? <span class="c"># true if using rubinius</span></pre><h5>RubyEngine.ree?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.ree? <span class="c"># true if using enterprise edition</span></pre><h5>RubyEngine.ironruby?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.ironruby? <span class="c"># true if using IronRuby</span></pre><h5>RubyEngine.macruby?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.macruby? <span class="c"># true if using MacRuby</span></pre><h5>RubyEngine.cardinal?</h5><pre class="usage source" style="display:block"><span class="co">RubyEngine</span>.cardinal? <span class="c"># true if using parrot</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_engine_spec">(<a href="javascript:show('engine_spec')">show</a>)</span>
          <pre class="source" id="engine_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/engine</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">RubyEngine</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -710,8 +715,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">RubyEngine</sp
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_engine_source">(<a href="javascript:show('engine_source')">show</a>)</span>
          <pre class="source" id="engine_source"><span class="r">module</span> <span class="cl">RubyEngine</span>
-  <span class="r">class</span> &lt;&lt; <span class="cl">self</span>
-    <span class="c"># try to guess it</span>
+    <span class="c"># try to guess the interpreter</span>
     <span class="iv">@interpreter</span> = <span class="r">case</span>
     <span class="r">when</span> <span class="co">RUBY_PLATFORM</span> == <span class="s"><span class="dl">'</span><span class="k">parrot</span><span class="dl">'</span></span>
       <span class="s"><span class="dl">'</span><span class="k">cardinal</span><span class="dl">'</span></span>
@@ -730,49 +734,50 @@ describe <span class="s"><span class="dl">'</span><span class="k">RubyEngine</sp
       <span class="s"><span class="dl">'</span><span class="k">mri</span><span class="dl">'</span></span>
     <span class="r">end</span>
 
+  <span class="r">class</span> &lt;&lt; <span class="cl">self</span>
     <span class="r">def</span> <span class="fu">is?</span>(what)
       what === <span class="iv">@interpreter</span>
     <span class="r">end</span>
     <span class="r">alias</span> <span class="fu">is</span> <span class="fu">is?</span>
 
     <span class="r">def</span> <span class="fu">to_s</span>
-      <span class="iv">@interpreter</span>
+      <span class="iv">@interpreter</span>.to_s
     <span class="r">end</span>
-  <span class="r">end</span>
 
-module_function
+    <span class="c"># ask methods</span>
 
-  <span class="r">def</span> <span class="fu">mri?</span>
-    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">mri</span><span class="dl">'</span></span>
-  <span class="r">end</span>
-  <span class="r">alias</span> <span class="fu">official_ruby?</span> <span class="fu">mri?</span>
-  <span class="r">alias</span> <span class="fu">ruby?</span> <span class="fu">mri?</span>
+    <span class="r">def</span> <span class="fu">mri?</span>
+      <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">mri</span><span class="dl">'</span></span>
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">official_ruby?</span> <span class="fu">mri?</span>
+    <span class="r">alias</span> <span class="fu">ruby?</span> <span class="fu">mri?</span>
 
-  <span class="r">def</span> <span class="fu">jruby?</span>
-    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">jruby</span><span class="dl">'</span></span>
-  <span class="r">end</span>
-  <span class="r">alias</span> <span class="fu">java?</span> <span class="fu">jruby?</span>
+    <span class="r">def</span> <span class="fu">jruby?</span>
+      <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">jruby</span><span class="dl">'</span></span>
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">java?</span> <span class="fu">jruby?</span>
 
-  <span class="r">def</span> <span class="fu">rubinius?</span>
-    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">rbx</span><span class="dl">'</span></span>
-  <span class="r">end</span>
-  <span class="r">alias</span> <span class="fu">rbx?</span> <span class="fu">rubinius?</span>
+    <span class="r">def</span> <span class="fu">rubinius?</span>
+      <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">rbx</span><span class="dl">'</span></span>
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">rbx?</span> <span class="fu">rubinius?</span>
 
-  <span class="r">def</span> <span class="fu">ree?</span>
-    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">ree</span><span class="dl">'</span></span>
-  <span class="r">end</span>
-  <span class="r">alias</span> <span class="fu">enterprise?</span> <span class="fu">ree?</span>
+    <span class="r">def</span> <span class="fu">ree?</span>
+      <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">ree</span><span class="dl">'</span></span>
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">enterprise?</span> <span class="fu">ree?</span>
 
-  <span class="r">def</span> <span class="fu">ironruby?</span>
-    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">ironruby</span><span class="dl">'</span></span>
-  <span class="r">end</span>
-  <span class="r">alias</span> <span class="fu">iron_ruby?</span> <span class="fu">ironruby?</span>
+    <span class="r">def</span> <span class="fu">ironruby?</span>
+      <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">ironruby</span><span class="dl">'</span></span>
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">iron_ruby?</span> <span class="fu">ironruby?</span>
 
-  <span class="r">def</span> <span class="fu">cardinal?</span>
-    <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">cardinal</span><span class="dl">'</span></span>
+    <span class="r">def</span> <span class="fu">cardinal?</span>
+      <span class="co">RubyEngine</span>.is? <span class="s"><span class="dl">'</span><span class="k">cardinal</span><span class="dl">'</span></span>
+    <span class="r">end</span>
+    <span class="r">alias</span> <span class="fu">parrot?</span> <span class="fu">cardinal?</span>
+    <span class="r">alias</span> <span class="fu">perl?</span> <span class="fu">cardinal?</span>
   <span class="r">end</span>
-  <span class="r">alias</span> <span class="fu">parrot?</span> <span class="fu">cardinal?</span>
-  <span class="r">alias</span> <span class="fu">perl?</span> <span class="fu">cardinal?</span>
 <span class="r">end</span>
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/engine">github wiki</a></td></tr></table> <h3 title="require 'zucker/enumerable'">enumerable</h3>
@@ -1813,7 +1818,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#|</span
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/union">github wiki</a></td></tr></table> <h3 title="require 'zucker/version'">version</h3>
          <table class="cube_table"
                 id="version_cube"
-                title="require 'zucker/version'"> <tr><th>Summary</th>    <td>Adds a <code>RubyVersion</code> class for easy compability checks.</td></tr><tr><th>Methods/Usage</th>    <td><h5>RubyVersion</h5><pre class="usage source" style="display:block"><span class="c"># return RUBY_VERSION</span>
+                title="require 'zucker/version'"> <tr><th>Summary</th>    <td>Adds a <code>RubyVersion</code> class for easy compatibility checks.</td></tr><tr><th>Methods/Usage</th>    <td><h5>RubyVersion</h5><pre class="usage source" style="display:block"><span class="c"># return RUBY_VERSION</span>
 <span class="co">RubyVersion</span>
 <span class="c"># check for the main version with a Float</span>
 <span class="co">RubyVersion</span>.is? <span class="fl">1.8</span>
@@ -2074,7 +2079,21 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#D</span
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/D">github wiki</a></td></tr></table> <h3 title="require 'zucker/binding'">binding</h3>
          <table class="cube_table"
                 id="binding_cube"
-                title="require 'zucker/binding'"> <tr><th>Summary</th>    <td>Adds a verbose <code>Binding#inspect</code>.</td></tr><tr><th>Why?</th>    <td>It gives you information about the current environment.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Binding#inspect</h5><pre class="usage source" style="display:block">binding.inspect <span class="c"># shows your current environment</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_binding_spec">(<a href="javascript:show('binding_spec')">show</a>)</span>
+                title="require 'zucker/binding'"> <tr><th>Summary</th>    <td>Adds a verbose <code>Binding#inspect</code>.</td></tr><tr><th>Why?</th>    <td>It gives you information about the current environment.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Binding#inspect</h5><pre class="usage source" style="display:block">binding.inspect <span class="c"># shows your current environment, irb example:</span>
+&gt;&gt; a=<span class="i">3</span>
+=&gt; <span class="i">3</span>
+&gt;&gt; binding
+=&gt; <span class="c">#&lt;Binding:0x94c4b50&gt;</span>
+local vars
+ - a: <span class="i">3</span>
+ - _: <span class="c">#&lt;Binding:0x94c4b50&gt;</span>
+(instance vars)
+ - none
+<span class="pc">self</span>
+ - main
+block_given?
+ - <span class="pc">false</span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_binding_spec">(<a href="javascript:show('binding_spec')">show</a>)</span>
          <pre class="source" id="binding_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/binding</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Binding#inspect</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -2088,7 +2107,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">Binding#inspec
       <span class="r">if</span> array.empty?
         <span class="s"><span class="dl">'</span><span class="k"> - none</span><span class="dl">'</span></span>
       <span class="r">else</span>
-        array.map{|e| <span class="s"><span class="dl">&quot;</span><span class="k"> - </span><span class="il"><span class="idl">#{</span>e<span class="idl">}</span></span><span class="k">: </span><span class="il"><span class="idl">#{</span> <span class="pc">self</span>.eval <span class="s"><span class="dl">'</span><span class="k">#{e}</span><span class="dl">'</span></span><span class="idl">}</span></span><span class="dl">&quot;</span></span>}*<span class="s"><span class="dl">&quot;</span><span class="ch">\n</span><span class="dl">&quot;</span></span>
+        array.map{|e|
+          val = <span class="pc">self</span>.eval <span class="s"><span class="dl">&quot;</span><span class="il"><span class="idl">#{</span>e<span class="idl">}</span></span><span class="dl">&quot;</span></span>
+          val = val.is_a?( <span class="co">Binding</span> ) ? val.to_s : val.inspect
+          <span class="s"><span class="dl">&quot;</span><span class="k"> - </span><span class="il"><span class="idl">#{</span>e<span class="idl">}</span></span><span class="k">: </span><span class="il"><span class="idl">#{</span> val <span class="idl">}</span></span><span class="dl">&quot;</span></span>
+        }.join <span class="s"><span class="dl">&quot;</span><span class="ch">\n</span><span class="dl">&quot;</span></span>
       <span class="r">end</span>
     }
 
@@ -2108,7 +2131,12 @@ block_given?
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/binding">github wiki</a></td></tr></table> <h3 title="require 'zucker/mm'">mm</h3>
          <table class="cube_table"
                 id="mm_cube"
-                title="require 'zucker/mm'"> <tr><th>Summary</th>    <td><code>mm</code> displays an ordered public method list.</td></tr><tr><th>Why?</th>    <td>See one object's methods without those rarely used inherited methods.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#method_list, Object#mm</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">test</span><span class="dl">'</span></span>.mm <span class="i">2</span> <span class="c"># outputs the list (2 levels deep)</span></pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://rbjl.net/31-the-multi-mega-method-list">this article</a> for more information.</td></tr><tr><th>Specification</th>    <td> <span id="show_mm_spec">(<a href="javascript:show('mm_spec')">show</a>)</span>
+                title="require 'zucker/mm'"> <tr><th>Summary</th>    <td><code>mm</code> displays an ordered public method list.</td></tr><tr><th>Why?</th>    <td>See one object's methods without those rarely used inherited methods.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#method_list, Object#mm</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">test</span><span class="dl">'</span></span>.mm <span class="i">2</span> <span class="c"># outputs the list (2 levels deep), for example:</span>
+ <span class="co">String</span>
+ [<span class="sy">:&lt;=&gt;</span>, <span class="sy">:==</span>, <span class="sy">:===</span>, <span class="sy">:eql?</span>, <span class="sy">:hash</span>, <span class="sy">:casecmp</span>, <span class="sy">:+</span>, <span class="sy">:*</span>, <span class="sy">:%</span>, <span class="sy">:[]</span>, <span class="sy">:[]=</span>, <span class="sy">:insert</span>, <span class="sy">:length</span>, <span class="sy">:size</span>, <span class="sy">:bytesize</span>, <span class="sy">:empty?</span>, <span class="sy">:=~</span>, <span class="sy">:match</span>, <span class="sy">:succ</span>, <span class="sy">:succ!</span>, <span class="sy">:next</span>, <span class="sy">:next!</span>, <span class="sy">:upto</span>, <span class="sy">:index</span>, <span class="sy">:rindex</span>, <span class="sy">:replace</span>, <span class="sy">:clear</span>, <span class="sy">:chr</span>, <span class="sy">:getbyte</span>, <span class="sy">:setbyte</span>, <span class="sy">:to_i</span>, <span class="sy">:to_f</span>, <span class="sy">:to_s</span>, <span class="sy">:to_str</span>, <span class="sy">:inspect</span>, <span class="sy">:dump</span>, <span class="sy">:upcase</span>, <span class="sy">:downcase</span>, <span class="sy">:capitalize</span>, <span class="sy">:swapcase</span>, <span class="sy">:upcase!</span>, <span class="sy">:downcase!</span>, <span class="sy">:capitalize!</span>, <span class="sy">:swapcase!</span>, <span class="sy">:hex</span>, <span class="sy">:oct</span>, <span class="sy">:split</span>, <span class="sy">:lines</span>, <span class="sy">:bytes</span>, <span class="sy">:chars</span>, <span class="sy">:codepoints</span>, <span class="sy">:reverse</span>, <span class="sy">:reverse!</span>, <span class="sy">:concat</span>, <span class="sy">:&lt;&lt;</span>, <span class="sy">:crypt</span>, <span class="sy">:intern</span>, <span class="sy">:to_sym</span>, <span class="sy">:ord</span>, <span class="sy">:include?</span>, <span class="sy">:start_with?</span>, <span class="sy">:end_with?</span>, <span class="sy">:scan</span>, <span class="sy">:ljust</span>, <span class="sy">:rjust</span>, <span class="sy">:center</span>, <span class="sy">:sub</span>, <span class="sy">:gsub</span>, <span class="sy">:chop</span>, <span class="sy">:chomp</span>, <span class="sy">:strip</span>, <span class="sy">:lstrip</span>, <span class="sy">:rstrip</span>, <span class="sy">:sub!</span>, <span class="sy">:gsub!</span>, <span class="sy">:chop!</span>, <span class="sy">:chomp!</span>, <span class="sy">:strip!</span>, <span class="sy">:lstrip!</span>, <span class="sy">:rstrip!</span>, <span class="sy">:tr</span>, <span class="sy">:tr_s</span>, <span class="sy">:delete</span>, <span class="sy">:squeeze</span>, <span class="sy">:count</span>, <span class="sy">:tr!</span>, <span class="sy">:tr_s!</span>, <span class="sy">:delete!</span>, <span class="sy">:squeeze!</span>, <span class="sy">:each_line</span>, <span class="sy">:each_byte</span>, <span class="sy">:each_char</span>, <span class="sy">:each_codepoint</span>, <span class="sy">:sum</span>, <span class="sy">:slice</span>, <span class="sy">:slice!</span>, <span class="sy">:partition</span>, <span class="sy">:rpartition</span>, <span class="sy">:encoding</span>, <span class="sy">:force_encoding</span>, <span class="sy">:valid_encoding?</span>, <span class="sy">:ascii_only?</span>, <span class="sy">:unpack</span>, <span class="sy">:encode</span>, <span class="sy">:encode!</span>, <span class="sy">:to_r</span>, <span class="sy">:to_c</span>, <span class="sy">:blank?</span>, <span class="sy">:^</span>, <span class="sy">:lchomp</span>, <span class="sy">:lchomp!</span>, <span class="sy">:ords</span>, <span class="sy">:constantize</span>, <span class="sy">:+@</span>, <span class="sy">:-@</span>, <span class="sy">:|</span>]
+ <span class="co">Comparable</span>
+ [<span class="sy">:==</span>, <span class="sy">:&gt;</span>, <span class="sy">:&gt;=</span>, <span class="sy">:&lt;</span>, <span class="sy">:&lt;=</span>, <span class="sy">:between?</span>]
+</pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://rbjl.net/31-the-multi-mega-method-list">this article</a> for more information.</td></tr><tr><th>Specification</th>    <td> <span id="show_mm_spec">(<a href="javascript:show('mm_spec')">show</a>)</span>
          <pre class="source" id="mm_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/mm</span><span class="dl">'</span></span>
 
 describe <span class="s"><span class="dl">'</span><span class="k">Object#method_list</span><span class="dl">'</span></span> <span class="r">do</span>
@@ -2220,7 +2248,8 @@ describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span
     <div id="smile"><a href="http://rbjl.net">J-_-L</a></div>
     This is the Ruby Zucker 4 documentation (2010-09-01).
     The current version is always available at <a href="http://rubyzucker.info">rubyzucker.info</a>.
-    Gem source can be found at <a href="http://github.com/janlelis/zucker">github</a>.
+    Source at <a href="http://github.com/janlelis/zucker">github</a>.
+    Ruby Logo CC-BY-SA Yukihiro Matsumoto.
   </div>
 
 </body>

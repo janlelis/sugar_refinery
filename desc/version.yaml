@@ -1,5 +1,5 @@
 version:
-  summary: Adds a ⇧RubyVersion⇧ class for easy compability checks.
+  summary: Adds a ⇧RubyVersion⇧ class for easy compatibility checks.
   methods:
     RubyVersion: |
       # return RUBY_VERSION

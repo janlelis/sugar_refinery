@@ -26,10 +26,10 @@ spec = Gem::Specification.new do |s|
   s.name = 'zucker'
   s.version = Zucker::VERSION
   s.date = Zucker::DATE
-  s.authors = ['Based on the thoughts of many people ;)', 'Jan Lelis']
+  s.authors = ['Jan Lelis','and many others']
   s.email = 'mail@janlelis.de'
-  s.summary = "Make your Ruby code even sweeter with syntactic sugar :)
-Adds lots of little helpers that you never want to miss again.
+  s.summary = "Sweeten your Ruby code with this syntactic sugar :).
+Adds a lot of little helpers that you do not want to miss again.
 See http://rubyzucker.info"
   s.homepage = 'http://rubyzucker.info'
   s.files = PKG_FILES.to_a
