@@ -23,7 +23,7 @@ version:
       RubyVersion.description # e.g. => "ruby 1.8.7 (2010-01-10 patchlevel 249) [i486-linux]"
   package: default
   info:
-  - Thanks to Hanmac for a nice improvement idea.
+  - Thanks to Hanmac for a nice improvement.
   versions:
   - 1.9
   - 1.8

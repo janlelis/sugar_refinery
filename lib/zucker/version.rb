@@ -17,7 +17,7 @@ module RubyVersion
         when String
           RUBY_VERSION
         when Date,Time
-          other.class.parse(RUBY_RELASE_DATE)
+          other.class.parse(RUBY_RELEASE_DATE)
         else 
           other = other.to_s
           RUBY_VERSION
@@ -26,7 +26,7 @@ module RubyVersion
     end  
     include Comparable
 
-    # language chaining
+    # chaining for dsl-like language
     def is?(other = nil)
       if other
         RubyVersion == other
