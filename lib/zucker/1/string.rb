@@ -1,3 +1,5 @@
+require 'zucker'
+
 class String
   def ^(pos)
     pos = pos.to_i

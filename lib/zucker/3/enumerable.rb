@@ -1,3 +1,5 @@
+require 'zucker'
+
 module Enumerable
   def mash
     ret = {}

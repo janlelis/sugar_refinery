@@ -1,3 +1,5 @@
+require 'zucker'
+
 def tap_on(obj, &block)
   obj.tap &block
 end

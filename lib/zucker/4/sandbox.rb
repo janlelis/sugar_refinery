@@ -1,3 +1,5 @@
+require 'zucker'
+
 module Kernel
   def sandbox(rescueblock_or_default=nil)
     Thread.start do

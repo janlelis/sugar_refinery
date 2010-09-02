@@ -1,3 +1,5 @@
+require 'zucker'
+
 module Info
   class << self
     # hash like access

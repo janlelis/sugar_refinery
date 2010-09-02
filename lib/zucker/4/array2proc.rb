@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Array
   def to_proc
     Proc.new{ |obj|

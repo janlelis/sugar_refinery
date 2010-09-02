@@ -1,3 +1,5 @@
+require 'zucker'
+
 alias is_an? is_a?
 
 module Enumerable

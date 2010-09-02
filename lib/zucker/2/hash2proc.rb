@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Hash
   def to_proc
     Proc.new{ |obj|

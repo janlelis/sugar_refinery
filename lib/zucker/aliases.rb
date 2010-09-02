@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Object
   alias is_an? is_a? # thanks to utility_belt
 end

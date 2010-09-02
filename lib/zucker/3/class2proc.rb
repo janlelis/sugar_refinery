@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Class
   def to_proc
     Proc.new do |*args|

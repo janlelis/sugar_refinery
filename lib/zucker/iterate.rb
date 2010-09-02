@@ -1,5 +1,8 @@
+require 'zucker'
+
 def iterate(*params)
   # params.shift.zip(*params).each{ |*elements| yield *elements }
+  raise ArgumentError, "wrong number of arguments (0)" if params.empty?
 
   first = params.shift
   if params.empty? # single param - like each

@@ -1,3 +1,5 @@
+require 'zucker'
+
 module Kernel
   def D(*args, &block)
     if args.empty?

@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Module
   def square_brackets_for(ivar, assignment = true)
     #  undef []   if respond_to? :[]

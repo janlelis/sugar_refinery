@@ -1,3 +1,5 @@
+require 'zucker'
+
 module Kernel
   def activate_warnings!
     $VERBOSE = true

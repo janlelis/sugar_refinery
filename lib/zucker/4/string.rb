@@ -1,3 +1,5 @@
+require 'zucker'
+
 class String
   def -(rem)
     gsub( Regexp === rem ? rem : rem.to_s, '' )

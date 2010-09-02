@@ -1,3 +1,5 @@
+require 'zucker'
+
 def instance_variables_from(obj, *only)
   iter =
   if    obj.is_a? Binding

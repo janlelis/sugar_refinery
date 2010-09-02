@@ -1,3 +1,5 @@
+require 'zucker'
+
 # default
 zucker = %w|
 aliases

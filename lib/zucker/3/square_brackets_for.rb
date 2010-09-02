@@ -1,3 +1,5 @@
+require 'zucker'
+
 def square_brackets_for(ivar, assignment = true)
 #  undef []   if respond_to? :[]
 #  undef []=  if respond_to? :[]=

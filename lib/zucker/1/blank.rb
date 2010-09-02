@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Object
   def blank?
     if respond_to? :empty? then empty? else !self end
