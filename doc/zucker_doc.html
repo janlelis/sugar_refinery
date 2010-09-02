@@ -302,7 +302,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 
       Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs)</p>
 
-      <h3 style="padding-left:1.3em">What methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
+      <h3 style="padding-left:1.3em">Which methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
       <p class="text">
 
       <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, square_brackets_for, tap_on, make_new</code>
@@ -1839,7 +1839,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#|</span
 <span class="co">RubyVersion</span>.tiny  <span class="c"># e.g. =&gt; 7</span>
 <span class="co">RubyVersion</span>.patchlevel <span class="c"># e.g. =&gt; 249</span>
 <span class="co">RubyVersion</span>.description <span class="c"># e.g. =&gt; &quot;ruby 1.8.7 (2010-01-10 patchlevel 249) [i486-linux]&quot;</span>
-</pre></td></tr><tr><th>Further information</th>    <td>Thanks to Hanmac for a nice improvement idea.</td></tr><tr><th>Specification</th>    <td> <span id="show_version_spec">(<a href="javascript:show('version_spec')">show</a>)</span>
+</pre></td></tr><tr><th>Further information</th>    <td>Thanks to Hanmac for a nice improvement.</td></tr><tr><th>Specification</th>    <td> <span id="show_version_spec">(<a href="javascript:show('version_spec')">show</a>)</span>
          <pre class="source" id="version_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/version</span><span class="dl">'</span></span>
 require <span class="s"><span class="dl">'</span><span class="k">date</span><span class="dl">'</span></span>
 
@@ -1914,7 +1914,7 @@ require <span class="s"><span class="dl">'</span><span class="k">time</span><spa
         <span class="r">when</span> <span class="co">String</span>
           <span class="co">RUBY_VERSION</span>
         <span class="r">when</span> <span class="co">Date</span>,<span class="co">Time</span>
-          other.class.parse(<span class="co">RUBY_RELASE_DATE</span>)
+          other.class.parse(<span class="co">RUBY_RELEASE_DATE</span>)
         <span class="r">else</span> 
           other = other.to_s
           <span class="co">RUBY_VERSION</span>
@@ -1923,7 +1923,7 @@ require <span class="s"><span class="dl">'</span><span class="k">time</span><spa
     <span class="r">end</span>  
     include <span class="co">Comparable</span>
 
-    <span class="c"># language chaining</span>
+    <span class="c"># chaining for dsl-like language</span>
     <span class="r">def</span> <span class="fu">is?</span>(other = <span class="pc">nil</span>)
       <span class="r">if</span> other
         <span class="co">RubyVersion</span> == other
@@ -2212,8 +2212,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span
       <h2>Changelog</h2>
       <div class="cubes">
         <pre class="scode">Zucker 4.next
-
-* 
+* improved RubyVersion constant (cleaner and more flexible)
 
 
 2010-09-01 | <a href="http://rubyzucker.info/4/">Zucker 4</a>

@@ -75,6 +75,8 @@ class ZuckerDoc
       File.open output_path, 'w' do |file|
         file.puts result
       end
+
+      puts "created Zucker documentation at #{File.expand_path(output_path)}"
     end
 
   protected
@@ -491,7 +493,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 
       Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs)</p>
 
-      <h3 style="padding-left:1.3em">What methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
+      <h3 style="padding-left:1.3em">Which methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
       <p class="text">
 
       <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, square_brackets_for, tap_on, make_new</code>
