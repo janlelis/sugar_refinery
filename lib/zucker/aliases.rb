@@ -1,4 +1,6 @@
 alias is_an? is_a?
+:q
+:q
 
 module Enumerable
   alias with zip
@@ -22,6 +24,20 @@ class Binding
   #alias [] eval
   def [](expr)
     self.eval "#{expr}"
+  end
+end
+
+class << File
+  alias filename basename
+end
+
+class << Dir
+  def join(*args)
+    File.join(*args)
+  end
+
+  def split(*args)
+    File.split(*args)
   end
 end
 

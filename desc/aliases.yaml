@@ -1,6 +1,5 @@
 aliases:
   summary: Some convenient aliases (and constants) for existing methods.
-  package: default
   methods:
     Object#is_an?: Object.is_a?
     Enumerable#with: Enumerable#zip
@@ -8,6 +7,9 @@ aliases:
     Array#**: Array#product
     Hash#+: Hash#merge
     Binding#[]: Binding#eval
+    File.filename: File.basename
+    Dir.join: File.join
+    Dir.split: File.split
     Infinity: 1.0 / 0.0
     NaN: 0.0 / 0.0
   versions:
