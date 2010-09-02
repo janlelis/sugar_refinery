@@ -1,8 +1,8 @@
 # documentation at http://rubyzucker.info or doc/zucker_doc.html
 
 module Zucker
-  VERSION = '4'
-  DATE    = '2010-09-01' # version 3
+  VERSION = '4.next'
+  DATE    = '2010-09-01' # version 4
 end
 
 # nothing further is done here

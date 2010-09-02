@@ -35,4 +35,4 @@ if RUBY_VERSION < '1.9'
   zucker -= %w|not tap union|
 end
 
-zucker.each{|rb| require File.join( 'zucker', rb )}
+zucker.each{|rb| require File.join( 'zucker', '4', rb )}

@@ -1,6 +1,6 @@
 require 'zucker'
 
-require 'zucker/D'
-require 'zucker/mm'
-require 'zucker/binding'
-require 'zucker/q'
+require 'zucker/4/D'
+require 'zucker/4/mm'
+require 'zucker/4/binding'
+require 'zucker/4/q'

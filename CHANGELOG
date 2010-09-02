@@ -1,5 +1,10 @@
-2010-09-01 | Zucker 4
+Zucker 4.next
 
+* 
+
+
+2010-09-01 | Zucker 4
+* fixed Binding#inspect
 * added RubyEngine constant
 * added RubyVersion constant
 * added OS constant
