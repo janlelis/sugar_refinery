@@ -1,3 +1,6 @@
+require 'date'
+require 'time'
+
 module RubyVersion
   class << self
     def to_s
@@ -24,6 +27,7 @@ module RubyVersion
     def tiny
       RUBY_VERSION.split('.')[2].to_i
     end
+    
     alias teeny tiny
 
     def patchlevel
