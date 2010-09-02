@@ -9,7 +9,6 @@ tap:
       make_new Hash do |obj|
         obj[1] = 2
       end #=> {1 => 2}
-  package: default
   info:
   - "Read more about using tap on the →ruby best practices→http://blog.rubybestpractices.com/posts/gregory/011-tap-that-hash.html→ blog."
   versions:

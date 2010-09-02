@@ -10,7 +10,6 @@ os:
     OS.solaris?: "OS.solaris? # true for solaris/sunos"
     OS.posix?: "OS.posix? # true if system is posix compatible"
     OS.is?: "OS.is? /win/ # matches the regex against the os string"
-  package: default
   info:
   - This cube depends on system information and may not be 100% accurate.
   - "Syntax and semantic inspired by Roger Pack's →os gem→http://github.com/rdp/os→."

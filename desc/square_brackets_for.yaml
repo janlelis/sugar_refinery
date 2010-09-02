@@ -16,7 +16,6 @@ square_brackets_for:
 
       a = Klass.new
       a[:a_key] # => 1
-  package: default
   versions:
   - 1.9
   - 1.8

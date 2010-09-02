@@ -17,7 +17,6 @@ binding:
       - main
      block_given?
       - false
-  package: debug
   versions:
   - 1.9
   - 1.8

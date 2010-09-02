@@ -1,4 +1,6 @@
-alias is_an? is_a?
+class Object
+  alias is_an? is_a? # thanks to utility_belt
+end
 
 module Enumerable
   alias with zip
@@ -26,7 +28,7 @@ class Binding
 end
 
 class << File
-  alias filename basename
+  alias filename basename # thanks rdp :)
 end
 
 class << Dir

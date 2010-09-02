@@ -3,7 +3,6 @@ blank:
   why: It's too familiar ;)
   methods:
     Object#blank?: "'an object'.blank? # => false"
-  package: default
   versions:
   - 1.9
   - 1.8

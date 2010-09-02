@@ -14,7 +14,6 @@ D:
       'Hello ' + name.D{|e| "The length is: #{e.size}"}
       # outputs "The length is: 5"
       # => 'Hello Earth'
-  package: debug
   info:
   - "This is inspired by the →⇧.tap⇧ method→http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions→."
   - There is also ⇧tap⇧ cube with more ⇧tap⇧ methods.

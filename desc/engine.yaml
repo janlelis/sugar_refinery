@@ -10,7 +10,6 @@ engine:
     RubyEngine.ironruby?: "RubyEngine.ironruby? # true if using IronRuby"
     RubyEngine.macruby?: "RubyEngine.macruby? # true if using MacRuby"
     RubyEngine.cardinal?: "RubyEngine.cardinal? # true if using parrot"
-  package: default
   versions:
   - 1.9
   - 1.8

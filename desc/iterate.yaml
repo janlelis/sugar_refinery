@@ -10,7 +10,6 @@ iterate:
       #  1,3
       #  2,4
       #  ,5
-  package: default
   versions:
   - 1.9
   - 1.8

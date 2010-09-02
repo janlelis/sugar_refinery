@@ -8,7 +8,6 @@ egonil:
 
       nn(5){ nil.some_methods.that[:do].not.exist }
       # => 5
-  package: default
   info:
   - See →this post→http://rbjl.net/26-the-28-bytes-of-ruby-joy→ for more information and discussion.
   versions:

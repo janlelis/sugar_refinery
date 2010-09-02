@@ -16,21 +16,39 @@ module Zucker
     :shortcuts  => %w|alias_for aliases square_brackets_for ivars|,
   }
 
+  NON_1_8_CUBES = %w|not tap union|
+
   # Zucker require helpers
-  def self.require_cube(cube, version = '')
-    require File.expand_path( File.join('..', 'zucker', version, cube), __FILE__)
-  end
+  class << self
+    def require_cube(cube, version = '')
+      unless RUBY_VERSION < '1.9' && Zucker::NON_1_8_CUBES.include?(cube)
+        require File.expand_path( File.join('..', 'zucker', version, cube), __FILE__)
+      end
+    end
 
-  def self.require_package(package, version = '')
-    PACKAGES[package.to_sym].each{ |cube_name|
-      require_cube cube_name, version
-    }
-  end
+    def require_package(package, version = '')
+      PACKAGES[package.to_sym].each{ |cube|
+        require_cube cube, version
+      }
+    end
 
-  def self.require_this(filename)
-    version=  File.split( File.expand_path( filename) )[-2]
-    version = '' if version =~ /^\d+$/
-    Zucker.require_package( File.basename( filename ).chomp( File.extname( filename )), version)
+    def require_this(filename)
+      version=  File.split( File.expand_path( filename) )[-2]
+      version = '' if version !~ /^\d+$/
+      package = File.basename( filename ).chomp( File.extname( filename ))
+      Zucker.require_package(package, version)
+    end
+
+    def require_all(version = '')
+      require_default( version ) +
+      require_package( :debug, version )
+    end
+
+    def require_default(version = '')
+      PACKAGES.map{ |package, _|
+        require_package package if package != :debug
+      }.compact
+    end
   end
 end
 

@@ -11,7 +11,6 @@ alias_for:
       # same as alias_for, but using Module#alias_method instead of alias
   info: 
   - Thanks to Kristian Mandrup for the idea and alias method specs.
-  package: default
   versions:
   - 1.9
   - 1.8

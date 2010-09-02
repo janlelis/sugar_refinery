@@ -1,10 +1,5 @@
 
-# File lib/core/facets/hash/op_and.rb, line 19
-#  def &(other)
-#    Hash[ *select{ |k,v|
-#      other[k] == v
-#    }.flatten ]
-#  end
+# File lib/core/facets/hash/op_and.rb
 
 #  def ^(other)
 #    Hash[ *reject{ |k,v|

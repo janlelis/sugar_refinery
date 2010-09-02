@@ -11,7 +11,6 @@ info:
       # you could also add them to the global namespace with: include Info
       # see the source file for the list of accessors or
       Info.list
-  package: default
   versions:
   - 1.9
   - 1.8 (not all information)

@@ -1,6 +1,4 @@
-# require all the sugar ;)
-# see README for an explaination of what they do
+require 'zucker'
+Zucker.require_all
 
-require 'zucker/default'
-require 'zucker/debug'
-
+# J-_-L

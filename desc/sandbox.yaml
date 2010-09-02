@@ -12,7 +12,6 @@ sandbox:
         # no Exception is thrown, if non-nil parameter is passed
       end
       # if it is a proc, it will be run instead, if an SecurityError gets raised
-  package: default
   versions:
   - 1.9
   - 1.8

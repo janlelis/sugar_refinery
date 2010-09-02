@@ -57,8 +57,8 @@ class ZuckerDoc
 
       result = DATA.read
 
-      cubes_html = PACKAGES.map{ |pkg_name|
-        package pkg_name, cubes.select{|name, hash| hash['package'] == pkg_name }
+      cubes_html = Zucker::PACKAGES.map{ |pkg_name, cube_names|
+        package pkg_name, cubes.select{|name, _| cube_names.include?( name ) }
       }.join
 
       # insert cubes
@@ -486,7 +486,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       </p>
       <h3 style="padding-left:1.3em">Packages</h3>
       <ul class="text">
-        <li>package list</li>
+        ..packages..
       </ul>
       <p class="text">
         Furthermore, there are two meta packages available: <strong>all</strong> simply requires all cubes and <strong>default</strong> requires all cubes except <strong>debug</strong>.

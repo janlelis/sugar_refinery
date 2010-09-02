@@ -7,7 +7,6 @@ kernel:
     executed_directly?, standalone?: "executed_directly? # checks, if the current file is run directly -> true"
     library?: "library? # checks, if the current file is run directly -> false"
     ignore_sigint!: "ignore_sigint! # blocks CTRL+C"
-  package: default
   versions:
   - 1.9
   - 1.8

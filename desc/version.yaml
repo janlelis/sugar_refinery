@@ -21,7 +21,6 @@ version:
       RubyVersion.tiny  # e.g. => 7
       RubyVersion.patchlevel # e.g. => 249
       RubyVersion.description # e.g. => "ruby 1.8.7 (2010-01-10 patchlevel 249) [i486-linux]"
-  package: default
   info:
   - Thanks to Hanmac for a nice improvement.
   versions:

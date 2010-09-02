@@ -18,6 +18,9 @@ end
 task 'default' => 'spec'
 Spec::Rake::SpecTask.new('spec') do |t|
   t.spec_files = FileList['spec/*.rb']
+  if RUBY_VERSION < '1.9'
+    p t.spec_files -= Zucker::NON_1_8_CUBES.map{|e| "spec/#{e}_spec.rb"}
+  end
 end
 
 # gem
