@@ -10,8 +10,8 @@ version:
       RubyVersion.is.above '1.8.7'
       RubyVersion.is.at_least '1.8.7' # or exactly, below, at_most
       # you can use the common comparison operators
-      RubyVersion.is >= '1.8.7'
-      RubyVersion.is.between? '1.8.6', '1.8.7'
+      RubyVersion >= '1.8.7'
+      RubyVersion.between? '1.8.6', '1.8.7'
       # relase date checks
       RubyVersion.is.older_than Date.today
       RubyVersion.is.newer_than '2009-08-19'
@@ -22,7 +22,8 @@ version:
       RubyVersion.patchlevel # e.g. => 249
       RubyVersion.description # e.g. => "ruby 1.8.7 (2010-01-10 patchlevel 249) [i486-linux]"
   package: default
+  info:
+  - Thanks to Hanmac for a nice improvement idea.
   versions:
   - 1.9
   - 1.8
-
