@@ -285,22 +285,26 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <p class="text">
         <code class="scode">gem install zucker # might need sudo</code>
       </p>
-
+      <h3 style="padding-left:1.3em">Quickstart</h3>
+      <p class="text">
+        <code class="scode">require 'zucker/all'</code>
+      </p>
       <h2>Usage / organisation</h2>
-      <p class="text">The gem consists of many small snippets, called <em>cubes</em>, which are bundled in <em>packages</em>. Currently, there are two packages available: <strong>default</strong> and <strong>debug</strong>. You can use a package by requiring it in this way:
-      <code class="scode">require 'zucker/default'</code>
-      and
-      <code class="scode">require 'zucker/debug'</code>
+      <p class="text">The gem consists of many small snippets, called <em>cubes</em>, which are bundled in <em>packages</em>. Since there aren't any dependencies within the gem, you can easily require only the packages or cubes you wan:
+        <code class="scode">require 'zucker/cube_or_package_name'</code>
+      </p>
+      <h3 class="text">Packages</h3>
+      <ul class="text">
+        <li>package list</li>
+      </ul>
+      <p class="text">
+        Furthermore, there are two meta packages available: <strong>all</strong> simply requires all cubes and <strong>default</strong> requires all cubes except <strong>debug</strong>.
+        You can also lock your <code>require</code> to a specific version of Zucker by simply putting the version before the cube name in this way:
 
-      Since there aren't any dependencies within the gem, you could also pick only the cubes you want:
+        <code class="scode">require 'zucker/1/egonil'</code>
 
-      <code class="scode">require 'zucker/egonil'</code>
-
-      You can also lock your <code>require</code> to a specific version of Zucker by simply putting the version before the cube name in this way:
-
-      <code class="scode">require 'zucker/1/egonil'</code>
-
-      Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for critical bugs)</p>
+        Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for very critical bugs).
+      </p>
 
       <h3 style="padding-left:1.3em">Which methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
       <p class="text">
