@@ -7,10 +7,75 @@ module RubyVersion
       RUBY_VERSION
     end
 
-    def is?(other_version = nil)
-      compare other_version
+    # comparable
+    def <=>(other)
+      value = case other
+        when Integer
+          RUBY_VERSION.to_i
+        when Float
+          RUBY_VERSION.to_f
+        when String
+          RUBY_VERSION
+        when Date,Time
+          other.class.parse(RUBY_RELASE_DATE)
+        else 
+          other = other.to_s
+          RUBY_VERSION
+        end  
+      value <=> other
+    end  
+    include Comparable
+
+    # language chaining
+    def is?(other = nil)
+      if other
+        RubyVersion == other
+      else
+        RubyVersion
+      end
     end
     alias is is?
+
+    # aliases
+    alias below     <
+    alias below?    <
+    alias at_most   <=
+    alias at_most?  <=
+    alias above     >
+    alias above?    >
+    alias at_least  >=
+    alias at_least? >=
+    alias exactly   ==
+    alias exactly?  ==
+    def not(other)
+      self != other
+    end
+    alias not?     not
+    alias between between?
+
+    # compare dates
+    def newer_than(other)
+      if other.is_a? Date or other.is_a? Time
+        RubyVersion > other
+      else
+        RUBY_RELEASE_DATE > other.to_s
+      end
+    end
+    alias newer_than? newer_than
+
+    def older_than(other)
+      if other.is_a? Date or other.is_a? Time
+        RubyVersion < other
+      else
+        RUBY_RELEASE_DATE < other.to_s
+      end
+    end
+    alias older_than? older_than
+
+    def released_today
+      RubyVersion.date == Date.today
+    end
+    alias released_today? released_today
 
     # accessors
 
@@ -46,71 +111,6 @@ module RubyVersion
     def description
       RUBY_DESCRIPTION
     end
-
-  private
-
-    def compare(other_version)
-      case other_version
-      when nil
-        matcher
-      when Float
-        other_version == RUBY_VERSION.to_f
-      else
-        other_version.to_s == RUBY_VERSION
-      end
-    end
-
-
-    def matcher
-      return @ruby if @ruby
-
-      @ruby = RUBY_VERSION.dup
-      @ruby.instance_eval do
-        alias below     <
-        alias below?    <
-        alias at_most   <=
-        alias at_most?  <=
-        alias above     >
-        alias above?    >
-        alias at_least  >=
-        alias at_least? >=
-        alias exactly   ==
-        alias exactly?  ==
-        def not(other)
-          self != other
-        end
-        alias not?     not
-        alias between between?
-
-        def newer_than(other)
-          case other.class
-          when Date, Time
-            other.class.parse(RUBY_RELEASE_DATE) > other
-          else
-            RUBY_RELEASE_DATE > other.to_s
-          end
-        end
-        alias newer_than? newer_than
-
-        def older_than(other)
-          case other.class
-          when Date, Time
-            other.class.parse(RUBY_RELEASE_DATE) < other
-          else
-            RUBY_RELEASE_DATE < other.to_s
-          end
-        end
-        alias older_than? older_than
-
-        def released_today
-          RubyVersion.date == Date.today
-        end
-        alias released_today? released_today
-      end
-
-      @ruby.freeze
-    end
-
   end
 end
 
