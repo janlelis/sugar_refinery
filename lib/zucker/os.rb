@@ -1,7 +1,7 @@
 require 'rbconfig'
 
 module OS
-  class << OS
+  class << self
     def is?(what)
       what === RbConfig::CONFIG['host_os']
     end

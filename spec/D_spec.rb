@@ -7,13 +7,15 @@ describe 'Object#D' do
   end
 
   it 'should not change the object"s value' do
-    a.each{ |e|
-      (e.D).should == e
-    }
+    capture_stdout do
+      a.each{ |e|
+        (e.D).should == e
+      }
 
-    a.each{ |e|
-      (e.D{|value| "This is a: #{value}"}).should == e
-    }
+      a.each{ |e|
+        (e.D{|value| "This is a: #{value}"}).should == e
+      }
+    end
   end
 
   it "should puts .inspect if no block is given (and not change the object's value)" do

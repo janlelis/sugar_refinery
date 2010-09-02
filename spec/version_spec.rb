@@ -4,7 +4,7 @@ require 'date'
 describe 'RubyVersion' do
   before :all do
     @remember_version = RUBY_VERSION
-    RUBY_VERSION = '1.8.7'
+    capture_stderr{ RUBY_VERSION = '1.8.7' }
   end
 
   it 'should display RUBY_VERSION if called directly (to_s)' do
@@ -25,7 +25,7 @@ describe 'RubyVersion' do
   context 'using is method without parameter but method chaining' do
     it 'should return a string for usage with comparison operators' do
       (RubyVersion.is > '1.8.7').should == false
-      (RubyVersion.is <= '1.8.7').should == true
+      (RubyVersion <= '1.8.7').should == true
       (RubyVersion.is.between? '1.8.6', '1.8.7').should == true
     end
 
@@ -50,6 +50,6 @@ describe 'RubyVersion' do
   end
 
   after :all do
-    RUBY_VERSION = @remember_version
+    capture_stderr{ RUBY_VERSION = @remember_version }
   end
 end

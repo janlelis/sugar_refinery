@@ -1,5 +1,5 @@
 module Info
-  class << Info
+  class << self
     # hash like access
     def [](what)
       send what

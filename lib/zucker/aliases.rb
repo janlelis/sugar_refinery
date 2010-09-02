@@ -1,6 +1,4 @@
 alias is_an? is_a?
-:q
-:q
 
 module Enumerable
   alias with zip
