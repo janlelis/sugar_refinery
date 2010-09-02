@@ -1,4 +1,8 @@
 Zucker 4.next
+* added aliases: File.filename (for basename), Dir.join and Dir.split (for File.join, split)
+* added a flexible requiring mechansim in zucker.rb (no api changes)
+* restructered packages
+* added rake tasks for releasing
 * improved RubyVersion constant (cleaner and more flexible)
 
 

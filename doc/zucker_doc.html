@@ -293,7 +293,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <p class="text">The gem consists of many small snippets, called <em>cubes</em>, which are bundled in <em>packages</em>. Since there aren't any dependencies within the gem, you can easily require only the packages or cubes you wan:
         <code class="scode">require 'zucker/cube_or_package_name'</code>
       </p>
-      <h3 class="text">Packages</h3>
+      <h3 style="padding-left:1.3em">Packages</h3>
       <ul class="text">
         <li>package list</li>
       </ul>
@@ -1239,7 +1239,14 @@ describe <span class="s"><span class="dl">'</span><span class="k">ignore_sigint!
 <span class="r">end</span>
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_kernel_source">(<a href="javascript:show('kernel_source')">show</a>)</span>
-         <pre class="source" id="kernel_source"><span class="r">module</span> <span class="cl">Kernel</span>
+         <pre class="source" id="kernel_source"><span class="c">=begin usage
+  activate_warnings!: &quot;activate_warnings! # sets $VERBOSE to 1&quot;
+  deactivate_warnings!: &quot;deactivate_warnings! # sets $VERBOSE to 0&quot;
+  executed_directly?, standalone?: &quot;executed_directly? # checks, if the current file is run directly -&gt; true&quot;
+  library?: &quot;library? # checks, if the current file is run directly -&gt; false&quot;
+  ignore_sigint!: &quot;ignore_sigint! # blocks CTRL+C&quot;
+=end</span>
+<span class="r">module</span> <span class="cl">Kernel</span>
   <span class="r">def</span> <span class="fu">activate_warnings!</span>
     <span class="gv">$VERBOSE</span> = <span class="pc">true</span>
   <span class="r">end</span>

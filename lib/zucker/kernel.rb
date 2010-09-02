@@ -1,3 +1,10 @@
+=begin usage
+  activate_warnings!: "activate_warnings! # sets $VERBOSE to 1"
+  deactivate_warnings!: "deactivate_warnings! # sets $VERBOSE to 0"
+  executed_directly?, standalone?: "executed_directly? # checks, if the current file is run directly -> true"
+  library?: "library? # checks, if the current file is run directly -> false"
+  ignore_sigint!: "ignore_sigint! # blocks CTRL+C"
+=end
 module Kernel
   def activate_warnings!
     $VERBOSE = true

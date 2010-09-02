@@ -65,8 +65,6 @@ task 'prepare_release' => %w[spec doc] do # run specs and doc
   `mkdir spec/#@v`
   `cp spec/*.* spec/#@v/`
 
-  # TODO adjust package paths
-
   # add changes to git and tag
   `git add .`
   `git commit -m'prepared Zucker #@v gem release'`
