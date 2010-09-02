@@ -15,3 +15,11 @@ describe 'Hash#<<' do
   end
 end
 
+describe 'Hash#&' do
+  it 'should select a sub hash containt only equal key-value pairs' do
+    a =  { 1=>4, 2=>5, 3=>6 }
+    b=   { 1=>4, 2=>7 }
+    (a & b).should == { 1=>4 }
+  end
+end
+

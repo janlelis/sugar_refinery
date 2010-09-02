@@ -1,4 +1,5 @@
 Zucker 4.next
+* added Hash#&
 * added aliases: File.filename (for basename), Dir.join and Dir.split (for File.join, split)
 * added a flexible requiring mechansim in zucker.rb (no api changes)
 * restructered packages

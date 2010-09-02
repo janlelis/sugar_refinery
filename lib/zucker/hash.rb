@@ -13,6 +13,12 @@ class Hash
       raise TypeError, 'can only append other Hashs and Enumerables (or Classes that implement to_splat)'
     end
   end
+
+  def &(other)
+    Hash[ *select{ |k,v|
+      other[k] == v
+    }.flatten ]
+  end
 end
 
 # J-_-L
