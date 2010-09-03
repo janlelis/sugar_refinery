@@ -1997,7 +1997,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">(aliases)</spa
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/aliases">github wiki</a></td></tr></table> <h3 title="require 'zucker/ivars'" id="ivars">ivars</h3>
          <table class="cube_table"
                 id="ivars_cube"
-                title="require 'zucker/ivars'"> <tr><th>Summary</th>    <td>This method lets you easily assign lots of instance variables.</td></tr><tr><th>Why?</th>    <td>Often, you have to write boilerplate code for assigning instance varialbles, for example this one:&lt;br/&gt;<code>def initialize(variable1, variable2)&lt;br/&gt;  @variable1, @variable2 = variable1, variable2&lt;br/&gt;end</code>&lt;br/&gt;</td></tr><tr><th>Methods/Usage</th>    <td><h5>instance_variables_from, ivars</h5><pre class="usage source" style="display:block"><span class="r">def</span> <span class="fu">a_method</span>(a = <span class="i">1</span>, b = <span class="i">2</span>)
+                title="require 'zucker/ivars'"> <tr><th>Summary</th>    <td>This method lets you easily assign lots of instance variables.</td></tr><tr><th>Why?</th>    <td>Often, you have to write boilerplate code for assigning instance varialbles, for example this one:<br/><code>def initialize(variable1, variable2)<br/>  @variable1, @variable2 = variable1, variable2<br/>end</code><br/></td></tr><tr><th>Methods/Usage</th>    <td><h5>instance_variables_from, ivars</h5><pre class="usage source" style="display:block"><span class="r">def</span> <span class="fu">a_method</span>(a = <span class="i">1</span>, b = <span class="i">2</span>)
   instance_variables_from binding <span class="c"># assigns @a and @b</span>
 
   params = {<span class="sy">:c</span> =&gt; <span class="i">3</span>, <span class="sy">:d</span> =&gt; <span class="i">4</span>}
@@ -2199,10 +2199,10 @@ block_given?
  - </span><span class="il"><span class="idl">#{</span><span class="pc">self</span>.eval <span class="s"><span class="dl">'</span><span class="k">block_given?</span><span class="dl">'</span></span><span class="idl">}</span></span><span class="dl">&quot;</span></span>
 
   <span class="r">end</span>
-<span class="r">end</span>
 
-<span class="r">alias</span> <span class="fu">v</span>  <span class="fu">binding</span>
-<span class="r">alias</span> <span class="fu">vv</span> <span class="fu">binding</span>
+  <span class="r">alias</span> <span class="fu">v</span>  <span class="fu">binding</span>
+  <span class="r">alias</span> <span class="fu">vv</span> <span class="fu">binding</span>
+<span class="r">end</span>
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/binding">github wiki</a></td></tr></table> <h3 title="require 'zucker/cc'" id="cc">cc</h3>
          <table class="cube_table"
@@ -2218,6 +2218,8 @@ describe <span class="s"><span class="dl">'</span><span class="k">c</span><span 
          <pre class="source" id="cc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
 
 <span class="r">module</span> <span class="cl">Kernel</span>
+  private
+
   <span class="r">def</span> <span class="fu">c</span>(show_irb = <span class="pc">false</span>)
     method_stack = caller.reverse.map{ |m|
       m.rindex( <span class="rx"><span class="dl">/</span><span class="k">:</span><span class="ch">\d</span><span class="k">+(:in `(.*)')?$</span><span class="dl">/</span></span> )
@@ -2370,6 +2372,8 @@ describe <span class="s"><span class="dl">'</span><span class="k">o</span><span 
          <pre class="source" id="oo_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
 
 <span class="r">module</span> <span class="cl">Kernel</span>
+  private
+
   <span class="r">def</span> <span class="fu">o</span>(desc = <span class="pc">nil</span>)
     caller[<span class="i">0</span>].rindex( <span class="rx"><span class="dl">/</span><span class="k">:(</span><span class="ch">\d</span><span class="k">+)(:in (`.*'))?$</span><span class="dl">/</span></span> )
     m = <span class="gv">$3</span> ? <span class="s"><span class="dl">&quot;</span><span class="k">method </span><span class="dl">#</span><span class="gv">$3</span><span class="k">, </span><span class="dl">&quot;</span></span> : <span class="s"><span class="dl">&quot;</span><span class="dl">&quot;</span></span>
@@ -2407,6 +2411,8 @@ describe <span class="s"><span class="dl">'</span><span class="k">q</span><span 
          <pre class="source" id="qq_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
 
 <span class="r">module</span> <span class="cl">Kernel</span>
+  private
+
   <span class="r">def</span> <span class="fu">q</span>(*args)
     puts args.map( &amp;<span class="sy">:inspect</span> )*<span class="s"><span class="dl">'</span><span class="k">  </span><span class="dl">'</span></span> <span class="r">unless</span> args.empty?
   <span class="r">end</span>

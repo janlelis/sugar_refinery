@@ -1,6 +1,8 @@
 require 'zucker'
 
 module Kernel
+  private
+
   def c(show_irb = false)
     method_stack = caller.reverse.map{ |m|
       m.rindex( /:\d+(:in `(.*)')?$/ )

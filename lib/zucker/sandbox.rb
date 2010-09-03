@@ -1,6 +1,8 @@
 require 'zucker'
 
 module Kernel
+  private
+
   def sandbox(rescueblock_or_default=nil)
     Thread.start do
       $SAFE = 4

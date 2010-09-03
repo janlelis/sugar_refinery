@@ -1,6 +1,8 @@
 require 'zucker'
 
 module Kernel
+  private
+
   def o(desc = nil)
     caller[0].rindex( /:(\d+)(:in (`.*'))?$/ )
     m = $3 ? "method #$3, " : ""

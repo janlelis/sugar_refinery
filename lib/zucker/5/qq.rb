@@ -1,6 +1,8 @@
 require 'zucker'
 
 module Kernel
+  private
+
   def q(*args)
     puts args.map( &:inspect )*'  ' unless args.empty?
   end

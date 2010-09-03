@@ -7,7 +7,7 @@ module Zucker
   
   # cube list
   PACKAGES = {
-    :control    => %w|egonil iterate kernel sandbox tap|,
+    :control    => %w|egonil iterate tap sandbox kernel|,
     :env        => %w|engine info os version|,
     :extensions => %w|array enumerable hash string unary union|,
     :object     => %w|blank mcopy not|,
