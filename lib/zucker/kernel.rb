@@ -18,6 +18,10 @@ module Kernel
   end
   alias standalone? executed_directly?
 
+  def irb?
+    !!(( IRB and $0 == 'irb' ) rescue nil)
+  end
+
   def ignore_sigint! # ctrl+c
      Signal.trap *%w|SIGINT IGNORE|
   end

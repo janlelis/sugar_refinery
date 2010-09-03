@@ -6,6 +6,7 @@ kernel:
     deactivate_warnings!: "deactivate_warnings! # sets $VERBOSE to 0"
     executed_directly?, standalone?: "executed_directly? # checks, if the current file is run directly -> true"
     library?: "library? # checks, if the current file is run directly -> false"
+    irb?: "irb? # returns true if in called in IRB"
     ignore_sigint!: "ignore_sigint! # blocks CTRL+C"
   versions:
   - 1.9
