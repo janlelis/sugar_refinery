@@ -3,7 +3,7 @@
 module Zucker
   # version and date get modified by the :prepare_release rake task
   VERSION = '5'
-  DATE = '2010-09-03'
+  DATE = '2010-09-04'
   
   # cube list
   PACKAGES = {
@@ -13,7 +13,7 @@ module Zucker
     :object     => %w|blank mcopy not|,
     :to_proc    => %w|array2proc class2proc hash2proc regexp2proc|,
     :shortcuts  => %w|aliases alias_for square_brackets_for ivars|,
-    :debug      => %w|binding D mm o q s|,
+    :debug      => %w|binding cc dd mm oo qq|,
   }
 
   NON_1_8_CUBES = %w|not tap union|
@@ -55,8 +55,6 @@ module Zucker
       aliases = {
         :mcopy       => :copy,
         :egonil      => :n,
-        :method_list => :m,
-        :D           => :d,
         :make_new    => :init,
         :tap_on      => :returning,
         :library?    => :lib?,

@@ -1,6 +1,6 @@
-require 'zucker/s'
+require 'zucker/cc'
 
-describe 'Kernel#s' do
+describe 'c' do
   it 'should output the method callstack' do; end
 end
 

@@ -1,7 +1,7 @@
 require 'zucker'
 
 module Kernel
-  def D(*args, &block)
+  def d(*args, &block)
     if args.empty?
       tap{
         if block_given?
@@ -11,10 +11,12 @@ module Kernel
         end
       }
     else
-      raise ArgumentError, ".D - The parser thought that the code after .D are method arguments... Please don't put a space after D or use .D() or .D{} in this case!"
+      raise ArgumentError, ".d - The parser thought that the code after .d are method arguments... Please don't put a space after d or use .d() or .d{} in this case!"
 #      eval ...
     end
   end
+
+  alias dd d
 end
 
 # J-_-L

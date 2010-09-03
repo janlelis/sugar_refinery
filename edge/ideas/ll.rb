@@ -15,6 +15,7 @@ module Kernel
 
     nil 
   end 
+  alias ll l
 end
 
 # J-_-L

@@ -27,5 +27,8 @@ block_given?
   end
 end
 
+alias v  binding
+alias vv binding
+
 # J-_-L
 

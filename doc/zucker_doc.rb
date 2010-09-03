@@ -99,6 +99,7 @@ class ZuckerDoc
 
       %{
       <h2 title="require 'zucker/#{name}'" id="#{name}">Cubes[#{name}]</h2>
+        #{ %q|<p class="text">(not included by <code>require 'zucker/default'</code>)</p>| if name == :debug }
         <div class="cubes">
         #{cube_html}
         </div> }
@@ -532,7 +533,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <h2>Extras</h2>
       <p class="text">
         You can activate some additional aliases for Zucker functionality by executing
-        <code class="scode">Zucker.more_aliases!</code>
+        <code class="scode">Zucker.more_aliases! # => [:copy, :n, :init, :returning, :lib?, :RV, :RE]</code>
       </p>
 
       <h2>Changelog</h2>

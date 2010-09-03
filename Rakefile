@@ -19,7 +19,7 @@ task 'default' => 'spec'
 Spec::Rake::SpecTask.new('spec') do |t|
   t.spec_files = FileList['spec/*.rb']
   if RUBY_VERSION < '1.9'
-    p t.spec_files -= Zucker::NON_1_8_CUBES.map{|e| "spec/#{e}_spec.rb"}
+    t.spec_files -= Zucker::NON_1_8_CUBES.map{|e| "spec/#{e}_spec.rb"}
   end
 end
 
@@ -70,8 +70,11 @@ task 'prepare_release' => %w[spec doc] do # run specs and doc
 
   # add changes to git and tag
   `git add .`
-  `git commit -m'prepared Zucker #@v gem release'`
+  `git commit -m 'Ruby Zucker #@v :)'`
   `git tag -a 'v#@v'`
+
+   # done
+   puts "prepared Zucker #@v gem release"
 end
 
 desc 'prepare_release, build gem, and push it to git and rubygems'

@@ -1,9 +1,9 @@
 binding:
   summary: Adds a verbose ⇧Binding#inspect⇧.
-  why: It gives you information about the current environment.
+  why: It gives you information about the current environment variables.
   methods:
-    Binding#inspect: |
-     binding.inspect # shows your current environment, irb example:
+    Binding#inspect, v, vv: |
+     # shows your current environment's variables, irb example:
      >> a=3
      => 3
      >> binding

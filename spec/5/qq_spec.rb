@@ -1,6 +1,6 @@
-require 'zucker/q'
+require 'zucker/qq'
 
-describe 'Kernel#q' do
+describe 'q' do
 
   it 'should output the same as p for a single arg' do
     capture_stdout{p /some object/}.should ==

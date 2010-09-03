@@ -9,6 +9,7 @@ module Kernel
     puts ret = "#{d}eached #{m}line #$1 of file #$`"
     # [$`, $1.to_i, $3.to_sym,  desc]
   end 
+  alias oo o
 end
 
 # J-_-L

@@ -1,7 +1,7 @@
 require 'zucker'
 
 module Kernel
-  def s(show_irb = false)
+  def c(show_irb = false)
     method_stack = caller.reverse.map{ |m|
       m.rindex( /:\d+(:in `(.*)')?$/ )
       $2
@@ -11,11 +11,13 @@ module Kernel
       method_stack = [ method_stack[0], '(irb)', *method_stack[a+1..-1] ]
     end
 
-    puts method_stack.map.with_index{ |m, i|
-      "  "*i + m
+    # puts method_stack.map.with_index{ |m, i|
+    method_stack.each_with_index{ |m, i|
+      puts "  "*i + m
     }
   end
-  alias callstack s
+
+  alias cc c
 end
 
 # J-_-L

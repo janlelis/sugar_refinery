@@ -3,6 +3,5 @@ maybe todos
 * File
 * dclone
 * more hash operators
-* more debug fun
 
 also see edge/ideas/*

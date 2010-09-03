@@ -1,7 +1,7 @@
 require 'zucker'
 
 module Kernel
-  def method_list(levels = 1)
+  def m(levels = 1)
     if self.is_a? Module
       klass, method_function = self, :public_methods
     else
@@ -26,7 +26,8 @@ module Kernel
     self # or whatever
   end
 
-  alias mm method_list
+  alias mm          m
+  alias method_list m
 end
 
 # J-_-L
