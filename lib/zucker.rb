@@ -13,7 +13,7 @@ module Zucker
     :object     => %w|blank mcopy not|,
     :to_proc    => %w|array2proc class2proc hash2proc regexp2proc|,
     :shortcuts  => %w|aliases alias_for square_brackets_for ivars|,
-    :debug      => %w|D mm binding q|,
+    :debug      => %w|binding D mm o q s|,
   }
 
   NON_1_8_CUBES = %w|not tap union|

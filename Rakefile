@@ -78,5 +78,6 @@ desc 'prepare_release, build gem, and push it to git and rubygems'
 task 'release' => 'prepare_release, gem' do
   `git push origin master --tags`
   last_gem = Dir['pkg/zucker-*.gem'].sort[-1] # TODO better sorting for zucker-10
+  exit if last_gem =~ /next/ # some error happened, do not pollute rubygems.org
   `gem push pkg/#{last_gem}`
 end

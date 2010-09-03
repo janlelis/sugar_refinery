@@ -1174,6 +1174,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <h2>Changelog</h2>
       <div class="cubes">
         <pre class="scode">2010-09-03 | <a href="http://rubyzucker.info/5/">Zucker 5</a>
+* added two debug helpers: o (output line, method, file) and s (output method callstack)
 * fixed __SPECIAL_VARS__ in info and kernel cube
 * Zucker.activate_more_aliases! option
 * added Hash#&
@@ -1245,6 +1246,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <h2>Changelog</h2>
       <div class="cubes">
         <pre class="scode">2010-09-03 | <a href="http://rubyzucker.info/5/">Zucker 5</a>
+* added two debug helpers: o (output line, method, file) and s (output method callstack)
 * fixed __SPECIAL_VARS__ in info and kernel cube
 * Zucker.activate_more_aliases! option
 * added Hash#&
@@ -2781,7 +2783,32 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#method_
   <span class="r">alias</span> <span class="fu">mm</span> <span class="fu">method_list</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8 (returns strings instead of symbols)</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mm">github wiki</a></td></tr></table> <h3 title="require 'zucker/q'">q</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8 (returns strings instead of symbols)</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mm">github wiki</a></td></tr></table> <h3 title="require 'zucker/o'">o</h3>
+         <table class="cube_table"
+                id="o_cube"
+                title="require 'zucker/o'"> <tr><th>Summary</th>    <td>This method outputs the current method, line, file and label (if given).</td></tr><tr><th>Methods/Usage</th>    <td><h5>o</h5><pre class="usage source" style="display:block">o <span class="c"># e.g:</span>
+o<span class="sy">:Label</span> <span class="c"># e.g:</span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_o_spec">(<a href="javascript:show('o_spec')">show</a>)</span>
+         <pre class="source" id="o_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/o</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">Kernel#o</span><span class="dl">'</span></span> <span class="r">do</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should output the current line, file, method and label (if given)</span><span class="dl">'</span></span> <span class="r">do</span>; <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_o_source">(<a href="javascript:show('o_source')">show</a>)</span>
+         <pre class="source" id="o_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Kernel</span>
+  <span class="r">def</span> <span class="fu">o</span>(desc = <span class="pc">nil</span>)
+    caller[<span class="i">0</span>].rindex( <span class="rx"><span class="dl">/</span><span class="k">:(</span><span class="ch">\d</span><span class="k">+)(:in (`.*'))?$</span><span class="dl">/</span></span> )
+    m = <span class="gv">$3</span> ? <span class="s"><span class="dl">&quot;</span><span class="k">method </span><span class="dl">#</span><span class="gv">$3</span><span class="k">, </span><span class="dl">&quot;</span></span> : <span class="s"><span class="dl">&quot;</span><span class="dl">&quot;</span></span>
+    d = desc ? <span class="s"><span class="dl">&quot;</span><span class="il"><span class="idl">#{</span>desc<span class="idl">}</span></span><span class="k">: r</span><span class="dl">&quot;</span></span> : <span class="s"><span class="dl">'</span><span class="k">R</span><span class="dl">'</span></span>
+
+    puts ret = <span class="s"><span class="dl">&quot;</span><span class="il"><span class="idl">#{</span>d<span class="idl">}</span></span><span class="k">eached </span><span class="il"><span class="idl">#{</span>m<span class="idl">}</span></span><span class="k">line </span><span class="dl">#</span><span class="gv">$1</span><span class="k"> of file </span><span class="dl">#</span><span class="gv">$`</span><span class="dl">&quot;</span></span>
+    <span class="c"># [$`, $1.to_i, $3.to_sym,  desc]</span>
+  <span class="r">end</span> 
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/o">github wiki</a></td></tr></table> <h3 title="require 'zucker/q'">q</h3>
          <table class="cube_table"
                 id="q_cube"
                 title="require 'zucker/q'"> <tr><th>Summary</th>    <td>This method does the same as <code>p</code>, but puts out multiple arguments on the same line.</td></tr><tr><th>Methods/Usage</th>    <td><h5>q</h5><pre class="usage source" style="display:block">q <span class="s"><span class="dl">&quot;</span><span class="k">zucker</span><span class="dl">&quot;</span></span>,<span class="s"><span class="dl">'</span><span class="dl">'</span></span>, {<span class="i">6</span>=&gt;<span class="i">7</span>}, <span class="i">5</span>, <span class="fl">2.3</span>, <span class="sy">:o</span> <span class="c"># outputs &quot;zucker&quot;  &quot;&quot;  {6=&gt;7}  5  2.3  :o</span>
@@ -2812,7 +2839,38 @@ describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/q">github wiki</a></td></tr></table>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/q">github wiki</a></td></tr></table> <h3 title="require 'zucker/s'">s</h3>
+         <table class="cube_table"
+                id="s_cube"
+                title="require 'zucker/s'"> <tr><th>Summary</th>    <td><code>s</code> outputs the curret method callstack.</td></tr><tr><th>Methods/Usage</th>    <td><h5>s, callstack</h5><pre class="usage source" style="display:block">s <span class="c"># shows the method callstack</span>
+s <span class="pc">true</span> <span class="c"># do not hide irb callstack</span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_s_spec">(<a href="javascript:show('s_spec')">show</a>)</span>
+         <pre class="source" id="s_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/s</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">Kernel#s</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should output a method callstack</span><span class="dl">'</span></span> <span class="r">do</span>; <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_s_source">(<a href="javascript:show('s_source')">show</a>)</span>
+         <pre class="source" id="s_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Kernel</span>
+  <span class="r">def</span> <span class="fu">s</span>(show_irb = <span class="pc">false</span>)
+    method_stack = caller.reverse.map{ |m|
+      m.rindex( <span class="rx"><span class="dl">/</span><span class="k">:</span><span class="ch">\d</span><span class="k">+(:in `(.*)')?$</span><span class="dl">/</span></span> )
+      <span class="gv">$2</span>
+    }.compact
+    
+    <span class="r">if</span> !show_irb &amp;&amp; a = method_stack.index( <span class="s"><span class="dl">'</span><span class="k">irb_binding</span><span class="dl">'</span></span> )
+      method_stack = [ method_stack[<span class="i">0</span>], <span class="s"><span class="dl">'</span><span class="k">(irb)</span><span class="dl">'</span></span>, *method_stack[a+<span class="i">1</span>..<span class="i">-1</span>] ]
+    <span class="r">end</span>
+
+    puts method_stack.map.with_index{ |m, i|
+      <span class="s"><span class="dl">&quot;</span><span class="k">  </span><span class="dl">&quot;</span></span>*i + m
+    }
+  <span class="r">end</span>
+  <span class="r">alias</span> <span class="fu">callstack</span> <span class="fu">s</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/s">github wiki</a></td></tr></table>
         </div> 
       <h2>Extras</h2>
       <p class="text">
@@ -2823,6 +2881,7 @@ describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span
       <h2>Changelog</h2>
       <div class="cubes">
         <pre class="scode">2010-09-03 | <a href="http://rubyzucker.info/5/">Zucker 5</a>
+* added two debug helpers: o (output line, method, file) and s (output method callstack)
 * fixed __SPECIAL_VARS__ in info and kernel cube
 * Zucker.activate_more_aliases! option
 * added Hash#&
