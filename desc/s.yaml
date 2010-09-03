@@ -1,5 +1,5 @@
 s:
-  summary: ⇧s⇧ outputs the curret method callstack.
+  summary: ⇧s⇧ outputs the current method callstack.
   methods:
     s, callstack: |
       s # shows the method callstack
