@@ -1,4 +1,6 @@
-Zucker 4.next
+2010-09-03 | Zucker 5
+* fixed __SPECIAL_VARS__ in info and kernel cube
+* Zucker.activate_more_aliases! option
 * added Hash#&
 * added aliases: File.filename (for basename), Dir.join and Dir.split (for File.join, split)
 * added a flexible requiring mechansim in zucker.rb (no api changes)

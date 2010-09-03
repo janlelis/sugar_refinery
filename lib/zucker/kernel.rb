@@ -10,11 +10,13 @@ module Kernel
   end
 
   def library?
-    __FILE__ != $PROGRAM_NAME
+    caller[0].rindex(/:\d+(:in `.*')?$/)
+    $PROGRAM_NAME != $` # __FILE__
   end
 
   def executed_directly?
-    __FILE__ == $PROGRAM_NAME
+    caller[0].rindex(/:\d+(:in `.*')?$/)
+    $PROGRAM_NAME == $` # __FILE__
   end
   alias standalone? executed_directly?
 

@@ -15,15 +15,6 @@ module Info
 
   module_function
 
-  # current script file
-  def current_file
-    __FILE__
-  end
-
-  def current_file_directory
-    File.dirname(__FILE__)
-  end
-
   # input
   def last_input_file
     $FILENAME
@@ -85,12 +76,25 @@ module Info
   end
 
   # current
-  def current_line
-    __LINE__
+
+  def current_file #  __FILE__
+    return $` if caller[0].rindex(/:\d+(:in `.*')?$/)
   end
 
-  def current_method # 1.9
-    __method__
+  def current_file_directory
+    if current_file[0,1] == '(' && current_file[-1,1] == ')'
+      current_file
+    else
+      File.dirname(current_file)
+    end
+  end
+
+  def current_line # __LINE__
+    return $1.to_i if caller[0].rindex( /:(\d+)(:in `.*')?$/ )
+  end
+
+  def current_method # __method__ (except aliases)
+    return $1.to_sym if caller(1)[0].rindex( /\`([^\']+)\'/ )
   end
 
   def current_callstack
@@ -141,9 +145,9 @@ module Info
   end
 
   # encoding (1.9)
-  def source_encoding
-    __ENCODING__
-  end
+  #def source_encoding
+  #  __ENCODING__
+  #end
 
   def external_encoding
     Encoding.default_external

@@ -518,7 +518,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <h3 style="padding-left:1.3em">Which methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
       <p class="text">
 
-      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, tap_on, make_new</code>
+      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, tap_on, make_new, (blank?, present?, mcopy)</code>
       </p>
 
        ....
