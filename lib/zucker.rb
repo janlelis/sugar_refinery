@@ -2,8 +2,8 @@
 
 module Zucker
   # version and date get modified by the :prepare_release rake task
-  VERSION = '4.next'
-  DATE = '2010-09-01' # version 4
+  VERSION = '5'
+  DATE = '2010-09-03'
   
   # cube list
   PACKAGES = {

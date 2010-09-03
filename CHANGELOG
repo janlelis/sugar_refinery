@@ -1,6 +1,6 @@
 2010-09-03 | Zucker 5
 * added two debug helpers: o (output line, method, file) and s (output method callstack)
-* fixed __SPECIAL_VARS__ in info and kernel cube
+* fixed __SPECIAL_VARS__ in info and kernel cube and some minor bugfixes
 * Zucker.activate_more_aliases! option
 * added Hash#&
 * added aliases: File.filename (for basename), Dir.join and Dir.split (for File.join, split)

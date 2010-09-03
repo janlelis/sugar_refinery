@@ -1,0 +1,10 @@
+s:
+  summary: ⇧s⇧ outputs the current method callstack.
+  methods:
+    s, callstack: |
+      s # shows the method callstack
+      s true # do not hide irb callstack
+  versions:
+  - 1.9
+  - 1.8
+

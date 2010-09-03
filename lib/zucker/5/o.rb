@@ -1,0 +1,14 @@
+require 'zucker'
+
+module Kernel
+  def o(desc = nil)
+    caller[0].rindex( /:(\d+)(:in (`.*'))?$/ )
+    m = $3 ? "method #$3, " : ""
+    d = desc ? "#{desc}: r" : 'R'
+
+    puts ret = "#{d}eached #{m}line #$1 of file #$`"
+    # [$`, $1.to_i, $3.to_sym,  desc]
+  end 
+end
+
+# J-_-L
