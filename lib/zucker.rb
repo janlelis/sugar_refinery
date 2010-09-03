@@ -7,19 +7,19 @@ module Zucker
   
   # cube list
   PACKAGES = {
+    :control    => %w|egonil iterate kernel sandbox tap|,
     :env        => %w|engine info os version|,
-    :to_proc    => %w|array2proc class2proc regexp2proc hash2proc|,
-    :object     => %w|blank not mcopy|,
+    :extensions => %w|array enumerable hash string unary union|,
+    :object     => %w|blank mcopy not|,
+    :to_proc    => %w|array2proc class2proc hash2proc regexp2proc|,
+    :shortcuts  => %w|aliases alias_for square_brackets_for ivars|,
     :debug      => %w|D mm binding q|,
-    :extensions => %w|array hash string enumerable unary union|,
-    :control    => %w|sandbox egonil iterate tap kernel|,
-    :shortcuts  => %w|alias_for aliases square_brackets_for ivars|,
   }
 
   NON_1_8_CUBES = %w|not tap union|
 
-  # Zucker require helpers
   class << self
+    # Zucker require helpers
     def require_cube(cube, version = '')
       unless RUBY_VERSION < '1.9' && Zucker::NON_1_8_CUBES.include?(cube)
         require File.expand_path( File.join('..', 'zucker', version, cube), __FILE__)
@@ -41,7 +41,7 @@ module Zucker
 
     def require_all(version = '')
       require_default( version ) +
-      require_package( :debug, version )
+      [require_package( :debug, version )]
     end
 
     def require_default(version = '')
@@ -49,6 +49,30 @@ module Zucker
         require_package package if package != :debug
       }.compact
     end
+
+    # these aliases 'pollute' the global namespace or may conflict with other codee
+    def activate_more_aliases!
+      aliases = {
+        :mcopy       => :copy,
+        :egonil      => :n,
+        :method_list => :m,
+        :D           => :d,
+        :make_new    => :init,
+        :tap_on      => :returning,
+        :library?    => :lib?,
+        :square_brackets_for => :brackets,
+      }
+
+      loaded_aliases = []
+      aliases.each{ |old, new|
+        Object.class_eval "alias #{new} #{old}; loaded_aliases << :#{new}" rescue nil
+      }
+      eval "::RV = RubyVersion; loaded_aliases << :RV" rescue nil
+      eval "::RE = RubyEngine;  loaded_aliases << :RE" rescue nil
+      
+      loaded_aliases
+    end
+    alias more_aliases! activate_more_aliases!
   end
 end
 

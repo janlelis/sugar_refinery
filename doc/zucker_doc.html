@@ -300,13 +300,13 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       </p>
       <h3 style="padding-left:1.3em">Packages</h3>
       <ul class="text">
-        <li><strong>env</strong>: Cubes for collecting information.</li>
-<li><strong>to_proc</strong>: Adds some <code>to_proc</code> extensions to use with <code>&</code>.</li>
-<li><strong>object</strong>: Extensions for <code>Object</code>.</li>
-<li><strong>debug</strong>: Print debugging tools.</li>
+        <li><strong>control</strong>: Cubes that change program behaviour.</li>
+<li><strong>env</strong>: Cubes for collecting information.</li>
 <li><strong>extensions</strong>: More extensions for Ruby base classes.</li>
-<li><strong>control</strong>: Cubes that change program behaviour.</li>
+<li><strong>object</strong>: Extensions for <code>Object</code>.</li>
+<li><strong>to_proc</strong>: Adds some <code>to_proc</code> extensions to use with <code>&</code>.</li>
 <li><strong>shortcuts</strong>: Cubes that save you keystrokes or disambiguate things.</li>
+<li><strong>debug</strong>: Print debugging tools.</li>
       </ul>
       <p class="text">
         Furthermore, there are two meta packages available: <strong>all</strong> simply requires all cubes and <strong>default</strong> requires all cubes except <strong>debug</strong>.
@@ -324,6 +324,313 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       </p>
 
        
+      <h2 title="require 'zucker/control'">Cubes[control]</h2>
+        <div class="cubes">
+         <h3 title="require 'zucker/egonil'">egonil</h3>
+         <table class="cube_table"
+                id="egonil_cube"
+                title="require 'zucker/egonil'"> <tr><th>Summary</th>    <td>Creates a block, where <code>nil</code> does not raise <code>NoMethodError</code>s.</td></tr><tr><th>Methods/Usage</th>    <td><h5>egonil, nn</h5><pre class="usage source" style="display:block">egonil <span class="r">do</span>
+  <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist
+<span class="r">end</span> <span class="c"># =&gt; nil</span>
+
+nn(<span class="i">5</span>){ <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist }
+<span class="c"># =&gt; 5</span>
+</pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://rbjl.net/26-the-28-bytes-of-ruby-joy">this post</a> for more information and discussion.</td></tr><tr><th>Specification</th>    <td> <span id="show_egonil_spec">(<a href="javascript:show('egonil_spec')">show</a>)</span>
+         <pre class="source" id="egonil_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/egonil</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">egonil</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should not raise nil exceptions in the block</span><span class="dl">'</span></span> <span class="r">do</span>
+    proc <span class="r">do</span>
+      egonil{ <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist }
+    <span class="r">end</span>.should_not raise_exception
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should return the nil_value if given</span><span class="dl">'</span></span> <span class="r">do</span>
+    egonil(<span class="i">9</span>){ <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist }.should == <span class="i">9</span>
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should restore default behaviour after the block</span><span class="dl">'</span></span> <span class="r">do</span>
+    proc <span class="r">do</span>
+      egonil{ <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist }
+    <span class="r">end</span>.should_not raise_exception
+
+    proc <span class="r">do</span>
+      <span class="pc">nil</span>.a_method
+    <span class="r">end</span>.should raise_exception <span class="co">NoMethodError</span>
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">raise NoMethodError for non-nil objects</span><span class="dl">'</span></span> <span class="r">do</span>
+    proc <span class="r">do</span>
+      egonil{ <span class="i">5</span>.a_method }
+    <span class="r">end</span>.should raise_exception <span class="co">NoMethodError</span>
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_egonil_source">(<a href="javascript:show('egonil_source')">show</a>)</span>
+         <pre class="source" id="egonil_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">def</span> <span class="fu">egonil</span>(nil_value = <span class="pc">nil</span>)
+  <span class="r">yield</span>
+<span class="r">rescue</span> <span class="co">NoMethodError</span> =&gt; e
+  <span class="r">if</span> e.message =~ <span class="rx"><span class="dl">/</span><span class="k">NilClass$</span><span class="dl">/</span></span>
+    nil_value
+  <span class="r">else</span>
+    raise <span class="co">NoMethodError</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="r">alias</span> <span class="fu">nn</span> <span class="fu">egonil</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/egonil">github wiki</a></td></tr></table> <h3 title="require 'zucker/iterate'">iterate</h3>
+         <table class="cube_table"
+                id="iterate_cube"
+                title="require 'zucker/iterate'"> <tr><th>Summary</th>    <td>Iterate over one or more collections.</td></tr><tr><th>Why?</th>    <td>It's like <code>.each</code> with two differences: It feels more like a control structure and you can easily iterate over multiple objects.</td></tr><tr><th>Methods/Usage</th>    <td><h5>iterate</h5><pre class="usage source" style="display:block">iterate [<span class="i">1</span>,<span class="i">2</span>], [<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>] <span class="r">do</span> |e,f|
+  puts <span class="s"><span class="dl">&quot;</span><span class="il"><span class="idl">#{</span>e<span class="idl">}</span></span><span class="k">,</span><span class="il"><span class="idl">#{</span>f<span class="idl">}</span></span><span class="dl">&quot;</span></span>
+<span class="r">end</span>
+<span class="c"># outputs</span>
+<span class="c">#  1,3</span>
+<span class="c">#  2,4</span>
+<span class="c">#  ,5</span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_iterate_spec">(<a href="javascript:show('iterate_spec')">show</a>)</span>
+         <pre class="source" id="iterate_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/iterate</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">Object#iterate</span><span class="dl">'</span></span> <span class="r">do</span>
+  let <span class="sy">:a</span>   <span class="r">do</span> [<span class="i">1</span>, <span class="i">2</span>, <span class="i">3</span>]     <span class="r">end</span>
+  let <span class="sy">:b</span>   <span class="r">do</span> <span class="s"><span class="dl">%w|</span><span class="k">a b c d</span><span class="dl">|</span></span>   <span class="r">end</span>
+  let <span class="sy">:res</span> <span class="r">do</span> <span class="co">Hash</span>.new {[]} <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should behave like Enumerable#each for a single argument</span><span class="dl">'</span></span> <span class="r">do</span>
+    iterate a <span class="r">do</span> |ele|
+      res[<span class="sy">:iter</span>] &lt;&lt; ele
+    <span class="r">end</span>
+
+    a.each <span class="r">do</span> |ele|
+      res[<span class="sy">:each</span>] &lt;&lt; ele
+    <span class="r">end</span>
+
+    res[<span class="sy">:iter</span>].should == res[<span class="sy">:each</span>]
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should pass the right params to the block</span><span class="dl">'</span></span> <span class="r">do</span>
+    res = <span class="co">Hash</span>.new {[]} <span class="c"># TODO: why?</span>
+    res[<span class="sy">:iter_a_b</span>] = [] <span class="c"># ....</span>
+    res[<span class="sy">:iter_b_a</span>] = [] <span class="c"># ....</span>
+
+
+    iterate a, b <span class="r">do</span> |e,f|
+      res[<span class="sy">:iter_a_b</span>] &lt;&lt; [e, f]
+<span class="c">#      p res[:iter_a_b], e, f</span>
+    <span class="r">end</span>
+
+    res[<span class="sy">:iter_a_b</span>].should == [
+      [<span class="i">1</span>, <span class="s"><span class="dl">'</span><span class="k">a</span><span class="dl">'</span></span>],
+      [<span class="i">2</span>, <span class="s"><span class="dl">'</span><span class="k">b</span><span class="dl">'</span></span>],
+      [<span class="i">3</span>, <span class="s"><span class="dl">'</span><span class="k">c</span><span class="dl">'</span></span>],
+      [<span class="pc">nil</span>, <span class="s"><span class="dl">'</span><span class="k">d</span><span class="dl">'</span></span>],
+    ]
+
+    iterate b, a <span class="r">do</span> |e,f|
+      res[<span class="sy">:iter_b_a</span>] &lt;&lt; [e, f]
+    <span class="r">end</span>
+
+    res[<span class="sy">:iter_b_a</span>].should == [
+      [<span class="s"><span class="dl">'</span><span class="k">a</span><span class="dl">'</span></span>, <span class="i">1</span>],
+      [<span class="s"><span class="dl">'</span><span class="k">b</span><span class="dl">'</span></span>, <span class="i">2</span>],
+      [<span class="s"><span class="dl">'</span><span class="k">c</span><span class="dl">'</span></span>, <span class="i">3</span>],
+      [<span class="s"><span class="dl">'</span><span class="k">d</span><span class="dl">'</span></span>, <span class="pc">nil</span>],
+    ]
+
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should return enumerators if no block is applied</span><span class="dl">'</span></span> <span class="r">do</span>
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_iterate_source">(<a href="javascript:show('iterate_source')">show</a>)</span>
+         <pre class="source" id="iterate_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">def</span> <span class="fu">iterate</span>(*params)
+  <span class="c"># params.shift.zip(*params).each{ |*elements| yield *elements }</span>
+  raise <span class="co">ArgumentError</span>, <span class="s"><span class="dl">&quot;</span><span class="k">wrong number of arguments (0)</span><span class="dl">&quot;</span></span> <span class="r">if</span> params.empty?
+
+  first = params.shift
+  <span class="r">if</span> params.empty? <span class="c"># single param - like each</span>
+    <span class="r">if</span> block_given?
+      first.map{|e| <span class="r">yield</span> e }
+    <span class="r">else</span>
+      first.map
+    <span class="r">end</span>
+  <span class="r">else</span>
+    padded_first = <span class="co">Array</span>.new( [first, *params].max_by(&amp;<span class="sy">:size</span>).size ){|i| first[i] } <span class="c"># append nils</span>
+    obj = padded_first.zip *params
+    <span class="r">if</span> block_given?
+      obj.map{|es| <span class="r">yield</span> *es }
+    <span class="r">else</span>
+      obj.map.to_enum
+    <span class="r">end</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/iterate">github wiki</a></td></tr></table> <h3 title="require 'zucker/kernel'">kernel</h3>
+         <table class="cube_table"
+                id="kernel_cube"
+                title="require 'zucker/kernel'"> <tr><th>Summary</th>    <td>Some useful general shortcut methods.</td></tr><tr><th>Why?</th>    <td>Readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>activate_warnings!</h5><pre class="usage source" style="display:block">activate_warnings! <span class="c"># sets $VERBOSE to 1</span></pre><h5>deactivate_warnings!</h5><pre class="usage source" style="display:block">deactivate_warnings! <span class="c"># sets $VERBOSE to 0</span></pre><h5>executed_directly?, standalone?</h5><pre class="usage source" style="display:block">executed_directly? <span class="c"># checks, if the current file is run directly -&gt; true</span></pre><h5>library?</h5><pre class="usage source" style="display:block">library? <span class="c"># checks, if the current file is run directly -&gt; false</span></pre><h5>ignore_sigint!</h5><pre class="usage source" style="display:block">ignore_sigint! <span class="c"># blocks CTRL+C</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_kernel_spec">(<a href="javascript:show('kernel_spec')">show</a>)</span>
+         <pre class="source" id="kernel_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/kernel</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">activate_warnings!</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should set $VERBOSE to true</span><span class="dl">'</span></span> <span class="r">do</span>
+    activate_warnings!
+    <span class="gv">$VERBOSE</span>.should == <span class="pc">true</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">deactivate_warnings!</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should set $VERBOSE to false</span><span class="dl">'</span></span> <span class="r">do</span>
+    deactivate_warnings!
+    <span class="gv">$VERBOSE</span>.should == <span class="pc">false</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">library?</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should return false if the file is invoked directly</span><span class="dl">'</span></span> <span class="r">do</span>
+    library?.should == ( <span class="pc">__FILE__</span> != <span class="gv">$PROGRAM_NAME</span> )
+  <span class="r">end</span>
+<span class="r">end</span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">executed_directly?</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should return true if the file is invoked directly</span><span class="dl">'</span></span> <span class="r">do</span>
+    executed_directly?.should == ( <span class="pc">__FILE__</span> == <span class="gv">$PROGRAM_NAME</span> )
+  <span class="r">end</span>
+<span class="r">end</span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">ignore_sigint!</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should catch ctrl+c signals</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="c"># ...</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_kernel_source">(<a href="javascript:show('kernel_source')">show</a>)</span>
+         <pre class="source" id="kernel_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Kernel</span>
+  <span class="r">def</span> <span class="fu">activate_warnings!</span>
+    <span class="gv">$VERBOSE</span> = <span class="pc">true</span>
+  <span class="r">end</span>
+
+  <span class="r">def</span> <span class="fu">deactivate_warnings!</span>
+    <span class="gv">$VERBOSE</span> = <span class="pc">false</span>
+  <span class="r">end</span>
+
+  <span class="r">def</span> <span class="fu">library?</span>
+    <span class="pc">__FILE__</span> != <span class="gv">$PROGRAM_NAME</span>
+  <span class="r">end</span>
+
+  <span class="r">def</span> <span class="fu">executed_directly?</span>
+    <span class="pc">__FILE__</span> == <span class="gv">$PROGRAM_NAME</span>
+  <span class="r">end</span>
+  <span class="r">alias</span> <span class="fu">standalone?</span> <span class="fu">executed_directly?</span>
+
+  <span class="r">def</span> <span class="fu">ignore_sigint!</span> <span class="c"># ctrl+c</span>
+     <span class="co">Signal</span>.trap *<span class="s"><span class="dl">%w|</span><span class="k">SIGINT IGNORE</span><span class="dl">|</span></span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/kernel">github wiki</a></td></tr></table> <h3 title="require 'zucker/sandbox'">sandbox</h3>
+         <table class="cube_table"
+                id="sandbox_cube"
+                title="require 'zucker/sandbox'"> <tr><th>Summary</th>    <td>Creates a sandbox area.</td></tr><tr><th>Why?</th>    <td>Ruby comes with sandboxes, but they are hidden (-> integrated) in the <code>$SAFE</code> concept.</td></tr><tr><th>Methods/Usage</th>    <td><h5>sandbox</h5><pre class="usage source" style="display:block">sandbox <span class="r">do</span>
+  <span class="c"># dangerous commands throw SecurityErrors ($SAFE=4)</span>
+<span class="r">end</span>
+<span class="c"># everything's normal again</span>
+
+sandbox( lambda{} ) <span class="r">do</span>
+  <span class="c"># no Exception is thrown, if non-nil parameter is passed</span>
+<span class="r">end</span>
+<span class="c"># if it is a proc, it will be run instead, if an SecurityError gets raised</span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_sandbox_spec">(<a href="javascript:show('sandbox_spec')">show</a>)</span>
+         <pre class="source" id="sandbox_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/sandbox</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">sandbox</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should throw a SecurityError if bad commands are issued</span><span class="dl">'</span></span> <span class="r">do</span>
+    proc <span class="r">do</span>
+      sandbox <span class="r">do</span>
+        <span class="sh"><span class="dl">`</span><span class="k">ls</span><span class="dl">`</span></span>
+      <span class="r">end</span>
+    <span class="r">end</span>.should raise_exception <span class="co">SecurityError</span>
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should not throw an exception for errors, if the given parameter is not nil</span><span class="dl">'</span></span> <span class="r">do</span>
+    proc <span class="r">do</span>
+      sandbox( <span class="pc">true</span> ) <span class="r">do</span>
+        <span class="sh"><span class="dl">`</span><span class="k">ls</span><span class="dl">`</span></span>
+      <span class="r">end</span>
+    <span class="r">end</span>.should_not raise_exception
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should run the proc passed as parameter for errors, if it is given</span><span class="dl">'</span></span> <span class="r">do</span>
+    sandbox( lambda{|e| e.class } ) <span class="r">do</span>
+      <span class="sh"><span class="dl">`</span><span class="k">ls</span><span class="dl">`</span></span>
+    <span class="r">end</span>.should == <span class="co">SecurityError</span>
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_sandbox_source">(<a href="javascript:show('sandbox_source')">show</a>)</span>
+         <pre class="source" id="sandbox_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Kernel</span>
+  <span class="r">def</span> <span class="fu">sandbox</span>(rescueblock_or_default=<span class="pc">nil</span>)
+    <span class="co">Thread</span>.start <span class="r">do</span>
+      <span class="gv">$SAFE</span> = <span class="i">4</span>
+      <span class="r">yield</span>
+    <span class="r">end</span>.value
+  <span class="r">rescue</span> <span class="co">SecurityError</span> =&gt; e
+    <span class="r">if</span> !rescueblock_or_default.nil?
+      <span class="r">if</span> rescueblock_or_default.is_a? <span class="co">Proc</span>
+        rescueblock_or_default.call e
+      <span class="r">else</span>
+        rescueblock_or_default
+      <span class="r">end</span>
+    <span class="r">else</span>
+      raise e
+    <span class="r">end</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/sandbox">github wiki</a></td></tr></table> <h3 title="require 'zucker/tap'">tap</h3>
+         <table class="cube_table"
+                id="tap_cube"
+                title="require 'zucker/tap'"> <tr><th>Summary</th>    <td>This cube adds the two <code>tap</code> variants <code>tap_on</code> (known as <code>returning</code> in ActiveSupport) and <code>make_new</code>.</td></tr><tr><th>Methods/Usage</th>    <td><h5>tap_on</h5><pre class="usage source" style="display:block">tap_on [<span class="i">1</span>,<span class="i">2</span>] <span class="r">do</span> |obj|
+  obj[<span class="i">4</span>] =&gt; <span class="i">5</span>
+<span class="r">end</span> <span class="c">#=&gt; [1, 2, nil, nil, 5]</span>
+</pre><h5>make_new</h5><pre class="usage source" style="display:block">make_new <span class="co">Hash</span> <span class="r">do</span> |obj|
+  obj[<span class="i">1</span>] = <span class="i">2</span>
+<span class="r">end</span> <span class="c">#=&gt; {1 =&gt; 2}</span>
+</pre></td></tr><tr><th>Further information</th>    <td>Read more about using tap on the <a href="http://blog.rubybestpractices.com/posts/gregory/011-tap-that-hash.html">ruby best practices</a> blog.</td></tr><tr><th>Specification</th>    <td> <span id="show_tap_spec">(<a href="javascript:show('tap_spec')">show</a>)</span>
+         <pre class="source" id="tap_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/tap</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">tap_on</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should call tap on the argument and apply the block</span><span class="dl">'</span></span> <span class="r">do</span>
+    obj = <span class="s"><span class="dl">&quot;</span><span class="k">an_object</span><span class="dl">&quot;</span></span>
+    block = <span class="sy">:reverse</span>.to_proc
+
+    tap_on( obj, &amp;block ).should == obj.tap( &amp;block )
+  <span class="r">end</span>
+<span class="r">end</span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">make_new</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should create a new instance of the class given as argument, apply the block on it and return result</span><span class="dl">'</span></span> <span class="r">do</span>
+    res = make_new <span class="co">Hash</span> <span class="r">do</span> |obj|
+      obj[<span class="i">1</span>] = <span class="i">2</span>
+    <span class="r">end</span>
+    res.should == { <span class="i">1</span>=&gt;<span class="i">2</span> }
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_tap_source">(<a href="javascript:show('tap_source')">show</a>)</span>
+         <pre class="source" id="tap_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">def</span> <span class="fu">tap_on</span>(obj, &amp;block)
+  obj.tap &amp;block
+<span class="r">end</span>
+
+<span class="r">def</span> <span class="fu">make_new</span>(what, *args, &amp;block)
+  what.new(*args).tap &amp;block
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/tap">github wiki</a></td></tr></table>
+        </div> 
       <h2 title="require 'zucker/env'">Cubes[env]</h2>
         <div class="cubes">
          <h3 title="require 'zucker/engine'">engine</h3>
@@ -884,439 +1191,6 @@ require <span class="s"><span class="dl">'</span><span class="k">time</span><spa
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/version">github wiki</a></td></tr></table>
         </div> 
-      <h2 title="require 'zucker/to_proc'">Cubes[to_proc]</h2>
-        <div class="cubes">
-         <h3 title="require 'zucker/array2proc'">array2proc</h3>
-         <table class="cube_table"
-                id="array2proc_cube"
-                title="require 'zucker/array2proc'"> <tr><th>Summary</th>    <td>Calls the method named by the first paramenter and passes the other elements as paramaters.</td></tr><tr><th>Why?</th>    <td>When using <code>Symbol#to_proc</code>, you often wish to pass parameters.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Array#to_proc</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map &amp;[<span class="sy">:*</span>, <span class="i">5</span>] <span class="c"># =&gt; [5, 10, 15, 20]</span>
-<span class="c"># you can also chain them, if the first parameter is an Array</span>
-[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map &amp;[[<span class="sy">:to_s</span>, <span class="i">2</span>],[<span class="sy">:+</span>, <span class="s"><span class="dl">'</span><span class="k">b</span><span class="dl">'</span></span>]]   <span class="c"># =&gt; [&quot;1b&quot;, &quot;10b&quot;, &quot;11b&quot;, &quot;100b&quot;]</span>
-</pre></td></tr><tr><th>Further information</th>    <td>Inspired by <a href="http://www.sanityinc.com/articles/adding-array-to-proc-to-ruby">this article</a>.<br/>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.<br/>Chaining inspired by <a href="http://github.com/eregon/Classes/blob/master/to_proc.rb">eregon</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_array2proc_spec">(<a href="javascript:show('array2proc_spec')">show</a>)</span>
-         <pre class="source" id="array2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/array2proc</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">Array#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should call the method of the first symbol, using the remaining elements as paramaters</span><span class="dl">'</span></span> <span class="r">do</span>
-    [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map( &amp;[<span class="sy">:to_s</span>, <span class="i">2</span>] ).should == [<span class="s"><span class="dl">&quot;</span><span class="k">1</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">10</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">11</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">100</span><span class="dl">&quot;</span></span>]
-  <span class="r">end</span>
-
-  it <span class="s"><span class="dl">&quot;</span><span class="k">should convert each element to a proc and chain it, if the first parameter is an array</span><span class="dl">&quot;</span></span> <span class="r">do</span>
-    [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map( &amp;[[<span class="sy">:*</span>,<span class="i">2</span>],[<span class="sy">:+</span>,<span class="i">4</span>]] ).should == [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map{|i| i*<span class="i">2</span> + <span class="i">4</span> }
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_array2proc_source">(<a href="javascript:show('array2proc_source')">show</a>)</span>
-         <pre class="source" id="array2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">class</span> <span class="cl">Array</span>
-  <span class="r">def</span> <span class="fu">to_proc</span>
-    <span class="co">Proc</span>.new{ |obj|
-      <span class="r">if</span> <span class="pc">self</span>.first.is_a? <span class="co">Array</span>
-        <span class="pc">self</span>.inject(obj){ |result, nested_array|
-          nested_array.to_proc.call result
-        }
-      <span class="r">else</span>
-        obj.send *<span class="pc">self</span>
-      <span class="r">end</span>
-    }
-  <span class="r">end</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/array2proc">github wiki</a></td></tr></table> <h3 title="require 'zucker/class2proc'">class2proc</h3>
-         <table class="cube_table"
-                id="class2proc_cube"
-                title="require 'zucker/class2proc'"> <tr><th>Summary</th>    <td>Creates a new instance of the class.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Class#to_proc</h5><pre class="usage source" style="display:block">[ [<span class="i">1</span>,<span class="i">2</span>],[<span class="i">3</span>,<span class="i">5</span>,<span class="i">6</span>,<span class="i">7</span>,<span class="i">3</span>] ].map(&amp;<span class="co">Set</span>) <span class="c"># =&gt; [ Set[1,2], Set[5,6,7,3] ]</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by Ruby Facets.<br/>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_class2proc_spec">(<a href="javascript:show('class2proc_spec')">show</a>)</span>
-         <pre class="source" id="class2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/class2proc</span><span class="dl">'</span></span>
-require <span class="s"><span class="dl">'</span><span class="k">set</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">Class#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should create new instances of the class</span><span class="dl">'</span></span> <span class="r">do</span>
-    [ [<span class="i">1</span>,<span class="i">2</span>],[<span class="i">3</span>,<span class="i">5</span>,<span class="i">6</span>,<span class="i">7</span>,<span class="i">3</span>] ].map(&amp;<span class="co">Set</span>).should == [ <span class="co">Set</span>[<span class="i">1</span>,<span class="i">2</span>], <span class="co">Set</span>[<span class="i">5</span>,<span class="i">6</span>,<span class="i">7</span>,<span class="i">3</span>] ]
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_class2proc_source">(<a href="javascript:show('class2proc_source')">show</a>)</span>
-         <pre class="source" id="class2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">class</span> <span class="cl">Class</span>
-  <span class="r">def</span> <span class="fu">to_proc</span>
-    <span class="co">Proc</span>.new <span class="r">do</span> |*args|
-      <span class="pc">self</span>.new *args
-    <span class="r">end</span>
-  <span class="r">end</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/class2proc">github wiki</a></td></tr></table> <h3 title="require 'zucker/hash2proc'">hash2proc</h3>
-         <table class="cube_table"
-                id="hash2proc_cube"
-                title="require 'zucker/hash2proc'"> <tr><th>Summary</th>    <td>Use a hash to apply procs to specific objects.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Hash#to_proc</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map(&amp;{
-<span class="i">2</span> =&gt; lambda {|e| e + <span class="i">1000</span>},
-<span class="i">4</span> =&gt; <span class="sy">:to_s</span>,
-}) <span class="c"># =&gt; [1, 1002, 3, '4']</span></pre></td></tr><tr><th>Further information</th>    <td>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_hash2proc_spec">(<a href="javascript:show('hash2proc_spec')">show</a>)</span>
-         <pre class="source" id="hash2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/hash2proc</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">Hash#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should run the proc given in the value for a key in the hash</span><span class="dl">'</span></span> <span class="r">do</span>
-    [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map(&amp;{
-      <span class="i">4</span> =&gt; <span class="sy">:to_s</span>,
-      <span class="c"># 3 =&gt; [:to_s, 2]  # &quot;11&quot; =&gt;  if array2proc is used</span>
-      <span class="i">2</span> =&gt; lambda {|e| e + <span class="i">1000</span>}
-    }).should == [<span class="i">1</span>, <span class="i">1002</span>, <span class="i">3</span>, <span class="s"><span class="dl">&quot;</span><span class="k">4</span><span class="dl">&quot;</span></span>]
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_hash2proc_source">(<a href="javascript:show('hash2proc_source')">show</a>)</span>
-         <pre class="source" id="hash2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">class</span> <span class="cl">Hash</span>
-  <span class="r">def</span> <span class="fu">to_proc</span>
-    <span class="co">Proc</span>.new{ |obj|
-      <span class="r">if</span> <span class="pc">self</span>.member? obj
-        <span class="pc">self</span>[obj].to_proc.call obj
-      <span class="r">else</span>
-        obj
-      <span class="r">end</span>
-    }
-  <span class="r">end</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/hash2proc">github wiki</a></td></tr></table> <h3 title="require 'zucker/regexp2proc'">regexp2proc</h3>
-         <table class="cube_table"
-                id="regexp2proc_cube"
-                title="require 'zucker/regexp2proc'"> <tr><th>Summary</th>    <td>Use <code>&/regex/</code> to match it against strings.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Regexp#to_proc</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.map    &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>  <span class="c"># =&gt; [&quot;j&quot;, nil, nil, &quot;y&quot;]</span>
-<span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.select &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>  <span class="c"># =&gt; [&quot;just&quot;, &quot;array&quot;]</span>
-</pre></td></tr><tr><th>Further information</th>    <td>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_regexp2proc_spec">(<a href="javascript:show('regexp2proc_spec')">show</a>)</span>
-         <pre class="source" id="regexp2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/regexp2proc</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">Regexp#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should match the regex</span><span class="dl">'</span></span> <span class="r">do</span>
-    <span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.map(     &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>).should == [<span class="s"><span class="dl">&quot;</span><span class="k">j</span><span class="dl">&quot;</span></span>, <span class="pc">nil</span>, <span class="pc">nil</span>, <span class="s"><span class="dl">&quot;</span><span class="k">y</span><span class="dl">&quot;</span></span>]
-    <span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.select(  &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>).should == [<span class="s"><span class="dl">&quot;</span><span class="k">just</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">array</span><span class="dl">&quot;</span></span>]
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_regexp2proc_source">(<a href="javascript:show('regexp2proc_source')">show</a>)</span>
-         <pre class="source" id="regexp2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">class</span> <span class="cl">Regexp</span>
-  <span class="r">def</span> <span class="fu">to_proc</span>
-    proc <span class="r">do</span> |e|
-      e.to_s[<span class="pc">self</span>]
-    <span class="r">end</span>
-  <span class="r">end</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/regexp2proc">github wiki</a></td></tr></table>
-        </div> 
-      <h2 title="require 'zucker/object'">Cubes[object]</h2>
-        <div class="cubes">
-         <h3 title="require 'zucker/blank'">blank</h3>
-         <table class="cube_table"
-                id="blank_cube"
-                title="require 'zucker/blank'"> <tr><th>Summary</th>    <td>Does pretty the same as in ActiveSupport (Every object can be asked if it is blank).</td></tr><tr><th>Why?</th>    <td>It's too familiar ;)</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#blank?</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">an object</span><span class="dl">'</span></span>.blank? <span class="c"># =&gt; false</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_blank_spec">(<a href="javascript:show('blank_spec')">show</a>)</span>
-         <pre class="source" id="blank_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/blank</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">Object#blank?</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should be blank for blank values</span><span class="dl">'</span></span> <span class="r">do</span>
-    blank_values   = [ <span class="pc">nil</span>, <span class="pc">false</span>, <span class="s"><span class="dl">'</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">   </span><span class="dl">'</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">  </span><span class="ch">\n</span><span class="ch">\t</span><span class="k">  </span><span class="ch">\r</span><span class="k"> </span><span class="dl">&quot;</span></span>, [], {}, <span class="rx"><span class="dl">/</span><span class="dl">/</span></span> ]
-
-    blank_values.each{ |blank|
-      blank.blank?.should == <span class="pc">true</span>
-    }
-  <span class="r">end</span>
-
-  it <span class="s"><span class="dl">'</span><span class="k">should not be blank for non blank values</span><span class="dl">'</span></span> <span class="r">do</span>
-    present_values = [ <span class="co">Object</span>.new, <span class="pc">true</span>, <span class="i">0</span>, <span class="i">1</span>, <span class="s"><span class="dl">'</span><span class="k">a</span><span class="dl">'</span></span>, [<span class="pc">nil</span>], { <span class="pc">nil</span> =&gt; <span class="pc">nil</span> } ]
-
-    present_values.each{ |present|
-      present.blank?.should == <span class="pc">false</span>
-    }
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_blank_source">(<a href="javascript:show('blank_source')">show</a>)</span>
-         <pre class="source" id="blank_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">class</span> <span class="cl">Object</span>
-  <span class="r">def</span> <span class="fu">blank?</span>
-    <span class="r">if</span> respond_to? <span class="sy">:empty?</span> <span class="r">then</span> empty? <span class="r">else</span> !<span class="pc">self</span> <span class="r">end</span>
-  <span class="r">end</span>
-
-  <span class="r">def</span> <span class="fu">present?</span>
-    !blank?
-  <span class="r">end</span>
-<span class="r">end</span>
-
-
-{ <span class="c"># what to do              # for which classes</span>
-  lambda{ <span class="pc">true</span> }         =&gt; [<span class="co">FalseClass</span>, <span class="co">NilClass</span>],
-  lambda{ <span class="pc">false</span> }        =&gt; [<span class="co">TrueClass</span>, <span class="co">Numeric</span>],
-  lambda{ empty? }       =&gt; [<span class="co">Array</span>, <span class="co">Hash</span>],
-  lambda{ <span class="pc">self</span> !~ <span class="rx"><span class="dl">/</span><span class="ch">\S</span><span class="dl">/</span></span> } =&gt; [<span class="co">String</span>],
-  lambda{ <span class="pc">self</span> == <span class="rx"><span class="dl">/</span><span class="dl">/</span></span>   } =&gt; [<span class="co">Regexp</span>],
-
-}.each{ |action, klass_array|
-  klass_array.each{ |klass|
-    klass.send <span class="sy">:define_method</span>, <span class="sy">:blank?</span>, &amp;action
-  }
-}
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/blank">github wiki</a></td></tr></table> <h3 title="require 'zucker/mcopy'">mcopy</h3>
-         <table class="cube_table"
-                id="mcopy_cube"
-                title="require 'zucker/mcopy'"> <tr><th>Summary</th>    <td>Adds <code>Object#mcopy</code> to create a deep copy using <code>Marshal</code>.</td></tr><tr><th>Why?</th>    <td>Every Ruby book describes, you can do <code>Marshal.load Marshal.dump object</code> to create a deep copy... But who needs this verbose syntax in everyday coding?</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#mcopy</h5><pre class="usage source" style="display:block">a = <span class="s"><span class="dl">%w[</span><span class="k">hello world</span><span class="dl">]</span></span>
-b = a.mcopy
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_mcopy_spec">(<a href="javascript:show('mcopy_spec')">show</a>)</span>
-         <pre class="source" id="mcopy_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/mcopy</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">Object#mcopy</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">create a (deep) copy via marshalling</span><span class="dl">'</span></span> <span class="r">do</span>
-    a = <span class="s"><span class="dl">%w[</span><span class="k">hello world</span><span class="dl">]</span></span>
-    b = a.mcopy
-    b.should == a
-
-    b[<span class="i">0</span>][<span class="i">1</span>,<span class="i">1</span>] = <span class="s"><span class="dl">'</span><span class="dl">'</span></span>
-    b.should_not == a
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_mcopy_source">(<a href="javascript:show('mcopy_source')">show</a>)</span>
-         <pre class="source" id="mcopy_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">class</span> <span class="cl">Object</span>
-  <span class="r">def</span> <span class="fu">mcopy</span>
-    <span class="co">Marshal</span>.load <span class="co">Marshal</span>.dump <span class="pc">self</span>
-  <span class="r">end</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mcopy">github wiki</a></td></tr></table> <h3 title="require 'zucker/not'">not</h3>
-         <table class="cube_table"
-                id="not_cube"
-                title="require 'zucker/not'"> <tr><th>Summary</th>    <td><code>not</code> returns an object on which all methods are redirected to it's receiver object, but returns inverted boolean.</td></tr><tr><th>Why?</th>    <td>Better readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#not</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>].not.empty? <span class="c"># true</span>
-</pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://blog.jayfields.com/2007/08/ruby-adding-not-method-for-readability.html">this article by Jay Field</a> for more information.</td></tr><tr><th>Specification</th>    <td> <span id="show_not_spec">(<a href="javascript:show('not_spec')">show</a>)</span>
-         <pre class="source" id="not_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/not</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">Object#not</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">&quot;</span><span class="k">should return an object on which all methods are redirected to it's receiver object, but return an inverted boolean</span><span class="dl">&quot;</span></span> <span class="r">do</span>
-    [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>].not.empty?.should == <span class="pc">true</span>
-    <span class="pc">nil</span>.not.nil?.should == <span class="pc">false</span>
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_not_source">(<a href="javascript:show('not_source')">show</a>)</span>
-         <pre class="source" id="not_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">class</span> <span class="cl">Object</span>
-  <span class="r">def</span> <span class="fu">not</span>
-    <span class="co">NotClass</span>.new <span class="pc">self</span>
-  <span class="r">end</span>
-
-  <span class="r">class</span> <span class="cl">NotClass</span> &lt; <span class="co">BasicObject</span>
-    <span class="r">def</span> <span class="fu">initialize</span>(receiver)
-      <span class="iv">@receiver</span> = receiver
-    <span class="r">end</span>
-    
-    <span class="r">def</span> <span class="fu">method_missing</span>(m, *args, &amp;block)
-      <span class="r">not</span> <span class="iv">@receiver</span>.public_send( m, *args, &amp;block )
-    <span class="r">end</span>
-  <span class="r">end</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/not">github wiki</a></td></tr></table>
-        </div> 
-      <h2 title="require 'zucker/debug'">Cubes[debug]</h2>
-        <div class="cubes">
-         <h3 title="require 'zucker/D'">D</h3>
-         <table class="cube_table"
-                id="D_cube"
-                title="require 'zucker/D'"> <tr><th>Summary</th>    <td>Easy debug printing with the <code>p</code> alternative <code>.D</code>. It outputs to stdout and returns <code>self</code>. Accepts a block.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#D</h5><pre class="usage source" style="display:block">some.<span class="co">D</span>.methods.<span class="co">D</span>.noone.<span class="co">D</span>.knows.<span class="co">D</span>
-<span class="c"># ...outputs 4 lines with the inspected objects</span>
-<span class="c"># =&gt; (result)</span>
-
-<span class="i">21</span>+<span class="co">Math</span>.sin(<span class="i">42</span>).<span class="co">D</span>
-<span class="c"># outputs -0.916521547915634</span>
-<span class="c"># =&gt; 20.0834784520844</span>
-
-name = <span class="s"><span class="dl">'</span><span class="k">Earth</span><span class="dl">'</span></span>
-<span class="s"><span class="dl">'</span><span class="k">Hello </span><span class="dl">'</span></span> + name.<span class="co">D</span>{|e| <span class="s"><span class="dl">&quot;</span><span class="k">The length is: </span><span class="il"><span class="idl">#{</span>e.size<span class="idl">}</span></span><span class="dl">&quot;</span></span>}
-<span class="c"># outputs &quot;The length is: 5&quot;</span>
-<span class="c"># =&gt; 'Hello Earth'</span>
-</pre></td></tr><tr><th>Further information</th>    <td>This is inspired by the <a href="http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions"><code>.tap</code> method</a>.<br/>There is also <code>tap</code> cube with more <code>tap</code> methods.</td></tr><tr><th>Specification</th>    <td> <span id="show_D_spec">(<a href="javascript:show('D_spec')">show</a>)</span>
-         <pre class="source" id="D_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/D</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">Object#D</span><span class="dl">'</span></span> <span class="r">do</span>
-
-  let <span class="sy">:a</span> <span class="r">do</span>
-    [ <span class="i">1</span>, <span class="s"><span class="dl">&quot;</span><span class="k">1</span><span class="dl">&quot;</span></span>, <span class="i">2</span>..<span class="i">5</span>, [], {<span class="sy">:hallo</span> =&gt; <span class="sy">:du</span>}, <span class="pc">nil</span>, <span class="pc">true</span> ]
-  <span class="r">end</span>
-
-  it <span class="s"><span class="dl">'</span><span class="k">should not change the object&quot;s value</span><span class="dl">'</span></span> <span class="r">do</span>
-    capture_stdout <span class="r">do</span>
-      a.each{ |e|
-        (e.<span class="co">D</span>).should == e
-      }
-
-      a.each{ |e|
-        (e.<span class="co">D</span>{|value| <span class="s"><span class="dl">&quot;</span><span class="k">This is a: </span><span class="il"><span class="idl">#{</span>value<span class="idl">}</span></span><span class="dl">&quot;</span></span>}).should == e
-      }
-    <span class="r">end</span>
-  <span class="r">end</span>
-
-  it <span class="s"><span class="dl">&quot;</span><span class="k">should puts .inspect if no block is given (and not change the object's value)</span><span class="dl">&quot;</span></span> <span class="r">do</span>
-    capture_stdout <span class="r">do</span>
-      a[<span class="i">0</span>].<span class="co">D</span>
-      a[<span class="i">1</span>].<span class="co">D</span>
-      a[<span class="i">6</span>].<span class="co">D</span>
-    <span class="r">end</span>.should == <span class="s"><span class="dl">%{</span><span class="k">1</span><span class="ch">\n</span><span class="k">&quot;1&quot;</span><span class="ch">\n</span><span class="k">true</span><span class="ch">\n</span><span class="dl">}</span></span>
-  <span class="r">end</span>
-
-  it <span class="s"><span class="dl">&quot;</span><span class="k">should puts the block if it is given (and not change the object's value)</span><span class="dl">&quot;</span></span> <span class="r">do</span>
-    capture_stdout <span class="r">do</span>
-      a[<span class="i">0</span>].<span class="co">D</span>{|value| <span class="s"><span class="dl">&quot;</span><span class="k">This is a: </span><span class="il"><span class="idl">#{</span>value<span class="idl">}</span></span><span class="dl">&quot;</span></span>}
-      a[<span class="i">1</span>].<span class="co">D</span>{|value| <span class="s"><span class="dl">&quot;</span><span class="k">This is a: </span><span class="il"><span class="idl">#{</span>value<span class="idl">}</span></span><span class="dl">&quot;</span></span>}
-      a[<span class="i">6</span>].<span class="co">D</span>{|value| <span class="s"><span class="dl">&quot;</span><span class="k">This is a: </span><span class="il"><span class="idl">#{</span>value<span class="idl">}</span></span><span class="dl">&quot;</span></span>}
-    <span class="r">end</span>.should == <span class="s"><span class="dl">%{</span><span class="k">This is a: 1</span><span class="ch">\n</span><span class="k">This is a: 1</span><span class="ch">\n</span><span class="k">This is a: true</span><span class="ch">\n</span><span class="dl">}</span></span>
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_D_source">(<a href="javascript:show('D_source')">show</a>)</span>
-         <pre class="source" id="D_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">module</span> <span class="cl">Kernel</span>
-  <span class="r">def</span> <span class="fu">D</span>(*args, &amp;block)
-    <span class="r">if</span> args.empty?
-      tap{
-        <span class="r">if</span> block_given?
-          puts <span class="r">yield</span> <span class="pc">self</span>
-        <span class="r">else</span>
-          puts <span class="pc">self</span>.inspect
-        <span class="r">end</span>
-      }
-    <span class="r">else</span>
-      raise <span class="co">ArgumentError</span>, <span class="s"><span class="dl">&quot;</span><span class="k">.D - The parser thought that the code after .D are method arguments... Please don't put a space after D or use .D() or .D{} in this case!</span><span class="dl">&quot;</span></span>
-<span class="c">#      eval ...</span>
-    <span class="r">end</span>
-  <span class="r">end</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/D">github wiki</a></td></tr></table> <h3 title="require 'zucker/binding'">binding</h3>
-         <table class="cube_table"
-                id="binding_cube"
-                title="require 'zucker/binding'"> <tr><th>Summary</th>    <td>Adds a verbose <code>Binding#inspect</code>.</td></tr><tr><th>Why?</th>    <td>It gives you information about the current environment.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Binding#inspect</h5><pre class="usage source" style="display:block">binding.inspect <span class="c"># shows your current environment, irb example:</span>
-&gt;&gt; a=<span class="i">3</span>
-=&gt; <span class="i">3</span>
-&gt;&gt; binding
-=&gt; <span class="c">#&lt;Binding:0x94c4b50&gt;</span>
-local vars
- - a: <span class="i">3</span>
- - _: <span class="c">#&lt;Binding:0x94c4b50&gt;</span>
-(instance vars)
- - none
-<span class="pc">self</span>
- - main
-block_given?
- - <span class="pc">false</span>
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_binding_spec">(<a href="javascript:show('binding_spec')">show</a>)</span>
-         <pre class="source" id="binding_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/binding</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">Binding#inspect</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should output the current environment</span><span class="dl">'</span></span> <span class="r">do</span>
-    <span class="c">#pending '#TODO: write spec'</span>
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_binding_source">(<a href="javascript:show('binding_source')">show</a>)</span>
-         <pre class="source" id="binding_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">class</span> <span class="cl">Binding</span>
-  <span class="r">def</span> <span class="fu">inspect</span>
-    put_vars = lambda { |array|
-      <span class="r">if</span> array.empty?
-        <span class="s"><span class="dl">'</span><span class="k"> - none</span><span class="dl">'</span></span>
-      <span class="r">else</span>
-        array.map{|e|
-          val = <span class="pc">self</span>.eval <span class="s"><span class="dl">&quot;</span><span class="il"><span class="idl">#{</span>e<span class="idl">}</span></span><span class="dl">&quot;</span></span>
-          val = val.is_a?( <span class="co">Binding</span> ) ? val.to_s : val.inspect
-          <span class="s"><span class="dl">&quot;</span><span class="k"> - </span><span class="il"><span class="idl">#{</span>e<span class="idl">}</span></span><span class="k">: </span><span class="il"><span class="idl">#{</span> val <span class="idl">}</span></span><span class="dl">&quot;</span></span>
-        }.join <span class="s"><span class="dl">&quot;</span><span class="ch">\n</span><span class="dl">&quot;</span></span>
-      <span class="r">end</span>
-    }
-
-<span class="s"><span class="dl">&quot;</span><span class="il"><span class="idl">#{</span><span class="pc">self</span>.to_s<span class="idl">}</span></span><span class="k">
-local vars
-</span><span class="il"><span class="idl">#{</span> put_vars[ <span class="pc">self</span>.eval <span class="s"><span class="dl">'</span><span class="k">local_variables</span><span class="dl">'</span></span> ] <span class="idl">}</span></span><span class="k">
-(instance vars)
-</span><span class="il"><span class="idl">#{</span> put_vars[ <span class="pc">self</span>.eval <span class="s"><span class="dl">'</span><span class="k">instance_variables</span><span class="dl">'</span></span> ] <span class="idl">}</span></span><span class="k">
-self
- - </span><span class="il"><span class="idl">#{</span><span class="pc">self</span>.eval <span class="s"><span class="dl">'</span><span class="k">self</span><span class="dl">'</span></span><span class="idl">}</span></span><span class="k">
-block_given?
- - </span><span class="il"><span class="idl">#{</span><span class="pc">self</span>.eval <span class="s"><span class="dl">'</span><span class="k">block_given?</span><span class="dl">'</span></span><span class="idl">}</span></span><span class="dl">&quot;</span></span>
-
-  <span class="r">end</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/binding">github wiki</a></td></tr></table> <h3 title="require 'zucker/mm'">mm</h3>
-         <table class="cube_table"
-                id="mm_cube"
-                title="require 'zucker/mm'"> <tr><th>Summary</th>    <td><code>mm</code> displays an ordered public method list.</td></tr><tr><th>Why?</th>    <td>See one object's methods without those rarely used inherited methods.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#method_list, Object#mm</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">test</span><span class="dl">'</span></span>.mm <span class="i">2</span> <span class="c"># outputs the list (2 levels deep), for example:</span>
- <span class="co">String</span>
- [<span class="sy">:&lt;=&gt;</span>, <span class="sy">:==</span>, <span class="sy">:===</span>, <span class="sy">:eql?</span>, <span class="sy">:hash</span>, <span class="sy">:casecmp</span>, <span class="sy">:+</span>, <span class="sy">:*</span>, <span class="sy">:%</span>, <span class="sy">:[]</span>, <span class="sy">:[]=</span>, <span class="sy">:insert</span>, <span class="sy">:length</span>, <span class="sy">:size</span>, <span class="sy">:bytesize</span>, <span class="sy">:empty?</span>, <span class="sy">:=~</span>, <span class="sy">:match</span>, <span class="sy">:succ</span>, <span class="sy">:succ!</span>, <span class="sy">:next</span>, <span class="sy">:next!</span>, <span class="sy">:upto</span>, <span class="sy">:index</span>, <span class="sy">:rindex</span>, <span class="sy">:replace</span>, <span class="sy">:clear</span>, <span class="sy">:chr</span>, <span class="sy">:getbyte</span>, <span class="sy">:setbyte</span>, <span class="sy">:to_i</span>, <span class="sy">:to_f</span>, <span class="sy">:to_s</span>, <span class="sy">:to_str</span>, <span class="sy">:inspect</span>, <span class="sy">:dump</span>, <span class="sy">:upcase</span>, <span class="sy">:downcase</span>, <span class="sy">:capitalize</span>, <span class="sy">:swapcase</span>, <span class="sy">:upcase!</span>, <span class="sy">:downcase!</span>, <span class="sy">:capitalize!</span>, <span class="sy">:swapcase!</span>, <span class="sy">:hex</span>, <span class="sy">:oct</span>, <span class="sy">:split</span>, <span class="sy">:lines</span>, <span class="sy">:bytes</span>, <span class="sy">:chars</span>, <span class="sy">:codepoints</span>, <span class="sy">:reverse</span>, <span class="sy">:reverse!</span>, <span class="sy">:concat</span>, <span class="sy">:&lt;&lt;</span>, <span class="sy">:crypt</span>, <span class="sy">:intern</span>, <span class="sy">:to_sym</span>, <span class="sy">:ord</span>, <span class="sy">:include?</span>, <span class="sy">:start_with?</span>, <span class="sy">:end_with?</span>, <span class="sy">:scan</span>, <span class="sy">:ljust</span>, <span class="sy">:rjust</span>, <span class="sy">:center</span>, <span class="sy">:sub</span>, <span class="sy">:gsub</span>, <span class="sy">:chop</span>, <span class="sy">:chomp</span>, <span class="sy">:strip</span>, <span class="sy">:lstrip</span>, <span class="sy">:rstrip</span>, <span class="sy">:sub!</span>, <span class="sy">:gsub!</span>, <span class="sy">:chop!</span>, <span class="sy">:chomp!</span>, <span class="sy">:strip!</span>, <span class="sy">:lstrip!</span>, <span class="sy">:rstrip!</span>, <span class="sy">:tr</span>, <span class="sy">:tr_s</span>, <span class="sy">:delete</span>, <span class="sy">:squeeze</span>, <span class="sy">:count</span>, <span class="sy">:tr!</span>, <span class="sy">:tr_s!</span>, <span class="sy">:delete!</span>, <span class="sy">:squeeze!</span>, <span class="sy">:each_line</span>, <span class="sy">:each_byte</span>, <span class="sy">:each_char</span>, <span class="sy">:each_codepoint</span>, <span class="sy">:sum</span>, <span class="sy">:slice</span>, <span class="sy">:slice!</span>, <span class="sy">:partition</span>, <span class="sy">:rpartition</span>, <span class="sy">:encoding</span>, <span class="sy">:force_encoding</span>, <span class="sy">:valid_encoding?</span>, <span class="sy">:ascii_only?</span>, <span class="sy">:unpack</span>, <span class="sy">:encode</span>, <span class="sy">:encode!</span>, <span class="sy">:to_r</span>, <span class="sy">:to_c</span>, <span class="sy">:blank?</span>, <span class="sy">:^</span>, <span class="sy">:lchomp</span>, <span class="sy">:lchomp!</span>, <span class="sy">:ords</span>, <span class="sy">:constantize</span>, <span class="sy">:+@</span>, <span class="sy">:-@</span>, <span class="sy">:|</span>]
- <span class="co">Comparable</span>
- [<span class="sy">:==</span>, <span class="sy">:&gt;</span>, <span class="sy">:&gt;=</span>, <span class="sy">:&lt;</span>, <span class="sy">:&lt;=</span>, <span class="sy">:between?</span>]
-</pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://rbjl.net/31-the-multi-mega-method-list">this article</a> for more information.</td></tr><tr><th>Specification</th>    <td> <span id="show_mm_spec">(<a href="javascript:show('mm_spec')">show</a>)</span>
-         <pre class="source" id="mm_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/mm</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">Object#method_list</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should display an ordered method list</span><span class="dl">'</span></span> <span class="r">do</span>
-    <span class="c">#pending '#TODO: write spec'</span>
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_mm_source">(<a href="javascript:show('mm_source')">show</a>)</span>
-         <pre class="source" id="mm_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">module</span> <span class="cl">Kernel</span>
-  <span class="r">def</span> <span class="fu">method_list</span>(levels = <span class="i">1</span>)
-    <span class="r">if</span> <span class="pc">self</span>.is_a? <span class="co">Module</span>
-      klass, method_function = <span class="pc">self</span>, <span class="sy">:public_methods</span>
-    <span class="r">else</span>
-      klass, method_function = <span class="pc">self</span>.class, <span class="sy">:public_instance_methods</span>
-
-      eigen = <span class="pc">self</span>.singleton_methods
-      <span class="r">if</span> !eigen.empty?
-        puts <span class="sy">:Eigenclass</span> <span class="c"># sorry for not being up to date, I just love the word</span>
-        p <span class="pc">self</span>.singleton_methods
-      <span class="r">end</span>
-    <span class="r">end</span>
-
-    levels.times{ |level|
-      <span class="r">if</span> cur = klass.ancestors[level]
-        p cur                               <span class="c"># put class name</span>
-        p cur.send method_function, <span class="pc">false</span>   <span class="c"># put methods of the class</span>
-      <span class="r">else</span>
-        <span class="r">break</span>
-      <span class="r">end</span>
-    }
-
-    <span class="pc">self</span> <span class="c"># or whatever</span>
-  <span class="r">end</span>
-
-  <span class="r">alias</span> <span class="fu">mm</span> <span class="fu">method_list</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8 (returns strings instead of symbols)</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mm">github wiki</a></td></tr></table> <h3 title="require 'zucker/q'">q</h3>
-         <table class="cube_table"
-                id="q_cube"
-                title="require 'zucker/q'"> <tr><th>Summary</th>    <td>This method does the same as <code>p</code>, but puts out multiple arguments on the same line.</td></tr><tr><th>Methods/Usage</th>    <td><h5>q</h5><pre class="usage source" style="display:block">q <span class="s"><span class="dl">&quot;</span><span class="k">zucker</span><span class="dl">&quot;</span></span>,<span class="s"><span class="dl">'</span><span class="dl">'</span></span>, {<span class="i">6</span>=&gt;<span class="i">7</span>}, <span class="i">5</span>, <span class="fl">2.3</span>, <span class="sy">:o</span> <span class="c"># outputs &quot;zucker&quot;  &quot;&quot;  {6=&gt;7}  5  2.3  :o</span>
-</pre></td></tr><tr><th>Further information</th>    <td>Inspired by <a href="http://github.com/rdp/sane/blob/master/lib/sane/pps.rb">rdp</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_q_spec">(<a href="javascript:show('q_spec')">show</a>)</span>
-         <pre class="source" id="q_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/q</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span><span class="dl">'</span></span> <span class="r">do</span>
-
-  it <span class="s"><span class="dl">'</span><span class="k">should output the same as p for a single arg</span><span class="dl">'</span></span> <span class="r">do</span>
-    capture_stdout{p <span class="rx"><span class="dl">/</span><span class="k">some object</span><span class="dl">/</span></span>}.should ==
-    capture_stdout{q <span class="rx"><span class="dl">/</span><span class="k">some object</span><span class="dl">/</span></span>}
-  <span class="r">end</span>
-
-  it <span class="s"><span class="dl">&quot;</span><span class="k">should output the same as p but for multiple args one one line, values separated by two spaces</span><span class="dl">&quot;</span></span> <span class="r">do</span>
-    capture_stdout <span class="r">do</span>
-      q <span class="i">1</span>, <span class="s"><span class="dl">&quot;</span><span class="k">1</span><span class="dl">&quot;</span></span>, <span class="i">2</span>..<span class="i">5</span>, [], {<span class="sy">:hallo</span> =&gt; <span class="sy">:du</span>}, <span class="pc">nil</span>, <span class="pc">true</span>
-    <span class="r">end</span>.chop.should ==
-    capture_stdout <span class="r">do</span>
-      p <span class="i">1</span>, <span class="s"><span class="dl">&quot;</span><span class="k">1</span><span class="dl">&quot;</span></span>, <span class="i">2</span>..<span class="i">5</span>, [], {<span class="sy">:hallo</span> =&gt; <span class="sy">:du</span>}, <span class="pc">nil</span>, <span class="pc">true</span>
-    <span class="r">end</span>.chop.gsub( <span class="s"><span class="dl">&quot;</span><span class="ch">\n</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">'</span><span class="k">  </span><span class="dl">'</span></span> )
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_q_source">(<a href="javascript:show('q_source')">show</a>)</span>
-         <pre class="source" id="q_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">module</span> <span class="cl">Kernel</span>
-  <span class="r">def</span> <span class="fu">q</span>(*args)
-    puts args.map( &amp;<span class="sy">:inspect</span> ).join <span class="s"><span class="dl">'</span><span class="k">  </span><span class="dl">'</span></span>
-  <span class="r">end</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/q">github wiki</a></td></tr></table>
-        </div> 
       <h2 title="require 'zucker/extensions'">Cubes[extensions]</h2>
         <div class="cubes">
          <h3 title="require 'zucker/array'">array</h3>
@@ -1663,312 +1537,231 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#|</span
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/union">github wiki</a></td></tr></table>
         </div> 
-      <h2 title="require 'zucker/control'">Cubes[control]</h2>
+      <h2 title="require 'zucker/object'">Cubes[object]</h2>
         <div class="cubes">
-         <h3 title="require 'zucker/egonil'">egonil</h3>
+         <h3 title="require 'zucker/blank'">blank</h3>
          <table class="cube_table"
-                id="egonil_cube"
-                title="require 'zucker/egonil'"> <tr><th>Summary</th>    <td>Creates a block, where <code>nil</code> does not raise <code>NoMethodError</code>s.</td></tr><tr><th>Methods/Usage</th>    <td><h5>egonil, nn</h5><pre class="usage source" style="display:block">egonil <span class="r">do</span>
-  <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist
-<span class="r">end</span> <span class="c"># =&gt; nil</span>
+                id="blank_cube"
+                title="require 'zucker/blank'"> <tr><th>Summary</th>    <td>Does pretty the same as in ActiveSupport (Every object can be asked if it is blank).</td></tr><tr><th>Why?</th>    <td>It's too familiar ;)</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#blank?</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">an object</span><span class="dl">'</span></span>.blank? <span class="c"># =&gt; false</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_blank_spec">(<a href="javascript:show('blank_spec')">show</a>)</span>
+         <pre class="source" id="blank_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/blank</span><span class="dl">'</span></span>
 
-nn(<span class="i">5</span>){ <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist }
-<span class="c"># =&gt; 5</span>
-</pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://rbjl.net/26-the-28-bytes-of-ruby-joy">this post</a> for more information and discussion.</td></tr><tr><th>Specification</th>    <td> <span id="show_egonil_spec">(<a href="javascript:show('egonil_spec')">show</a>)</span>
-         <pre class="source" id="egonil_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/egonil</span><span class="dl">'</span></span>
+describe <span class="s"><span class="dl">'</span><span class="k">Object#blank?</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should be blank for blank values</span><span class="dl">'</span></span> <span class="r">do</span>
+    blank_values   = [ <span class="pc">nil</span>, <span class="pc">false</span>, <span class="s"><span class="dl">'</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">   </span><span class="dl">'</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">  </span><span class="ch">\n</span><span class="ch">\t</span><span class="k">  </span><span class="ch">\r</span><span class="k"> </span><span class="dl">&quot;</span></span>, [], {}, <span class="rx"><span class="dl">/</span><span class="dl">/</span></span> ]
 
-describe <span class="s"><span class="dl">'</span><span class="k">egonil</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should not raise nil exceptions in the block</span><span class="dl">'</span></span> <span class="r">do</span>
-    proc <span class="r">do</span>
-      egonil{ <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist }
-    <span class="r">end</span>.should_not raise_exception
+    blank_values.each{ |blank|
+      blank.blank?.should == <span class="pc">true</span>
+    }
   <span class="r">end</span>
 
-  it <span class="s"><span class="dl">'</span><span class="k">should return the nil_value if given</span><span class="dl">'</span></span> <span class="r">do</span>
-    egonil(<span class="i">9</span>){ <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist }.should == <span class="i">9</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should not be blank for non blank values</span><span class="dl">'</span></span> <span class="r">do</span>
+    present_values = [ <span class="co">Object</span>.new, <span class="pc">true</span>, <span class="i">0</span>, <span class="i">1</span>, <span class="s"><span class="dl">'</span><span class="k">a</span><span class="dl">'</span></span>, [<span class="pc">nil</span>], { <span class="pc">nil</span> =&gt; <span class="pc">nil</span> } ]
+
+    present_values.each{ |present|
+      present.blank?.should == <span class="pc">false</span>
+    }
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_blank_source">(<a href="javascript:show('blank_source')">show</a>)</span>
+         <pre class="source" id="blank_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Object</span>
+  <span class="r">def</span> <span class="fu">blank?</span>
+    <span class="r">if</span> respond_to? <span class="sy">:empty?</span> <span class="r">then</span> empty? <span class="r">else</span> !<span class="pc">self</span> <span class="r">end</span>
   <span class="r">end</span>
 
-  it <span class="s"><span class="dl">'</span><span class="k">should restore default behaviour after the block</span><span class="dl">'</span></span> <span class="r">do</span>
-    proc <span class="r">do</span>
-      egonil{ <span class="pc">nil</span>.some_methods.that[<span class="sy">:do</span>].not.exist }
-    <span class="r">end</span>.should_not raise_exception
-
-    proc <span class="r">do</span>
-      <span class="pc">nil</span>.a_method
-    <span class="r">end</span>.should raise_exception <span class="co">NoMethodError</span>
-  <span class="r">end</span>
-
-  it <span class="s"><span class="dl">'</span><span class="k">raise NoMethodError for non-nil objects</span><span class="dl">'</span></span> <span class="r">do</span>
-    proc <span class="r">do</span>
-      egonil{ <span class="i">5</span>.a_method }
-    <span class="r">end</span>.should raise_exception <span class="co">NoMethodError</span>
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_egonil_source">(<a href="javascript:show('egonil_source')">show</a>)</span>
-         <pre class="source" id="egonil_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">def</span> <span class="fu">egonil</span>(nil_value = <span class="pc">nil</span>)
-  <span class="r">yield</span>
-<span class="r">rescue</span> <span class="co">NoMethodError</span> =&gt; e
-  <span class="r">if</span> e.message =~ <span class="rx"><span class="dl">/</span><span class="k">NilClass$</span><span class="dl">/</span></span>
-    nil_value
-  <span class="r">else</span>
-    raise <span class="co">NoMethodError</span>
+  <span class="r">def</span> <span class="fu">present?</span>
+    !blank?
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="r">alias</span> <span class="fu">nn</span> <span class="fu">egonil</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/egonil">github wiki</a></td></tr></table> <h3 title="require 'zucker/iterate'">iterate</h3>
+{ <span class="c"># what to do              # for which classes</span>
+  lambda{ <span class="pc">true</span> }         =&gt; [<span class="co">FalseClass</span>, <span class="co">NilClass</span>],
+  lambda{ <span class="pc">false</span> }        =&gt; [<span class="co">TrueClass</span>, <span class="co">Numeric</span>],
+  lambda{ empty? }       =&gt; [<span class="co">Array</span>, <span class="co">Hash</span>],
+  lambda{ <span class="pc">self</span> !~ <span class="rx"><span class="dl">/</span><span class="ch">\S</span><span class="dl">/</span></span> } =&gt; [<span class="co">String</span>],
+  lambda{ <span class="pc">self</span> == <span class="rx"><span class="dl">/</span><span class="dl">/</span></span>   } =&gt; [<span class="co">Regexp</span>],
+
+}.each{ |action, klass_array|
+  klass_array.each{ |klass|
+    klass.send <span class="sy">:define_method</span>, <span class="sy">:blank?</span>, &amp;action
+  }
+}
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/blank">github wiki</a></td></tr></table> <h3 title="require 'zucker/mcopy'">mcopy</h3>
          <table class="cube_table"
-                id="iterate_cube"
-                title="require 'zucker/iterate'"> <tr><th>Summary</th>    <td>Iterate over one or more collections.</td></tr><tr><th>Why?</th>    <td>It's like <code>.each</code> with two differences: It feels more like a control structure and you can easily iterate over multiple objects.</td></tr><tr><th>Methods/Usage</th>    <td><h5>iterate</h5><pre class="usage source" style="display:block">iterate [<span class="i">1</span>,<span class="i">2</span>], [<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>] <span class="r">do</span> |e,f|
-  puts <span class="s"><span class="dl">&quot;</span><span class="il"><span class="idl">#{</span>e<span class="idl">}</span></span><span class="k">,</span><span class="il"><span class="idl">#{</span>f<span class="idl">}</span></span><span class="dl">&quot;</span></span>
-<span class="r">end</span>
-<span class="c"># outputs</span>
-<span class="c">#  1,3</span>
-<span class="c">#  2,4</span>
-<span class="c">#  ,5</span>
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_iterate_spec">(<a href="javascript:show('iterate_spec')">show</a>)</span>
-         <pre class="source" id="iterate_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/iterate</span><span class="dl">'</span></span>
+                id="mcopy_cube"
+                title="require 'zucker/mcopy'"> <tr><th>Summary</th>    <td>Adds <code>Object#mcopy</code> to create a deep copy using <code>Marshal</code>.</td></tr><tr><th>Why?</th>    <td>Every Ruby book describes, you can do <code>Marshal.load Marshal.dump object</code> to create a deep copy... But who needs this verbose syntax in everyday coding?</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#mcopy</h5><pre class="usage source" style="display:block">a = <span class="s"><span class="dl">%w[</span><span class="k">hello world</span><span class="dl">]</span></span>
+b = a.mcopy
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_mcopy_spec">(<a href="javascript:show('mcopy_spec')">show</a>)</span>
+         <pre class="source" id="mcopy_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/mcopy</span><span class="dl">'</span></span>
 
-describe <span class="s"><span class="dl">'</span><span class="k">Object#iterate</span><span class="dl">'</span></span> <span class="r">do</span>
-  let <span class="sy">:a</span>   <span class="r">do</span> [<span class="i">1</span>, <span class="i">2</span>, <span class="i">3</span>]     <span class="r">end</span>
-  let <span class="sy">:b</span>   <span class="r">do</span> <span class="s"><span class="dl">%w|</span><span class="k">a b c d</span><span class="dl">|</span></span>   <span class="r">end</span>
-  let <span class="sy">:res</span> <span class="r">do</span> <span class="co">Hash</span>.new {[]} <span class="r">end</span>
+describe <span class="s"><span class="dl">'</span><span class="k">Object#mcopy</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">create a (deep) copy via marshalling</span><span class="dl">'</span></span> <span class="r">do</span>
+    a = <span class="s"><span class="dl">%w[</span><span class="k">hello world</span><span class="dl">]</span></span>
+    b = a.mcopy
+    b.should == a
 
-  it <span class="s"><span class="dl">'</span><span class="k">should behave like Enumerable#each for a single argument</span><span class="dl">'</span></span> <span class="r">do</span>
-    iterate a <span class="r">do</span> |ele|
-      res[<span class="sy">:iter</span>] &lt;&lt; ele
-    <span class="r">end</span>
-
-    a.each <span class="r">do</span> |ele|
-      res[<span class="sy">:each</span>] &lt;&lt; ele
-    <span class="r">end</span>
-
-    res[<span class="sy">:iter</span>].should == res[<span class="sy">:each</span>]
+    b[<span class="i">0</span>][<span class="i">1</span>,<span class="i">1</span>] = <span class="s"><span class="dl">'</span><span class="dl">'</span></span>
+    b.should_not == a
   <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_mcopy_source">(<a href="javascript:show('mcopy_source')">show</a>)</span>
+         <pre class="source" id="mcopy_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
 
-  it <span class="s"><span class="dl">'</span><span class="k">should pass the right params to the block</span><span class="dl">'</span></span> <span class="r">do</span>
-    res = <span class="co">Hash</span>.new {[]} <span class="c"># TODO: why?</span>
-    res[<span class="sy">:iter_a_b</span>] = [] <span class="c"># ....</span>
-    res[<span class="sy">:iter_b_a</span>] = [] <span class="c"># ....</span>
-
-
-    iterate a, b <span class="r">do</span> |e,f|
-      res[<span class="sy">:iter_a_b</span>] &lt;&lt; [e, f]
-<span class="c">#      p res[:iter_a_b], e, f</span>
-    <span class="r">end</span>
-
-    res[<span class="sy">:iter_a_b</span>].should == [
-      [<span class="i">1</span>, <span class="s"><span class="dl">'</span><span class="k">a</span><span class="dl">'</span></span>],
-      [<span class="i">2</span>, <span class="s"><span class="dl">'</span><span class="k">b</span><span class="dl">'</span></span>],
-      [<span class="i">3</span>, <span class="s"><span class="dl">'</span><span class="k">c</span><span class="dl">'</span></span>],
-      [<span class="pc">nil</span>, <span class="s"><span class="dl">'</span><span class="k">d</span><span class="dl">'</span></span>],
-    ]
-
-    iterate b, a <span class="r">do</span> |e,f|
-      res[<span class="sy">:iter_b_a</span>] &lt;&lt; [e, f]
-    <span class="r">end</span>
-
-    res[<span class="sy">:iter_b_a</span>].should == [
-      [<span class="s"><span class="dl">'</span><span class="k">a</span><span class="dl">'</span></span>, <span class="i">1</span>],
-      [<span class="s"><span class="dl">'</span><span class="k">b</span><span class="dl">'</span></span>, <span class="i">2</span>],
-      [<span class="s"><span class="dl">'</span><span class="k">c</span><span class="dl">'</span></span>, <span class="i">3</span>],
-      [<span class="s"><span class="dl">'</span><span class="k">d</span><span class="dl">'</span></span>, <span class="pc">nil</span>],
-    ]
-
-  <span class="r">end</span>
-
-  it <span class="s"><span class="dl">'</span><span class="k">should return enumerators if no block is applied</span><span class="dl">'</span></span> <span class="r">do</span>
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_iterate_source">(<a href="javascript:show('iterate_source')">show</a>)</span>
-         <pre class="source" id="iterate_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">def</span> <span class="fu">iterate</span>(*params)
-  <span class="c"># params.shift.zip(*params).each{ |*elements| yield *elements }</span>
-  raise <span class="co">ArgumentError</span>, <span class="s"><span class="dl">&quot;</span><span class="k">wrong number of arguments (0)</span><span class="dl">&quot;</span></span> <span class="r">if</span> params.empty?
-
-  first = params.shift
-  <span class="r">if</span> params.empty? <span class="c"># single param - like each</span>
-    <span class="r">if</span> block_given?
-      first.map{|e| <span class="r">yield</span> e }
-    <span class="r">else</span>
-      first.map
-    <span class="r">end</span>
-  <span class="r">else</span>
-    padded_first = <span class="co">Array</span>.new( [first, *params].max_by(&amp;<span class="sy">:size</span>).size ){|i| first[i] } <span class="c"># append nils</span>
-    obj = padded_first.zip *params
-    <span class="r">if</span> block_given?
-      obj.map{|es| <span class="r">yield</span> *es }
-    <span class="r">else</span>
-      obj.map.to_enum
-    <span class="r">end</span>
+<span class="r">class</span> <span class="cl">Object</span>
+  <span class="r">def</span> <span class="fu">mcopy</span>
+    <span class="co">Marshal</span>.load <span class="co">Marshal</span>.dump <span class="pc">self</span>
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/iterate">github wiki</a></td></tr></table> <h3 title="require 'zucker/kernel'">kernel</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mcopy">github wiki</a></td></tr></table> <h3 title="require 'zucker/not'">not</h3>
          <table class="cube_table"
-                id="kernel_cube"
-                title="require 'zucker/kernel'"> <tr><th>Summary</th>    <td>Some useful general shortcut methods.</td></tr><tr><th>Why?</th>    <td>Readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>activate_warnings!</h5><pre class="usage source" style="display:block">activate_warnings! <span class="c"># sets $VERBOSE to 1</span></pre><h5>deactivate_warnings!</h5><pre class="usage source" style="display:block">deactivate_warnings! <span class="c"># sets $VERBOSE to 0</span></pre><h5>executed_directly?, standalone?</h5><pre class="usage source" style="display:block">executed_directly? <span class="c"># checks, if the current file is run directly -&gt; true</span></pre><h5>library?</h5><pre class="usage source" style="display:block">library? <span class="c"># checks, if the current file is run directly -&gt; false</span></pre><h5>ignore_sigint!</h5><pre class="usage source" style="display:block">ignore_sigint! <span class="c"># blocks CTRL+C</span></pre></td></tr><tr><th>Specification</th>    <td> <span id="show_kernel_spec">(<a href="javascript:show('kernel_spec')">show</a>)</span>
-         <pre class="source" id="kernel_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/kernel</span><span class="dl">'</span></span>
+                id="not_cube"
+                title="require 'zucker/not'"> <tr><th>Summary</th>    <td><code>not</code> returns an object on which all methods are redirected to it's receiver object, but returns inverted boolean.</td></tr><tr><th>Why?</th>    <td>Better readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#not</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>].not.empty? <span class="c"># true</span>
+</pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://blog.jayfields.com/2007/08/ruby-adding-not-method-for-readability.html">this article by Jay Field</a> for more information.</td></tr><tr><th>Specification</th>    <td> <span id="show_not_spec">(<a href="javascript:show('not_spec')">show</a>)</span>
+         <pre class="source" id="not_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/not</span><span class="dl">'</span></span>
 
-describe <span class="s"><span class="dl">'</span><span class="k">activate_warnings!</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should set $VERBOSE to true</span><span class="dl">'</span></span> <span class="r">do</span>
-    activate_warnings!
-    <span class="gv">$VERBOSE</span>.should == <span class="pc">true</span>
+describe <span class="s"><span class="dl">'</span><span class="k">Object#not</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">&quot;</span><span class="k">should return an object on which all methods are redirected to it's receiver object, but return an inverted boolean</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+    [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>].not.empty?.should == <span class="pc">true</span>
+    <span class="pc">nil</span>.not.nil?.should == <span class="pc">false</span>
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_not_source">(<a href="javascript:show('not_source')">show</a>)</span>
+         <pre class="source" id="not_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Object</span>
+  <span class="r">def</span> <span class="fu">not</span>
+    <span class="co">NotClass</span>.new <span class="pc">self</span>
+  <span class="r">end</span>
+
+  <span class="r">class</span> <span class="cl">NotClass</span> &lt; <span class="co">BasicObject</span>
+    <span class="r">def</span> <span class="fu">initialize</span>(receiver)
+      <span class="iv">@receiver</span> = receiver
+    <span class="r">end</span>
+    
+    <span class="r">def</span> <span class="fu">method_missing</span>(m, *args, &amp;block)
+      <span class="r">not</span> <span class="iv">@receiver</span>.public_send( m, *args, &amp;block )
+    <span class="r">end</span>
   <span class="r">end</span>
 <span class="r">end</span>
 
-describe <span class="s"><span class="dl">'</span><span class="k">deactivate_warnings!</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should set $VERBOSE to false</span><span class="dl">'</span></span> <span class="r">do</span>
-    deactivate_warnings!
-    <span class="gv">$VERBOSE</span>.should == <span class="pc">false</span>
-  <span class="r">end</span>
-<span class="r">end</span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">library?</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should return false if the file is invoked directly</span><span class="dl">'</span></span> <span class="r">do</span>
-    library?.should == ( <span class="pc">__FILE__</span> != <span class="gv">$PROGRAM_NAME</span> )
-  <span class="r">end</span>
-<span class="r">end</span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">executed_directly?</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should return true if the file is invoked directly</span><span class="dl">'</span></span> <span class="r">do</span>
-    executed_directly?.should == ( <span class="pc">__FILE__</span> == <span class="gv">$PROGRAM_NAME</span> )
-  <span class="r">end</span>
-<span class="r">end</span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">ignore_sigint!</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should catch ctrl+c signals</span><span class="dl">'</span></span> <span class="r">do</span>
-    <span class="c"># ...</span>
-  <span class="r">end</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_kernel_source">(<a href="javascript:show('kernel_source')">show</a>)</span>
-         <pre class="source" id="kernel_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">module</span> <span class="cl">Kernel</span>
-  <span class="r">def</span> <span class="fu">activate_warnings!</span>
-    <span class="gv">$VERBOSE</span> = <span class="pc">true</span>
-  <span class="r">end</span>
-
-  <span class="r">def</span> <span class="fu">deactivate_warnings!</span>
-    <span class="gv">$VERBOSE</span> = <span class="pc">false</span>
-  <span class="r">end</span>
-
-  <span class="r">def</span> <span class="fu">library?</span>
-    <span class="pc">__FILE__</span> != <span class="gv">$PROGRAM_NAME</span>
-  <span class="r">end</span>
-
-  <span class="r">def</span> <span class="fu">executed_directly?</span>
-    <span class="pc">__FILE__</span> == <span class="gv">$PROGRAM_NAME</span>
-  <span class="r">end</span>
-  <span class="r">alias</span> <span class="fu">standalone?</span> <span class="fu">executed_directly?</span>
-
-  <span class="r">def</span> <span class="fu">ignore_sigint!</span> <span class="c"># ctrl+c</span>
-     <span class="co">Signal</span>.trap *<span class="s"><span class="dl">%w|</span><span class="k">SIGINT IGNORE</span><span class="dl">|</span></span>
-  <span class="r">end</span>
-<span class="r">end</span>
-
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/kernel">github wiki</a></td></tr></table> <h3 title="require 'zucker/sandbox'">sandbox</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/not">github wiki</a></td></tr></table>
+        </div> 
+      <h2 title="require 'zucker/to_proc'">Cubes[to_proc]</h2>
+        <div class="cubes">
+         <h3 title="require 'zucker/array2proc'">array2proc</h3>
          <table class="cube_table"
-                id="sandbox_cube"
-                title="require 'zucker/sandbox'"> <tr><th>Summary</th>    <td>Creates a sandbox area.</td></tr><tr><th>Why?</th>    <td>Ruby comes with sandboxes, but they are hidden (-> integrated) in the <code>$SAFE</code> concept.</td></tr><tr><th>Methods/Usage</th>    <td><h5>sandbox</h5><pre class="usage source" style="display:block">sandbox <span class="r">do</span>
-  <span class="c"># dangerous commands throw SecurityErrors ($SAFE=4)</span>
-<span class="r">end</span>
-<span class="c"># everything's normal again</span>
+                id="array2proc_cube"
+                title="require 'zucker/array2proc'"> <tr><th>Summary</th>    <td>Calls the method named by the first paramenter and passes the other elements as paramaters.</td></tr><tr><th>Why?</th>    <td>When using <code>Symbol#to_proc</code>, you often wish to pass parameters.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Array#to_proc</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map &amp;[<span class="sy">:*</span>, <span class="i">5</span>] <span class="c"># =&gt; [5, 10, 15, 20]</span>
+<span class="c"># you can also chain them, if the first parameter is an Array</span>
+[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map &amp;[[<span class="sy">:to_s</span>, <span class="i">2</span>],[<span class="sy">:+</span>, <span class="s"><span class="dl">'</span><span class="k">b</span><span class="dl">'</span></span>]]   <span class="c"># =&gt; [&quot;1b&quot;, &quot;10b&quot;, &quot;11b&quot;, &quot;100b&quot;]</span>
+</pre></td></tr><tr><th>Further information</th>    <td>Inspired by <a href="http://www.sanityinc.com/articles/adding-array-to-proc-to-ruby">this article</a>.<br/>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.<br/>Chaining inspired by <a href="http://github.com/eregon/Classes/blob/master/to_proc.rb">eregon</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_array2proc_spec">(<a href="javascript:show('array2proc_spec')">show</a>)</span>
+         <pre class="source" id="array2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/array2proc</span><span class="dl">'</span></span>
 
-sandbox( lambda{} ) <span class="r">do</span>
-  <span class="c"># no Exception is thrown, if non-nil parameter is passed</span>
-<span class="r">end</span>
-<span class="c"># if it is a proc, it will be run instead, if an SecurityError gets raised</span>
-</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_sandbox_spec">(<a href="javascript:show('sandbox_spec')">show</a>)</span>
-         <pre class="source" id="sandbox_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/sandbox</span><span class="dl">'</span></span>
-
-describe <span class="s"><span class="dl">'</span><span class="k">sandbox</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should throw a SecurityError if bad commands are issued</span><span class="dl">'</span></span> <span class="r">do</span>
-    proc <span class="r">do</span>
-      sandbox <span class="r">do</span>
-        <span class="sh"><span class="dl">`</span><span class="k">ls</span><span class="dl">`</span></span>
-      <span class="r">end</span>
-    <span class="r">end</span>.should raise_exception <span class="co">SecurityError</span>
+describe <span class="s"><span class="dl">'</span><span class="k">Array#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should call the method of the first symbol, using the remaining elements as paramaters</span><span class="dl">'</span></span> <span class="r">do</span>
+    [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map( &amp;[<span class="sy">:to_s</span>, <span class="i">2</span>] ).should == [<span class="s"><span class="dl">&quot;</span><span class="k">1</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">10</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">11</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">100</span><span class="dl">&quot;</span></span>]
   <span class="r">end</span>
 
-  it <span class="s"><span class="dl">'</span><span class="k">should not throw an exception for errors, if the given parameter is not nil</span><span class="dl">'</span></span> <span class="r">do</span>
-    proc <span class="r">do</span>
-      sandbox( <span class="pc">true</span> ) <span class="r">do</span>
-        <span class="sh"><span class="dl">`</span><span class="k">ls</span><span class="dl">`</span></span>
-      <span class="r">end</span>
-    <span class="r">end</span>.should_not raise_exception
+  it <span class="s"><span class="dl">&quot;</span><span class="k">should convert each element to a proc and chain it, if the first parameter is an array</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+    [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map( &amp;[[<span class="sy">:*</span>,<span class="i">2</span>],[<span class="sy">:+</span>,<span class="i">4</span>]] ).should == [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map{|i| i*<span class="i">2</span> + <span class="i">4</span> }
   <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_array2proc_source">(<a href="javascript:show('array2proc_source')">show</a>)</span>
+         <pre class="source" id="array2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
 
-  it <span class="s"><span class="dl">'</span><span class="k">should run the proc passed as parameter for errors, if it is given</span><span class="dl">'</span></span> <span class="r">do</span>
-    sandbox( lambda{|e| e.class } ) <span class="r">do</span>
-      <span class="sh"><span class="dl">`</span><span class="k">ls</span><span class="dl">`</span></span>
-    <span class="r">end</span>.should == <span class="co">SecurityError</span>
-  <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_sandbox_source">(<a href="javascript:show('sandbox_source')">show</a>)</span>
-         <pre class="source" id="sandbox_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">module</span> <span class="cl">Kernel</span>
-  <span class="r">def</span> <span class="fu">sandbox</span>(rescueblock_or_default=<span class="pc">nil</span>)
-    <span class="co">Thread</span>.start <span class="r">do</span>
-      <span class="gv">$SAFE</span> = <span class="i">4</span>
-      <span class="r">yield</span>
-    <span class="r">end</span>.value
-  <span class="r">rescue</span> <span class="co">SecurityError</span> =&gt; e
-    <span class="r">if</span> !rescueblock_or_default.nil?
-      <span class="r">if</span> rescueblock_or_default.is_a? <span class="co">Proc</span>
-        rescueblock_or_default.call e
+<span class="r">class</span> <span class="cl">Array</span>
+  <span class="r">def</span> <span class="fu">to_proc</span>
+    <span class="co">Proc</span>.new{ |obj|
+      <span class="r">if</span> <span class="pc">self</span>.first.is_a? <span class="co">Array</span>
+        <span class="pc">self</span>.inject(obj){ |result, nested_array|
+          nested_array.to_proc.call result
+        }
       <span class="r">else</span>
-        rescueblock_or_default
+        obj.send *<span class="pc">self</span>
       <span class="r">end</span>
-    <span class="r">else</span>
-      raise e
-    <span class="r">end</span>
+    }
   <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/sandbox">github wiki</a></td></tr></table> <h3 title="require 'zucker/tap'">tap</h3>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/array2proc">github wiki</a></td></tr></table> <h3 title="require 'zucker/class2proc'">class2proc</h3>
          <table class="cube_table"
-                id="tap_cube"
-                title="require 'zucker/tap'"> <tr><th>Summary</th>    <td>This cube adds the two <code>tap</code> variants <code>tap_on</code> (known as <code>returning</code> in ActiveSupport) and <code>make_new</code>.</td></tr><tr><th>Methods/Usage</th>    <td><h5>tap_on</h5><pre class="usage source" style="display:block">tap_on [<span class="i">1</span>,<span class="i">2</span>] <span class="r">do</span> |obj|
-  obj[<span class="i">4</span>] =&gt; <span class="i">5</span>
-<span class="r">end</span> <span class="c">#=&gt; [1, 2, nil, nil, 5]</span>
-</pre><h5>make_new</h5><pre class="usage source" style="display:block">make_new <span class="co">Hash</span> <span class="r">do</span> |obj|
-  obj[<span class="i">1</span>] = <span class="i">2</span>
-<span class="r">end</span> <span class="c">#=&gt; {1 =&gt; 2}</span>
-</pre></td></tr><tr><th>Further information</th>    <td>Read more about using tap on the <a href="http://blog.rubybestpractices.com/posts/gregory/011-tap-that-hash.html">ruby best practices</a> blog.</td></tr><tr><th>Specification</th>    <td> <span id="show_tap_spec">(<a href="javascript:show('tap_spec')">show</a>)</span>
-         <pre class="source" id="tap_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/tap</span><span class="dl">'</span></span>
+                id="class2proc_cube"
+                title="require 'zucker/class2proc'"> <tr><th>Summary</th>    <td>Creates a new instance of the class.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Class#to_proc</h5><pre class="usage source" style="display:block">[ [<span class="i">1</span>,<span class="i">2</span>],[<span class="i">3</span>,<span class="i">5</span>,<span class="i">6</span>,<span class="i">7</span>,<span class="i">3</span>] ].map(&amp;<span class="co">Set</span>) <span class="c"># =&gt; [ Set[1,2], Set[5,6,7,3] ]</span></pre></td></tr><tr><th>Further information</th>    <td>Inspired by Ruby Facets.<br/>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_class2proc_spec">(<a href="javascript:show('class2proc_spec')">show</a>)</span>
+         <pre class="source" id="class2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/class2proc</span><span class="dl">'</span></span>
+require <span class="s"><span class="dl">'</span><span class="k">set</span><span class="dl">'</span></span>
 
-describe <span class="s"><span class="dl">'</span><span class="k">tap_on</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should call tap on the argument and apply the block</span><span class="dl">'</span></span> <span class="r">do</span>
-    obj = <span class="s"><span class="dl">&quot;</span><span class="k">an_object</span><span class="dl">&quot;</span></span>
-    block = <span class="sy">:reverse</span>.to_proc
-
-    tap_on( obj, &amp;block ).should == obj.tap( &amp;block )
+describe <span class="s"><span class="dl">'</span><span class="k">Class#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should create new instances of the class</span><span class="dl">'</span></span> <span class="r">do</span>
+    [ [<span class="i">1</span>,<span class="i">2</span>],[<span class="i">3</span>,<span class="i">5</span>,<span class="i">6</span>,<span class="i">7</span>,<span class="i">3</span>] ].map(&amp;<span class="co">Set</span>).should == [ <span class="co">Set</span>[<span class="i">1</span>,<span class="i">2</span>], <span class="co">Set</span>[<span class="i">5</span>,<span class="i">6</span>,<span class="i">7</span>,<span class="i">3</span>] ]
   <span class="r">end</span>
-<span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_class2proc_source">(<a href="javascript:show('class2proc_source')">show</a>)</span>
+         <pre class="source" id="class2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
 
-describe <span class="s"><span class="dl">'</span><span class="k">make_new</span><span class="dl">'</span></span> <span class="r">do</span>
-  it <span class="s"><span class="dl">'</span><span class="k">should create a new instance of the class given as argument, apply the block on it and return result</span><span class="dl">'</span></span> <span class="r">do</span>
-    res = make_new <span class="co">Hash</span> <span class="r">do</span> |obj|
-      obj[<span class="i">1</span>] = <span class="i">2</span>
+<span class="r">class</span> <span class="cl">Class</span>
+  <span class="r">def</span> <span class="fu">to_proc</span>
+    <span class="co">Proc</span>.new <span class="r">do</span> |*args|
+      <span class="pc">self</span>.new *args
     <span class="r">end</span>
-    res.should == { <span class="i">1</span>=&gt;<span class="i">2</span> }
   <span class="r">end</span>
-<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_tap_source">(<a href="javascript:show('tap_source')">show</a>)</span>
-         <pre class="source" id="tap_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
-
-<span class="r">def</span> <span class="fu">tap_on</span>(obj, &amp;block)
-  obj.tap &amp;block
 <span class="r">end</span>
 
-<span class="r">def</span> <span class="fu">make_new</span>(what, *args, &amp;block)
-  what.new(*args).tap &amp;block
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/class2proc">github wiki</a></td></tr></table> <h3 title="require 'zucker/hash2proc'">hash2proc</h3>
+         <table class="cube_table"
+                id="hash2proc_cube"
+                title="require 'zucker/hash2proc'"> <tr><th>Summary</th>    <td>Use a hash to apply procs to specific objects.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Hash#to_proc</h5><pre class="usage source" style="display:block">[<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map(&amp;{
+<span class="i">2</span> =&gt; lambda {|e| e + <span class="i">1000</span>},
+<span class="i">4</span> =&gt; <span class="sy">:to_s</span>,
+}) <span class="c"># =&gt; [1, 1002, 3, '4']</span></pre></td></tr><tr><th>Further information</th>    <td>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_hash2proc_spec">(<a href="javascript:show('hash2proc_spec')">show</a>)</span>
+         <pre class="source" id="hash2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/hash2proc</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">Hash#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should run the proc given in the value for a key in the hash</span><span class="dl">'</span></span> <span class="r">do</span>
+    [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map(&amp;{
+      <span class="i">4</span> =&gt; <span class="sy">:to_s</span>,
+      <span class="c"># 3 =&gt; [:to_s, 2]  # &quot;11&quot; =&gt;  if array2proc is used</span>
+      <span class="i">2</span> =&gt; lambda {|e| e + <span class="i">1000</span>}
+    }).should == [<span class="i">1</span>, <span class="i">1002</span>, <span class="i">3</span>, <span class="s"><span class="dl">&quot;</span><span class="k">4</span><span class="dl">&quot;</span></span>]
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_hash2proc_source">(<a href="javascript:show('hash2proc_source')">show</a>)</span>
+         <pre class="source" id="hash2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Hash</span>
+  <span class="r">def</span> <span class="fu">to_proc</span>
+    <span class="co">Proc</span>.new{ |obj|
+      <span class="r">if</span> <span class="pc">self</span>.member? obj
+        <span class="pc">self</span>[obj].to_proc.call obj
+      <span class="r">else</span>
+        obj
+      <span class="r">end</span>
+    }
+  <span class="r">end</span>
 <span class="r">end</span>
 
-<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/tap">github wiki</a></td></tr></table>
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/hash2proc">github wiki</a></td></tr></table> <h3 title="require 'zucker/regexp2proc'">regexp2proc</h3>
+         <table class="cube_table"
+                id="regexp2proc_cube"
+                title="require 'zucker/regexp2proc'"> <tr><th>Summary</th>    <td>Use <code>&/regex/</code> to match it against strings.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Regexp#to_proc</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.map    &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>  <span class="c"># =&gt; [&quot;j&quot;, nil, nil, &quot;y&quot;]</span>
+<span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.select &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>  <span class="c"># =&gt; [&quot;just&quot;, &quot;array&quot;]</span>
+</pre></td></tr><tr><th>Further information</th>    <td>More about <a href="http://rbjl.net/29-become-a-proc-star">to_proc</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_regexp2proc_spec">(<a href="javascript:show('regexp2proc_spec')">show</a>)</span>
+         <pre class="source" id="regexp2proc_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/regexp2proc</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">Regexp#to_proc</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should match the regex</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.map(     &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>).should == [<span class="s"><span class="dl">&quot;</span><span class="k">j</span><span class="dl">&quot;</span></span>, <span class="pc">nil</span>, <span class="pc">nil</span>, <span class="s"><span class="dl">&quot;</span><span class="k">y</span><span class="dl">&quot;</span></span>]
+    <span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.select(  &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>).should == [<span class="s"><span class="dl">&quot;</span><span class="k">just</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">array</span><span class="dl">&quot;</span></span>]
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_regexp2proc_source">(<a href="javascript:show('regexp2proc_source')">show</a>)</span>
+         <pre class="source" id="regexp2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Regexp</span>
+  <span class="r">def</span> <span class="fu">to_proc</span>
+    proc <span class="r">do</span> |e|
+      e.to_s[<span class="pc">self</span>]
+    <span class="r">end</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/regexp2proc">github wiki</a></td></tr></table>
         </div> 
       <h2 title="require 'zucker/shortcuts'">Cubes[shortcuts]</h2>
         <div class="cubes">
@@ -2335,6 +2128,218 @@ describe <span class="s"><span class="dl">'</span><span class="k">square_bracket
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/square_brackets_for">github wiki</a></td></tr></table>
         </div> 
+      <h2 title="require 'zucker/debug'">Cubes[debug]</h2>
+        <div class="cubes">
+         <h3 title="require 'zucker/D'">D</h3>
+         <table class="cube_table"
+                id="D_cube"
+                title="require 'zucker/D'"> <tr><th>Summary</th>    <td>Easy debug printing with the <code>p</code> alternative <code>.D</code>. It outputs to stdout and returns <code>self</code>. Accepts a block.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#D</h5><pre class="usage source" style="display:block">some.<span class="co">D</span>.methods.<span class="co">D</span>.noone.<span class="co">D</span>.knows.<span class="co">D</span>
+<span class="c"># ...outputs 4 lines with the inspected objects</span>
+<span class="c"># =&gt; (result)</span>
+
+<span class="i">21</span>+<span class="co">Math</span>.sin(<span class="i">42</span>).<span class="co">D</span>
+<span class="c"># outputs -0.916521547915634</span>
+<span class="c"># =&gt; 20.0834784520844</span>
+
+name = <span class="s"><span class="dl">'</span><span class="k">Earth</span><span class="dl">'</span></span>
+<span class="s"><span class="dl">'</span><span class="k">Hello </span><span class="dl">'</span></span> + name.<span class="co">D</span>{|e| <span class="s"><span class="dl">&quot;</span><span class="k">The length is: </span><span class="il"><span class="idl">#{</span>e.size<span class="idl">}</span></span><span class="dl">&quot;</span></span>}
+<span class="c"># outputs &quot;The length is: 5&quot;</span>
+<span class="c"># =&gt; 'Hello Earth'</span>
+</pre></td></tr><tr><th>Further information</th>    <td>This is inspired by the <a href="http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions"><code>.tap</code> method</a>.<br/>There is also <code>tap</code> cube with more <code>tap</code> methods.</td></tr><tr><th>Specification</th>    <td> <span id="show_D_spec">(<a href="javascript:show('D_spec')">show</a>)</span>
+         <pre class="source" id="D_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/D</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">Object#D</span><span class="dl">'</span></span> <span class="r">do</span>
+
+  let <span class="sy">:a</span> <span class="r">do</span>
+    [ <span class="i">1</span>, <span class="s"><span class="dl">&quot;</span><span class="k">1</span><span class="dl">&quot;</span></span>, <span class="i">2</span>..<span class="i">5</span>, [], {<span class="sy">:hallo</span> =&gt; <span class="sy">:du</span>}, <span class="pc">nil</span>, <span class="pc">true</span> ]
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should not change the object&quot;s value</span><span class="dl">'</span></span> <span class="r">do</span>
+    capture_stdout <span class="r">do</span>
+      a.each{ |e|
+        (e.<span class="co">D</span>).should == e
+      }
+
+      a.each{ |e|
+        (e.<span class="co">D</span>{|value| <span class="s"><span class="dl">&quot;</span><span class="k">This is a: </span><span class="il"><span class="idl">#{</span>value<span class="idl">}</span></span><span class="dl">&quot;</span></span>}).should == e
+      }
+    <span class="r">end</span>
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">&quot;</span><span class="k">should puts .inspect if no block is given (and not change the object's value)</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+    capture_stdout <span class="r">do</span>
+      a[<span class="i">0</span>].<span class="co">D</span>
+      a[<span class="i">1</span>].<span class="co">D</span>
+      a[<span class="i">6</span>].<span class="co">D</span>
+    <span class="r">end</span>.should == <span class="s"><span class="dl">%{</span><span class="k">1</span><span class="ch">\n</span><span class="k">&quot;1&quot;</span><span class="ch">\n</span><span class="k">true</span><span class="ch">\n</span><span class="dl">}</span></span>
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">&quot;</span><span class="k">should puts the block if it is given (and not change the object's value)</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+    capture_stdout <span class="r">do</span>
+      a[<span class="i">0</span>].<span class="co">D</span>{|value| <span class="s"><span class="dl">&quot;</span><span class="k">This is a: </span><span class="il"><span class="idl">#{</span>value<span class="idl">}</span></span><span class="dl">&quot;</span></span>}
+      a[<span class="i">1</span>].<span class="co">D</span>{|value| <span class="s"><span class="dl">&quot;</span><span class="k">This is a: </span><span class="il"><span class="idl">#{</span>value<span class="idl">}</span></span><span class="dl">&quot;</span></span>}
+      a[<span class="i">6</span>].<span class="co">D</span>{|value| <span class="s"><span class="dl">&quot;</span><span class="k">This is a: </span><span class="il"><span class="idl">#{</span>value<span class="idl">}</span></span><span class="dl">&quot;</span></span>}
+    <span class="r">end</span>.should == <span class="s"><span class="dl">%{</span><span class="k">This is a: 1</span><span class="ch">\n</span><span class="k">This is a: 1</span><span class="ch">\n</span><span class="k">This is a: true</span><span class="ch">\n</span><span class="dl">}</span></span>
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_D_source">(<a href="javascript:show('D_source')">show</a>)</span>
+         <pre class="source" id="D_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Kernel</span>
+  <span class="r">def</span> <span class="fu">D</span>(*args, &amp;block)
+    <span class="r">if</span> args.empty?
+      tap{
+        <span class="r">if</span> block_given?
+          puts <span class="r">yield</span> <span class="pc">self</span>
+        <span class="r">else</span>
+          puts <span class="pc">self</span>.inspect
+        <span class="r">end</span>
+      }
+    <span class="r">else</span>
+      raise <span class="co">ArgumentError</span>, <span class="s"><span class="dl">&quot;</span><span class="k">.D - The parser thought that the code after .D are method arguments... Please don't put a space after D or use .D() or .D{} in this case!</span><span class="dl">&quot;</span></span>
+<span class="c">#      eval ...</span>
+    <span class="r">end</span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/D">github wiki</a></td></tr></table> <h3 title="require 'zucker/binding'">binding</h3>
+         <table class="cube_table"
+                id="binding_cube"
+                title="require 'zucker/binding'"> <tr><th>Summary</th>    <td>Adds a verbose <code>Binding#inspect</code>.</td></tr><tr><th>Why?</th>    <td>It gives you information about the current environment.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Binding#inspect</h5><pre class="usage source" style="display:block">binding.inspect <span class="c"># shows your current environment, irb example:</span>
+&gt;&gt; a=<span class="i">3</span>
+=&gt; <span class="i">3</span>
+&gt;&gt; binding
+=&gt; <span class="c">#&lt;Binding:0x94c4b50&gt;</span>
+local vars
+ - a: <span class="i">3</span>
+ - _: <span class="c">#&lt;Binding:0x94c4b50&gt;</span>
+(instance vars)
+ - none
+<span class="pc">self</span>
+ - main
+block_given?
+ - <span class="pc">false</span>
+</pre></td></tr><tr><th>Specification</th>    <td> <span id="show_binding_spec">(<a href="javascript:show('binding_spec')">show</a>)</span>
+         <pre class="source" id="binding_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/binding</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">Binding#inspect</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should output the current environment</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="c">#pending '#TODO: write spec'</span>
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_binding_source">(<a href="javascript:show('binding_source')">show</a>)</span>
+         <pre class="source" id="binding_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Binding</span>
+  <span class="r">def</span> <span class="fu">inspect</span>
+    put_vars = lambda { |array|
+      <span class="r">if</span> array.empty?
+        <span class="s"><span class="dl">'</span><span class="k"> - none</span><span class="dl">'</span></span>
+      <span class="r">else</span>
+        array.map{|e|
+          val = <span class="pc">self</span>.eval <span class="s"><span class="dl">&quot;</span><span class="il"><span class="idl">#{</span>e<span class="idl">}</span></span><span class="dl">&quot;</span></span>
+          val = val.is_a?( <span class="co">Binding</span> ) ? val.to_s : val.inspect
+          <span class="s"><span class="dl">&quot;</span><span class="k"> - </span><span class="il"><span class="idl">#{</span>e<span class="idl">}</span></span><span class="k">: </span><span class="il"><span class="idl">#{</span> val <span class="idl">}</span></span><span class="dl">&quot;</span></span>
+        }.join <span class="s"><span class="dl">&quot;</span><span class="ch">\n</span><span class="dl">&quot;</span></span>
+      <span class="r">end</span>
+    }
+
+<span class="s"><span class="dl">&quot;</span><span class="il"><span class="idl">#{</span><span class="pc">self</span>.to_s<span class="idl">}</span></span><span class="k">
+local vars
+</span><span class="il"><span class="idl">#{</span> put_vars[ <span class="pc">self</span>.eval <span class="s"><span class="dl">'</span><span class="k">local_variables</span><span class="dl">'</span></span> ] <span class="idl">}</span></span><span class="k">
+(instance vars)
+</span><span class="il"><span class="idl">#{</span> put_vars[ <span class="pc">self</span>.eval <span class="s"><span class="dl">'</span><span class="k">instance_variables</span><span class="dl">'</span></span> ] <span class="idl">}</span></span><span class="k">
+self
+ - </span><span class="il"><span class="idl">#{</span><span class="pc">self</span>.eval <span class="s"><span class="dl">'</span><span class="k">self</span><span class="dl">'</span></span><span class="idl">}</span></span><span class="k">
+block_given?
+ - </span><span class="il"><span class="idl">#{</span><span class="pc">self</span>.eval <span class="s"><span class="dl">'</span><span class="k">block_given?</span><span class="dl">'</span></span><span class="idl">}</span></span><span class="dl">&quot;</span></span>
+
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/binding">github wiki</a></td></tr></table> <h3 title="require 'zucker/mm'">mm</h3>
+         <table class="cube_table"
+                id="mm_cube"
+                title="require 'zucker/mm'"> <tr><th>Summary</th>    <td><code>mm</code> displays an ordered public method list.</td></tr><tr><th>Why?</th>    <td>See one object's methods without those rarely used inherited methods.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#method_list, Object#mm</h5><pre class="usage source" style="display:block"><span class="s"><span class="dl">'</span><span class="k">test</span><span class="dl">'</span></span>.mm <span class="i">2</span> <span class="c"># outputs the list (2 levels deep), for example:</span>
+ <span class="co">String</span>
+ [<span class="sy">:&lt;=&gt;</span>, <span class="sy">:==</span>, <span class="sy">:===</span>, <span class="sy">:eql?</span>, <span class="sy">:hash</span>, <span class="sy">:casecmp</span>, <span class="sy">:+</span>, <span class="sy">:*</span>, <span class="sy">:%</span>, <span class="sy">:[]</span>, <span class="sy">:[]=</span>, <span class="sy">:insert</span>, <span class="sy">:length</span>, <span class="sy">:size</span>, <span class="sy">:bytesize</span>, <span class="sy">:empty?</span>, <span class="sy">:=~</span>, <span class="sy">:match</span>, <span class="sy">:succ</span>, <span class="sy">:succ!</span>, <span class="sy">:next</span>, <span class="sy">:next!</span>, <span class="sy">:upto</span>, <span class="sy">:index</span>, <span class="sy">:rindex</span>, <span class="sy">:replace</span>, <span class="sy">:clear</span>, <span class="sy">:chr</span>, <span class="sy">:getbyte</span>, <span class="sy">:setbyte</span>, <span class="sy">:to_i</span>, <span class="sy">:to_f</span>, <span class="sy">:to_s</span>, <span class="sy">:to_str</span>, <span class="sy">:inspect</span>, <span class="sy">:dump</span>, <span class="sy">:upcase</span>, <span class="sy">:downcase</span>, <span class="sy">:capitalize</span>, <span class="sy">:swapcase</span>, <span class="sy">:upcase!</span>, <span class="sy">:downcase!</span>, <span class="sy">:capitalize!</span>, <span class="sy">:swapcase!</span>, <span class="sy">:hex</span>, <span class="sy">:oct</span>, <span class="sy">:split</span>, <span class="sy">:lines</span>, <span class="sy">:bytes</span>, <span class="sy">:chars</span>, <span class="sy">:codepoints</span>, <span class="sy">:reverse</span>, <span class="sy">:reverse!</span>, <span class="sy">:concat</span>, <span class="sy">:&lt;&lt;</span>, <span class="sy">:crypt</span>, <span class="sy">:intern</span>, <span class="sy">:to_sym</span>, <span class="sy">:ord</span>, <span class="sy">:include?</span>, <span class="sy">:start_with?</span>, <span class="sy">:end_with?</span>, <span class="sy">:scan</span>, <span class="sy">:ljust</span>, <span class="sy">:rjust</span>, <span class="sy">:center</span>, <span class="sy">:sub</span>, <span class="sy">:gsub</span>, <span class="sy">:chop</span>, <span class="sy">:chomp</span>, <span class="sy">:strip</span>, <span class="sy">:lstrip</span>, <span class="sy">:rstrip</span>, <span class="sy">:sub!</span>, <span class="sy">:gsub!</span>, <span class="sy">:chop!</span>, <span class="sy">:chomp!</span>, <span class="sy">:strip!</span>, <span class="sy">:lstrip!</span>, <span class="sy">:rstrip!</span>, <span class="sy">:tr</span>, <span class="sy">:tr_s</span>, <span class="sy">:delete</span>, <span class="sy">:squeeze</span>, <span class="sy">:count</span>, <span class="sy">:tr!</span>, <span class="sy">:tr_s!</span>, <span class="sy">:delete!</span>, <span class="sy">:squeeze!</span>, <span class="sy">:each_line</span>, <span class="sy">:each_byte</span>, <span class="sy">:each_char</span>, <span class="sy">:each_codepoint</span>, <span class="sy">:sum</span>, <span class="sy">:slice</span>, <span class="sy">:slice!</span>, <span class="sy">:partition</span>, <span class="sy">:rpartition</span>, <span class="sy">:encoding</span>, <span class="sy">:force_encoding</span>, <span class="sy">:valid_encoding?</span>, <span class="sy">:ascii_only?</span>, <span class="sy">:unpack</span>, <span class="sy">:encode</span>, <span class="sy">:encode!</span>, <span class="sy">:to_r</span>, <span class="sy">:to_c</span>, <span class="sy">:blank?</span>, <span class="sy">:^</span>, <span class="sy">:lchomp</span>, <span class="sy">:lchomp!</span>, <span class="sy">:ords</span>, <span class="sy">:constantize</span>, <span class="sy">:+@</span>, <span class="sy">:-@</span>, <span class="sy">:|</span>]
+ <span class="co">Comparable</span>
+ [<span class="sy">:==</span>, <span class="sy">:&gt;</span>, <span class="sy">:&gt;=</span>, <span class="sy">:&lt;</span>, <span class="sy">:&lt;=</span>, <span class="sy">:between?</span>]
+</pre></td></tr><tr><th>Further information</th>    <td>See <a href="http://rbjl.net/31-the-multi-mega-method-list">this article</a> for more information.</td></tr><tr><th>Specification</th>    <td> <span id="show_mm_spec">(<a href="javascript:show('mm_spec')">show</a>)</span>
+         <pre class="source" id="mm_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/mm</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">Object#method_list</span><span class="dl">'</span></span> <span class="r">do</span>
+  it <span class="s"><span class="dl">'</span><span class="k">should display an ordered method list</span><span class="dl">'</span></span> <span class="r">do</span>
+    <span class="c">#pending '#TODO: write spec'</span>
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_mm_source">(<a href="javascript:show('mm_source')">show</a>)</span>
+         <pre class="source" id="mm_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Kernel</span>
+  <span class="r">def</span> <span class="fu">method_list</span>(levels = <span class="i">1</span>)
+    <span class="r">if</span> <span class="pc">self</span>.is_a? <span class="co">Module</span>
+      klass, method_function = <span class="pc">self</span>, <span class="sy">:public_methods</span>
+    <span class="r">else</span>
+      klass, method_function = <span class="pc">self</span>.class, <span class="sy">:public_instance_methods</span>
+
+      eigen = <span class="pc">self</span>.singleton_methods
+      <span class="r">if</span> !eigen.empty?
+        puts <span class="sy">:Eigenclass</span> <span class="c"># sorry for not being up to date, I just love the word</span>
+        p <span class="pc">self</span>.singleton_methods
+      <span class="r">end</span>
+    <span class="r">end</span>
+
+    levels.times{ |level|
+      <span class="r">if</span> cur = klass.ancestors[level]
+        p cur                               <span class="c"># put class name</span>
+        p cur.send method_function, <span class="pc">false</span>   <span class="c"># put methods of the class</span>
+      <span class="r">else</span>
+        <span class="r">break</span>
+      <span class="r">end</span>
+    }
+
+    <span class="pc">self</span> <span class="c"># or whatever</span>
+  <span class="r">end</span>
+
+  <span class="r">alias</span> <span class="fu">mm</span> <span class="fu">method_list</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8 (returns strings instead of symbols)</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mm">github wiki</a></td></tr></table> <h3 title="require 'zucker/q'">q</h3>
+         <table class="cube_table"
+                id="q_cube"
+                title="require 'zucker/q'"> <tr><th>Summary</th>    <td>This method does the same as <code>p</code>, but puts out multiple arguments on the same line.</td></tr><tr><th>Methods/Usage</th>    <td><h5>q</h5><pre class="usage source" style="display:block">q <span class="s"><span class="dl">&quot;</span><span class="k">zucker</span><span class="dl">&quot;</span></span>,<span class="s"><span class="dl">'</span><span class="dl">'</span></span>, {<span class="i">6</span>=&gt;<span class="i">7</span>}, <span class="i">5</span>, <span class="fl">2.3</span>, <span class="sy">:o</span> <span class="c"># outputs &quot;zucker&quot;  &quot;&quot;  {6=&gt;7}  5  2.3  :o</span>
+</pre></td></tr><tr><th>Further information</th>    <td>Inspired by <a href="http://github.com/rdp/sane/blob/master/lib/sane/pps.rb">rdp</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_q_spec">(<a href="javascript:show('q_spec')">show</a>)</span>
+         <pre class="source" id="q_spec">require <span class="s"><span class="dl">'</span><span class="k">zucker/q</span><span class="dl">'</span></span>
+
+describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span><span class="dl">'</span></span> <span class="r">do</span>
+
+  it <span class="s"><span class="dl">'</span><span class="k">should output the same as p for a single arg</span><span class="dl">'</span></span> <span class="r">do</span>
+    capture_stdout{p <span class="rx"><span class="dl">/</span><span class="k">some object</span><span class="dl">/</span></span>}.should ==
+    capture_stdout{q <span class="rx"><span class="dl">/</span><span class="k">some object</span><span class="dl">/</span></span>}
+  <span class="r">end</span>
+
+  it <span class="s"><span class="dl">&quot;</span><span class="k">should output the same as p but for multiple args one one line, values separated by two spaces</span><span class="dl">&quot;</span></span> <span class="r">do</span>
+    capture_stdout <span class="r">do</span>
+      q <span class="i">1</span>, <span class="s"><span class="dl">&quot;</span><span class="k">1</span><span class="dl">&quot;</span></span>, <span class="i">2</span>..<span class="i">5</span>, [], {<span class="sy">:hallo</span> =&gt; <span class="sy">:du</span>}, <span class="pc">nil</span>, <span class="pc">true</span>
+    <span class="r">end</span>.chop.should ==
+    capture_stdout <span class="r">do</span>
+      p <span class="i">1</span>, <span class="s"><span class="dl">&quot;</span><span class="k">1</span><span class="dl">&quot;</span></span>, <span class="i">2</span>..<span class="i">5</span>, [], {<span class="sy">:hallo</span> =&gt; <span class="sy">:du</span>}, <span class="pc">nil</span>, <span class="pc">true</span>
+    <span class="r">end</span>.chop.gsub( <span class="s"><span class="dl">&quot;</span><span class="ch">\n</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">'</span><span class="k">  </span><span class="dl">'</span></span> )
+  <span class="r">end</span>
+<span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_q_source">(<a href="javascript:show('q_source')">show</a>)</span>
+         <pre class="source" id="q_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Kernel</span>
+  <span class="r">def</span> <span class="fu">q</span>(*args)
+    puts args.map( &amp;<span class="sy">:inspect</span> ).join <span class="s"><span class="dl">'</span><span class="k">  </span><span class="dl">'</span></span>
+  <span class="r">end</span>
+<span class="r">end</span>
+
+<span class="c"># J-_-L</span></pre> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/q">github wiki</a></td></tr></table>
+        </div> 
+      <h2>Extras</h2>
+      <p class="text">
+        You can activate some additional aliases for Zucker functionality by executing
+        <code class="scode">Zucker.more_aliases!</code>
+      </p>
 
       <h2>Changelog</h2>
       <div class="cubes">

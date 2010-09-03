@@ -522,6 +522,11 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       </p>
 
        ....
+      <h2>Extras</h2>
+      <p class="text">
+        You can activate some additional aliases for Zucker functionality by executing
+        <code class="scode">Zucker.more_aliases!</code>
+      </p>
 
       <h2>Changelog</h2>
       <div class="cubes">
