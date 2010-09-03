@@ -5,7 +5,6 @@ require 'yaml'
 require 'coderay'
 
 class ZuckerDoc
-  PACKAGES     = %w|default debug|
   ORDER        = %w|summary why methods info spec source versions discussion|
   DESCRIPTIONS = {
     'summary'  => 'Summary',
@@ -41,6 +40,20 @@ class ZuckerDoc
           $& # no changes
         end
       end
+
+      # build package list
+      @packages = Zucker::PACKAGES.map{ |pkg, _|
+      descriptions = {
+        :env        => 'Cubes for collecting information.',
+        :to_proc    => 'Adds some ⇧to_proc⇧ extensions to use with ⇧&⇧.',
+        :object     => 'Extensions for ⇧Object⇧.',
+        :debug      => 'Print debugging tools.',
+        :extensions => 'More extensions for Ruby base classes.',
+        :control    => 'Cubes that change program behaviour.',
+        :shortcuts  => 'Cubes that save you keystrokes or disambiguate things.',
+      }
+        "<li><strong>#{pkg}</strong>: #{ descriptions[pkg] }</li>"
+      }.join "\n"
 
 
       # collect description files and turn them to html
@@ -282,6 +295,11 @@ table{
   display:block;
 }
 
+ul{
+  margin:5px 0px !important;
+  padding:none;
+}
+
 th{
   text-align:left;
   vertical-align:top;
@@ -500,7 +518,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <h3 style="padding-left:1.3em">Which methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
       <p class="text">
 
-      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, square_brackets_for, tap_on, make_new</code>
+      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, tap_on, make_new</code>
       </p>
 
        ....

@@ -91,6 +91,11 @@ table{
   display:block;
 }
 
+ul{
+  margin:5px 0px !important;
+  padding:none;
+}
+
 th{
   text-align:left;
   vertical-align:top;
@@ -295,7 +300,13 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       </p>
       <h3 style="padding-left:1.3em">Packages</h3>
       <ul class="text">
-        
+        <li><strong>env</strong>: Cubes for collecting information.</li>
+<li><strong>to_proc</strong>: Adds some <code>to_proc</code> extensions to use with <code>&</code>.</li>
+<li><strong>object</strong>: Extensions for <code>Object</code>.</li>
+<li><strong>debug</strong>: Print debugging tools.</li>
+<li><strong>extensions</strong>: More extensions for Ruby base classes.</li>
+<li><strong>control</strong>: Cubes that change program behaviour.</li>
+<li><strong>shortcuts</strong>: Cubes that save you keystrokes or disambiguate things.</li>
       </ul>
       <p class="text">
         Furthermore, there are two meta packages available: <strong>all</strong> simply requires all cubes and <strong>default</strong> requires all cubes except <strong>debug</strong>.
@@ -309,7 +320,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <h3 style="padding-left:1.3em">Which methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
       <p class="text">
 
-      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, square_brackets_for, tap_on, make_new</code>
+      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, tap_on, make_new</code>
       </p>
 
        
@@ -330,7 +341,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">RubyEngine</sp
     <span class="c"># please see the source or description file</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_engine_source">(<a href="javascript:show('engine_source')">show</a>)</span>
-         <pre class="source" id="engine_source"><span class="r">module</span> <span class="cl">RubyEngine</span>
+         <pre class="source" id="engine_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">RubyEngine</span>
     <span class="c"># try to guess the interpreter</span>
     <span class="iv">@interpreter</span> = <span class="r">case</span>
     <span class="r">when</span> <span class="co">RUBY_PLATFORM</span> == <span class="s"><span class="dl">'</span><span class="k">parrot</span><span class="dl">'</span></span>
@@ -415,7 +428,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Info</span><sp
     <span class="c"># see sourcefile for the list</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_info_source">(<a href="javascript:show('info_source')">show</a>)</span>
-         <pre class="source" id="info_source"><span class="r">module</span> <span class="cl">Info</span>
+         <pre class="source" id="info_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Info</span>
   <span class="r">class</span> &lt;&lt; <span class="cl">self</span>
     <span class="c"># hash like access</span>
     <span class="r">def</span> <span class="fu">[]</span>(what)
@@ -624,7 +639,8 @@ describe <span class="s"><span class="dl">'</span><span class="k">OS.is?</span><
     !!( <span class="co">RbConfig</span>::<span class="co">CONFIG</span>[<span class="s"><span class="dl">'</span><span class="k">host_os</span><span class="dl">'</span></span>] =~ <span class="rx"><span class="dl">/</span><span class="k">linux</span><span class="dl">/</span></span> )
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_os_source">(<a href="javascript:show('os_source')">show</a>)</span>
-         <pre class="source" id="os_source">require <span class="s"><span class="dl">'</span><span class="k">rbconfig</span><span class="dl">'</span></span>
+         <pre class="source" id="os_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+require <span class="s"><span class="dl">'</span><span class="k">rbconfig</span><span class="dl">'</span></span>
 
 <span class="r">module</span> <span class="cl">OS</span>
   <span class="r">class</span> &lt;&lt; <span class="cl">self</span>
@@ -749,7 +765,8 @@ describe <span class="s"><span class="dl">'</span><span class="k">RubyVersion</s
     capture_stderr{ <span class="co">RUBY_VERSION</span> = <span class="iv">@remember_version</span> }
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_version_source">(<a href="javascript:show('version_source')">show</a>)</span>
-         <pre class="source" id="version_source">require <span class="s"><span class="dl">'</span><span class="k">date</span><span class="dl">'</span></span>
+         <pre class="source" id="version_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+require <span class="s"><span class="dl">'</span><span class="k">date</span><span class="dl">'</span></span>
 require <span class="s"><span class="dl">'</span><span class="k">time</span><span class="dl">'</span></span>
 
 <span class="r">module</span> <span class="cl">RubyVersion</span>
@@ -887,7 +904,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Array#to_proc<
     [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map( &amp;[[<span class="sy">:*</span>,<span class="i">2</span>],[<span class="sy">:+</span>,<span class="i">4</span>]] ).should == [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>].map{|i| i*<span class="i">2</span> + <span class="i">4</span> }
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_array2proc_source">(<a href="javascript:show('array2proc_source')">show</a>)</span>
-         <pre class="source" id="array2proc_source"><span class="r">class</span> <span class="cl">Array</span>
+         <pre class="source" id="array2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Array</span>
   <span class="r">def</span> <span class="fu">to_proc</span>
     <span class="co">Proc</span>.new{ |obj|
       <span class="r">if</span> <span class="pc">self</span>.first.is_a? <span class="co">Array</span>
@@ -913,7 +932,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Class#to_proc<
     [ [<span class="i">1</span>,<span class="i">2</span>],[<span class="i">3</span>,<span class="i">5</span>,<span class="i">6</span>,<span class="i">7</span>,<span class="i">3</span>] ].map(&amp;<span class="co">Set</span>).should == [ <span class="co">Set</span>[<span class="i">1</span>,<span class="i">2</span>], <span class="co">Set</span>[<span class="i">5</span>,<span class="i">6</span>,<span class="i">7</span>,<span class="i">3</span>] ]
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_class2proc_source">(<a href="javascript:show('class2proc_source')">show</a>)</span>
-         <pre class="source" id="class2proc_source"><span class="r">class</span> <span class="cl">Class</span>
+         <pre class="source" id="class2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Class</span>
   <span class="r">def</span> <span class="fu">to_proc</span>
     <span class="co">Proc</span>.new <span class="r">do</span> |*args|
       <span class="pc">self</span>.new *args
@@ -939,7 +960,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Hash#to_proc</
     }).should == [<span class="i">1</span>, <span class="i">1002</span>, <span class="i">3</span>, <span class="s"><span class="dl">&quot;</span><span class="k">4</span><span class="dl">&quot;</span></span>]
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_hash2proc_source">(<a href="javascript:show('hash2proc_source')">show</a>)</span>
-         <pre class="source" id="hash2proc_source"><span class="r">class</span> <span class="cl">Hash</span>
+         <pre class="source" id="hash2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Hash</span>
   <span class="r">def</span> <span class="fu">to_proc</span>
     <span class="co">Proc</span>.new{ |obj|
       <span class="r">if</span> <span class="pc">self</span>.member? obj
@@ -965,7 +988,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Regexp#to_proc
     <span class="s"><span class="dl">%w|</span><span class="k">just another string array</span><span class="dl">|</span></span>.select(  &amp;<span class="rx"><span class="dl">/</span><span class="k">[jy]</span><span class="dl">/</span></span>).should == [<span class="s"><span class="dl">&quot;</span><span class="k">just</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">array</span><span class="dl">&quot;</span></span>]
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_regexp2proc_source">(<a href="javascript:show('regexp2proc_source')">show</a>)</span>
-         <pre class="source" id="regexp2proc_source"><span class="r">class</span> <span class="cl">Regexp</span>
+         <pre class="source" id="regexp2proc_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Regexp</span>
   <span class="r">def</span> <span class="fu">to_proc</span>
     proc <span class="r">do</span> |e|
       e.to_s[<span class="pc">self</span>]
@@ -1000,7 +1025,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#blank?<
     }
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_blank_source">(<a href="javascript:show('blank_source')">show</a>)</span>
-         <pre class="source" id="blank_source"><span class="r">class</span> <span class="cl">Object</span>
+         <pre class="source" id="blank_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Object</span>
   <span class="r">def</span> <span class="fu">blank?</span>
     <span class="r">if</span> respond_to? <span class="sy">:empty?</span> <span class="r">then</span> empty? <span class="r">else</span> !<span class="pc">self</span> <span class="r">end</span>
   <span class="r">end</span>
@@ -1042,7 +1069,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#mcopy</
     b.should_not == a
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_mcopy_source">(<a href="javascript:show('mcopy_source')">show</a>)</span>
-         <pre class="source" id="mcopy_source"><span class="r">class</span> <span class="cl">Object</span>
+         <pre class="source" id="mcopy_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Object</span>
   <span class="r">def</span> <span class="fu">mcopy</span>
     <span class="co">Marshal</span>.load <span class="co">Marshal</span>.dump <span class="pc">self</span>
   <span class="r">end</span>
@@ -1061,7 +1090,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#not</sp
     <span class="pc">nil</span>.not.nil?.should == <span class="pc">false</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_not_source">(<a href="javascript:show('not_source')">show</a>)</span>
-         <pre class="source" id="not_source"><span class="r">class</span> <span class="cl">Object</span>
+         <pre class="source" id="not_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Object</span>
   <span class="r">def</span> <span class="fu">not</span>
     <span class="co">NotClass</span>.new <span class="pc">self</span>
   <span class="r">end</span>
@@ -1133,7 +1164,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#D</span
     <span class="r">end</span>.should == <span class="s"><span class="dl">%{</span><span class="k">This is a: 1</span><span class="ch">\n</span><span class="k">This is a: 1</span><span class="ch">\n</span><span class="k">This is a: true</span><span class="ch">\n</span><span class="dl">}</span></span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_D_source">(<a href="javascript:show('D_source')">show</a>)</span>
-         <pre class="source" id="D_source"><span class="r">module</span> <span class="cl">Kernel</span>
+         <pre class="source" id="D_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Kernel</span>
   <span class="r">def</span> <span class="fu">D</span>(*args, &amp;block)
     <span class="r">if</span> args.empty?
       tap{
@@ -1175,7 +1208,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Binding#inspec
     <span class="c">#pending '#TODO: write spec'</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_binding_source">(<a href="javascript:show('binding_source')">show</a>)</span>
-         <pre class="source" id="binding_source"><span class="r">class</span> <span class="cl">Binding</span>
+         <pre class="source" id="binding_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Binding</span>
   <span class="r">def</span> <span class="fu">inspect</span>
     put_vars = lambda { |array|
       <span class="r">if</span> array.empty?
@@ -1218,7 +1253,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#method_
     <span class="c">#pending '#TODO: write spec'</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_mm_source">(<a href="javascript:show('mm_source')">show</a>)</span>
-         <pre class="source" id="mm_source"><span class="r">module</span> <span class="cl">Kernel</span>
+         <pre class="source" id="mm_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Kernel</span>
   <span class="r">def</span> <span class="fu">method_list</span>(levels = <span class="i">1</span>)
     <span class="r">if</span> <span class="pc">self</span>.is_a? <span class="co">Module</span>
       klass, method_function = <span class="pc">self</span>, <span class="sy">:public_methods</span>
@@ -1270,7 +1307,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Kernel#q</span
     <span class="r">end</span>.chop.gsub( <span class="s"><span class="dl">&quot;</span><span class="ch">\n</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">'</span><span class="k">  </span><span class="dl">'</span></span> )
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_q_source">(<a href="javascript:show('q_source')">show</a>)</span>
-         <pre class="source" id="q_source"><span class="r">module</span> <span class="cl">Kernel</span>
+         <pre class="source" id="q_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Kernel</span>
   <span class="r">def</span> <span class="fu">q</span>(*args)
     puts args.map( &amp;<span class="sy">:inspect</span> ).join <span class="s"><span class="dl">'</span><span class="k">  </span><span class="dl">'</span></span>
   <span class="r">end</span>
@@ -1306,7 +1345,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Array#chrs</sp
     [<span class="i">72</span>, <span class="i">97</span>, <span class="i">108</span>, <span class="i">108</span>, <span class="i">111</span>].chrs.should == <span class="s"><span class="dl">'</span><span class="k">Hallo</span><span class="dl">'</span></span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_array_source">(<a href="javascript:show('array_source')">show</a>)</span>
-         <pre class="source" id="array_source"><span class="r">class</span> <span class="cl">Array</span>
+         <pre class="source" id="array_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Array</span>
   <span class="r">def</span> <span class="fu">^</span>(other) <span class="c"># TODO: more efficient</span>
     (<span class="pc">self</span> - other) +
     (other - <span class="pc">self</span>)
@@ -1338,7 +1379,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Enumerable#mas
     [<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>].mash{|e| [e, e.to_s] }.should == {<span class="i">1</span>=&gt;<span class="s"><span class="dl">'</span><span class="k">1</span><span class="dl">'</span></span>,<span class="i">2</span>=&gt;<span class="s"><span class="dl">'</span><span class="k">2</span><span class="dl">'</span></span>,<span class="i">3</span>=&gt;<span class="s"><span class="dl">'</span><span class="k">3</span><span class="dl">'</span></span>,}
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_enumerable_source">(<a href="javascript:show('enumerable_source')">show</a>)</span>
-         <pre class="source" id="enumerable_source"><span class="r">module</span> <span class="cl">Enumerable</span>
+         <pre class="source" id="enumerable_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Enumerable</span>
   <span class="r">def</span> <span class="fu">mash</span>
     ret = {}
     each{ |kv|
@@ -1378,7 +1421,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Hash#&amp;</sp
     (a &amp; b).should == { <span class="i">1</span>=&gt;<span class="i">4</span> }
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_hash_source">(<a href="javascript:show('hash_source')">show</a>)</span>
-         <pre class="source" id="hash_source"><span class="r">class</span> <span class="cl">Hash</span>
+         <pre class="source" id="hash_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Hash</span>
   <span class="r">def</span> <span class="pc">self</span>.<span class="fu">zip</span>(keys,values)
     <span class="co">Hash</span>[ *keys.zip( values ).flatten ]
   <span class="r">end</span>
@@ -1476,7 +1521,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">String#ords</s
     <span class="r">end</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_string_source">(<a href="javascript:show('string_source')">show</a>)</span>
-         <pre class="source" id="string_source"><span class="r">class</span> <span class="cl">String</span>
+         <pre class="source" id="string_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">String</span>
   <span class="r">def</span> <span class="fu">-</span>(rem)
     gsub( <span class="co">Regexp</span> === rem ? rem : rem.to_s, <span class="s"><span class="dl">'</span><span class="dl">'</span></span> )
   <span class="r">end</span>
@@ -1555,7 +1602,9 @@ describe <span class="co">String</span>, <span class="s"><span class="dl">'</spa
     -<span class="s"><span class="dl">'</span><span class="k">matz</span><span class="dl">'</span></span> == <span class="sy">:matz</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_unary_source">(<a href="javascript:show('unary_source')">show</a>)</span>
-         <pre class="source" id="unary_source"><span class="r">class</span> <span class="cl">String</span>
+         <pre class="source" id="unary_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">String</span>
   <span class="r">def</span> <span class="fu">+@</span>
     <span class="pc">self</span>
   <span class="r">end</span>
@@ -1598,7 +1647,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">Regexp#|</span
 describe <span class="s"><span class="dl">'</span><span class="k">String#|</span><span class="dl">'</span></span> <span class="r">do</span>
   it_should_behave_like <span class="s"><span class="dl">'</span><span class="k">Regexp.union operator</span><span class="dl">'</span></span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_union_source">(<a href="javascript:show('union_source')">show</a>)</span>
-         <pre class="source" id="union_source"><span class="r">class</span> <span class="cl">Regexp</span>
+         <pre class="source" id="union_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Regexp</span>
   <span class="r">def</span> <span class="fu">|</span>(arg)
     <span class="co">Regexp</span>.union <span class="pc">self</span>, arg.is_a?(<span class="co">Regexp</span>) ? arg : arg.to_s
   <span class="r">end</span>
@@ -1653,7 +1704,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">egonil</span><
     <span class="r">end</span>.should raise_exception <span class="co">NoMethodError</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_egonil_source">(<a href="javascript:show('egonil_source')">show</a>)</span>
-         <pre class="source" id="egonil_source"><span class="r">def</span> <span class="fu">egonil</span>(nil_value = <span class="pc">nil</span>)
+         <pre class="source" id="egonil_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">def</span> <span class="fu">egonil</span>(nil_value = <span class="pc">nil</span>)
   <span class="r">yield</span>
 <span class="r">rescue</span> <span class="co">NoMethodError</span> =&gt; e
   <span class="r">if</span> e.message =~ <span class="rx"><span class="dl">/</span><span class="k">NilClass$</span><span class="dl">/</span></span>
@@ -1729,8 +1782,11 @@ describe <span class="s"><span class="dl">'</span><span class="k">Object#iterate
   it <span class="s"><span class="dl">'</span><span class="k">should return enumerators if no block is applied</span><span class="dl">'</span></span> <span class="r">do</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_iterate_source">(<a href="javascript:show('iterate_source')">show</a>)</span>
-         <pre class="source" id="iterate_source"><span class="r">def</span> <span class="fu">iterate</span>(*params)
+         <pre class="source" id="iterate_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">def</span> <span class="fu">iterate</span>(*params)
   <span class="c"># params.shift.zip(*params).each{ |*elements| yield *elements }</span>
+  raise <span class="co">ArgumentError</span>, <span class="s"><span class="dl">&quot;</span><span class="k">wrong number of arguments (0)</span><span class="dl">&quot;</span></span> <span class="r">if</span> params.empty?
 
   first = params.shift
   <span class="r">if</span> params.empty? <span class="c"># single param - like each</span>
@@ -1789,13 +1845,8 @@ describe <span class="s"><span class="dl">'</span><span class="k">ignore_sigint!
 <span class="r">end</span>
 
 <span class="c"># J-_-L</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_kernel_source">(<a href="javascript:show('kernel_source')">show</a>)</span>
-         <pre class="source" id="kernel_source"><span class="c">=begin usage
-  activate_warnings!: &quot;activate_warnings! # sets $VERBOSE to 1&quot;
-  deactivate_warnings!: &quot;deactivate_warnings! # sets $VERBOSE to 0&quot;
-  executed_directly?, standalone?: &quot;executed_directly? # checks, if the current file is run directly -&gt; true&quot;
-  library?: &quot;library? # checks, if the current file is run directly -&gt; false&quot;
-  ignore_sigint!: &quot;ignore_sigint! # blocks CTRL+C&quot;
-=end</span>
+         <pre class="source" id="kernel_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
 <span class="r">module</span> <span class="cl">Kernel</span>
   <span class="r">def</span> <span class="fu">activate_warnings!</span>
     <span class="gv">$VERBOSE</span> = <span class="pc">true</span>
@@ -1857,7 +1908,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">sandbox</span>
     <span class="r">end</span>.should == <span class="co">SecurityError</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_sandbox_source">(<a href="javascript:show('sandbox_source')">show</a>)</span>
-         <pre class="source" id="sandbox_source"><span class="r">module</span> <span class="cl">Kernel</span>
+         <pre class="source" id="sandbox_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">module</span> <span class="cl">Kernel</span>
   <span class="r">def</span> <span class="fu">sandbox</span>(rescueblock_or_default=<span class="pc">nil</span>)
     <span class="co">Thread</span>.start <span class="r">do</span>
       <span class="gv">$SAFE</span> = <span class="i">4</span>
@@ -1905,7 +1958,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">make_new</span
     res.should == { <span class="i">1</span>=&gt;<span class="i">2</span> }
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_tap_source">(<a href="javascript:show('tap_source')">show</a>)</span>
-         <pre class="source" id="tap_source"><span class="r">def</span> <span class="fu">tap_on</span>(obj, &amp;block)
+         <pre class="source" id="tap_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">def</span> <span class="fu">tap_on</span>(obj, &amp;block)
   obj.tap &amp;block
 <span class="r">end</span>
 
@@ -2043,7 +2098,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">alias_methods_
     <span class="r">end</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_alias_for_source">(<a href="javascript:show('alias_for_source')">show</a>)</span>
-         <pre class="source" id="alias_for_source"><span class="r">def</span> <span class="fu">alias_for</span>(m, *aliases)
+         <pre class="source" id="alias_for_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">def</span> <span class="fu">alias_for</span>(m, *aliases)
   aliases.each{ |a|
     class_eval <span class="s"><span class="dl">&quot;</span><span class="k">alias </span><span class="il"><span class="idl">#{</span>a<span class="idl">}</span></span><span class="k"> </span><span class="il"><span class="idl">#{</span>m<span class="idl">}</span></span><span class="dl">&quot;</span></span>
   }
@@ -2077,7 +2134,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">(aliases)</spa
     <span class="co">NaN</span>.nan?.should         == <span class="pc">true</span>
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_aliases_source">(<a href="javascript:show('aliases_source')">show</a>)</span>
-         <pre class="source" id="aliases_source"><span class="r">class</span> <span class="cl">Object</span>
+         <pre class="source" id="aliases_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Object</span>
   <span class="r">alias</span> <span class="fu">is_an?</span> <span class="fu">is_a?</span> <span class="c"># thanks to utility_belt</span>
 <span class="r">end</span>
 
@@ -2153,7 +2212,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">instance_varia
 
   <span class="r">end</span>
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_ivars_source">(<a href="javascript:show('ivars_source')">show</a>)</span>
-         <pre class="source" id="ivars_source"><span class="r">def</span> <span class="fu">instance_variables_from</span>(obj, *only)
+         <pre class="source" id="ivars_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">def</span> <span class="fu">instance_variables_from</span>(obj, *only)
   iter =
   <span class="r">if</span>    obj.is_a? <span class="co">Binding</span>
     obj.eval(<span class="s"><span class="dl">'</span><span class="k">local_variables</span><span class="dl">'</span></span>).map{|e| [obj.eval(<span class="s"><span class="dl">&quot;</span><span class="il"><span class="idl">#{</span>e<span class="idl">}</span></span><span class="dl">&quot;</span></span>), e] }
@@ -2253,7 +2314,9 @@ describe <span class="s"><span class="dl">'</span><span class="k">square_bracket
   <span class="r">end</span>
 
 <span class="r">end</span></pre> </td></tr><tr><th>Source</th>    <td> <span id="show_square_brackets_for_source">(<a href="javascript:show('square_brackets_for_source')">show</a>)</span>
-         <pre class="source" id="square_brackets_for_source"><span class="r">class</span> <span class="cl">Module</span>
+         <pre class="source" id="square_brackets_for_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
+
+<span class="r">class</span> <span class="cl">Module</span>
   <span class="r">def</span> <span class="fu">square_brackets_for</span>(ivar, assignment = <span class="pc">true</span>)
     <span class="c">#  undef []   if respond_to? :[]</span>
     <span class="c">#  undef []=  if respond_to? :[]=</span>
