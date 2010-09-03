@@ -512,6 +512,8 @@ describe <span class="s"><span class="dl">'</span><span class="k">ignore_sigint!
          <pre class="source" id="kernel_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
 
 <span class="r">module</span> <span class="cl">Kernel</span>
+  private
+
   <span class="r">def</span> <span class="fu">activate_warnings!</span>
     <span class="gv">$VERBOSE</span> = <span class="pc">true</span>
   <span class="r">end</span>
@@ -581,6 +583,8 @@ describe <span class="s"><span class="dl">'</span><span class="k">sandbox</span>
          <pre class="source" id="sandbox_source">require <span class="s"><span class="dl">'</span><span class="k">zucker</span><span class="dl">'</span></span>
 
 <span class="r">module</span> <span class="cl">Kernel</span>
+  private
+
   <span class="r">def</span> <span class="fu">sandbox</span>(rescueblock_or_default=<span class="pc">nil</span>)
     <span class="co">Thread</span>.start <span class="r">do</span>
       <span class="gv">$SAFE</span> = <span class="i">4</span>

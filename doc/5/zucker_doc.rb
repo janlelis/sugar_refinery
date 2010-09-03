@@ -195,8 +195,8 @@ class ZuckerDoc
     end
 
     def convert_html_chars(string, protect_spaces = false)
-      string = string.to_s.gsub( "\n", '<br/>' )
       string = replace_html_special_chars( string )
+      string = string.to_s.gsub( "\n", '<br/>' )
 
       if protect_spaces
         string.gsub(' ',' ')
