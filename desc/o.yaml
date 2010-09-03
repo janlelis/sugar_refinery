@@ -1,0 +1,10 @@
+o:
+  summary: This method outputs the current method, line, file and label (if given).
+  methods:
+    o: |
+      o # e.g:
+      o:Label # e.g:
+  versions:
+  - 1.9
+  - 1.8
+
