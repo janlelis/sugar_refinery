@@ -25,10 +25,10 @@ block_given?
  - #{self.eval 'block_given?'}"
 
   end
-
-  alias v  binding
-  alias vv binding
 end
+
+alias v  binding
+alias vv binding
 
 # J-_-L
 
