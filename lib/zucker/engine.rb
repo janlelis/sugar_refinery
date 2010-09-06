@@ -3,8 +3,7 @@ module RubyEngine
     @interpreter = case
     when RUBY_PLATFORM == 'parrot'
       'cardinal'
-    when Object.constants.include?( :RUBY_ENGINE ) ||
-         Object.constants.include?( 'RUBY_ENGINE'  )
+    when Object.const_defined? :RUBY_ENGINE
       if RUBY_ENGINE == 'ruby'
         if RUBY_DESCRIPTION =~ /Enterprise/
           'ree'
@@ -12,7 +11,7 @@ module RubyEngine
           'mri'
         end
       else
-        RUBY_ENGINE.to_sym # jruby, rbx, ironruby, macruby, etc.
+        RUBY_ENGINE.to_s # jruby, rbx, ironruby, macruby, etc.
       end
     else # probably 1.8
       'mri'
