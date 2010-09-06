@@ -1,3 +1,5 @@
+require 'zucker'
+
 # require all the sugar ;)
 # see README for an explaination of what they do
 

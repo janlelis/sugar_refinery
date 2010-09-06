@@ -1,3 +1,5 @@
+require 'zucker'
+
 module RubyEngine
   class << self
     # try to guess it

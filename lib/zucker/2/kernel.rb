@@ -1,3 +1,5 @@
+require 'zucker'
+
 def activate_warnings!
   $VERBOSE = true
 end

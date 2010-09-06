@@ -1,4 +1,4 @@
-require 'args'
+require_relative 'args'
 
 describe 'arguments' do
   it 'should create a hash containing all arguments with its names' do

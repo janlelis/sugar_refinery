@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Regexp
   def to_proc
     proc do |e|

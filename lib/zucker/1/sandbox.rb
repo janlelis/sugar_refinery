@@ -1,3 +1,5 @@
+require 'zucker'
+
 def sandbox(rescueblock=nil)
   Thread.start do
     $SAFE = 4

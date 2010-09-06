@@ -1,0 +1,16 @@
+iterate:
+  summary: Iterate over one or more collections.
+  why: "It's like ⇧.each⇧ with two differences: It feels more like a control structure and you can easily iterate over multiple objects."
+  methods:
+    iterate: |
+      iterate [1,2], [3,4,5] do |e,f|
+        puts "#{e},#{f}"
+      end
+      # outputs
+      #  1,3
+      #  2,4
+      #  ,5
+  versions:
+  - 1.9
+  - 1.8
+

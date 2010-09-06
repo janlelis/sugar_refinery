@@ -1,3 +1,5 @@
+require 'zucker'
+
 def iterate(*params)
   # params.shift.zip(*params).each{ |*elements| yield *elements }
 

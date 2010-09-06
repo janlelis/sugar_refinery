@@ -1,3 +1,5 @@
+require 'zucker'
+
 module RubyVersion
   class << self
     def to_s

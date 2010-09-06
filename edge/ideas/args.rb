@@ -13,9 +13,10 @@ alias args arguments
 #### EVIL ####
 # set up binding tracer
 @@last_bindings ||= []
-set_trace_func lambda { |event, _, _, _, bind, _|
+set_trace_func lambda { |event, _, _, _, binding_, _|
   if event[/call/]
-    @@last_bindings.unshift bind
+#p binding_.eval "local_variables" if binding_
+    @@last_bindings.unshift binding_
     @@last_bindings.pop if @@last_bindings.size > 5
   end
 }

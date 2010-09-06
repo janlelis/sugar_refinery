@@ -1,5 +1,7 @@
 require 'zucker'
 
+require 'zucker'
+
 # default
 zucker = %w|
 alias_for

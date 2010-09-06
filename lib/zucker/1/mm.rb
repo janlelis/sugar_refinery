@@ -1,3 +1,5 @@
+require 'zucker'
+
 module Kernel
   def method_list(levels = 1)
     if self.is_a? Module

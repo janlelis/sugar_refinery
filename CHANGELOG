@@ -1,4 +1,8 @@
-Zucker 4.next
+2010-09-04 | Zucker 5
+* debug edition -  added two debug helpers: oo (output line, method, file) and cc (output method callstack)
+* renamed cube D to dd add added more debug aliases (for mm and binding)
+* fixed __SPECIAL_VARS__ in info and kernel cube and some minor bugfixes
+* Zucker.activate_more_aliases! option
 * added Hash#&
 * added aliases: File.filename (for basename), Dir.join and Dir.split (for File.join, split)
 * added a flexible requiring mechansim in zucker.rb (no api changes)

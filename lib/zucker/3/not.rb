@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Object
   def not
     NotClass.new self

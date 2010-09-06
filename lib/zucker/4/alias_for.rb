@@ -1,3 +1,5 @@
+require 'zucker'
+
 def alias_for(m, *aliases)
   aliases.each{ |a|
     class_eval "alias #{a} #{m}"

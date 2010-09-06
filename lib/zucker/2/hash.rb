@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Hash
   def self.zip(keys,values)
     Hash[ *keys.zip( values ).flatten ]

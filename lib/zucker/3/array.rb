@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Array
   def ^(other) # TODO: more efficient
     (self - other) +

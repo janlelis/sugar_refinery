@@ -1,3 +1,5 @@
+require 'zucker'
+
 module RubyEngine
     # try to guess the interpreter
     @interpreter = case

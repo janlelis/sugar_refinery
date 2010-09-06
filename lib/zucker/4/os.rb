@@ -1,3 +1,5 @@
+require 'zucker'
+
 require 'rbconfig'
 
 module OS

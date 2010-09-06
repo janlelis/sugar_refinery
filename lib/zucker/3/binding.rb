@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Binding
   def inspect
     put_vars = lambda { |array|

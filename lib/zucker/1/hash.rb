@@ -1,3 +1,5 @@
+require 'zucker'
+
 class Hash
   def self.zip(keys,values)
     Hash[ *[1,2,3].zip( [4,5,6] ).flatten ]

@@ -1,3 +1,5 @@
+require 'zucker'
+
 def egonil(nil_value = nil)
   yield
 rescue NoMethodError => e

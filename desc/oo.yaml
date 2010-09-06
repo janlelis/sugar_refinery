@@ -1,0 +1,10 @@
+oo:
+  summary: The ⇧o⇧ method outputs the current method, line, file and label (if given).
+  methods:
+    o, oo: |
+      o # e.g: Reached method `irb_binding', line 1 of file (irb)
+      o:Label # e.g: Label: reached method `abc', line 7 of file (irb)
+  versions:
+  - 1.9
+  - 1.8
+
