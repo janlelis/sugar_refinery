@@ -11,8 +11,9 @@ def iterate(*params)
     else
       first.map.to_enum
     end
-  else
-    padded_first = Array.new( [first, *params].max_by{|e|e.to_a.size}.size ){|i| first[i] } # append nils
+  else # multiple params
+    max_size = [first, *params].max_by(&:count).size
+    padded_first = first.to_a + [nil]*(max_size - first.count)  # append nils
     obj = padded_first.zip *params
     if block_given?
       obj.map{|es| yield *es }
