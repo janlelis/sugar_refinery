@@ -75,6 +75,15 @@ module Info
     $:
   end
 
+  # user
+  def user_login
+    Etc.getlogin
+  end
+
+  def user_name
+    Etc.getpwnam(user_login).gecos.split(',')[0]
+  end
+
   # current
 
   def current_file #  __FILE__
