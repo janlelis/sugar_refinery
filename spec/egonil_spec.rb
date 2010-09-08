@@ -7,10 +7,6 @@ describe 'egonil' do
     end.should_not raise_exception
   end
 
-  it 'should return the nil_value if given' do
-    egonil(9){ nil.some_methods.that[:do].not.exist }.should == 9
-  end
-
   it 'should restore default behaviour after the block' do
     proc do
       egonil{ nil.some_methods.that[:do].not.exist }
