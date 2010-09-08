@@ -1,4 +1,6 @@
 require 'zucker'
+require 'rbconfig'
+require 'etc'
 
 module Info
   class << self
@@ -158,7 +160,7 @@ module Info
   end
 
   # ruby version info
-  def ruby_version
+  def ruby_version # also see the RubyVersion cube
     ::RUBY_VERSION
   end
 
@@ -172,6 +174,10 @@ module Info
 
   def ruby_release_date
     ::RUBY_RELEASE_DATE
+  end
+
+  def ruby_engine # warning! not support by every implementation. It's saver to use the RubyEngine cube
+    ::RUBY_ENGINE
   end
 end
 
