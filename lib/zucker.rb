@@ -65,8 +65,17 @@ module Zucker
       aliases.each{ |old, new|
         Object.class_eval "alias #{new} #{old}; loaded_aliases << :#{new}" rescue nil
       }
-      eval "::RV = RubyVersion; loaded_aliases << :RV" rescue nil
-      eval "::RE = RubyEngine;  loaded_aliases << :RE" rescue nil
+
+      #eval "::RV = RubyVersion; loaded_aliases << :RV" rescue nil
+      (
+         Object.const_set '::RV', RubyVersion
+         loaded_aliases << :RV
+      ) rescue nil
+      #eval "::RE = RubyEngine; loaded_aliases << :RE" rescue nil
+      (
+         Object.const_set '::RE', RubyEngine
+         loaded_aliases << :RE
+      ) rescue nil
       
       loaded_aliases
     end
