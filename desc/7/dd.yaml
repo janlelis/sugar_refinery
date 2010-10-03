@@ -1,0 +1,23 @@
+dd:
+  summary: Easy debug printing with the ⇧p⇧ alternative ⇧.d⇧. It outputs to stdout and returns ⇧self⇧. Accepts a block.
+  methods:
+    Object#d, Object#dd: |
+      some.d.methods.d.noone.d.knows.d
+      # ...outputs 4 lines with the inspected objects
+      # => (result)
+
+      21+Math.sin(42).d
+      # outputs -0.916521547915634
+      # => 20.0834784520844
+
+      name = 'Earth'
+      'Hello ' + name.d{|e| "The length is: #{e.size}"}
+      # outputs "The length is: 5"
+      # => 'Hello Earth'
+  info:
+  - "This is inspired by the →⇧.tap⇧ method→http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions→."
+  - There is also ⇧tap⇧ cube with more ⇧tap⇧ methods.
+  versions:
+  - 1.9
+  - 1.8
+
