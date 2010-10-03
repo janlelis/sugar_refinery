@@ -1,0 +1,15 @@
+engine:
+  summary: Adds a ⇧RubyEngine⇧ class for easy compatibility checks.
+  methods:
+    RubyEngine: |
+    RubyEngine: "# outputs the interpreter name"
+    RubyEngine.mri?: "RubyEngine.mri? # true if using the official Ruby interpreter"
+    RubyEngine.jruby?: "RubyEngine.jruby? # true if using JRuby"
+    RubyEngine.rubinius?: "RubyEngine.rubinius? # true if using rubinius"
+    RubyEngine.ree?: "RubyEngine.ree? # true if using enterprise edition"
+    RubyEngine.ironruby?: "RubyEngine.ironruby? # true if using IronRuby"
+    RubyEngine.macruby?: "RubyEngine.macruby? # true if using MacRuby"
+    RubyEngine.cardinal?: "RubyEngine.cardinal? # true if using parrot"
+  versions:
+  - 1.9
+  - 1.8

@@ -1,0 +1,13 @@
+array:
+  summary: Methods one could miss for ⇧Array⇧.
+  why:
+  - ⇧Array⇧ has ⇧&⇧ and ⇧|⇧, but why does it not have ⇧^⇧?
+  - ⇧sum⇧ is just needed pretty often..
+  methods:
+    Array#^: "[1,2,3,4] ^ [3,4,5,6]  # => [1,2,5,6]"
+    Array#sum: "[1,2,3,4,5].sum  # => 15"
+    Array#chrs: "[72, 97, 108, 108, 111].chrs  # => 'Hallo'"
+  versions:
+  - 1.9
+  - 1.8
+
