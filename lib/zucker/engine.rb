@@ -5,7 +5,7 @@ module RubyEngine
     @interpreter = case
     when RUBY_PLATFORM == 'parrot'
       'cardinal'
-    when Object.const_defined? :RUBY_ENGINE
+    when Object.const_defined?(:RUBY_ENGINE)
       if RUBY_ENGINE == 'ruby'
         if RUBY_DESCRIPTION =~ /Enterprise/
           'ree'

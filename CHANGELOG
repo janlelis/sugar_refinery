@@ -1,7 +1,9 @@
-Zucker 5.next
-* small changes+bugfixes+doc improvements
+2010-10-03 | Zucker 6
+* bugfix for OS.posix?
+* small changes + bugfixes + doc improvements
 * added two user methods to Info
 * changed egonil semantics ( using method_missing, see http://rbjl.net/26/catch_nil.rb )
+* bugfix for vv
 
 2010-09-04 | Zucker 5
 * debug edition -  added two debug helpers: oo (output line, method, file) and cc (output method callstack)

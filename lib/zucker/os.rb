@@ -16,27 +16,32 @@ module OS
   module_function
 
   def linux?
-    OS.is? /linux|cygwin/
+    OS.is?( /linux|cygwin/ )
   end
 
   def mac?
-    OS.is? /mac|darwin/
+    OS.is?( /mac|darwin/ )
   end
 
   def bsd?
-    OS.is? /bsd/
+    OS.is?( /bsd/ )
   end
 
   def windows?
-    OS.is? /mswin|win|mingw/
+    OS.is?( /mswin|win|mingw/ )
   end
 
   def solaris?
-    OS.is? /solaris|sunos/
+    OS.is?( /solaris|sunos/ )
   end
 
   def posix?
-    linux? or mac? or bsd? or solaris? or Process.respond_to?(:fork)
+    linux? or mac? or bsd? or solaris? or begin 
+        fork do end
+        true
+      rescue NotImplementedError, NoMethodError
+        false
+      end
   end
 
   #def symbian?

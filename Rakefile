@@ -24,20 +24,21 @@ Spec::Rake::SpecTask.new('spec') do |t|
 end
 
 # gem
-PKG_FILES = FileList[ '[a-zA-Z]*', 'lib/**/*' ]
 spec = Gem::Specification.new do |s|
   s.name = 'zucker'
   s.version = Zucker::VERSION
   s.date = Zucker::DATE
-  s.authors = ['Jan Lelis','and many others']
+  s.authors = ['Jan Lelis','and others']
   s.email = 'mail@janlelis.de'
   s.summary = "Sweeten your Ruby code with this syntactic sugar :).
 Adds a lot of little helpers that you do not want to miss again.
 See http://rubyzucker.info"
+  s.description = s.summary
   s.homepage = 'http://rubyzucker.info'
-  s.files = PKG_FILES.to_a
+  s.files = FileList[ '[a-zA-Z]*', 'lib/**/*' ].to_a
   s.require_paths = ["lib"]
   s.required_ruby_version = '>= 1.8.7' # 1.9 recommended
+  s.add_development_dependency 'coderay'
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
