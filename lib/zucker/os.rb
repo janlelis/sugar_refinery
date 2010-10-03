@@ -28,7 +28,7 @@ module OS
   end
 
   def windows?
-    OS.is?( /mswin|win|mingw/ )
+    OS.is?( /mswin|mingw/ )
   end
 
   def solaris?

@@ -500,7 +500,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 
       <h2>Install</h2>
       <p class="text">
-        <code class="scode">gem install zucker # might need sudo</code>
+        <code class="scode">gem install zucker --no-rdoc --no-ri # might need sudo</code>
       </p>
       <h3 style="padding-left:1.3em">Quickstart</h3>
       <p class="text">

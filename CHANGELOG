@@ -1,3 +1,7 @@
+2010-10-03 | Zucker 7
+* fixed critical OS.windows? bug
+
+
 2010-10-03 | Zucker 6
 * no new cubes
 * bugfix for OS.posix?
@@ -5,6 +9,7 @@
 * added two user methods to Info
 * changed egonil semantics ( using method_missing, see http://rbjl.net/26/catch_nil.rb )
 * bugfix for vv
+
 
 2010-09-04 | Zucker 5
 * debug edition -  added two debug helpers: oo (output line, method, file) and cc (output method callstack)
