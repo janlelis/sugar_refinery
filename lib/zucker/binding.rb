@@ -1,7 +1,7 @@
 require 'zucker'
 
 class Binding
-  def inspect
+  def variables
     put_vars = lambda { |array|
       if array.empty?
         ' - none'
@@ -25,10 +25,9 @@ block_given?
  - #{self.eval 'block_given?'}"
 
   end
-end
 
-alias v  binding
-alias vv binding
+  alias vars variables
+end
 
 # J-_-L
 

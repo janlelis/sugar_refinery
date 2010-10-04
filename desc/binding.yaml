@@ -1,8 +1,8 @@
 binding:
-  summary: Adds a verbose ⇧Binding#inspect⇧.
+  summary: Adds a ⇧Binding#vars⇧.
   why: It gives you information about the current environment variables.
   methods:
-    Binding#inspect, v, vv: |
+    Binding#variables, Binding#vars: |
      # shows your current environment's variables, irb example:
      >> a=3
      => 3
