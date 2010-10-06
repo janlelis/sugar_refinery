@@ -1,3 +1,9 @@
+2010-10-06 | Zucker 8
+* fixed a little alias_for bug
+* disabled rdoc creation when installing (in favour of the custom docs)
+* changed Binding#inspect to Binding.variables (was too verbose and dangerous)
+
+
 2010-10-03 | Zucker 7
 * fixed critical OS.windows? bug
 

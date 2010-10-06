@@ -39,6 +39,8 @@ See http://rubyzucker.info"
   s.require_paths = ["lib"]
   s.required_ruby_version = '>= 1.8.7' # 1.9 recommended
   s.add_development_dependency 'coderay'
+  s.has_rdoc = false
+  s.rdoc_options = '--version' # don't generate
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
