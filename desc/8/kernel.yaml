@@ -1,0 +1,14 @@
+kernel:
+  summary: Some useful general shortcut methods.
+  why: Readability.
+  methods:
+    activate_warnings!: "activate_warnings! # sets $VERBOSE to 1"
+    deactivate_warnings!: "deactivate_warnings! # sets $VERBOSE to 0"
+    executed_directly?, standalone?: "executed_directly? # checks, if the current file is run directly -> true"
+    library?: "library? # checks, if the current file is run directly -> false"
+    irb?: "irb? # returns false if not called from IRB"
+    ignore_sigint!: "ignore_sigint! # blocks CTRL+C"
+  versions:
+  - 1.9
+  - 1.8
+

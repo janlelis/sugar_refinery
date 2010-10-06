@@ -1,0 +1,23 @@
+binding:
+  summary: Adds a ⇧Binding#vars⇧.
+  why: It gives you information about the current environment variables.
+  methods:
+    Binding#variables, Binding#vars: |
+     # shows your current environment's variables, irb example:
+     >> a=3
+     => 3
+     >> binding
+     => #<Binding:0x94c4b50>
+     local vars
+      - a: 3
+      - _: #<Binding:0x94c4b50>
+     (instance vars)
+      - none
+     self
+      - main
+     block_given?
+      - false
+  versions:
+  - 1.9
+  - 1.8
+

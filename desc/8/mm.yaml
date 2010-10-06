@@ -1,0 +1,16 @@
+mm:
+  summary: ⇧m⇧ displays an ordered public method list.
+  why: See one object's methods without those rarely used inherited methods.
+  methods:
+    Object#m, Object#mm, Object#method_list: |
+      'test'.m 2 # outputs the list (2 levels deep), for example:
+       String
+       [:<=>, :==, :===, :eql?, :hash, :casecmp, :+, :*, :%, :[], :[]=, :insert, :length, :size, :bytesize, :empty?, :=~, :match, :succ, :succ!, :next, :next!, :upto, :index, :rindex, :replace, :clear, :chr, :getbyte, :setbyte, :to_i, :to_f, :to_s, :to_str, :inspect, :dump, :upcase, :downcase, :capitalize, :swapcase, :upcase!, :downcase!, :capitalize!, :swapcase!, :hex, :oct, :split, :lines, :bytes, :chars, :codepoints, :reverse, :reverse!, :concat, :<<, :crypt, :intern, :to_sym, :ord, :include?, :start_with?, :end_with?, :scan, :ljust, :rjust, :center, :sub, :gsub, :chop, :chomp, :strip, :lstrip, :rstrip, :sub!, :gsub!, :chop!, :chomp!, :strip!, :lstrip!, :rstrip!, :tr, :tr_s, :delete, :squeeze, :count, :tr!, :tr_s!, :delete!, :squeeze!, :each_line, :each_byte, :each_char, :each_codepoint, :sum, :slice, :slice!, :partition, :rpartition, :encoding, :force_encoding, :valid_encoding?, :ascii_only?, :unpack, :encode, :encode!, :to_r, :to_c, :blank?, :^, :lchomp, :lchomp!, :ords, :constantize, :+@, :-@, :|]
+       Comparable
+       [:==, :>, :>=, :<, :<=, :between?]
+  info:
+  - See →this article→http://rbjl.net/31-the-multi-mega-method-list→ for more information.
+  versions:
+  - 1.9
+  - 1.8 (returns strings instead of symbols)
+
