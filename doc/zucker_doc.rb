@@ -516,12 +516,6 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       </ul>
       <p class="text">
         Furthermore, there are two meta packages available: <strong>all</strong> simply requires all cubes and <strong>default</strong> requires all cubes except <strong>debug</strong>.
-        You can also lock your ⇧require⇧ to a specific version of Zucker by simply putting the version before the cube name in this way:
-
-        <code class="scode">require 'zucker/1/egonil'</code>
-
-        Future releases of the gem will include all previous (main) versions, so the behaviour of these directly required cubes will not change (except for very critical bugs).
-      </p>
 
       <h3 style="padding-left:1.3em">Which methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
       <p class="text">

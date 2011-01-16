@@ -38,7 +38,7 @@ describe 'String#ords' do
     end
 
     it 'should also work for nested constants' do
-      'Spec::VERSION'.constantize.should == Spec::VERSION
+      'Zucker::VERSION'.constantize.should == Zucker::VERSION
     end
 
     it 'should throw name error if constant does not exist (and no parameter is given)' do

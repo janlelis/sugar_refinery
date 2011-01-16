@@ -1,3 +1,6 @@
+Zucker 9
+* removed history versions (sorry, it caused too much gem/rdoc troubles)
+
 2010-10-06 | Zucker 8
 * fixed a little alias_for bug
 * disabled rdoc creation when installing (in favour of the custom docs)
