@@ -3,21 +3,11 @@ require 'zucker'
 module Kernel
   private
 
-  def sandbox(rescueblock_or_default=nil)
+  def sandbox
     Thread.start do
       $SAFE = 4
       yield
     end.value
-  rescue SecurityError => e
-    if !rescueblock_or_default.nil?
-      if rescueblock_or_default.is_a? Proc
-        rescueblock_or_default.call e
-      else
-        rescueblock_or_default
-      end
-    else
-      raise e
-    end
   end
 end
 
