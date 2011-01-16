@@ -21,13 +21,15 @@ module Kernel
     $PROGRAM_NAME == $` # __FILE__
   end
   alias standalone? executed_directly?
+  alias directly_executed? executed_directly?
 
   def irb?
-    !!(( IRB and $0 == 'irb' ) rescue nil)
+    (defined?(IRB) && $0 =~ /irb/) || (defined?(Ripl) && $0 =~ /ripl/)
   end
 
   def ignore_sigint! # ctrl+c
-     Signal.trap *%w|SIGINT IGNORE|
+    Signal.trap *%w|SIGINT IGNORE|
+    true
   end
 end
 

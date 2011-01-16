@@ -1,7 +1,7 @@
 ivars:
   summary: This method lets you easily assign lots of instance variables.
   why: |
-   Often, you have to write boilerplate code for assigning instance varialbles, for example this one:
+   Often, you have to write boilerplate code for assigning instance variables, for example this one:
    ⇧def initialize(variable1, variable2)
      @variable1, @variable2 = variable1, variable2
    end⇧

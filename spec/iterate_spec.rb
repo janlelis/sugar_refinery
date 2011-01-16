@@ -25,7 +25,6 @@ describe 'Object#iterate' do
 
     iterate a, b do |e,f|
       res[:iter_a_b] << [e, f]
-#      p res[:iter_a_b], e, f
     end
 
     res[:iter_a_b].should == [
@@ -49,6 +48,12 @@ describe 'Object#iterate' do
   end
 
   it 'should return enumerators if no block is applied' do
+    res = Hash.new {[]} # TODO: why?
+    res[:iter_a_b] = [] # ....
+    res[:iter_b_a] = [] # ....
+
+    enumerator = iterate a,b
+    enumerator.should be_kind_of(RUBY_VERSION < '1.9' ? Enumerable::Enumerator : Enumerator)
+    enumerator.to_a.should == [[1,'a'], [2,'b'], [3,'c'], [nil, 'd']]
   end
 end
-

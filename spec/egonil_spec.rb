@@ -22,5 +22,11 @@ describe 'egonil' do
       egonil{ 5.a_method }
     end.should raise_exception NoMethodError
   end
+
+  it 'should raise other Exceptions' do
+    proc do
+      egonil{ 5 / 0 }
+    end.should raise_exception ZeroDivisionError
+  end
 end
 
