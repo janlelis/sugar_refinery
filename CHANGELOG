@@ -1,4 +1,6 @@
 Zucker 9
+* debug pack improvements
+  * binding: typos + return nil
 * removed optional sandbox param
 * changed rakefile/rspec/gemspec structure
 * removed history versions (sorry, it caused too much gem/rdoc troubles)

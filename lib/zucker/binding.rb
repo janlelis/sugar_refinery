@@ -7,17 +7,16 @@ class Binding
         ' - none'
       else
         array.map{|e|
-          val = self.eval "#{e}"
-          val = val.is_a?( Binding ) ? val.to_s : val.inspect
+          val = (self.eval "#{e}").inspect
           " - #{e}: #{ val }"
         }.join "\n"
       end
     }
 
-"#{self.to_s}
-local vars
+    puts "#{self.to_s}
+local variables
 #{ put_vars[ self.eval 'local_variables' ] }
-(instance vars)
+(instance variables)
 #{ put_vars[ self.eval 'instance_variables' ] }
 self
  - #{self.eval 'self'}
