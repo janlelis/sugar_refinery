@@ -3,7 +3,7 @@ cc:
   methods:
     c, cc: |
       c # shows the method callstack
-      c true # do not hide irb callstack
+      c true # do not hide irb/ripl callstack
   versions:
   - 1.9
   - 1.8
