@@ -50,7 +50,7 @@ end
 
 # release
 desc 'run specs, build doc, bump version, set date, copy version directories and add these changes to git'
-task 'prepare_release' => %w[spec doc] do # run specs and doc
+task 'prepare_release' => %w[spec] do # run specs
   # really want to release?
   print 'Do you really want to release? ...then enter release: '
   exit if $stdin.gets.chomp != 'release'
@@ -61,6 +61,8 @@ task 'prepare_release' => %w[spec doc] do # run specs and doc
   zucker_rb.sub! /VERSION\s*=.*(\d+).*$/ do "VERSION = '#{ @v = $1.to_i + 1 }'" end
   zucker_rb.sub! /DATE\s*=.*$/, "DATE = '#{Date.today}'"
   File.open 'lib/zucker.rb','w' do |f| f.write zucker_rb end
+
+  `rake doc`
 
   # add changes to git and tag
   `git add .`

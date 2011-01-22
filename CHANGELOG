@@ -1,4 +1,4 @@
-Zucker 9
+2011-01-22 | Zucker 9
 * removed history versions (sorry, it caused too much gem/rdoc troubles)
 * add file cube: File.delete! and File.gsub
 * debug pack improvements

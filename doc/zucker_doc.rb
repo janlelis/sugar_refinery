@@ -500,7 +500,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
     <h1>Ruby Zucker ..version..</h1>
       <h2 style="clear:both">What is it?</h2>
       <p class="text">Zucker (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>) is the German word for sugar. It adds syntactic sugar in the form of independent, small scripts that make Ruby even more sweet. It adds a lot of useful helper methods for an improved readability and usage. Everything is documented on this page.</p>
-      <p class="text">Read <a href="http://rbjl.net/32-introducing-ruby-zucker-a-new-syntactical-sugar-gem">this blog post</a> for some more examples. See the <a href="http://wiki.github.com/janlelis/zucker">github wiki</a> for discussion and information about contributing.</p>
+      <p class="text">See the <a href="http://github.com/janlelis/zucker">github page</a> and wiki for issues, discussion and information about contributing.</p>
 
       <h2>Install</h2>
       <p class="text">
@@ -530,7 +530,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
        ..cubes..
       <h2>Extras</h2>
       <p class="text">
-        You can activate some additional aliases for Zucker functionality by executing
+        You can activate some additional aliases for Zucker functionality by executing:
         <code class="scode">Zucker.more_aliases! # => [:copy, :n, :init, :returning, :lib?, :RV, :RE]</code>
       </p>
 
