@@ -1,4 +1,5 @@
 Zucker 9
+* add file cube: File.delete! and File.gsub
 * debug pack improvements
   * binding: typos + return nil
   * cc: support for ripl + return nil

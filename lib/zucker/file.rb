@@ -14,4 +14,9 @@ class << File
       file.print data
     }
   end
+
+  def delete! filename
+    return nil if !File.exist?(filename)
+    File.delete filename
+  end
 end
