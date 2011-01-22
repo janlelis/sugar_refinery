@@ -1,0 +1,15 @@
+file:
+  summary: Extensions for ⇧File⇧.
+  methods:
+    File#gsub: |
+      File.gsub 'some_filename', {
+        /hi/ => 'cu',
+        /\d/ => proc do ($&.to_i+1).to_s end
+      } # will read the file and substitute the hash keys with their values
+    File#delete!: "File.delete! 'some_filename' # will delete the file, don't care if it exist."
+  info:
+  - "Idea for ⇧.File#delete!⇧. from sugar-high."
+  versions:
+  - 1.9
+  - 1.8
+

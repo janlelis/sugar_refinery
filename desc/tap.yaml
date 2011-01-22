@@ -3,7 +3,7 @@ tap:
   methods:
     tap_on: |
       tap_on [1,2] do |obj|
-        obj[4] => 5
+        obj[4] = 5
       end #=> [1, 2, nil, nil, 5]
     make_new: |
       make_new Hash do |obj|
@@ -13,4 +13,5 @@ tap:
   - "Read more about using tap on the →ruby best practices→http://blog.rubybestpractices.com/posts/gregory/011-tap-that-hash.html→ blog."
   versions:
   - 1.9
+  - 1.8
 

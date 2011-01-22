@@ -1,4 +1,5 @@
 Zucker 9
+* removed history versions (sorry, it caused too much gem/rdoc troubles)
 * add file cube: File.delete! and File.gsub
 * debug pack improvements
   * binding: typos + return nil
@@ -6,8 +7,10 @@ Zucker 9
   * mm: also show eigenclass for modules + nicer displaying + return nil
   * added Regexp#visualize
 * removed optional sandbox param
+* renamed xxx2proc to xxx_to_proc
 * changed rakefile/rspec/gemspec structure
-* removed history versions (sorry, it caused too much gem/rdoc troubles)
+* more minor fixes and improvements
+
 
 2010-10-06 | Zucker 8
 * fixed a little alias_for bug

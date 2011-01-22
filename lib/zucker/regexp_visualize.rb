@@ -22,5 +22,5 @@ class Regexp
     nil
   end
 
-  alias > visualize
+  alias vis visualize
 end

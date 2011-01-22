@@ -13,6 +13,6 @@ describe 'make_new' do
   it 'should create a new instance of the class given as argument, apply the block on it and return result' do
     make_new Hash do |obj|
       obj[1] = 2
-    end.should == { 1=>2 }
+    end.should.send(:'==', { 1 => 2})
   end
 end

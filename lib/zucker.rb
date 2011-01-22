@@ -3,20 +3,20 @@
 module Zucker
   # version and date get modified by the :prepare_release rake task
   VERSION = '8'
-  DATE = '2010-10-06'
+  DATE = '2011-01-23'
   
   # cube list
   PACKAGES = {
     :control    => %w|egonil iterate tap sandbox kernel|,
     :env        => %w|engine info os version|,
-    :extensions => %w|array enumerable hash string unary union|,
+    :extensions => %w|array enumerable file hash string unary union|,
     :object     => %w|blank mcopy not|,
-    :to_proc    => %w|array2proc class2proc hash2proc regexp2proc|,
+    :to_proc    => %w|array_to_proc class_to_proc hash_to_proc regexp_to_proc|,
     :shortcuts  => %w|aliases alias_for square_brackets_for ivars|,
-    :debug      => %w|binding cc dd mm oo qq|,
+    :debug      => %w|binding cc dd mm oo qq regexp_visualize|,
   }
 
-  NON_1_8_CUBES = %w|not tap union|
+  NON_1_8_CUBES = %w|not|
 
   class << self
     # Zucker require helpers
@@ -50,7 +50,7 @@ module Zucker
       }.compact
     end
 
-    # these aliases 'pollute' the global namespace or may conflict with other codee
+    # these aliases 'pollute' the global namespace or may conflict with other code
     def activate_more_aliases!
       aliases = {
         :mcopy       => :copy,
@@ -62,18 +62,19 @@ module Zucker
       }
 
       loaded_aliases = []
+
       aliases.each{ |old, new|
         Object.class_eval "alias #{new} #{old}; loaded_aliases << :#{new}" rescue nil
       }
 
       #eval "::RV = RubyVersion; loaded_aliases << :RV" rescue nil
       (
-         Object.const_set '::RV', RubyVersion
+         Object.const_set 'RV', RubyVersion
          loaded_aliases << :RV
       ) rescue nil
       #eval "::RE = RubyEngine; loaded_aliases << :RE" rescue nil
       (
-         Object.const_set '::RE', RubyEngine
+         Object.const_set 'RE', RubyEngine
          loaded_aliases << :RE
       ) rescue nil
       

@@ -58,7 +58,11 @@ class ZuckerDoc
 
       # collect description files and turn them to html
       cubes = Dir[ File.join(path, 'desc', '*.yaml') ].inject({}) do |res, cube_file; a|
-        a = YAML.load_file cube_file
+        begin
+          a = YAML.load_file cube_file
+        rescue 
+          warn "Could not load the yaml file for #{ cube_file }"
+        end
         if a.instance_of? Hash
           res.merge a
         else
@@ -507,17 +511,17 @@ table.source td { padding: 2px 4px; vertical-align: top; }
         <code class="scode">require 'zucker/all'</code>
       </p>
       <h2>Usage / organisation</h2>
-      <p class="text">The gem consists of many small snippets, called <em>cubes</em>, which are bundled in <em>packages</em>. Since there aren't any dependencies within the gem, you can easily require only the packages or cubes you want:
-        <code class="scode">require 'zucker/cube_or_package_name'</code>
+      <p class="text">The gem consists of many small snippets, called <em>cubes</em>, which are bundled in <em>packs</em>. Since there aren't any dependencies within the gem, you can easily require only the packs or cubes you want:
+        <code class="scode">require 'zucker/cube_or_pack_name'</code>
       </p>
       <h3 style="padding-left:1.3em">Packages</h3>
       <ul class="text">
         ..packages..
       </ul>
       <p class="text">
-        Furthermore, there are two meta packages available: <strong>all</strong> simply requires all cubes and <strong>default</strong> requires all cubes except <strong>debug</strong>.
+        Furthermore, there are two meta packs available: <strong>all</strong> simply requires all cubes and <strong>default</strong> requires all cubes except <strong>debug</strong>.</p>
 
-      <h3 style="padding-left:1.3em">Which methods and constants are added directly to the global namespace by the <em>default</em> package?</h3>
+      <h3 style="padding-left:1.3em">Which methods and constants are added directly to the global namespace by the <em>default</em> pack?</h3>
       <p class="text">
 
       <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, standalone?, library?, ignore_sigint!, sandbox, tap_on, make_new, (blank?, present?, mcopy)</code>

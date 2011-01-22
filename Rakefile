@@ -71,11 +71,10 @@ task 'prepare_release' => %w[spec doc] do # run specs and doc
    puts "prepared Zucker #@v gem release"
 end
 
-desc 'prepare_release, build gem, and push it to git and rubygems'
+desc 'prepare_release, build gem, and push it to git and display rubygems push command'
 task 'release' => %w[gem] do
   `git push origin master`
   `git push origin master --tags`
-  last_gem = Dir['pkg/zucker-*.gem'].sort[-1] # TODO better sorting or date for zucker-10
-  exit if last_gem =~ /next/ # some error happened, do not pollute rubygems.org
+  last_gem = Dir['pkg/zucker-*.gem'].sort[-1] # TODO read version from lib/zucker.rb for zucker-10
   puts "gem push pkg/#{last_gem}"
 end
