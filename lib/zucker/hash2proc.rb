@@ -1,16 +1,2 @@
-require 'zucker'
-
-class Hash
-  def to_proc
-    Proc.new{ |obj|
-      if self.member? obj
-        self[obj].to_proc.call obj
-      else
-        obj
-      end
-    }
-  end
-end
-
-# J-_-L
-
+warn 'Zucker: hash2proc has been renamed. Please use hash_to_proc!'
+require 'zucker/hash_to_proc'

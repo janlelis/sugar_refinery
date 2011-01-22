@@ -1,12 +1,2 @@
-require 'zucker'
-
-class Class
-  def to_proc
-    Proc.new do |*args|
-      self.new *args
-    end
-  end
-end
-
-# J-_-L
-
+warn 'Zucker: class2proc has been renamed. Please use class_to_proc!'
+require 'zucker/class_to_proc'

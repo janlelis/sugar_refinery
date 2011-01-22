@@ -1,4 +1,4 @@
-require 'zucker/regexp2proc'
+require 'zucker/regexp_to_proc'
 
 describe 'Regexp#to_proc' do
   it 'should match the regex' do

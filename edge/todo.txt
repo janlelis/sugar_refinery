@@ -1,7 +1,0 @@
-maybe todos
-* make docs ri-compatible (declaration of methods/usage as ri/rdoc comment)
-* File
-* dclone
-* more hash operators
-
-also see edge/ideas/*

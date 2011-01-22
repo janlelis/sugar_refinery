@@ -1,4 +1,4 @@
-class2proc:
+class_to_proc:
   summary: Creates a new instance of the class.
   methods:
     Class#to_proc: "[ [1,2],[3,5,6,7,3] ].map(&Set) # => [ Set[1,2], Set[5,6,7,3] ]"

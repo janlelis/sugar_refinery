@@ -1,4 +1,4 @@
-require 'zucker/hash2proc'
+require 'zucker/hash_to_proc'
 
 describe 'Hash#to_proc' do
   it 'should run the proc given in the value for a key in the hash' do

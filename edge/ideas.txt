@@ -1,2 +1,0 @@
-ideas may contain code from other projects
-  (if a snippet does, check the comments for credits)

@@ -1,4 +1,4 @@
-regexp2proc:
+regexp_to_proc:
   summary: Use ⇧&/regex/⇧ to match it against strings.
   methods:
     Regexp#to_proc: |

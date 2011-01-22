@@ -1,4 +1,4 @@
-array2proc:
+array_to_proc:
   summary: Calls the method named by the first paramenter and passes the other elements as paramaters.
   why: When using ⇧Symbol#to_proc⇧, you often wish to pass parameters.
   methods:

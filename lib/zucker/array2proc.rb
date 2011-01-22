@@ -1,18 +1,2 @@
-require 'zucker'
-
-class Array
-  def to_proc
-    Proc.new{ |obj|
-      if self.first.is_a? Array
-        self.inject(obj){ |result, nested_array|
-          nested_array.to_proc.call result
-        }
-      else
-        obj.send *self
-      end
-    }
-  end
-end
-
-# J-_-L
-
+warn 'Zucker: array2proc has been renamed. Please use array_to_proc!'
+require 'zucker/array_to_proc'

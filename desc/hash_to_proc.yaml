@@ -1,4 +1,4 @@
-hash2proc:
+hash_to_proc:
   summary: Use a hash to apply procs to specific objects.
   methods:
     Hash#to_proc: "[1,2,3,4].map(&{\n2 => lambda {|e| e + 1000},\n4 => :to_s,\n}) # => [1, 1002, 3, '4']"
