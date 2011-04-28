@@ -8,7 +8,7 @@ file:
       } # will read the file and substitute the hash keys with their values
     File#delete!: "File.delete! 'some_filename' # will delete the file, don't care if it exist."
   info:
-  - "Idea for ⇧.File#delete!⇧. from sugar-high."
+  - "Idea for ⇧File#delete!⇧ from sugar-high."
   versions:
   - 1.9
   - 1.8

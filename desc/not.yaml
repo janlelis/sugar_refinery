@@ -1,5 +1,5 @@
 not:
-  summary: ⇧not⇧ returns an object on which all methods are redirected to it's receiver object, but returns inverted boolean.
+  summary: ⇧not⇧ returns an object on which all methods are redirected to it's receiver object, but returns the inverted boolean.
   why: Better readability.
   methods:
     Object#not: |

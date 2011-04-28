@@ -1,75 +1,80 @@
+2011-04-29 | Zucker 10
+* doc tweaks
+* fix zucker 9 permission issue
+
+
 2011-01-22 | Zucker 9
-* removed history versions (sorry, it caused too much gem/rdoc troubles)
+* remove history versions (sorry, it caused too much gem/rdoc troubles)
 * add file cube: File.delete! and File.gsub
 * debug pack improvements
   * binding: typos + return nil
   * cc: support for ripl + return nil
   * mm: also show eigenclass for modules + nicer displaying + return nil
   * added Regexp#visualize
-* removed optional sandbox param
-* renamed xxx2proc to xxx_to_proc
-* changed rakefile/rspec/gemspec structure
+* remove optional sandbox param
+* rename xxx2proc to xxx_to_proc
+* change rakefile/rspec/gemspec structure
 * more minor fixes and improvements
 
 
 2010-10-06 | Zucker 8
-* fixed a little alias_for bug
-* disabled rdoc creation when installing (in favour of the custom docs)
-* changed Binding#inspect to Binding.variables (was too verbose and dangerous)
+* fix a little alias_for bug
+* disable rdoc creation when installing (in favour of the custom docs)
+* change Binding#inspect to Binding.variables (was too verbose and dangerous)
 
 
 2010-10-03 | Zucker 7
-* fixed critical OS.windows? bug
+* fix critical OS.windows? bug
 
 
 2010-10-03 | Zucker 6
 * no new cubes
 * bugfix for OS.posix?
 * small changes + bugfixes + doc improvements
-* added two user methods to Info
-* changed egonil semantics ( using method_missing, see http://rbjl.net/26/catch_nil.rb )
+* add two user methods to Info
+* change egonil semantics ( using method_missing, see http://rbjl.net/26/catch_nil.rb )
 * bugfix for vv
 
 
 2010-09-04 | Zucker 5
-* debug edition -  added two debug helpers: oo (output line, method, file) and cc (output method callstack)
-* renamed cube D to dd add added more debug aliases (for mm and binding)
-* fixed __SPECIAL_VARS__ in info and kernel cube and some minor bugfixes
+* debug edition -  add two debug helpers: oo (output line, method, file) and cc (output method callstack)
+* rename cube D to dd add add more debug aliases (for mm and binding)
+* fix __SPECIAL_VARS__ in info and kernel cube and some minor bugfixes
 * Zucker.activate_more_aliases! option
-* added Hash#&
-* added aliases: File.filename (for basename), Dir.join and Dir.split (for File.join, split)
-* added a flexible requiring mechansim in zucker.rb (no api changes)
-* restructered packages
-* added rake tasks for releasing
-* improved RubyVersion constant (cleaner and more flexible)
+* add Hash#&
+* add aliases: File.filename (for basename), Dir.join and Dir.split (for File.join, split)
+* add a flexible requiring mechansim in zucker.rb (no api changes)
+* restructure packages
+* add rake tasks for releasing
+* improve RubyVersion constant (cleaner and more flexible)
 
 
 2010-09-01 | Zucker 4
-* fixed Binding#inspect
-* added RubyEngine constant
-* added RubyVersion constant
-* added OS constant
-* added q debug method (like p but on one line)
-* added String#-
+* fix Binding#inspect
+* add RubyEngine constant
+* add RubyVersion constant
+* add OS constant
+* add q debug method (like p but on one line)
+* add String#-
 
 
 2010-08-14 | Zucker 3
-* added tap cube
-* added Object#not
-* added alias_for for an alternative alias syntax
-* added String#constantize (improved AS version)
-* improved Info module
-* made Array#sum Rails compatibile
-* improved docs
-* changed directory layout (no changes for requiring)
+* add tap cube
+* add Object#not
+* add alias_for for an alternative alias syntax
+* add String#constantize (improved AS version)
+* improve Info module
+* make Array#sum Rails compatibile
+* improve docs
+* change directory layout (no changes for requiring)
 * more small changes
 
 
 2010-08-08 | Zucker 2
-* added info cube
-* added chaining for array2proc
-* fixed Hash.zip
-* fixed instance_variables_from binding for 1.9
+* add info cube
+* add chaining for array2proc
+* fix Hash.zip
+* fix instance_variables_from binding for 1.9
 * more specs
 
 
