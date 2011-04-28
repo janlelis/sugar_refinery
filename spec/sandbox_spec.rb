@@ -1,12 +1,14 @@
 require 'zucker/sandbox'
 
 describe 'sandbox' do
-  it 'should throw a SecurityError if bad commands are issued' do
-    proc do
-      sandbox do
-        `ls`
-      end
-    end.should raise_exception SecurityError
+  unless defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
+    it 'should throw a SecurityError if bad commands are issued' do
+      proc do
+        sandbox do
+          `ls`
+        end
+      end.should raise_exception SecurityError
+    end
   end
 end
 
