@@ -16,6 +16,7 @@ task 'doc' do
 end
 
 task 'default' => 'spec'
+task 'test' => 'spec'
 RSpec::Core::RakeTask.new('spec') do |t|
   t.ruby_opts = "-r " + File.join(@path, 'spec', 'spec_helper')
 

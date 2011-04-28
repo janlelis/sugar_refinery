@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.description = "Sweeten your Ruby code with syntactic sugar :).
 Adds a lot of little helpers that you do not want to miss again."
   s.homepage    = "http://rubyzucker.info"
-  s.files = Dir.glob( %w[{lib,spec}/**/*.rb desc/**/*.yaml] ) + %w{Rakefile zucker.gemspec MIT-LICENSE README CHANGELOG doc/zucker_doc.rb doc/zucker_doc.html}
+  s.files = Dir.glob( %w[{lib,spec}/**/*.rb desc/**/*.yaml] ) + %w{Rakefile zucker.gemspec MIT-LICENSE README CHANGELOG doc/zucker_doc.rb doc/zucker_doc.html .gemtest}
   s.has_rdoc = false
   s.require_paths = ["lib"]
   s.required_ruby_version = '>= 1.8.7' # 1.9 recommended
