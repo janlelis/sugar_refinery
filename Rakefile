@@ -19,6 +19,7 @@ task 'default' => 'spec'
 task 'test' => 'spec'
 RSpec::Core::RakeTask.new('spec') do |t|
   t.ruby_opts = "-r " + File.join(@path, 'spec', 'spec_helper')
+  t.rspec_opts = "--color"
 
   if RUBY_VERSION < '1.9'
     t.pattern = File.join(@path, 'spec', '*_spec.rb')
@@ -50,7 +51,7 @@ task :gemspec do
 end
 
 # release
-desc 'run specs, build doc, bump version, set date, copy version directories and add these changes to git'
+desc 'run specs, build doc, bump version, set date and add these changes to git'
 task 'prepare_release' => %w[spec] do # run specs
   # really want to release?
   print 'Do you really want to release? ...then enter release: '
@@ -63,12 +64,12 @@ task 'prepare_release' => %w[spec] do # run specs
   zucker_rb.sub! /DATE\s*=.*$/, "DATE = '#{Date.today}'"
   File.open 'lib/zucker.rb','w' do |f| f.write zucker_rb end
 
-  `rake doc`
+  system 'rake doc'
 
   # add changes to git and tag
-  `git add .`
-  `git commit -m 'Ruby Zucker #@v :)'`
-  `git tag -a v#@v -m 'Ruby Zucker #@v :)'`
+  system 'git add .'
+  system "git commit -m 'Ruby Zucker #@v :)'"
+  system "git tag -a v#@v -m 'Ruby Zucker #@v :)"
 
    # done
    puts "prepared Zucker #@v gem release"
@@ -76,8 +77,7 @@ end
 
 desc 'prepare_release, build gem, and push it to git and display rubygems push command'
 task 'release' => %w[gem] do
-  `git push origin master`
-  `git push origin master --tags`
-  last_gem = Dir['pkg/zucker-*.gem'].sort[-1] # TODO read version from lib/zucker.rb for zucker-10
-  puts "gem push pkg/#{last_gem}"
+  system 'git push origin master'
+  system 'git push origin master --tags'
+  puts "gem push pkg/zucker-#{ Zucker::VERSION }.gem"
 end

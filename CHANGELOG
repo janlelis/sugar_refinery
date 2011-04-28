@@ -1,5 +1,6 @@
 2011-04-29 | Zucker 10
-* doc tweaks
+* doc/spec tweaks
+  * make test.rubygems.org-testable
 * fix zucker 9 permission issue
 
 
