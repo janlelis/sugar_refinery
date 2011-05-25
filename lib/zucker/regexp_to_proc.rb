@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker RegexpToProc = true end
 
 class Regexp
   def to_proc

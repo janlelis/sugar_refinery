@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Binding = true end
 
 unless defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx'
   class Binding

@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Unary = true end
 
 class String
   def +@

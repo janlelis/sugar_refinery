@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Union = true end
 
 class Regexp
   def |(arg)

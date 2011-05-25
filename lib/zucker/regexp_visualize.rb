@@ -1,3 +1,6 @@
+require 'zucker'
+module Zucker RegexpVisualize = true end
+
 class Regexp
   def visualize(string, groups = nil)
     if self =~ string
@@ -24,3 +27,5 @@ class Regexp
 
   alias vis visualize
 end
+
+# J-_-L

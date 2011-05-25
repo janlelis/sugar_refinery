@@ -1,5 +1,6 @@
 require 'zucker'
 require 'rbconfig'
+module Zucker Os = true end
 
 module OS
   class << self

@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Iterate = true end
 
 def iterate(*params)
   # params.shift.zip(*params).each{ |*elements| yield *elements }

@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Egonil = true end
 
 # code by Yohan, slightly edited and comments by me
 def egonil(&block)

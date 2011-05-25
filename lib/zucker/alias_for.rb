@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker AliasFor = true end
 
 def alias_for(m, *aliases)
   aliases.each{ |a|

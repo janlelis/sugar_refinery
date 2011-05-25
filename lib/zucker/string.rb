@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker String = true end
 
 class String
   def -(rem)

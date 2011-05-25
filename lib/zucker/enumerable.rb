@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Enumerable = true end
 
 module Enumerable
   def mash

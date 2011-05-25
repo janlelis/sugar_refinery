@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Cc = true end
 
 module Kernel
   private

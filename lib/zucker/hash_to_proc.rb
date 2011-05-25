@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker HashToProc = true end
 
 class Hash
   def to_proc

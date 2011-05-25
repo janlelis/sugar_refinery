@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Engine = true end
 
 module RubyEngine
     # try to guess the interpreter

@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Dd = true end
 
 module Kernel
   def d(*args, &block)

@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker ClassToProc = true end
 
 class Class
   def to_proc

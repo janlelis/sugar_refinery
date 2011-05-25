@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Hash = true end
 
 class Hash
   def self.zip(keys,values)

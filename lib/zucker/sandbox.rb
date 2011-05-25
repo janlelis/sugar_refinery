@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Sandbox  = true end
 
 module Kernel
   private

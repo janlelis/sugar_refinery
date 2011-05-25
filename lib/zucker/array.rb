@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Array = true end
 
 class Array
   def ^(other) # TODO: more efficient

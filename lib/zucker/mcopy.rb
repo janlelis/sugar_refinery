@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Mcopy = true end
 
 class Object
   def mcopy

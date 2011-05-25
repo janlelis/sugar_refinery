@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Aliases = true end
 
 class Object
   alias is_an? is_a? # thanks to utility_belt

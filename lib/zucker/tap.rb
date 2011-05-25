@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Tap = true end
 
 def tap_on(obj, &block)
   obj.tap &block

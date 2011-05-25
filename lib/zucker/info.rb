@@ -1,6 +1,7 @@
 require 'zucker'
 require 'rbconfig'
 require 'etc'
+module Zucker Info = true end
 
 module Info
   class << self

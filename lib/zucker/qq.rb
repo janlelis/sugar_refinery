@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Qq = true end
 
 module Kernel
   private

@@ -1,3 +1,6 @@
+require 'zucker'
+module Zucker File = true end
+
 class << File
   def gsub(filename, regex_hash)
     data = File.read filename
@@ -20,3 +23,6 @@ class << File
     File.delete filename
   end
 end
+
+# J-_-L
+

@@ -1,4 +1,5 @@
-2911-05-25 | Zucker 11
+2011-05-25 | Zucker 11
+* add Zucker::constants to check if cube has been required (e.g. Zucker::AliasFor if 'zucker/alias_for' is loaded)
 * rbx tweaks
   * don't define Binding#vars on rbx
   * sandbox-not-working warning

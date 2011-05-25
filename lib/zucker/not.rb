@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Not = true end
 
 class Object
   def not

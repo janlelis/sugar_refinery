@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker ArrayToProc = true end
 
 class Array
   def to_proc

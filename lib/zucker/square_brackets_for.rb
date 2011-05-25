@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker SquareBracketsFor = true end
 
 class Module
   def square_brackets_for(ivar, assignment = true)

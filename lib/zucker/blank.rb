@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Blank = true end
 
 class Object
   def blank?

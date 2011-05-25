@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Mm = true end
 
 module Kernel
   def m(levels = 1)

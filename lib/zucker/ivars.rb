@@ -1,4 +1,5 @@
 require 'zucker'
+module Zucker Ivars = true end
 
 def instance_variables_from(obj, *only)
   iter =
