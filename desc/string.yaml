@@ -3,8 +3,8 @@ string:
   why: Strings cannot be comfortable enough ;).
   methods:
     String#-: "'1234abc5678' - 'b' - /\d/ # => ac"
-    String#^: "'Yes vs No'^7 # => 'No'"
-    String#lchomp: "'   Yes'.lchomp  # => 'Yes'"
+    String#^: "'Yes vs No'^2 # => 's vs No'"
+    String#lchomp: "'  Yes'.lchomp  # => ' Yes'"
     String#lchomp!: "# mutable lchomp version"
     String#ords: "'Hallo'.ords # => [72, 97, 108, 108, 111]"
     String#constantize: |

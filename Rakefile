@@ -42,7 +42,7 @@ end
 
 desc "Install the gem locally"
 task :install => :gem do
-  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}}
+  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version} --no-rdoc --no-ri}
 end
 
 desc "Validate the gemspec"
@@ -69,7 +69,7 @@ task 'prepare_release' => %w[spec] do # run specs
   # add changes to git and tag
   system 'git add .'
   system "git commit -m 'Ruby Zucker #@v :)'"
-  system "git tag -a v#@v -m 'Ruby Zucker #@v :)"
+  system "git tag -a v#@v -m 'Ruby Zucker #@v :)'"
 
    # done
    puts "prepared Zucker #@v gem release"

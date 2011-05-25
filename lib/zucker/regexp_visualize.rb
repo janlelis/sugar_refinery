@@ -10,7 +10,7 @@ class Regexp
             gr_string[ $~.end( group ),   0 ] = '< '
             gr_string[ $~.begin( group ), 0 ] = ' >'
             puts group.to_s + ': ' + gr_string
-          rescue IndexError
+          rescue IndexError, Rubinius::ObjectBoundsExceededError
             puts group.to_s + ': no match'
           end
         }

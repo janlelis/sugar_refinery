@@ -1,3 +1,10 @@
+2911-05-25 | Zucker 11
+* rbx tweaks
+  * don't define Binding#vars on rbx
+  * sandbox-not-working warning
+* doc tweaks
+
+
 2011-04-29 | Zucker 10
 * doc/spec tweaks
   * make test.rubygems.org-testable

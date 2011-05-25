@@ -21,7 +21,7 @@ describe 'Regexp#visualize' do
     end.chomp.should == '1:  >mail< @example.com'
   end
 
-  it 'should display "group identifier: no match" the arg2 group could not be matched' do
+  it 'should display "group identifier: no match" if the arg2 group could not be matched' do
     capture_stdout do
       regex.vis 'mail@example.com', 3
     end.chomp.should == '3: no match'

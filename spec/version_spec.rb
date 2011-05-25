@@ -11,7 +11,7 @@ describe 'RubyVersion' do
     RubyVersion.to_s.should == '1.8.7'
   end
 
-  context 'using is method with parameter' do
+  context 'with "is" method, with parameter' do
     it 'should check for main version (1.8 or 1.9) when Float paramater is given' do
       RubyVersion.is?( 1.8 ).should == true
       RubyVersion.is?( 1.9 ).should == false
@@ -22,7 +22,7 @@ describe 'RubyVersion' do
     end
   end
 
-  context 'using is method without parameter but method chaining' do
+  context 'with "is" method, without parameter, but method chaining' do
     it 'should return a string for usage with comparison operators' do
       (RubyVersion.is > '1.8.7').should == false
       (RubyVersion <= '1.8.7').should == true
