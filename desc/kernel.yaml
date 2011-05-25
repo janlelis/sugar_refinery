@@ -8,6 +8,7 @@ kernel:
     library?: "library? # checks, if the current file is run directly -> false"
     irb?: "irb? # returns false if not called from IRB or RIPL"
     ignore_sigint!: "ignore_sigint! # blocks CTRL+C"
+    ignore_sigquit!: "ignore_sigquit! # blocks CTRL+\\"
   versions:
   - 1.9
   - 1.8

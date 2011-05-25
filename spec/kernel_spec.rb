@@ -27,11 +27,16 @@ describe 'executed_directly?' do
 end
 
 describe 'irb?' do
-  it 'should return true if called in IRB' do; end
+  it 'should return true if called in IRB or RIPL' do; end
 end
 
 describe 'ignore_sigint!' do
   it 'should catch ctrl+c signals' do; end
 end
+
+describe 'ignore_sigquit!' do
+  it 'should catch ctrl+\ signals' do; end
+end
+
 
 # J-_-L
