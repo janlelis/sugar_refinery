@@ -4,6 +4,7 @@
   * don't define Binding#vars on rbx (prevent endless recursion)
   * sandbox-not-working warning
 * add Kernel#ignore_sigquit!
+* fix warnings
 * doc tweaks
 
 

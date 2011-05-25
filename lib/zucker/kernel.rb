@@ -29,12 +29,12 @@ module Kernel
   end
 
   def ignore_sigint! # ctrl+c
-    Signal.trap *%w|SIGINT IGNORE|
+    Signal.trap(*%w|SIGINT IGNORE|)
     true
   end
 
   def ignore_sigquit! # ctrl+\
-    Signal.trap *%w|SIGQUIT IGNORE|
+    Signal.trap(*%w|SIGQUIT IGNORE|)
     true
   end
 end

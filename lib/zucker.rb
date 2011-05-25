@@ -22,7 +22,7 @@ module Zucker
     # Zucker require helpers
     def require_cube(cube, version = '')
       unless RUBY_VERSION < '1.9' && Zucker::NON_1_8_CUBES.include?(cube)
-        require File.expand_path( File.join('..', 'zucker', version, cube), __FILE__)
+        require ::File.expand_path( ::File.join('..', 'zucker', version, cube), __FILE__)
       end
     end
 
@@ -33,9 +33,9 @@ module Zucker
     end
 
     def require_this(filename)
-      version=  File.split( File.expand_path( filename) )[-2]
+      version=  ::File.split( ::File.expand_path( filename) )[-2]
       version = '' if version !~ /^\d+$/
-      package = File.basename( filename ).chomp( File.extname( filename ))
+      package = ::File.basename( filename ).chomp( ::File.extname( filename ))
       Zucker.require_package(package, version)
     end
 

@@ -13,7 +13,7 @@ class Regexp
             gr_string[ $~.end( group ),   0 ] = '< '
             gr_string[ $~.begin( group ), 0 ] = ' >'
             puts group.to_s + ': ' + gr_string
-          rescue IndexError, Rubinius::ObjectBoundsExceededError
+          rescue IndexError, defined?(Rubinius) &&  Rubinius::ObjectBoundsExceededError
             puts group.to_s + ': no match'
           end
         }

@@ -9,7 +9,7 @@ class Array
           nested_array.to_proc.call result
         }
       else
-        obj.send *self
+        obj.send(*self)
       end
     }
   end
