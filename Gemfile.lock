@@ -1,0 +1,26 @@
+PATH
+  remote: .
+  specs:
+    zucker (11)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    coderay (0.9.8)
+    diff-lcs (1.1.2)
+    rspec (2.5.0)
+      rspec-core (~> 2.5.0)
+      rspec-expectations (~> 2.5.0)
+      rspec-mocks (~> 2.5.0)
+    rspec-core (2.5.2)
+    rspec-expectations (2.5.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  coderay
+  rspec
+  zucker!
