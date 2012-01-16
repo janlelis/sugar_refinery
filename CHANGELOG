@@ -1,6 +1,7 @@
 2012-01-16 | Zucker 12.1
-* Fix a requiring bug
-* Rename zucker/version cube to zucker/ruby_version and Zucker::PACKAGES to Zucker::PACKS
+* fix a requiring bug
+* rename zucker/version cube to zucker/ruby_version and Zucker::PACKAGES to Zucker::PACKS
+* remove more_aliases! (keep it simple...)
 
 
 2011-05-25 | Zucker 11

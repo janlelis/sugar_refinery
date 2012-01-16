@@ -26,62 +26,27 @@ module Zucker
       end
     end
 
-    def require_package(package)
-      PACKS[package.to_sym].each{ |cube|
+    def require_pack(pack)
+      PACKS[pack.to_sym].each{ |cube|
         require_cube cube
       }
     end
 
-    def require_this(filename)
-      package = ::File.basename( filename ).chomp( ::File.extname( filename ))
-      require_package(package)
-    end
-
-    def require_all
-      require_default + [require_package( :debug )]
+    def require_this(filename) # pack shortcut
+      pack = ::File.basename( filename ).chomp( ::File.extname( filename ))
+      require_pack(pack)
     end
 
     def require_default
-      PACKS.map{ |package, _|
-        require_package package if package != :debug
+      PACKS.map{ |pack, _|
+        require_pack pack if pack != :debug
       }.compact
     end
 
-    # these aliases 'pollute' the global namespace or may conflict with other code
-    def activate_more_aliases!
-      aliases = {
-        :mcopy       => :copy,
-        :egonil      => :n,
-        :make_new    => :init,
-        :tap_on      => :returning,
-        :library?    => :lib?,
-        :square_brackets_for => :brackets,
-      }
-
-      loaded_aliases = []
-
-      aliases.each{ |old, new|
-        Object.class_eval "alias #{new} #{old}; loaded_aliases << :#{new}" rescue nil
-      }
-
-      #eval "::RV = RubyVersion; loaded_aliases << :RV" rescue nil
-      (
-         Object.const_set 'RV', RubyVersion
-         loaded_aliases << :RV
-      ) rescue nil
-      #eval "::RE = RubyEngine; loaded_aliases << :RE" rescue nil
-      (
-         Object.const_set 'RE', RubyEngine
-         loaded_aliases << :RE
-      ) rescue nil
-      
-      loaded_aliases
+    def require_all
+      require_default + [require_pack( :debug )]
     end
-    alias more_aliases! activate_more_aliases!
   end
 end
-
-# You can use Zucker with
-#  require 'zucker/all'
 
 # J-_-L
