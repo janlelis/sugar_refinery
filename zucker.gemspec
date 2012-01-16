@@ -15,6 +15,7 @@ Adds a lot of little helpers that you do not want to miss again."
   s.require_paths = ["lib"]
   s.required_ruby_version = '>= 1.8.7' # 1.9 recommended
   s.license = 'MIT'
+  s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'coderay'
 

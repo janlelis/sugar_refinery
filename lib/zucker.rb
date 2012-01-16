@@ -16,7 +16,7 @@ module Zucker
     :debug      => %w|binding cc dd mm oo qq regexp_visualize|,
   }
 
-  NON_1_8_CUBES = %w|not|
+  NON_1_8_CUBES = %w|not case|
 
   class << self
     # Zucker require helpers

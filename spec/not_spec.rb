@@ -1,5 +1,4 @@
 if defined? BasicObject # 1.9 only
-
   require 'zucker/not'
 
   describe 'Object#not' do
@@ -8,5 +7,4 @@ if defined? BasicObject # 1.9 only
       nil.not.nil?.should == false
     end
   end
-
 end

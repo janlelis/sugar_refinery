@@ -1,4 +1,4 @@
-require 'zucker/version'
+require 'zucker/ruby_version'
 require 'date'
 
 describe 'RubyVersion' do
