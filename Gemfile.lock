@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    zucker (11)
+    zucker (12.1)
 
 GEM
   remote: http://rubygems.org/
