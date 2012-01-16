@@ -1,3 +1,8 @@
+2012-01-16 | Zucker 12.1
+* Fix a requiring bug
+* Rename zucker/version cube to zucker/ruby_version and Zucker::PACKAGES to Zucker::PACKS
+
+
 2011-05-25 | Zucker 11
 * add Zucker::constants to check if cube has been required (e.g. Zucker::AliasFor if 'zucker/alias_for' is loaded)
 * rbx tweaks

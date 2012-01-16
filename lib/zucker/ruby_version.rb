@@ -1,7 +1,7 @@
 require 'zucker'
 require 'date'
 require 'time'
-module Zucker Version = true end
+module Zucker RubyVersion = true end
 
 module RubyVersion
   class << self

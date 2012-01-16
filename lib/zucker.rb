@@ -6,9 +6,9 @@ module Zucker
   DATE = '2011-05-25'
   
   # cube list
-  PACKAGES = {
+  PACKS = {
     :control    => %w|egonil iterate tap sandbox kernel|,
-    :env        => %w|engine info os version|,
+    :env        => %w|engine info os ruby_version|,
     :extensions => %w|array enumerable file hash string unary union|,
     :object     => %w|blank mcopy not|,
     :to_proc    => %w|array_to_proc class_to_proc hash_to_proc regexp_to_proc|,
@@ -20,32 +20,29 @@ module Zucker
 
   class << self
     # Zucker require helpers
-    def require_cube(cube, version = '')
+    def require_cube(cube)
       unless RUBY_VERSION < '1.9' && Zucker::NON_1_8_CUBES.include?(cube)
-        require ::File.expand_path( ::File.join('..', 'zucker', version, cube), __FILE__)
+        require "zucker/#{cube}"
       end
     end
 
-    def require_package(package, version = '')
-      PACKAGES[package.to_sym].each{ |cube|
-        require_cube cube, version
+    def require_package(package)
+      PACKS[package.to_sym].each{ |cube|
+        require_cube cube
       }
     end
 
     def require_this(filename)
-      version=  ::File.split( ::File.expand_path( filename) )[-2]
-      version = '' if version !~ /^\d+$/
       package = ::File.basename( filename ).chomp( ::File.extname( filename ))
-      Zucker.require_package(package, version)
+      require_package(package)
     end
 
-    def require_all(version = '')
-      require_default( version ) +
-      [require_package( :debug, version )]
+    def require_all
+      require_default + [require_package( :debug )]
     end
 
-    def require_default(version = '')
-      PACKAGES.map{ |package, _|
+    def require_default
+      PACKS.map{ |package, _|
         require_package package if package != :debug
       }.compact
     end

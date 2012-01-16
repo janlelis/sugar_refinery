@@ -1,12 +1,7 @@
-require 'rake'
 require 'rspec/core/rake_task'
 require 'fileutils'
 
-if RUBY_VERSION >= '1.9.2'
-  require_relative 'lib/zucker'
-else
-  require 'lib/zucker'
-end
+require File.dirname(__FILE__) + '/lib/zucker'
 
 @path = Rake.application.find_rakefile_location[1]
 
