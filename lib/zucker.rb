@@ -9,7 +9,7 @@ module Zucker
   PACKS = {
     :control    => %w|egonil iterate tap sandbox kernel|,
     :env        => %w|engine info os ruby_version|,
-    :extensions => %w|array enumerable file hash string unary union|,
+    :extensions => %w|array case enumerable file hash string unary union|,
     :object     => %w|blank mcopy not|,
     :to_proc    => %w|array_to_proc class_to_proc hash_to_proc regexp_to_proc|,
     :shortcuts  => %w|aliases alias_for square_brackets_for ivars|,

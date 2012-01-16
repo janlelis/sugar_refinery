@@ -2,6 +2,7 @@
 * fix a requiring bug
 * rename zucker/version cube to zucker/ruby_version and Zucker::PACKAGES to Zucker::PACKS
 * remove more_aliases! (keep it simple...)
+* add case cube: String#to_camel and String#to_snake
 
 
 2011-05-25 | Zucker 11

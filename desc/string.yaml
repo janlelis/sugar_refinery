@@ -1,5 +1,5 @@
 string:
-  summary: ⇧String⇧ extensions.
+  summary: Generic ⇧String⇧ extensions.
   why: Strings cannot be comfortable enough ;).
   methods:
     String#-: "'1234abc5678' - 'b' - /\d/ # => ac"
