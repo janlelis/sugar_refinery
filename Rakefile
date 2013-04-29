@@ -14,7 +14,7 @@ task 'default' => 'spec'
 task 'test' => 'spec'
 RSpec::Core::RakeTask.new('spec') do |t|
   t.ruby_opts = "-r " + File.join(@path, 'spec', 'spec_helper')
-  t.rspec_opts = "--color"
+  t.rspec_opts = ["--color", "--format documentation"]
 
   if RUBY_VERSION < '1.9'
     t.pattern = File.join(@path, 'spec', '*_spec.rb')

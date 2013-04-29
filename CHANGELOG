@@ -1,3 +1,6 @@
+2013-04-26 | Zucker 13.1 (master)
+* ...
+
 2012-01-16 | Zucker 12.1
 * fix a requiring bug
 * rename zucker/version cube to zucker/ruby_version and Zucker::PACKAGES to Zucker::PACKS
