@@ -1,5 +1,8 @@
 2013-04-26 | Zucker 13.1 (master)
+* fix alias_for bug
 * ...
+* repackage (gh#4)
+
 
 2012-01-16 | Zucker 12.1
 * fix a requiring bug

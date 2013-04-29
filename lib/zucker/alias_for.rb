@@ -3,7 +3,7 @@ module Zucker AliasFor = true end
 
 def alias_for(m, *aliases)
   aliases.each{ |a|
-    class_eval "alias #{a} #{m}"
+    class_eval "alias :'#{ a.to_s }' :'#{ m.to_s }'"
   }
 end
 alias aliases_for alias_for

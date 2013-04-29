@@ -18,11 +18,11 @@ describe 'alias_for' do
       def m2
         2
       end
-      alias_for :m2, :a2
+      aliases_for :m2, :a2, :'a-2'
     end
     proc do
-
       [1,2,3].a2.should == 2
+      [1,2,3].send('a-2').should == 2
     end.should_not raise_exception
   end
 
