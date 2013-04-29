@@ -29,6 +29,7 @@ module RubyEngine
     def to_s
       @interpreter.to_s
     end
+    alias inspect to_s
 
     # ask methods
 

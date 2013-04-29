@@ -8,6 +8,7 @@ module RubyVersion
     def to_s
       RUBY_VERSION
     end
+    alias inspect to_s
 
     # comparable
     def <=>(other)
