@@ -92,7 +92,7 @@ class ZuckerDoc
         file.puts result
       end
 
-      puts "created Zucker documentation at #{File.expand_path(output_path)}"
+      puts "Created Zucker documentation at #{File.expand_path(output_path)}"
     end
 
   protected
@@ -129,7 +129,7 @@ class ZuckerDoc
     def methods(m)
       m.map{ |name, usage|
         "<h5>#{replace_html_special_chars name}</h5>" +
-        "<pre class=\"usage source\" style=\"display:block\">#{ syntax_highlight usage }</pre>"
+        "<div class=\"usage source\" style=\"display:block\">#{ syntax_highlight usage }</div>"
       }.join
     end
 
@@ -174,9 +174,9 @@ class ZuckerDoc
 
     def source_helper(kind, file_prefix, suffix='')
       %{ <span id="show_#{@cube_name}_#{kind}">(<a href="javascript:show('#{@cube_name}_#{kind}')">show</a>)</span>
-         <pre class="source" id="#{@cube_name}_#{kind}">#{
+         <div class="source" id="#{@cube_name}_#{kind}">#{
            get_source_file( File.join file_prefix, ( @cube_name + suffix + '.rb' ) )
-         }</pre> }
+         }</div> }
     end
 
     def get_source_file(filename)
@@ -189,7 +189,7 @@ class ZuckerDoc
 
     def syntax_highlight(string)
       #convert_html_chars
-      CodeRay.scan(string, :ruby).html
+      CodeRay.scan(string, :ruby).div
     end
 
     def replace_html_special_chars(string)
