@@ -1,6 +1,7 @@
 2013-04-26 | Zucker 13.1 (master)
 * fix alias_for bug
 * RubyVersion#inspect and RubyEngine#inspect map to #to_s
+* Remove Array#sum
 * ...
 * repackage (gh#4)
 
