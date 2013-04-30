@@ -55,7 +55,14 @@ task 'prepare_release' => %w[spec] do # run specs
   # bump version and date
   require 'date'
   zucker_rb = File.read('lib/zucker.rb')
-  zucker_rb.sub! /VERSION\s*=.*?(\d+).*?$/ do "VERSION = '#{ @v = $1.to_i + 1 }'" end
+  zucker_rb.sub! /VERSION\s*=\s*'(\d+)\.(\d+)'$/ do
+    if $2 == current_year = Date.today.strftime('%y')
+      @v = "#$2.#{$1.to_i + 1}"
+    else
+      @v = "#{current_year}.1"
+    end
+    "VERSION = '#{@v}'"
+  end
   zucker_rb.sub! /DATE\s*=.*$/, "DATE = '#{Date.today}'"
   File.open 'lib/zucker.rb','w' do |f| f.write zucker_rb end
 
@@ -63,8 +70,8 @@ task 'prepare_release' => %w[spec] do # run specs
 
   # add changes to git and tag
   system 'git add .'
-  system "git commit -m 'Ruby Zucker #@v :)'"
-  system "git tag -a v#@v -m 'Ruby Zucker #@v :)'"
+  system "git commit -m 'Zucker #@v'"
+  system "git tag -a v#@v -m 'Zucker #@v'"
 
    # done
    puts "prepared Zucker #@v gem release"

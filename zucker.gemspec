@@ -18,12 +18,12 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'coderay'
 
-  len = s.homepage.size
+  len = 24
   s.post_install_message = \
    ("       ┌── " + "info ".ljust(len-2,'%')                                   + "─┐\n" +
-    " J-_-L │ "   + s.homepage                                                 + " │\n" +
+    " J-_-L │ "   + s.homepage.ljust(len,' ')                                  + " │\n" +
     "       ├── " + "usage ".ljust(len-2,'%')                                  + "─┤\n" +
-    "       │ "   + "require 'zucker/all'".ljust(len,' ')                      + " │\n" +
+    "       │ "   + "require 'zucker/default'".ljust(len,' ')                  + " │\n" +
     "       │ "   + "# or".ljust(len,' ')                                      + " │\n" +
     "       │ "   + "require 'zucker/<name>".ljust(len,' ')                    + " │\n" +
     "       └─"   + '─'*len                                                    + "─┘").gsub('%', '─') # 1.8 workaround
