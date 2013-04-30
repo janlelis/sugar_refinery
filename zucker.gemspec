@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
    ("       ┌── " + "info ".ljust(len-2,'%')                                   + "─┐\n" +
     " J-_-L │ "   + s.homepage                                                 + " │\n" +
     "       ├── " + "usage ".ljust(len-2,'%')                                  + "─┤\n" +
-    "       │ "   + "require 'zucker/all'".ljust(len,' ')                      + " │\n" +
+    "       │ "   + "require 'zucker/default'".ljust(len,' ')                  + " │\n" +
     "       │ "   + "# or".ljust(len,' ')                                      + " │\n" +
     "       │ "   + "require 'zucker/<name>".ljust(len,' ')                    + " │\n" +
     "       └─"   + '─'*len                                                    + "─┘").gsub('%', '─') # 1.8 workaround
