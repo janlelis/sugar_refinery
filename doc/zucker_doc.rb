@@ -45,7 +45,6 @@ class ZuckerDoc
       # build package list
       @packs = Zucker::PACKS.map{ |pkg, _|
       descriptions = {
-        :env        => 'Cubes for collecting information.',
         :to_proc    => 'Adds some ⇧to_proc⇧ extensions to use with ⇧&amp;⇧.',
         :object     => 'Extensions for ⇧Object⇧.',
         :extensions => 'More extensions for Ruby base classes.',
@@ -514,7 +513,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <p class="text">But you probably should not do this. The gem consists of many small snippets, called <em>cubes</em>, that can be required individually. Since there aren't any dependencies within the gem, you can easily require only the cubes you need:
         <code class="scode">require 'zucker/cube_name'</code>
       </p>
-      <h3 style="padding-left:1.3em">Packs (Multiple cubes at once)</h3>
+      <h3 style="padding-left:1.3em">Packs (multiple cubes at once)</h3>
       <ul class="text">
         ..packs..
       </ul>
@@ -522,7 +521,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <h3 style="padding-left:1.3em">Overview: Which methods and constants are added directly to the global namespace by the <em>default</em> pack?</h3>
       <p class="text">
 
-      <code class="scode">Info, RubyVersion, RubyEngine, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, tap_on, make_new, (blank?, present?, mcopy)</code>
+      <code class="scode">Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, tap_on, make_new, Object#blank?, Object#present?, Object#mcopy</code>
       </p>
 
        ..cubes..

@@ -12,10 +12,9 @@ module Zucker
   DATE = '2013-04-30'
 
   PACKS = {
-    :control    => %w|egonil iterate tap sandbox kernel|,
-    :env        => %w|engine info os ruby_version|,
+    :control    => %w|egonil iterate tap|,
     :extensions => %w|array case enumerable file hash string unary union|,
-    :object     => %w|blank mcopy not|,
+    :object     => %w|blank mcopy|,
     :to_proc    => %w|array_to_proc class_to_proc hash_to_proc regexp_to_proc|,
     :shortcuts  => %w|aliases alias_for square_brackets_for ivars|,
   }
