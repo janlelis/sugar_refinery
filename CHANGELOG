@@ -2,8 +2,9 @@
 * drop Ruby 1.8 support
 * rewrite Zucker to use refinements!
 * move all "debug" cubes to extra gem!
-* remove "kernel" and "not" cube completely
+* remove "os" cube, use "os" gem instead!
 * remove "sandbox" cube, since sandboxing is not recommended and removed from Ruby 2.1
+* remove "kernel" and "not" cube completely
 
 
 2013-04-30 | Zucker 13.1
