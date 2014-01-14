@@ -289,15 +289,17 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <p class="text">
         <code class="scode">gem install zucker --no-rdoc --no-ri # might need sudo</code>
       </p>
-      <h3 style="padding-left:1.3em">Quickstart</h3>
+
+      <h2>Usage / Organization</h2>
       <p class="text">
+        You can require everything using:
         <code class="scode">require 'zucker/all'</code>
       </p>
-      <h2>Usage / organisation</h2>
-      <p class="text">The gem consists of many small snippets, called <em>cubes</em>, which are bundled in <em>packs</em>. Since there aren't any dependencies within the gem, you can easily require only the packs or cubes you want:
-        <code class="scode">require 'zucker/cube_or_pack_name'</code>
+
+      <p class="text">But you probably should not do this. The gem consists of many small snippets, called <em>cubes</em>, that can be required individually. Since there aren't any dependencies within the gem, you can easily require only the cubes you need:
+        <code class="scode">require 'zucker/cube_name'</code>
       </p>
-      <h3 style="padding-left:1.3em">Packs</h3>
+      <h3 style="padding-left:1.3em">Packs (Multiple cubes at once)</h3>
       <ul class="text">
          <li><a href="#control" style="text-decoration:none;font-weight:bold;">control</a>: Cubes that change program behaviour.</li> 
  <li><a href="#env" style="text-decoration:none;font-weight:bold;">env</a>: Cubes for collecting information.</li> 
@@ -305,20 +307,16 @@ table.source td { padding: 2px 4px; vertical-align: top; }
  <li><a href="#object" style="text-decoration:none;font-weight:bold;">object</a>: Extensions for <code>Object</code>.</li> 
  <li><a href="#to_proc" style="text-decoration:none;font-weight:bold;">to_proc</a>: Adds some <code>to_proc</code> extensions to use with <code>&amp;</code>.</li> 
  <li><a href="#shortcuts" style="text-decoration:none;font-weight:bold;">shortcuts</a>: Cubes that save you keystrokes or disambiguate things.</li> 
- <li><a href="#debug" style="text-decoration:none;font-weight:bold;">debug</a>: Print debugging tools.</li> 
       </ul>
-      <p class="text">
-        Furthermore, there are two meta packs available: <strong>all</strong> simply requires all cubes and <strong>default</strong> requires all cubes except <strong>debug</strong>.</p>
 
       <h3 style="padding-left:1.3em">Overview: Which methods and constants are added directly to the global namespace by the <em>default</em> pack?</h3>
       <p class="text">
 
-      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, activate_warnings!, deactivate_warnings!, executed_directly?, directly_executed?, standalone?, library?, ignore_sigint!, ignore_sigquit!, sandbox, tap_on, make_new, (blank?, present?, mcopy)</code>
+      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, tap_on, make_new, (blank?, present?, mcopy)</code>
       </p>
 
        
       <h2 title="require 'zucker/control'" id="control">Cubes[control]</h2>
-        
         <div class="cubes">
          <h3 title="require 'zucker/egonil'" id="egonil">egonil</h3>
          <table class="cube_table"
@@ -500,166 +498,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/iterate">github wiki</a></td></tr></table> <h3 title="require 'zucker/kernel'" id="kernel">kernel</h3>
-         <table class="cube_table"
-                id="kernel_cube"
-                title="require 'zucker/kernel'"> <tr><th>Summary</th>    <td>Some useful general shortcut methods.</td></tr><tr><th>Why?</th>    <td>Readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>activate_warnings!</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>activate_warnings! <span style="color:#777"># sets $VERBOSE to 1</span></pre></div>
-</div>
-</div><h5>deactivate_warnings!</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>deactivate_warnings! <span style="color:#777"># sets $VERBOSE to 0</span></pre></div>
-</div>
-</div><h5>executed_directly?, directly_executed?, standalone?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>executed_directly? <span style="color:#777"># checks, if the current file is run directly -&gt; true</span></pre></div>
-</div>
-</div><h5>library?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>library? <span style="color:#777"># checks, if the current file is run directly -&gt; false</span></pre></div>
-</div>
-</div><h5>irb?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>irb? <span style="color:#777"># returns false if not called from IRB or RIPL</span></pre></div>
-</div>
-</div><h5>ignore_sigint!</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>ignore_sigint! <span style="color:#777"># blocks CTRL+C</span></pre></div>
-</div>
-</div><h5>ignore_sigquit!</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>ignore_sigquit! <span style="color:#777"># blocks CTRL+\</span></pre></div>
-</div>
-</div></td></tr><tr><th>Specification</th>    <td> <span id="show_kernel_spec">(<a href="javascript:show('kernel_spec')">show</a>)</span>
-         <div class="source" id="kernel_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/kernel</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">activate_warnings!</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should set $VERBOSE to true</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    activate_warnings!
-    <span style="color:#d70">$VERBOSE</span>.should == <span style="color:#069">true</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">deactivate_warnings!</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should set $VERBOSE to false</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    deactivate_warnings!
-    <span style="color:#d70">$VERBOSE</span>.should == <span style="color:#069">false</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">library?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return false if the file is invoked directly</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    library?.should == ( <span style="color:#069">__FILE__</span> != <span style="color:#d70">$PROGRAM_NAME</span> )
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">executed_directly?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return true if the file is invoked directly</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    executed_directly?.should == ( <span style="color:#069">__FILE__</span> == <span style="color:#d70">$PROGRAM_NAME</span> )
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">irb?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return true if called in IRB or RIPL</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ignore_sigint!</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should catch ctrl+c signals</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ignore_sigquit!</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should catch ctrl+</span><span style="color:#D20">\ </span><span style="color:#D20">signals</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_kernel_source">(<a href="javascript:show('kernel_source')">show</a>)</span>
-         <div class="source" id="kernel_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Kernel</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Kernel</span>
-  private
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">activate_warnings!</span>
-    <span style="color:#d70">$VERBOSE</span> = <span style="color:#069">true</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">deactivate_warnings!</span>
-    <span style="color:#d70">$VERBOSE</span> = <span style="color:#069">false</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">library?</span>
-    caller[<span style="color:#00D">0</span>].rindex(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">:</span><span style="color:#D20">\d</span><span style="color:#808">+(:in `.*')?$</span><span style="color:#404">/</span></span>)
-    <span style="color:#d70">$PROGRAM_NAME</span> != <span style="color:#d70">$`</span> <span style="color:#777"># __FILE__</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">executed_directly?</span>
-    caller[<span style="color:#00D">0</span>].rindex(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">:</span><span style="color:#D20">\d</span><span style="color:#808">+(:in `.*')?$</span><span style="color:#404">/</span></span>)
-    <span style="color:#d70">$PROGRAM_NAME</span> == <span style="color:#d70">$`</span> <span style="color:#777"># __FILE__</span>
-  <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">standalone?</span> <span style="color:#06B;font-weight:bold">executed_directly?</span>
-  <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">directly_executed?</span> <span style="color:#06B;font-weight:bold">executed_directly?</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">irb?</span>
-    (<span style="color:#080;font-weight:bold">defined?</span>(<span style="color:#036;font-weight:bold">IRB</span>) &amp;&amp; <span style="color:#d70">$0</span> =~ <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">irb</span><span style="color:#404">/</span></span>) || (<span style="color:#080;font-weight:bold">defined?</span>(<span style="color:#036;font-weight:bold">Ripl</span>) &amp;&amp; <span style="color:#d70">$0</span> =~ <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">ripl</span><span style="color:#404">/</span></span>)
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">ignore_sigint!</span> <span style="color:#777"># ctrl+c</span>
-    <span style="color:#036;font-weight:bold">Signal</span>.trap(*<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w|</span><span style="color:#D20">SIGINT IGNORE</span><span style="color:#710">|</span></span>)
-    <span style="color:#069">true</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">ignore_sigquit!</span> <span style="color:#777"># ctrl+\</span>
-    <span style="color:#036;font-weight:bold">Signal</span>.trap(*<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w|</span><span style="color:#D20">SIGQUIT IGNORE</span><span style="color:#710">|</span></span>)
-    <span style="color:#069">true</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/kernel">github wiki</a></td></tr></table> <h3 title="require 'zucker/sandbox'" id="sandbox">sandbox</h3>
-         <table class="cube_table"
-                id="sandbox_cube"
-                title="require 'zucker/sandbox'"> <tr><th>Summary</th>    <td>Creates a sandbox area.</td></tr><tr><th>Why?</th>    <td>Ruby comes with sandboxes, but they are hidden (-&gt; integrated) in the <code>$SAFE</code> concept.</td></tr><tr><th>Methods/Usage</th>    <td><h5>sandbox</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>sandbox <span style="color:#080;font-weight:bold">do</span>
-  <span style="color:#777"># dangerous commands throw SecurityErrors ($SAFE=4)</span>
-<span style="color:#080;font-weight:bold">end</span>
-<span style="color:#777"># everything's normal again</span>
-</pre></div>
-</div>
-</div></td></tr><tr><th>Specification</th>    <td> <span id="show_sandbox_spec">(<a href="javascript:show('sandbox_spec')">show</a>)</span>
-         <div class="source" id="sandbox_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/sandbox</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sandbox</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  <span style="color:#080;font-weight:bold">unless</span> <span style="color:#080;font-weight:bold">defined?</span>(<span style="color:#069">RUBY_ENGINE</span>) &amp;&amp; ( <span style="color:#069">RUBY_ENGINE</span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">jruby</span><span style="color:#710">'</span></span> || <span style="color:#069">RUBY_ENGINE</span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">rbx</span><span style="color:#710">'</span></span> )
-    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should throw a SecurityError if bad commands are issued</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-      proc <span style="color:#080;font-weight:bold">do</span>
-        sandbox <span style="color:#080;font-weight:bold">do</span>
-          <span style="background-color:hsla(120,100%,50%,0.06)"><span style="color:#161">`</span><span style="color:#2B2">ls</span><span style="color:#161">`</span></span>
-        <span style="color:#080;font-weight:bold">end</span>
-      <span style="color:#080;font-weight:bold">end</span>.should raise_exception <span style="color:#036;font-weight:bold">SecurityError</span>
-    <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_sandbox_source">(<a href="javascript:show('sandbox_source')">show</a>)</span>
-         <div class="source" id="sandbox_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Sandbox</span>  = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Kernel</span>
-  private
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">sandbox</span>
-    warn <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">zucker: sandbox does not work in rbx and jruby</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">if</span> <span style="color:#080;font-weight:bold">defined?</span>(<span style="color:#069">RUBY_ENGINE</span>) &amp;&amp; ( <span style="color:#069">RUBY_ENGINE</span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">jruby</span><span style="color:#710">'</span></span> || <span style="color:#069">RUBY_ENGINE</span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">rbx</span><span style="color:#710">'</span></span> )
-    <span style="color:#036;font-weight:bold">Thread</span>.start <span style="color:#080;font-weight:bold">do</span>
-      <span style="color:#d70">$SAFE</span> = <span style="color:#00D">4</span>
-      <span style="color:#080;font-weight:bold">yield</span>
-    <span style="color:#080;font-weight:bold">end</span>.value
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8, Does not work on JRuby, since $SAFE is not supported there</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/sandbox">github wiki</a></td></tr></table> <h3 title="require 'zucker/tap'" id="tap">tap</h3>
+</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/iterate">github wiki</a></td></tr></table> <h3 title="require 'zucker/tap'" id="tap">tap</h3>
          <table class="cube_table"
                 id="tap_cube"
                 title="require 'zucker/tap'"> <tr><th>Summary</th>    <td>This cube adds the two <code>tap</code> variants <code>tap_on</code> (known as <code>returning</code> in ActiveSupport) and <code>make_new</code>.</td></tr><tr><th>Methods/Usage</th>    <td><h5>tap_on</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -713,7 +552,6 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 </div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/tap">github wiki</a></td></tr></table>
         </div> 
       <h2 title="require 'zucker/env'" id="env">Cubes[env]</h2>
-        
         <div class="cubes">
          <h3 title="require 'zucker/engine'" id="engine">engine</h3>
          <table class="cube_table"
@@ -1175,7 +1013,6 @@ require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:
 </div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/os">github wiki</a></td></tr></table>
         </div> 
       <h2 title="require 'zucker/extensions'" id="extensions">Cubes[extensions]</h2>
-        
         <div class="cubes">
          <h3 title="require 'zucker/array'" id="array">array</h3>
          <table class="cube_table"
@@ -1232,38 +1069,38 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 </div>
 </div></td></tr><tr><th>Specification</th>    <td> <span id="show_case_spec">(<a href="javascript:show('case_spec')">show</a>)</span>
          <div class="source" id="case_spec"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#080;font-weight:bold">if</span> <span style="color:#080;font-weight:bold">defined?</span> <span style="color:#036;font-weight:bold">BasicObject</span> <span style="color:#777"># 1.9 only</span>
-  require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/case</span><span style="color:#710">'</span></span>
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/case</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Case</span>
 
-  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#to_camel</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should turn a snake_cased string to CamelCase</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_snake_case</span><span style="color:#710">'</span></span>.to_camel.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">WasSnakeCase</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#to_camel</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should turn a snake_cased string to CamelCase</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_snake_case</span><span style="color:#710">'</span></span>.to_camel.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">WasSnakeCase</span><span style="color:#710">'</span></span>
   <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
 
-  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#to_snake</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should turn a CamelCased string to snake_case</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">WasCamelCase</span><span style="color:#710">'</span></span>.to_snake.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_camel_case</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#to_snake</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should turn a CamelCased string to snake_case</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">WasCamelCase</span><span style="color:#710">'</span></span>.to_snake.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_camel_case</span><span style="color:#710">'</span></span>
   <span style="color:#080;font-weight:bold">end</span>
 <span style="color:#080;font-weight:bold">end</span></pre></div>
 </div>
 </div> </td></tr><tr><th>Source</th>    <td> <span id="show_case_source">(<a href="javascript:show('case_source')">show</a>)</span>
          <div class="source" id="case_source"><div class="CodeRay">
   <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Case</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
 
-<span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">String</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_snake</span>
-    gsub(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">(?&lt;!^)[A-Z]</span><span style="color:#404">/</span></span>) <span style="color:#080;font-weight:bold">do</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">_</span><span style="color:#710">#</span><span style="color:#d70">$&amp;</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">end</span>.downcase
-  <span style="color:#080;font-weight:bold">end</span>
-  
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_camel</span>
-    gsub(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">(?:^|_)([a-z])</span><span style="color:#404">/</span></span>) <span style="color:#080;font-weight:bold">do</span> <span style="color:#d70">$1</span>.upcase <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Case</span>
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_snake</span>
+        gsub(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">(?&lt;!^)[A-Z]</span><span style="color:#404">/</span></span>) <span style="color:#080;font-weight:bold">do</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">_</span><span style="color:#710">#</span><span style="color:#d70">$&amp;</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">end</span>.downcase
+      <span style="color:#080;font-weight:bold">end</span>
 
-<span style="color:#777"># J-_-L</span></pre></div>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_camel</span>
+        gsub(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">(?:^|_)([a-z])</span><span style="color:#404">/</span></span>) <span style="color:#080;font-weight:bold">do</span> <span style="color:#d70">$1</span>.upcase <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
 </div>
 </div> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/case">github wiki</a></td></tr></table> <h3 title="require 'zucker/enumerable'" id="enumerable">enumerable</h3>
          <table class="cube_table"
@@ -1731,7 +1568,6 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 </div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/union">github wiki</a></td></tr></table>
         </div> 
       <h2 title="require 'zucker/object'" id="object">Cubes[object]</h2>
-        
         <div class="cubes">
          <h3 title="require 'zucker/blank'" id="blank">blank</h3>
          <table class="cube_table"
@@ -1828,53 +1664,9 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mcopy">github wiki</a></td></tr></table> <h3 title="require 'zucker/not'" id="not">not</h3>
-         <table class="cube_table"
-                id="not_cube"
-                title="require 'zucker/not'"> <tr><th>Summary</th>    <td><code>not</code> returns an object on which all methods are redirected to it's receiver object, but returns the inverted boolean.</td></tr><tr><th>Why?</th>    <td>Better readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#not</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>[<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].not.empty? <span style="color:#777"># true</span>
-</pre></div>
-</div>
-</div></td></tr><tr><th>Information</th>    <td>See <a href="http://blog.jayfields.com/2007/08/ruby-adding-not-method-for-readability.html">this article by Jay Field</a> for more information.</td></tr><tr><th>Specification</th>    <td> <span id="show_not_spec">(<a href="javascript:show('not_spec')">show</a>)</span>
-         <div class="source" id="not_spec"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#080;font-weight:bold">if</span> <span style="color:#080;font-weight:bold">defined?</span> <span style="color:#036;font-weight:bold">BasicObject</span> <span style="color:#777"># 1.9 only</span>
-  require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/not</span><span style="color:#710">'</span></span>
-
-  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object#not</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should return an object on which all methods are redirected to it's receiver object, but return an inverted boolean</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
-      [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].not.empty?.should == <span style="color:#069">true</span>
-      <span style="color:#069">nil</span>.not.nil?.should == <span style="color:#069">false</span>
-    <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_not_source">(<a href="javascript:show('not_source')">show</a>)</span>
-         <div class="source" id="not_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Not</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Object</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">not</span>
-    <span style="color:#036;font-weight:bold">NotClass</span>.new <span style="color:#069">self</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">NotClass</span> &lt; <span style="color:#036;font-weight:bold">BasicObject</span>
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">initialize</span>(receiver)
-      <span style="color:#33B">@receiver</span> = receiver
-    <span style="color:#080;font-weight:bold">end</span>
-    
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">method_missing</span>(m, *args, &amp;block)
-      <span style="color:#080;font-weight:bold">not</span> <span style="color:#33B">@receiver</span>.public_send( m, *args, &amp;block )
-    <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/not">github wiki</a></td></tr></table>
+</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mcopy">github wiki</a></td></tr></table>
         </div> 
       <h2 title="require 'zucker/to_proc'" id="to_proc">Cubes[to_proc]</h2>
-        
         <div class="cubes">
          <h3 title="require 'zucker/array_to_proc'" id="array_to_proc">array_to_proc</h3>
          <table class="cube_table"
@@ -2031,7 +1823,6 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 </div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/regexp_to_proc">github wiki</a></td></tr></table>
         </div> 
       <h2 title="require 'zucker/shortcuts'" id="shortcuts">Cubes[shortcuts]</h2>
-        
         <div class="cubes">
          <h3 title="require 'zucker/alias_for'" id="alias_for">alias_for</h3>
          <table class="cube_table"
@@ -2469,451 +2260,17 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 </div>
 </div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/square_brackets_for">github wiki</a></td></tr></table>
         </div> 
-      <h2 title="require 'zucker/debug'" id="debug">Cubes[debug]</h2>
-        <p class="text">(not included by <code>require 'zucker/default'</code>)</p>
-        <div class="cubes">
-         <h3 title="require 'zucker/binding'" id="binding">binding</h3>
-         <table class="cube_table"
-                id="binding_cube"
-                title="require 'zucker/binding'"> <tr><th>Summary</th>    <td>Adds <code>Binding#vars</code>. It gives you information about the current environment variables.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Binding#variables, Binding#vars</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#777"># shows your current environment's variables, irb example:</span>
-&gt;&gt; a=<span style="color:#00D">3</span>
-=&gt; <span style="color:#00D">3</span>
-&gt;&gt; binding.vars
-=&gt; <span style="color:#777">#&lt;Binding:0x94c4b50&gt;</span>
-local variables
- - <span style="color:#606">a</span>: <span style="color:#00D">3</span>
- - <span style="color:#606">_</span>: <span style="color:#777">#&lt;Binding:0x94c4b50&gt;</span>
-(instance variables)
- - none
-<span style="color:#069">self</span>
- - main
-block_given?
- - <span style="color:#069">false</span>
-</pre></div>
-</div>
-</div></td></tr><tr><th>Specification</th>    <td> <span id="show_binding_spec">(<a href="javascript:show('binding_spec')">show</a>)</span>
-         <div class="source" id="binding_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/binding</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Binding#variables</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should output information about the current environment</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_binding_source">(<a href="javascript:show('binding_source')">show</a>)</span>
-         <div class="source" id="binding_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Binding</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">unless</span> <span style="color:#080;font-weight:bold">defined?</span>(<span style="color:#069">RUBY_ENGINE</span>) &amp;&amp; <span style="color:#069">RUBY_ENGINE</span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">rbx</span><span style="color:#710">'</span></span>
-  <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Binding</span>
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">variables</span>
-      put_vars = lambda { |array|
-        <span style="color:#080;font-weight:bold">if</span> array.empty?
-          <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20"> - none</span><span style="color:#710">'</span></span>
-        <span style="color:#080;font-weight:bold">else</span>
-          array.map{|e|
-            val = (<span style="color:#069">self</span>.eval <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>e<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>).inspect
-            <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20"> - </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>e<span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">: </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span> val <span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>
-          }.join <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>
-        <span style="color:#080;font-weight:bold">end</span>
-      }
-
-      puts <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span><span style="color:#069">self</span>.to_s<span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">
-local variables
-</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span> put_vars[ <span style="color:#069">self</span>.eval <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">local_variables</span><span style="color:#710">'</span></span> ] <span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">
-(instance variables)
-</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span> put_vars[ <span style="color:#069">self</span>.eval <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">instance_variables</span><span style="color:#710">'</span></span> ] <span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">
-self
- - </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span><span style="color:#069">self</span>.eval <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">self</span><span style="color:#710">'</span></span><span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">
-block_given?
- - </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span><span style="color:#069">self</span>.eval <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">block_given?</span><span style="color:#710">'</span></span><span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>
-
-    <span style="color:#080;font-weight:bold">end</span>
-
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">vars</span> <span style="color:#06B;font-weight:bold">variables</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8 (no rbx support)</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/binding">github wiki</a></td></tr></table> <h3 title="require 'zucker/cc'" id="cc">cc</h3>
-         <table class="cube_table"
-                id="cc_cube"
-                title="require 'zucker/cc'"> <tr><th>Summary</th>    <td><code>c</code> outputs the current method callstack.</td></tr><tr><th>Methods/Usage</th>    <td><h5>c, cc</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>c <span style="color:#777"># shows the method callstack</span>
-c <span style="color:#069">true</span> <span style="color:#777"># do not hide irb/ripl callstack</span>
-</pre></div>
-</div>
-</div></td></tr><tr><th>Specification</th>    <td> <span id="show_cc_spec">(<a href="javascript:show('cc_spec')">show</a>)</span>
-         <div class="source" id="cc_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/cc</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">c</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should output the method callstack</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_cc_source">(<a href="javascript:show('cc_source')">show</a>)</span>
-         <div class="source" id="cc_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Cc</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Kernel</span>
-  private
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">c</span>(show_irb = <span style="color:#069">false</span>)
-    method_stack = caller.reverse.map{ |m|
-      m.rindex( <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">:</span><span style="color:#D20">\d</span><span style="color:#808">+(:in `(.*)')?$</span><span style="color:#404">/</span></span> )
-      <span style="color:#d70">$2</span>
-    }.compact
-    
-    <span style="color:#080;font-weight:bold">if</span> !show_irb
-      <span style="color:#080;font-weight:bold">if</span> a = method_stack.index( <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">irb_binding</span><span style="color:#710">'</span></span> )
-        method_stack = [ method_stack[<span style="color:#00D">0</span>], <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">(irb)</span><span style="color:#710">'</span></span>, *method_stack[a+<span style="color:#00D">1</span>..<span style="color:#00D">-1</span>] ]
-      <span style="color:#080;font-weight:bold">elsif</span> a = method_stack[<span style="color:#00D">1</span>..<span style="color:#00D">-1</span>].index( <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">&lt;main&gt;</span><span style="color:#710">'</span></span> )
-        method_stack = [ method_stack[<span style="color:#00D">0</span>], <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">(ripl)</span><span style="color:#710">'</span></span>, *method_stack[a+<span style="color:#00D">2</span>..<span style="color:#00D">-1</span>] ]
-      <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">end</span>
-
-    <span style="color:#777"># puts method_stack.map.with_index{ |m, i|</span>
-    method_stack.each_with_index{ |m, i|
-      puts <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">  </span><span style="color:#710">&quot;</span></span>*i + m
-    }
-    <span style="color:#069">nil</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">cc</span> <span style="color:#06B;font-weight:bold">c</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/cc">github wiki</a></td></tr></table> <h3 title="require 'zucker/dd'" id="dd">dd</h3>
-         <table class="cube_table"
-                id="dd_cube"
-                title="require 'zucker/dd'"> <tr><th>Summary</th>    <td>Easy debug printing with the <code>p</code> alternative <code>.d</code>. It outputs to stdout and returns <code>self</code>. Accepts a block.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#d, Object#dd</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>some.d.methods.d.noone.d.knows.d
-<span style="color:#777"># ...outputs 4 lines with the inspected objects</span>
-<span style="color:#777"># =&gt; (result)</span>
-
-<span style="color:#00D">21</span>+<span style="color:#036;font-weight:bold">Math</span>.sin(<span style="color:#00D">42</span>).d
-<span style="color:#777"># outputs -0.916521547915634</span>
-<span style="color:#777"># =&gt; 20.0834784520844</span>
-
-name = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Earth</span><span style="color:#710">'</span></span>
-<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Hello </span><span style="color:#710">'</span></span> + name.d{|e| <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">The length is: </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>e.size<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>}
-<span style="color:#777"># outputs &quot;The length is: 5&quot;</span>
-<span style="color:#777"># =&gt; 'Hello Earth'</span>
-</pre></div>
-</div>
-</div></td></tr><tr><th>Information</th>    <td>This is inspired by the <a href="http://moonbase.rydia.net/mental/blog/programming/eavesdropping-on-expressions"><code>.tap</code> method</a>.<br/>There is also <code>tap</code> cube with more <code>tap</code> methods.</td></tr><tr><th>Specification</th>    <td> <span id="show_dd_spec">(<a href="javascript:show('dd_spec')">show</a>)</span>
-         <div class="source" id="dd_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/dd</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object#d</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-
-  let <span style="color:#A60">:a</span> <span style="color:#080;font-weight:bold">do</span>
-    [ <span style="color:#00D">1</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1</span><span style="color:#710">&quot;</span></span>, <span style="color:#00D">2</span>..<span style="color:#00D">5</span>, [], {<span style="color:#A60">:hallo</span> =&gt; <span style="color:#A60">:du</span>}, <span style="color:#069">nil</span>, <span style="color:#069">true</span> ]
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should not change the object's value</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
-    capture_stdout <span style="color:#080;font-weight:bold">do</span>
-      a.each{ |e|
-        (e.d).should == e
-      }
-
-      a.each{ |e|
-        (e.d{|value| <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">This is a: </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>value<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>}).should == e
-      }
-    <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should puts .inspect if no block is given (and not change the object's value)</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
-    capture_stdout <span style="color:#080;font-weight:bold">do</span>
-      a[<span style="color:#00D">0</span>].d
-      a[<span style="color:#00D">1</span>].d
-      a[<span style="color:#00D">6</span>].d
-    <span style="color:#080;font-weight:bold">end</span>.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%{</span><span style="color:#D20">1</span><span style="color:#b0b">\n</span><span style="color:#D20">&quot;1&quot;</span><span style="color:#b0b">\n</span><span style="color:#D20">true</span><span style="color:#b0b">\n</span><span style="color:#710">}</span></span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should puts the block if it is given (and not change the object's value)</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
-    capture_stdout <span style="color:#080;font-weight:bold">do</span>
-      a[<span style="color:#00D">0</span>].d{|value| <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">This is a: </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>value<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>}
-      a[<span style="color:#00D">1</span>].d{|value| <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">This is a: </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>value<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>}
-      a[<span style="color:#00D">6</span>].d{|value| <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">This is a: </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>value<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>}
-    <span style="color:#080;font-weight:bold">end</span>.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%{</span><span style="color:#D20">This is a: 1</span><span style="color:#b0b">\n</span><span style="color:#D20">This is a: 1</span><span style="color:#b0b">\n</span><span style="color:#D20">This is a: true</span><span style="color:#b0b">\n</span><span style="color:#710">}</span></span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_dd_source">(<a href="javascript:show('dd_source')">show</a>)</span>
-         <div class="source" id="dd_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Dd</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Kernel</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">d</span>(*args, &amp;block)
-    <span style="color:#080;font-weight:bold">if</span> args.empty?
-      tap{
-        <span style="color:#080;font-weight:bold">if</span> block_given?
-          puts <span style="color:#080;font-weight:bold">yield</span> <span style="color:#069">self</span>
-        <span style="color:#080;font-weight:bold">else</span>
-          puts <span style="color:#069">self</span>.inspect
-        <span style="color:#080;font-weight:bold">end</span>
-      }
-    <span style="color:#080;font-weight:bold">else</span>
-      raise <span style="color:#036;font-weight:bold">ArgumentError</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">.d - The parser thought that the code after .d are method arguments... Please don't put a space after d or use .d() or .d{} in this case!</span><span style="color:#710">&quot;</span></span>
-<span style="color:#777">#      eval ...</span>
-    <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">dd</span> <span style="color:#06B;font-weight:bold">d</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/dd">github wiki</a></td></tr></table> <h3 title="require 'zucker/mm'" id="mm">mm</h3>
-         <table class="cube_table"
-                id="mm_cube"
-                title="require 'zucker/mm'"> <tr><th>Summary</th>    <td><code>m</code> displays an ordered public method list.</td></tr><tr><th>Why?</th>    <td>See one object's methods without those rarely used inherited methods.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#m, Object#mm, Object#method_list</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>&gt;&gt; <span style="color:#00D">5</span>.mm <span style="color:#00D">2</span> <span style="color:#777"># outputs the list (2 levels deep), for example:</span>
-<span style="color:#777"># = Fixnum</span>
-<span style="color:#777"># to_s  -@  +  -  *  /  div  %  modulo  divmod  fdiv  **  abs  magnitude  ==  ===  &lt;=&gt;  &gt;  &gt;=  &lt;  &lt;=  ~  &amp;  |  ^  []  &lt;&lt;  &gt;&gt;  to_f  size  zero?  odd?  even?  succ</span>
-<span style="color:#777"># = Integer</span>
-<span style="color:#777"># integer?  odd?  even?  upto  downto  times  succ  next  pred  chr  ord  to_i  to_int  floor  ceil  truncate  round  gcd  lcm  gcdlcm  numerator  denominator  to_r  rationalize</span>
-</pre></div>
-</div>
-</div></td></tr><tr><th>Information</th>    <td>See <a href="http://rbjl.net/31-the-multi-mega-method-list">this article</a> for more information.</td></tr><tr><th>Specification</th>    <td> <span id="show_mm_spec">(<a href="javascript:show('mm_spec')">show</a>)</span>
-         <div class="source" id="mm_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/mm</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object#mm</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should display an ordered method list</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_mm_source">(<a href="javascript:show('mm_source')">show</a>)</span>
-         <div class="source" id="mm_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Mm</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Kernel</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">m</span>(levels = <span style="color:#00D">1</span>)
-    <span style="color:#777"># output helper</span>
-    mputs = proc{ |e| puts e.map(&amp;<span style="color:#A60">:to_s</span>)*<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">  </span><span style="color:#710">'</span></span> }
-
-    <span style="color:#777"># how to get results</span>
-    <span style="color:#080;font-weight:bold">if</span> <span style="color:#069">self</span>.is_a? <span style="color:#036;font-weight:bold">Module</span>
-      klass, method_function = <span style="color:#069">self</span>, <span style="color:#A60">:public_methods</span>
-    <span style="color:#080;font-weight:bold">else</span>
-      klass, method_function = <span style="color:#069">self</span>.class, <span style="color:#A60">:public_instance_methods</span>
-    <span style="color:#080;font-weight:bold">end</span>
-
-    <span style="color:#777"># eigenclass</span>
-    eigen = <span style="color:#069">self</span>.singleton_methods
-    <span style="color:#080;font-weight:bold">if</span> !eigen.empty?
-      puts <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">= Eigenclass</span><span style="color:#710">'</span></span> <span style="color:#777"># sorry for not being up to date, I just love the word</span>
-      mputs[ <span style="color:#069">self</span>.singleton_methods ]
-    <span style="color:#080;font-weight:bold">end</span>
-
-    <span style="color:#777"># display</span>
-    levels.times{ |level|
-      <span style="color:#080;font-weight:bold">if</span> cur = klass.ancestors[level]
-        puts <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">= </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>cur<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>  <span style="color:#777"># put class name</span>
-        mputs[ cur.send method_function, <span style="color:#069">false</span> ] <span style="color:#777"># put methods of the class</span>
-      <span style="color:#080;font-weight:bold">else</span>
-        <span style="color:#080;font-weight:bold">break</span>
-      <span style="color:#080;font-weight:bold">end</span>
-    }
-
-    <span style="color:#069">nil</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">mm</span>          <span style="color:#06B;font-weight:bold">m</span>
-  <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">method_list</span> <span style="color:#06B;font-weight:bold">m</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mm">github wiki</a></td></tr></table> <h3 title="require 'zucker/oo'" id="oo">oo</h3>
-         <table class="cube_table"
-                id="oo_cube"
-                title="require 'zucker/oo'"> <tr><th>Summary</th>    <td>The <code>o</code> method outputs the current method, line, file and label (if given).</td></tr><tr><th>Methods/Usage</th>    <td><h5>o, oo</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>o <span style="color:#777"># e.g: Reached method `irb_binding', line 1 of file (irb)</span>
-<span style="color:#606">o</span>:<span style="color:#036;font-weight:bold">Label</span> <span style="color:#777"># e.g: Label: reached method `abc', line 7 of file (irb)</span>
-</pre></div>
-</div>
-</div></td></tr><tr><th>Specification</th>    <td> <span id="show_oo_spec">(<a href="javascript:show('oo_spec')">show</a>)</span>
-         <div class="source" id="oo_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/oo</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">o</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should output the current line, file, method and label (if given)</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_oo_source">(<a href="javascript:show('oo_source')">show</a>)</span>
-         <div class="source" id="oo_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Oo</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Kernel</span>
-  private
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">o</span>(desc = <span style="color:#069">nil</span>)
-    caller[<span style="color:#00D">0</span>].rindex( <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">:(</span><span style="color:#D20">\d</span><span style="color:#808">+)(:in (`.*'))?$</span><span style="color:#404">/</span></span> )
-    m = <span style="color:#d70">$3</span> ? <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">method </span><span style="color:#710">#</span><span style="color:#d70">$3</span><span style="color:#D20">, </span><span style="color:#710">&quot;</span></span> : <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>
-    d = desc ? <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>desc<span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">: r</span><span style="color:#710">&quot;</span></span> : <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">R</span><span style="color:#710">'</span></span>
-
-    puts <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>d<span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">eached </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>m<span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">line </span><span style="color:#710">#</span><span style="color:#d70">$1</span><span style="color:#D20"> of file </span><span style="color:#710">#</span><span style="color:#d70">$`</span><span style="color:#710">&quot;</span></span>
-    <span style="color:#777"># [$`, $1.to_i, $3.to_sym,  desc]</span>
-  <span style="color:#080;font-weight:bold">end</span> 
-  <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">oo</span> <span style="color:#06B;font-weight:bold">o</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/oo">github wiki</a></td></tr></table> <h3 title="require 'zucker/qq'" id="qq">qq</h3>
-         <table class="cube_table"
-                id="qq_cube"
-                title="require 'zucker/qq'"> <tr><th>Summary</th>    <td>The <code>q</code> method does the same like <code>p</code>, but outputs multiple arguments on the same line.</td></tr><tr><th>Methods/Usage</th>    <td><h5>q, qq</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>q <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">zucker</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>, {<span style="color:#00D">6</span>=&gt;<span style="color:#00D">7</span>}, <span style="color:#00D">5</span>, <span style="color:#60E">2.3</span>, <span style="color:#A60">:o</span> <span style="color:#777"># outputs &quot;zucker&quot;  &quot;&quot;  {6=&gt;7}  5  2.3  :o</span>
-</pre></div>
-</div>
-</div></td></tr><tr><th>Information</th>    <td>Inspired by <a href="http://github.com/rdp/sane/blob/master/lib/sane/pps.rb">rdp</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_qq_spec">(<a href="javascript:show('qq_spec')">show</a>)</span>
-         <div class="source" id="qq_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/qq</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">q</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should output the same as p for a single arg</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    capture_stdout{p <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">some object</span><span style="color:#404">/</span></span>}.should ==
-    capture_stdout{q <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">some object</span><span style="color:#404">/</span></span>}
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should output the same as p but for multiple args one one line, values separated by two spaces</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
-    capture_stdout <span style="color:#080;font-weight:bold">do</span>
-      q <span style="color:#00D">1</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1</span><span style="color:#710">&quot;</span></span>, <span style="color:#00D">2</span>..<span style="color:#00D">5</span>, [], {<span style="color:#A60">:hallo</span> =&gt; <span style="color:#A60">:du</span>}, <span style="color:#069">nil</span>, <span style="color:#069">true</span>
-    <span style="color:#080;font-weight:bold">end</span>.chop.should ==
-    capture_stdout <span style="color:#080;font-weight:bold">do</span>
-      p <span style="color:#00D">1</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1</span><span style="color:#710">&quot;</span></span>, <span style="color:#00D">2</span>..<span style="color:#00D">5</span>, [], {<span style="color:#A60">:hallo</span> =&gt; <span style="color:#A60">:du</span>}, <span style="color:#069">nil</span>, <span style="color:#069">true</span>
-    <span style="color:#080;font-weight:bold">end</span>.chop.gsub( <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">  </span><span style="color:#710">'</span></span> )
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_qq_source">(<a href="javascript:show('qq_source')">show</a>)</span>
-         <div class="source" id="qq_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Qq</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Kernel</span>
-  private
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">q</span>(*args)
-    puts args.map( &amp;<span style="color:#A60">:inspect</span> )*<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">  </span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">unless</span> args.empty?
-  <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">qq</span> <span style="color:#06B;font-weight:bold">q</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/qq">github wiki</a></td></tr></table> <h3 title="require 'zucker/regexp_visualize'" id="regexp_visualize">regexp_visualize</h3>
-         <table class="cube_table"
-                id="regexp_visualize_cube"
-                title="require 'zucker/regexp_visualize'"> <tr><th>Summary</th>    <td>Test your regex against a string, handy for the command line.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Regexp#visualize, Regexp#vis</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#777"># regex = /\b([A-Z0-9._%+-]+)@([A-Z0-9.-]+\.[A-Z]{2,4})\b/i</span>
-regex.vis <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">I do not contain an email address.</span><span style="color:#710">'</span></span>
-<span style="color:#777"># no match</span>
-regex.vis <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">I contain an email address: mail@example.com</span><span style="color:#710">'</span></span>
-<span style="color:#777"># I contain an email address:  &gt;mail@example.com&lt; </span>
-regex.vis <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">mail@example.com</span><span style="color:#710">'</span></span>, <span style="color:#00D">1</span>
-<span style="color:#777"># 1:  &gt;mail&lt; @example.com</span>
-regex.vis <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">mail@example.com</span><span style="color:#710">'</span></span>, <span style="color:#00D">2</span>
-<span style="color:#777"># 2: mail@ &gt;example.com&lt; </span>
-regex.vis <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">mail@example.com</span><span style="color:#710">'</span></span>, <span style="color:#00D">3</span>
-<span style="color:#777"># 3: no match</span>
-regex.vis <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">mail@example.com</span><span style="color:#710">'</span></span>, [<span style="color:#00D">0</span>,<span style="color:#00D">1</span>,<span style="color:#00D">2</span>]
-<span style="color:#777"># 0:  &gt;mail@example.com&lt; </span>
-<span style="color:#777"># 1:  &gt;mail&lt; @example.com</span>
-<span style="color:#777"># 2: mail@ &gt;example.com&lt; </span>
-</pre></div>
-</div>
-</div></td></tr><tr><th>Specification</th>    <td> <span id="show_regexp_visualize_spec">(<a href="javascript:show('regexp_visualize_spec')">show</a>)</span>
-         <div class="source" id="regexp_visualize_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/regexp_visualize</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Regexp#visualize</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  let <span style="color:#A60">:regex</span> <span style="color:#080;font-weight:bold">do</span> <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#D20">\b</span><span style="color:#808">([A-Z0-9._%+-]+)@([A-Z0-9.-]+</span><span style="color:#D20">\.</span><span style="color:#808">[A-Z]{2,4})</span><span style="color:#D20">\b</span><span style="color:#404">/</span><span style="color:#C2C">i</span></span> <span style="color:#080;font-weight:bold">end</span> <span style="color:#777"># regex from regular-expressions.info/email.html</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should display a string where &gt;and&lt; mark the found regex</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    capture_stdout <span style="color:#080;font-weight:bold">do</span>
-      regex.vis <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">I do not contain an email address.</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>.chomp.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">no match</span><span style="color:#710">'</span></span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should display &quot;no match&quot; if the regex could not be matched</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    capture_stdout <span style="color:#080;font-weight:bold">do</span>
-      regex.vis <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">I contain an email address: mail@example.com</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>.chomp.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">I contain an email address:  &gt;mail@example.com&lt; </span><span style="color:#710">'</span></span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should display a string where &gt;and&lt; mark the found regex group if group identifier is given as arg2</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    capture_stdout <span style="color:#080;font-weight:bold">do</span>
-      regex.vis <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">mail@example.com</span><span style="color:#710">'</span></span>, <span style="color:#00D">1</span>
-    <span style="color:#080;font-weight:bold">end</span>.chomp.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1:  &gt;mail&lt; @example.com</span><span style="color:#710">'</span></span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should display &quot;group identifier: no match&quot; if the arg2 group could not be matched</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    capture_stdout <span style="color:#080;font-weight:bold">do</span>
-      regex.vis <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">mail@example.com</span><span style="color:#710">'</span></span>, <span style="color:#00D">3</span>
-    <span style="color:#080;font-weight:bold">end</span>.chomp.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">3: no match</span><span style="color:#710">'</span></span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should also take an array of group identfiers as arg2</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    capture_stdout <span style="color:#080;font-weight:bold">do</span>
-      regex.vis <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">mail@example.com</span><span style="color:#710">'</span></span>, [<span style="color:#00D">0</span>,<span style="color:#00D">1</span>,<span style="color:#00D">2</span>]
-    <span style="color:#080;font-weight:bold">end</span>.chomp.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">0:  &gt;mail@example.com&lt; </span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>\
-                        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1:  &gt;mail&lt; @example.com</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>\
-                        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">2: mail@ &gt;example.com&lt; </span><span style="color:#710">&quot;</span></span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_regexp_visualize_source">(<a href="javascript:show('regexp_visualize_source')">show</a>)</span>
-         <div class="source" id="regexp_visualize_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">RegexpVisualize</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Regexp</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">visualize</span>(string, groups = <span style="color:#069">nil</span>)
-    <span style="color:#080;font-weight:bold">if</span> <span style="color:#069">self</span> =~ string
-      <span style="color:#080;font-weight:bold">if</span> !groups
-        puts <span style="color:#d70">$`</span> + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20"> &gt;</span><span style="color:#710">'</span></span> + <span style="color:#d70">$&amp;</span> + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">&lt; </span><span style="color:#710">'</span></span> + <span style="color:#d70">$'</span>
-      <span style="color:#080;font-weight:bold">else</span>
-        Array( groups ).each{ |group|
-          <span style="color:#080;font-weight:bold">begin</span>
-            gr_string = string.dup
-            gr_string[ <span style="color:#d70">$~</span>.end( group ),   <span style="color:#00D">0</span> ] = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">&lt; </span><span style="color:#710">'</span></span>
-            gr_string[ <span style="color:#d70">$~</span>.begin( group ), <span style="color:#00D">0</span> ] = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20"> &gt;</span><span style="color:#710">'</span></span>
-            puts group.to_s + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">: </span><span style="color:#710">'</span></span> + gr_string
-          <span style="color:#080;font-weight:bold">rescue</span> <span style="color:#036;font-weight:bold">IndexError</span>, <span style="color:#080;font-weight:bold">defined?</span>(<span style="color:#036;font-weight:bold">Rubinius</span>) &amp;&amp;  <span style="color:#036;font-weight:bold">Rubinius</span>::<span style="color:#036;font-weight:bold">ObjectBoundsExceededError</span>
-            puts group.to_s + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">: no match</span><span style="color:#710">'</span></span>
-          <span style="color:#080;font-weight:bold">end</span>
-        }
-      <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">else</span>
-      puts <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">no match</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>
-
-    <span style="color:#069">nil</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">vis</span> <span style="color:#06B;font-weight:bold">visualize</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/regexp_visualize">github wiki</a></td></tr></table>
-        </div> 
 
       <h2>Changelog</h2>
       <div class="cubes">
-        <pre class="scode">2013-04-30 | <a href="http://rubyzucker.info/13.1/">Zucker 13.1</a>
+        <pre class="scode">2014-04-14 | <a href="http://rubyzucker.info/14.1/">Zucker 14.1</a>
+* Drop Ruby 1.8 support
+* Rewrite Zucker to use Refinements!
+* Remove kernel and not cube
+* Remove sandbox cube, since sandboxing is not recommended and removed from Ruby 2.1
+
+
+2013-04-30 | <a href="http://rubyzucker.info/13.1/">Zucker 13.1</a>
 * fix alias_for bug
 * let RubyVersion#inspect and RubyEngine#inspect map to #to_s
 * remove Array#sum

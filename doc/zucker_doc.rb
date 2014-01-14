@@ -48,7 +48,6 @@ class ZuckerDoc
         :env        => 'Cubes for collecting information.',
         :to_proc    => 'Adds some ⇧to_proc⇧ extensions to use with ⇧&amp;⇧.',
         :object     => 'Extensions for ⇧Object⇧.',
-        :debug      => 'Print debugging tools.',
         :extensions => 'More extensions for Ruby base classes.',
         :control    => 'Cubes that change program behaviour.',
         :shortcuts  => 'Cubes that save you keystrokes or disambiguate things.',
@@ -61,7 +60,7 @@ class ZuckerDoc
       cubes = Dir[ File.join(path, 'desc', '*.yaml') ].inject({}) do |res, cube_file; a|
         begin
           a = YAML.load_file cube_file
-        rescue 
+        rescue
           warn "Could not load the yaml file for #{ cube_file }"
         end
         if a.instance_of? Hash
@@ -104,7 +103,6 @@ class ZuckerDoc
 
       %{
       <h2 title="require 'zucker/#{name}'" id="#{name}">Cubes[#{name}]</h2>
-        #{ %q|<p class="text">(not included by <code>require 'zucker/default'</code>)</p>| if name == :debug }
         <div class="cubes">
         #{cube_html}
         </div> }
@@ -506,20 +504,20 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <p class="text">
         <code class="scode">gem install zucker --no-rdoc --no-ri # might need sudo</code>
       </p>
-      <h3 style="padding-left:1.3em">Quickstart</h3>
+
+      <h2>Usage / Organization</h2>
       <p class="text">
+        You can require everything using:
         <code class="scode">require 'zucker/all'</code>
       </p>
-      <h2>Usage / organisation</h2>
-      <p class="text">The gem consists of many small snippets, called <em>cubes</em>, which are bundled in <em>packs</em>. Since there aren't any dependencies within the gem, you can easily require only the packs or cubes you want:
-        <code class="scode">require 'zucker/cube_or_pack_name'</code>
+
+      <p class="text">But you probably should not do this. The gem consists of many small snippets, called <em>cubes</em>, that can be required individually. Since there aren't any dependencies within the gem, you can easily require only the cubes you need:
+        <code class="scode">require 'zucker/cube_name'</code>
       </p>
-      <h3 style="padding-left:1.3em">Packs</h3>
+      <h3 style="padding-left:1.3em">Packs (Multiple cubes at once)</h3>
       <ul class="text">
         ..packs..
       </ul>
-      <p class="text">
-        Furthermore, there are two meta packs available: <strong>all</strong> simply requires all cubes and <strong>default</strong> requires all cubes except <strong>debug</strong>.</p>
 
       <h3 style="padding-left:1.3em">Overview: Which methods and constants are added directly to the global namespace by the <em>default</em> pack?</h3>
       <p class="text">
