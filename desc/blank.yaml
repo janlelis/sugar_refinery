@@ -5,7 +5,4 @@ blank:
     Object#blank?:
     - "'an object'.blank? # => false"
     - "nil.present? # => false"
-  versions:
-  - 1.9
-  - 1.8
 

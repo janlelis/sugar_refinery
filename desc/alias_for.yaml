@@ -9,9 +9,6 @@ alias_for:
       end # creates multiple aliases
     Module#method_alias_for, Module#method_aliases_for: |
       # same as alias_for, but using Module#alias_method instead of alias
-  info: 
+  info:
   - Thanks to Kristian Mandrup for the idea and alias method specs.
-  versions:
-  - 1.9
-  - 1.8
 

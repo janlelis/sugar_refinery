@@ -8,7 +8,4 @@ hash:
     Hash#&: "{ 1=>4, 2=>5, 3=>6 } & { 1=>4, 2=>7 } # => { 1=>4 }"
   info:
   - Some of the operators are inspired by Ruby Facets.
-  versions:
-  - 1.9
-  - 1.8
 

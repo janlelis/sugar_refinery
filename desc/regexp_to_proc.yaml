@@ -6,7 +6,4 @@ regexp_to_proc:
       %w|just another string array|.select &/[jy]/  # => ["just", "array"]
   info:
   - "More about →to_proc→http://rbjl.net/29-become-a-proc-star→."
-  versions:
-  - 1.9
-  - 1.8
 

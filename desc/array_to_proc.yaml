@@ -10,7 +10,4 @@ array_to_proc:
   - Inspired by →this article→http://www.sanityinc.com/articles/adding-array-to-proc-to-ruby→.
   - "More about →to_proc→http://rbjl.net/29-become-a-proc-star→."
   - Chaining inspired by →eregon→http://github.com/eregon/Classes/blob/master/to_proc.rb→.
-  versions:
-  - 1.9
-  - 1.8
 

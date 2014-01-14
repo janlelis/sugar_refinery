@@ -299,10 +299,9 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <p class="text">But you probably should not do this. The gem consists of many small snippets, called <em>cubes</em>, that can be required individually. Since there aren't any dependencies within the gem, you can easily require only the cubes you need:
         <code class="scode">require 'zucker/cube_name'</code>
       </p>
-      <h3 style="padding-left:1.3em">Packs (Multiple cubes at once)</h3>
+      <h3 style="padding-left:1.3em">Packs (multiple cubes at once)</h3>
       <ul class="text">
          <li><a href="#control" style="text-decoration:none;font-weight:bold;">control</a>: Cubes that change program behaviour.</li> 
- <li><a href="#env" style="text-decoration:none;font-weight:bold;">env</a>: Cubes for collecting information.</li> 
  <li><a href="#extensions" style="text-decoration:none;font-weight:bold;">extensions</a>: More extensions for Ruby base classes.</li> 
  <li><a href="#object" style="text-decoration:none;font-weight:bold;">object</a>: Extensions for <code>Object</code>.</li> 
  <li><a href="#to_proc" style="text-decoration:none;font-weight:bold;">to_proc</a>: Adds some <code>to_proc</code> extensions to use with <code>&amp;</code>.</li> 
@@ -312,7 +311,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
       <h3 style="padding-left:1.3em">Overview: Which methods and constants are added directly to the global namespace by the <em>default</em> pack?</h3>
       <p class="text">
 
-      <code class="scode">Info, RubyVersion, RubyEngine, OS, Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, tap_on, make_new, (blank?, present?, mcopy)</code>
+      <code class="scode">Infinity, NaN, alias_for, aliases_for, egonil, nn, iterate, instance_variables_from, ivars, tap_on, make_new, Object#blank?, Object#present?, Object#mcopy</code>
       </p>
 
        
@@ -393,7 +392,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/egonil">github wiki</a></td></tr></table> <h3 title="require 'zucker/iterate'" id="iterate">iterate</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/iterate'" id="iterate">iterate</h3>
          <table class="cube_table"
                 id="iterate_cube"
                 title="require 'zucker/iterate'"> <tr><th>Summary</th>    <td>Iterate over one or more collections.</td></tr><tr><th>Why?</th>    <td>It's like <code>.each</code> with two differences: It feels more like a control structure and you can easily iterate over multiple objects.</td></tr><tr><th>Methods/Usage</th>    <td><h5>iterate</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -498,7 +497,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/iterate">github wiki</a></td></tr></table> <h3 title="require 'zucker/tap'" id="tap">tap</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/tap'" id="tap">tap</h3>
          <table class="cube_table"
                 id="tap_cube"
                 title="require 'zucker/tap'"> <tr><th>Summary</th>    <td>This cube adds the two <code>tap</code> variants <code>tap_on</code> (known as <code>returning</code> in ActiveSupport) and <code>make_new</code>.</td></tr><tr><th>Methods/Usage</th>    <td><h5>tap_on</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -530,7 +529,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
   it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should create a new instance of the class given as argument, apply the block on it and return result</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
     make_new <span style="color:#036;font-weight:bold">Hash</span> <span style="color:#080;font-weight:bold">do</span> |obj|
       obj[<span style="color:#00D">1</span>] = <span style="color:#00D">2</span>
-    <span style="color:#080;font-weight:bold">end</span>.should.send(<span style="color:#A60"><span style="color:#A60">:</span><span style="color:#630">'</span><span style="color:#A60">==</span><span style="color:#630">'</span></span>, { <span style="color:#00D">1</span> =&gt; <span style="color:#00D">2</span>})
+    <span style="color:#080;font-weight:bold">end</span>.should.send(<span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">'</span><span style="color:#A60">==</span><span style="color:#740">'</span></span>, { <span style="color:#00D">1</span> =&gt; <span style="color:#00D">2</span>})
   <span style="color:#080;font-weight:bold">end</span>
 <span style="color:#080;font-weight:bold">end</span></pre></div>
 </div>
@@ -549,468 +548,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/tap">github wiki</a></td></tr></table>
-        </div> 
-      <h2 title="require 'zucker/env'" id="env">Cubes[env]</h2>
-        <div class="cubes">
-         <h3 title="require 'zucker/engine'" id="engine">engine</h3>
-         <table class="cube_table"
-                id="engine_cube"
-                title="require 'zucker/engine'"> <tr><th>Summary</th>    <td>Adds a <code>RubyEngine</code> class for easy compatibility checks.</td></tr><tr><th>Methods/Usage</th>    <td><h5>RubyEngine</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#777"># outputs the interpreter name</span></pre></div>
-</div>
-</div><h5>RubyEngine.mri?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">RubyEngine</span>.mri? <span style="color:#777"># true if using the official Ruby interpreter</span></pre></div>
-</div>
-</div><h5>RubyEngine.jruby?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">RubyEngine</span>.jruby? <span style="color:#777"># true if using JRuby</span></pre></div>
-</div>
-</div><h5>RubyEngine.rubinius?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">RubyEngine</span>.rubinius? <span style="color:#777"># true if using rubinius</span></pre></div>
-</div>
-</div><h5>RubyEngine.ree?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">RubyEngine</span>.ree? <span style="color:#777"># true if using enterprise edition</span></pre></div>
-</div>
-</div><h5>RubyEngine.ironruby?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">RubyEngine</span>.ironruby? <span style="color:#777"># true if using IronRuby</span></pre></div>
-</div>
-</div><h5>RubyEngine.macruby?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">RubyEngine</span>.macruby? <span style="color:#777"># true if using MacRuby</span></pre></div>
-</div>
-</div><h5>RubyEngine.cardinal?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">RubyEngine</span>.cardinal? <span style="color:#777"># true if using parrot</span></pre></div>
-</div>
-</div></td></tr><tr><th>Specification</th>    <td> <span id="show_engine_spec">(<a href="javascript:show('engine_spec')">show</a>)</span>
-         <div class="source" id="engine_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/engine</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">RubyEngine</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should display the current ruby interpreter (to_s)</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    <span style="color:#036;font-weight:bold">RubyEngine</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should create many method aliases for asking for a specific interpreter</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    <span style="color:#777"># please see the source or description file</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_engine_source">(<a href="javascript:show('engine_source')">show</a>)</span>
-         <div class="source" id="engine_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Engine</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">RubyEngine</span>
-    <span style="color:#777"># try to guess the interpreter</span>
-    <span style="color:#33B">@interpreter</span> = <span style="color:#080;font-weight:bold">case</span>
-    <span style="color:#080;font-weight:bold">when</span> <span style="color:#069">RUBY_PLATFORM</span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">parrot</span><span style="color:#710">'</span></span>
-      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">cardinal</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">when</span> <span style="color:#036;font-weight:bold">Object</span>.const_defined?(<span style="color:#A60">:RUBY_ENGINE</span>)
-      <span style="color:#080;font-weight:bold">if</span> <span style="color:#069">RUBY_ENGINE</span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ruby</span><span style="color:#710">'</span></span>
-        <span style="color:#080;font-weight:bold">if</span> <span style="color:#069">RUBY_DESCRIPTION</span> =~ <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">Enterprise</span><span style="color:#404">/</span></span>
-          <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ree</span><span style="color:#710">'</span></span>
-        <span style="color:#080;font-weight:bold">else</span>
-          <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">mri</span><span style="color:#710">'</span></span>
-        <span style="color:#080;font-weight:bold">end</span>
-      <span style="color:#080;font-weight:bold">else</span>
-        <span style="color:#069">RUBY_ENGINE</span>.to_s <span style="color:#777"># jruby, rbx, ironruby, macruby, etc.</span>
-      <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">else</span> <span style="color:#777"># probably 1.8</span>
-      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">mri</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">class</span> &lt;&lt; <span style="color:#B06;font-weight:bold">self</span>
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">is?</span>(what)
-      what === <span style="color:#33B">@interpreter</span>
-    <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">is</span> <span style="color:#06B;font-weight:bold">is?</span>
-
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_s</span>
-      <span style="color:#33B">@interpreter</span>.to_s
-    <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">inspect</span> <span style="color:#06B;font-weight:bold">to_s</span>
-
-    <span style="color:#777"># ask methods</span>
-
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">mri?</span>
-      <span style="color:#036;font-weight:bold">RubyEngine</span>.is? <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">mri</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">official_ruby?</span> <span style="color:#06B;font-weight:bold">mri?</span>
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">ruby?</span> <span style="color:#06B;font-weight:bold">mri?</span>
-
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">jruby?</span>
-      <span style="color:#036;font-weight:bold">RubyEngine</span>.is? <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">jruby</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">java?</span> <span style="color:#06B;font-weight:bold">jruby?</span>
-
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">rubinius?</span>
-      <span style="color:#036;font-weight:bold">RubyEngine</span>.is? <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">rbx</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">rbx?</span> <span style="color:#06B;font-weight:bold">rubinius?</span>
-
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">ree?</span>
-      <span style="color:#036;font-weight:bold">RubyEngine</span>.is? <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ree</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">enterprise?</span> <span style="color:#06B;font-weight:bold">ree?</span>
-
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">ironruby?</span>
-      <span style="color:#036;font-weight:bold">RubyEngine</span>.is? <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ironruby</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">iron_ruby?</span> <span style="color:#06B;font-weight:bold">ironruby?</span>
-
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">cardinal?</span>
-      <span style="color:#036;font-weight:bold">RubyEngine</span>.is? <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">cardinal</span><span style="color:#710">'</span></span>
-    <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">parrot?</span> <span style="color:#06B;font-weight:bold">cardinal?</span>
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">perl?</span> <span style="color:#06B;font-weight:bold">cardinal?</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/engine">github wiki</a></td></tr></table> <h3 title="require 'zucker/info'" id="info">info</h3>
-         <table class="cube_table"
-                id="info_cube"
-                title="require 'zucker/info'"> <tr><th>Summary</th>    <td>Access environment information with the <code>Info</code> module.</td></tr><tr><th>Why?</th>    <td>You don't need to remember in which global variable, constant or special method the information you are searching for is hidden.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Info</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#777"># for example</span>
-<span style="color:#036;font-weight:bold">Info</span>.working_directory <span style="color:#777"># Dir.pwd</span>
-<span style="color:#036;font-weight:bold">Info</span>.load_path         <span style="color:#777"># $:</span>
-<span style="color:#036;font-weight:bold">Info</span>.platform          <span style="color:#777"># RUBY_PLATFORM</span>
-<span style="color:#036;font-weight:bold">Info</span>.current_file      <span style="color:#777"># similar to __FILE__</span>
-<span style="color:#777"># you could also add them to the global namespace with: include Info</span>
-<span style="color:#777"># see the source file for the list of accessors or</span>
-<span style="color:#036;font-weight:bold">Info</span>.list
-</pre></div>
-</div>
-</div></td></tr><tr><th>Information</th>    <td>Please note that it is not possible to put some of __THOSE_KEYWORDS__ in methods, so the result might slightly differ. This might affect <code>current_file</code>, <code>current_file_directory</code>, <code>current_line</code> and <code>current_method</code>.<br/>Thanks to Facets for the <code>caller</code> Regexp.</td></tr><tr><th>Specification</th>    <td> <span id="show_info_spec">(<a href="javascript:show('info_spec')">show</a>)</span>
-         <div class="source" id="info_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/info</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Info</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should define accessors for global variables, constants and some special methods/keywords</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    <span style="color:#777"># see sourcefile for the list</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_info_source">(<a href="javascript:show('info_source')">show</a>)</span>
-         <div class="source" id="info_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">rbconfig</span><span style="color:#710">'</span></span>
-require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">etc</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Info</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Info</span>
-  <span style="color:#080;font-weight:bold">class</span> &lt;&lt; <span style="color:#B06;font-weight:bold">self</span>
-    <span style="color:#777"># hash like access</span>
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">[]</span>(what)
-      send what
-    <span style="color:#080;font-weight:bold">end</span>
-
-    <span style="color:#777"># list available info methods</span>
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">list</span>
-      singleton_methods - [<span style="color:#A60">:[]</span>, <span style="color:#A60">:list</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">[]</span><span style="color:#710">'</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">list</span><span style="color:#710">'</span></span>]
-    <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  module_function
-
-  <span style="color:#777"># input</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">last_input_file</span>
-    <span style="color:#d70">$FILENAME</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">last_input_line_number</span>
-    <span style="color:#d70">$.</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">last_input</span>
-    <span style="color:#d70">$_</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#777"># program</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">program_name</span>
-    <span style="color:#d70">$0</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">program_arguments</span>
-    <span style="color:#d70">$:</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">loaded_programs</span>
-    <span style="color:#d70">$&quot;</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">program_data</span>
-    ::<span style="color:#036;font-weight:bold">DATA</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">child_program_status</span>
-    <span style="color:#d70">$CHILD_STATUS</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#777"># system info</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">environment</span>
-    ::<span style="color:#036;font-weight:bold">ENV</span>
-  <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">env</span> <span style="color:#06B;font-weight:bold">environment</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">working_directory</span>
-    <span style="color:#036;font-weight:bold">Dir</span>.pwd
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">platform</span>
-    ::<span style="color:#036;font-weight:bold">RUBY_PLATFORM</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">os</span>
-    <span style="color:#036;font-weight:bold">RbConfig</span>::<span style="color:#036;font-weight:bold">CONFIG</span>[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">host_os</span><span style="color:#710">'</span></span>]
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">process_id</span>
-    <span style="color:#d70">$$</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">load_path</span>
-    <span style="color:#d70">$:</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#777"># user</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">user_login</span>
-    <span style="color:#036;font-weight:bold">Etc</span>.getlogin
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">user_name</span>
-    <span style="color:#036;font-weight:bold">Etc</span>.getpwnam(user_login).gecos.split(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">,</span><span style="color:#710">'</span></span>)[<span style="color:#00D">0</span>]
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#777"># current</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">current_file</span> <span style="color:#777">#  __FILE__</span>
-    <span style="color:#080;font-weight:bold">return</span> <span style="color:#d70">$`</span> <span style="color:#080;font-weight:bold">if</span> caller[<span style="color:#00D">0</span>].rindex(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">:</span><span style="color:#D20">\d</span><span style="color:#808">+(:in `.*')?$</span><span style="color:#404">/</span></span>)
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">current_file_directory</span>
-    <span style="color:#080;font-weight:bold">if</span> current_file[<span style="color:#00D">0</span>,<span style="color:#00D">1</span>] == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">(</span><span style="color:#710">'</span></span> &amp;&amp; current_file[<span style="color:#00D">-1</span>,<span style="color:#00D">1</span>] == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">)</span><span style="color:#710">'</span></span>
-      current_file
-    <span style="color:#080;font-weight:bold">else</span>
-      <span style="color:#036;font-weight:bold">File</span>.dirname(current_file)
-    <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">current_line</span> <span style="color:#777"># __LINE__</span>
-    <span style="color:#080;font-weight:bold">return</span> <span style="color:#d70">$1</span>.to_i <span style="color:#080;font-weight:bold">if</span> caller[<span style="color:#00D">0</span>].rindex( <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">:(</span><span style="color:#D20">\d</span><span style="color:#808">+)(:in `.*')?$</span><span style="color:#404">/</span></span> )
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">current_method</span> <span style="color:#777"># __method__ (except aliases)</span>
-    <span style="color:#080;font-weight:bold">return</span> <span style="color:#d70">$1</span>.to_sym <span style="color:#080;font-weight:bold">if</span> caller(<span style="color:#00D">1</span>)[<span style="color:#00D">0</span>].rindex( <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#D20">\`</span><span style="color:#808">([^</span><span style="color:#D20">\'</span><span style="color:#808">]+)</span><span style="color:#D20">\'</span><span style="color:#404">/</span></span> )
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">current_callstack</span>
-    caller
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#777"># dealing with strings</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">gets_separator</span>
-    <span style="color:#d70">$/</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">join_separator</span>
-    <span style="color:#d70">$,</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">print_separator</span>
-    <span style="color:#d70">$,</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">split_separator</span>
-    <span style="color:#d70">$;</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#777"># misc</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">security_level</span>
-    <span style="color:#d70">$SAFE</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">warnings_activated?</span>
-    <span style="color:#d70">$VERBOSE</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">debug_activated?</span>
-    <span style="color:#d70">$DEBUG</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">last_exception</span>
-    <span style="color:#d70">$!</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#777"># defined objects</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">global_variables</span>
-    <span style="color:#036;font-weight:bold">Object</span>.send <span style="color:#A60">:global_variables</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">global_constants</span>
-    <span style="color:#036;font-weight:bold">Object</span>.constants
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#777"># encoding (1.9)</span>
-  <span style="color:#777">#def source_encoding</span>
-  <span style="color:#777">#  __ENCODING__</span>
-  <span style="color:#777">#end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">external_encoding</span>
-    <span style="color:#036;font-weight:bold">Encoding</span>.default_external
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">internal_encoding</span>
-    <span style="color:#036;font-weight:bold">Encoding</span>.default_internal
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#777"># ruby version info</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">ruby_version</span> <span style="color:#777"># also see the RubyVersion cube</span>
-    ::<span style="color:#036;font-weight:bold">RUBY_VERSION</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">ruby_patchlevel</span>
-    ::<span style="color:#036;font-weight:bold">RUBY_PATCHLEVEL</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">ruby_description</span>
-    ::<span style="color:#036;font-weight:bold">RUBY_DESCRIPTION</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">ruby_release_date</span>
-    ::<span style="color:#036;font-weight:bold">RUBY_RELEASE_DATE</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">ruby_engine</span> <span style="color:#777"># warning! not support by every implementation. It's saver to use the RubyEngine cube</span>
-    ::<span style="color:#036;font-weight:bold">RUBY_ENGINE</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8 (not all information)</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/info">github wiki</a></td></tr></table> <h3 title="require 'zucker/os'" id="os">os</h3>
-         <table class="cube_table"
-                id="os_cube"
-                title="require 'zucker/os'"> <tr><th>Summary</th>    <td>Detect the operating system.</td></tr><tr><th>Why?</th>    <td>Checking for <code>RUBY_PLATFORM</code> does not report the OS when using JRuby and for better readability.</td></tr><tr><th>Methods/Usage</th>    <td><h5>OS</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#777"># displays the operating system</span></pre></div>
-</div>
-</div><h5>OS.linux?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">OS</span>.linux? <span style="color:#777"># true if you are on a linux machine</span></pre></div>
-</div>
-</div><h5>OS.mac?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">OS</span>.mac? <span style="color:#777"># true for macs</span></pre></div>
-</div>
-</div><h5>OS.bsd?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">OS</span>.bsd? <span style="color:#777"># true for bsds</span></pre></div>
-</div>
-</div><h5>OS.windows?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>include <span style="color:#036;font-weight:bold">OS</span>; windows? <span style="color:#777"># true for windows. Example of including OS to get the os methods into the global namespace</span></pre></div>
-</div>
-</div><h5>OS.solaris?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">OS</span>.solaris? <span style="color:#777"># true for solaris/sunos</span></pre></div>
-</div>
-</div><h5>OS.posix?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">OS</span>.posix? <span style="color:#777"># true if system is posix compatible</span></pre></div>
-</div>
-</div><h5>OS.is?</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#036;font-weight:bold">OS</span>.is? <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">x</span><span style="color:#404">/</span></span> <span style="color:#777"># matches the regex against the os string</span></pre></div>
-</div>
-</div></td></tr><tr><th>Information</th>    <td>This cube depends on system information and may not be 100% accurate.<br/>Syntax and semantic inspired by Roger Pack's <a href="http://github.com/rdp/os">os gem</a>.</td></tr><tr><th>Specification</th>    <td> <span id="show_os_spec">(<a href="javascript:show('os_spec')">show</a>)</span>
-         <div class="source" id="os_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/os</span><span style="color:#710">'</span></span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">OS</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should display the used operation system (to_s)</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">linux?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return true if OS is a linux</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">mac?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return true if OS is a mac or darwin</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">bsd?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return true if OS is a bsd</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">windows?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return true if OS is a windows</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">solaris?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return true if OS is a solaris or sunos</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">posix?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return true if OS is posix compatible</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>; <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">OS.is?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should test if RbConfig::CONFIG['host_os'] matches the regex (boolean value)</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
-    <span style="color:#036;font-weight:bold">OS</span>.is?(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">linux</span><span style="color:#404">/</span></span>).should ==
-    !!( <span style="color:#036;font-weight:bold">RbConfig</span>::<span style="color:#036;font-weight:bold">CONFIG</span>[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">host_os</span><span style="color:#710">'</span></span>] =~ <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">linux</span><span style="color:#404">/</span></span> )
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_os_source">(<a href="javascript:show('os_source')">show</a>)</span>
-         <div class="source" id="os_source"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
-require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">rbconfig</span><span style="color:#710">'</span></span>
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span> <span style="color:#036;font-weight:bold">Os</span> = <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">OS</span>
-  <span style="color:#080;font-weight:bold">class</span> &lt;&lt; <span style="color:#B06;font-weight:bold">self</span>
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">is?</span>(what)
-      what === <span style="color:#036;font-weight:bold">RbConfig</span>::<span style="color:#036;font-weight:bold">CONFIG</span>[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">host_os</span><span style="color:#710">'</span></span>]
-    <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">is</span> <span style="color:#06B;font-weight:bold">is?</span>
-
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_s</span>
-      <span style="color:#036;font-weight:bold">RbConfig</span>::<span style="color:#036;font-weight:bold">CONFIG</span>[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">host_os</span><span style="color:#710">'</span></span>]
-    <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  module_function
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">linux?</span>
-    <span style="color:#036;font-weight:bold">OS</span>.is?( <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">linux|cygwin</span><span style="color:#404">/</span></span> )
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">mac?</span>
-    <span style="color:#036;font-weight:bold">OS</span>.is?( <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">mac|darwin</span><span style="color:#404">/</span></span> )
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">bsd?</span>
-    <span style="color:#036;font-weight:bold">OS</span>.is?( <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">bsd</span><span style="color:#404">/</span></span> )
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">windows?</span>
-    <span style="color:#036;font-weight:bold">OS</span>.is?( <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">mswin|mingw</span><span style="color:#404">/</span></span> )
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">solaris?</span>
-    <span style="color:#036;font-weight:bold">OS</span>.is?( <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">solaris|sunos</span><span style="color:#404">/</span></span> )
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">posix?</span>
-    linux? <span style="color:#080;font-weight:bold">or</span> mac? <span style="color:#080;font-weight:bold">or</span> bsd? <span style="color:#080;font-weight:bold">or</span> solaris? <span style="color:#080;font-weight:bold">or</span> <span style="color:#080;font-weight:bold">begin</span> 
-        fork <span style="color:#080;font-weight:bold">do</span> <span style="color:#080;font-weight:bold">end</span>
-        <span style="color:#069">true</span>
-      <span style="color:#080;font-weight:bold">rescue</span> <span style="color:#036;font-weight:bold">NotImplementedError</span>, <span style="color:#036;font-weight:bold">NoMethodError</span>
-        <span style="color:#069">false</span>
-      <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  <span style="color:#777">#def symbian?</span>
-    <span style="color:#777">#TODO who knows what symbian returns?</span>
-  <span style="color:#777">#end</span>
-
-  <span style="color:#777"># ...</span>
-<span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#777"># J-_-L</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/os">github wiki</a></td></tr></table>
+</div> </td></tr></table>
         </div> 
       <h2 title="require 'zucker/extensions'" id="extensions">Cubes[extensions]</h2>
         <div class="cubes">
@@ -1058,7 +596,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/array">github wiki</a></td></tr></table> <h3 title="require 'zucker/case'" id="case">case</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/case'" id="case">case</h3>
          <table class="cube_table"
                 id="case_cube"
                 title="require 'zucker/case'"> <tr><th>Summary</th>    <td>Provides <code>String#to_camel</code> and <code>String#to_snake</code>.</td></tr><tr><th>Why?</th>    <td>It kind of lies in the nature of Ruby.</td></tr><tr><th>Methods/Usage</th>    <td><h5>String#to_camel</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -1092,7 +630,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
   <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Case</span>
     refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
       <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_snake</span>
-        gsub(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">(?&lt;!^)[A-Z]</span><span style="color:#404">/</span></span>) <span style="color:#080;font-weight:bold">do</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">_</span><span style="color:#710">#</span><span style="color:#d70">$&amp;</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">end</span>.downcase
+        gsub(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">(?&lt;!^)[A-Z]</span><span style="color:#404">/</span></span>) <span style="color:#080;font-weight:bold">do</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">_</span><span style="color:#666">#</span><span style="color:#d70">$&amp;</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">end</span>.downcase
       <span style="color:#080;font-weight:bold">end</span>
 
       <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_camel</span>
@@ -1102,7 +640,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
   <span style="color:#080;font-weight:bold">end</span>
 <span style="color:#080;font-weight:bold">end</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/case">github wiki</a></td></tr></table> <h3 title="require 'zucker/enumerable'" id="enumerable">enumerable</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/enumerable'" id="enumerable">enumerable</h3>
          <table class="cube_table"
                 id="enumerable_cube"
                 title="require 'zucker/enumerable'"> <tr><th>Summary</th>    <td><code>Enumerable</code> extensions.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Enumerable#mash</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -1135,7 +673,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/enumerable">github wiki</a></td></tr></table> <h3 title="require 'zucker/file'" id="file">file</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/file'" id="file">file</h3>
          <table class="cube_table"
                 id="file_cube"
                 title="require 'zucker/file'"> <tr><th>Summary</th>    <td>Extensions for <code>File</code>.</td></tr><tr><th>Methods/Usage</th>    <td><h5>File.gsub</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -1225,7 +763,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/file">github wiki</a></td></tr></table> <h3 title="require 'zucker/hash'" id="hash">hash</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/hash'" id="hash">hash</h3>
          <table class="cube_table"
                 id="hash_cube"
                 title="require 'zucker/hash'"> <tr><th>Summary</th>    <td>Some sugar for dealing with hashes.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Hash.zip</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -1296,7 +834,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/hash">github wiki</a></td></tr></table> <h3 title="require 'zucker/string'" id="string">string</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/string'" id="string">string</h3>
          <table class="cube_table"
                 id="string_cube"
                 title="require 'zucker/string'"> <tr><th>Summary</th>    <td>Generic <code>String</code> extensions.</td></tr><tr><th>Why?</th>    <td>Strings cannot be comfortable enough ;).</td></tr><tr><th>Methods/Usage</th>    <td><h5>String#-</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -1448,7 +986,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/string">github wiki</a></td></tr></table> <h3 title="require 'zucker/unary'" id="unary">unary</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/unary'" id="unary">unary</h3>
          <table class="cube_table"
                 id="unary_cube"
                 title="require 'zucker/unary'"> <tr><th>Summary</th>    <td>Easy conversion between strings and symbols.</td></tr><tr><th>Why?</th>    <td>Sometimes, you do not care if you get a <code>String</code> or <code>Symbol</code> as input - but when analysing it, you often need to choose one format. A concise possibility for this conversion is using the unary operators <code>String#-@</code> and <code>Symbol#+@</code>.</td></tr><tr><th>Methods/Usage</th>    <td><h5>String#+@</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -1518,7 +1056,7 @@ describe <span style="color:#036;font-weight:bold">String</span>, <span style="b
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8 (<code>+:literal</code> not possible)</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/unary">github wiki</a></td></tr></table> <h3 title="require 'zucker/union'" id="union">union</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/union'" id="union">union</h3>
          <table class="cube_table"
                 id="union_cube"
                 title="require 'zucker/union'"> <tr><th>Summary</th>    <td>Easy creation of <code>Regexp.union</code>s.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Regexp#|, String#|</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -1565,7 +1103,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/union">github wiki</a></td></tr></table>
+</div> </td></tr></table>
         </div> 
       <h2 title="require 'zucker/object'" id="object">Cubes[object]</h2>
         <div class="cubes">
@@ -1628,7 +1166,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/blank">github wiki</a></td></tr></table> <h3 title="require 'zucker/mcopy'" id="mcopy">mcopy</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/mcopy'" id="mcopy">mcopy</h3>
          <table class="cube_table"
                 id="mcopy_cube"
                 title="require 'zucker/mcopy'"> <tr><th>Summary</th>    <td>Adds <code>Object#mcopy</code> to create a deep copy using <code>Marshal</code>.</td></tr><tr><th>Why?</th>    <td>Every Ruby book describes, you can do <code>Marshal.load Marshal.dump object</code> to create a deep copy... But who needs this verbose syntax in everyday coding?</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#mcopy</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -1664,7 +1202,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/mcopy">github wiki</a></td></tr></table>
+</div> </td></tr></table>
         </div> 
       <h2 title="require 'zucker/to_proc'" id="to_proc">Cubes[to_proc]</h2>
         <div class="cubes">
@@ -1712,7 +1250,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/array_to_proc">github wiki</a></td></tr></table> <h3 title="require 'zucker/class_to_proc'" id="class_to_proc">class_to_proc</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/class_to_proc'" id="class_to_proc">class_to_proc</h3>
          <table class="cube_table"
                 id="class_to_proc_cube"
                 title="require 'zucker/class_to_proc'"> <tr><th>Summary</th>    <td>Creates a new instance of the class.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Class#to_proc</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -1744,7 +1282,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/class_to_proc">github wiki</a></td></tr></table> <h3 title="require 'zucker/hash_to_proc'" id="hash_to_proc">hash_to_proc</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/hash_to_proc'" id="hash_to_proc">hash_to_proc</h3>
          <table class="cube_table"
                 id="hash_to_proc_cube"
                 title="require 'zucker/hash_to_proc'"> <tr><th>Summary</th>    <td>Use a hash to apply procs to specific objects.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Hash#to_proc</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -1786,7 +1324,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/hash_to_proc">github wiki</a></td></tr></table> <h3 title="require 'zucker/regexp_to_proc'" id="regexp_to_proc">regexp_to_proc</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/regexp_to_proc'" id="regexp_to_proc">regexp_to_proc</h3>
          <table class="cube_table"
                 id="regexp_to_proc_cube"
                 title="require 'zucker/regexp_to_proc'"> <tr><th>Summary</th>    <td>Use <code>&amp;/regex/</code> to match it against strings.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Regexp#to_proc</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -1820,7 +1358,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/regexp_to_proc">github wiki</a></td></tr></table>
+</div> </td></tr></table>
         </div> 
       <h2 title="require 'zucker/shortcuts'" id="shortcuts">Cubes[shortcuts]</h2>
         <div class="cubes">
@@ -1860,7 +1398,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
       <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">m2</span>
         <span style="color:#00D">2</span>
       <span style="color:#080;font-weight:bold">end</span>
-      aliases_for <span style="color:#A60">:m2</span>, <span style="color:#A60">:a2</span>, <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#630">'</span><span style="color:#A60">a-2</span><span style="color:#630">'</span></span>
+      aliases_for <span style="color:#A60">:m2</span>, <span style="color:#A60">:a2</span>, <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">'</span><span style="color:#A60">a-2</span><span style="color:#740">'</span></span>
     <span style="color:#080;font-weight:bold">end</span>
     proc <span style="color:#080;font-weight:bold">do</span>
       [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].a2.should == <span style="color:#00D">2</span>
@@ -1983,7 +1521,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/alias_for">github wiki</a></td></tr></table> <h3 title="require 'zucker/aliases'" id="aliases">aliases</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/aliases'" id="aliases">aliases</h3>
          <table class="cube_table"
                 id="aliases_cube"
                 title="require 'zucker/aliases'"> <tr><th>Summary</th>    <td>Some convenient aliases (and constants) for existing methods.</td></tr><tr><th>Methods/Usage</th>    <td><h5>Object#is_an?</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -2088,7 +1626,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/aliases">github wiki</a></td></tr></table> <h3 title="require 'zucker/ivars'" id="ivars">ivars</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/ivars'" id="ivars">ivars</h3>
          <table class="cube_table"
                 id="ivars_cube"
                 title="require 'zucker/ivars'"> <tr><th>Summary</th>    <td>This method lets you easily assign lots of instance variables.</td></tr><tr><th>Why?</th>    <td>Often, you have to write boilerplate code for assigning instance variables, for example this one:<br/><code>def initialize(variable1, variable2)<br/>  @variable1, @variable2 = variable1, variable2<br/>end</code><br/></td></tr><tr><th>Methods/Usage</th>    <td><h5>instance_variables_from, ivars</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -2143,7 +1681,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
     arg = arg.to_s
     <span style="color:#080;font-weight:bold">if</span> only.include?(arg) || only.include?(arg.to_sym) || only.empty?
       arg = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">_</span><span style="color:#710">'</span></span> + arg  <span style="color:#080;font-weight:bold">if</span> (<span style="color:#00D">48</span>..<span style="color:#00D">57</span>).member? arg.unpack(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">C</span><span style="color:#710">'</span></span>)[<span style="color:#00D">0</span>]  <span style="color:#777"># 1.8+1.9</span>
-      ret &lt;&lt; ivar = <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#630">&quot;</span><span style="color:#A60">@</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>arg<span style="font-weight:bold;color:#666">}</span></span><span style="color:#630">&quot;</span></span>
+      ret &lt;&lt; ivar = <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">&quot;</span><span style="color:#A60">@</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>arg<span style="font-weight:bold;color:#666">}</span></span><span style="color:#740">&quot;</span></span>
       <span style="color:#069">self</span>.instance_variable_set ivar, value
     <span style="color:#080;font-weight:bold">end</span>
   }
@@ -2153,7 +1691,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/ivars">github wiki</a></td></tr></table> <h3 title="require 'zucker/square_brackets_for'" id="square_brackets_for">square_brackets_for</h3>
+</div> </td></tr></table> <h3 title="require 'zucker/square_brackets_for'" id="square_brackets_for">square_brackets_for</h3>
          <table class="cube_table"
                 id="square_brackets_for_cube"
                 title="require 'zucker/square_brackets_for'"> <tr><th>Summary</th>    <td>This helper methods defines <code>[]</code> and <code>[]=</code> for accesing an instance variable.</td></tr><tr><th>Methods/Usage</th>    <td><h5>square_brackets_for</h5><div class="usage source" style="display:block"><div class="CodeRay">
@@ -2245,12 +1783,12 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
     <span style="color:#777">#  undef []=  if respond_to? :[]=</span>
 
     define_method <span style="color:#A60">:[]</span> <span style="color:#080;font-weight:bold">do</span> |key|
-      (instance_variable_get <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#630">&quot;</span><span style="color:#A60">@</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>ivar<span style="font-weight:bold;color:#666">}</span></span><span style="color:#630">&quot;</span></span>)[key]
+      (instance_variable_get <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">&quot;</span><span style="color:#A60">@</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>ivar<span style="font-weight:bold;color:#666">}</span></span><span style="color:#740">&quot;</span></span>)[key]
     <span style="color:#080;font-weight:bold">end</span>
 
     <span style="color:#080;font-weight:bold">if</span> assignment
       define_method <span style="color:#A60">:[]=</span> <span style="color:#080;font-weight:bold">do</span> |key, value|
-        (instance_variable_get <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#630">&quot;</span><span style="color:#A60">@</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>ivar<span style="font-weight:bold;color:#666">}</span></span><span style="color:#630">&quot;</span></span>)[key] = value
+        (instance_variable_get <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">&quot;</span><span style="color:#A60">@</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>ivar<span style="font-weight:bold;color:#666">}</span></span><span style="color:#740">&quot;</span></span>)[key] = value
       <span style="color:#080;font-weight:bold">end</span>
     <span style="color:#080;font-weight:bold">end</span>
   <span style="color:#080;font-weight:bold">end</span>
@@ -2258,16 +1796,21 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
 <span style="color:#777"># J-_-L</span></pre></div>
 </div>
-</div> </td></tr><tr><th>Compatibility</th>    <td>1.9, 1.8</td></tr><tr><th>Discussion</th>    <td><a href="http://wiki.github.com/janlelis/zucker/square_brackets_for">github wiki</a></td></tr></table>
+</div> </td></tr></table>
         </div> 
 
       <h2>Changelog</h2>
       <div class="cubes">
         <pre class="scode">2014-04-14 | <a href="http://rubyzucker.info/14.1/">Zucker 14.1</a>
-* Drop Ruby 1.8 support
-* Rewrite Zucker to use Refinements!
-* Remove kernel and not cube
-* Remove sandbox cube, since sandboxing is not recommended and removed from Ruby 2.1
+* drop Ruby 1.8 support
+* rewrite zucker to use refinements!
+* move all "debug" cubes to extra gem!
+* remove "ruby_version" cube, use "ruby_version" gem instead!
+* remove "engine" cube, use "ruby_engine" gem instead!
+* remove "info" cube, use "info" gem instead!
+* remove "os" cube, use rdp's "os" gem instead!
+* remove "sandbox" cube, since sandboxing is not recommended and removed from Ruby 2.1
+* remove "kernel" and "not" cube completely
 
 
 2013-04-30 | <a href="http://rubyzucker.info/13.1/">Zucker 13.1</a>

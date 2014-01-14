@@ -5,7 +5,4 @@ class_to_proc:
   info:
   - Inspired by Ruby Facets.
   - "More about →to_proc→http://rbjl.net/29-become-a-proc-star→."
-  versions:
-  - 1.9
-  - 1.8
 

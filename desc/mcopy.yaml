@@ -5,7 +5,4 @@ mcopy:
     Object#mcopy: |
       a = %w[hello world]
       b = a.mcopy
-  versions:
-  - 1.9
-  - 1.8
 

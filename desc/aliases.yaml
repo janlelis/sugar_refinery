@@ -12,7 +12,4 @@ aliases:
     Dir.split: File.split
     Infinity: 1.0 / 0.0
     NaN: 0.0 / 0.0
-  versions:
-  - 1.9
-  - 1.8
 

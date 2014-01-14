@@ -11,7 +11,4 @@ tap:
       end #=> {1 => 2}
   info:
   - "Read more about using tap on the →ruby best practices→http://blog.rubybestpractices.com/posts/gregory/011-tap-that-hash.html→ blog."
-  versions:
-  - 1.9
-  - 1.8
 

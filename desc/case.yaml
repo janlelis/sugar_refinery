@@ -4,6 +4,4 @@ case:
   methods:
     String#to_camel: "'was_snake_string'.to_camel # => 'WasSnakeString'"
     String#to_snake: "'WasCamelString' # => 'was_camel_string'"
-  versions:
-  - 1.9
 

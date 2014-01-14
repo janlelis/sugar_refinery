@@ -9,7 +9,4 @@ egonil:
       nn{ nil.some_methods.that[:do].not.exist } # => nil
   info:
   - See →this post→http://rbjl.net/26-the-28-bytes-of-ruby-joy→ for more information and discussion.
-  versions:
-  - 1.9
-  - 1.8
 

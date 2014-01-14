@@ -9,7 +9,4 @@ unary:
   package: default
   info:
   - "Inspired by (I've seen the unary + for Symbol somewhere on the net... but cannot remember where...)"
-  versions:
-  - 1.9
-  - 1.8 (⇧+:literal⇧ not possible)
 

@@ -5,7 +5,7 @@ require 'yaml'
 require 'coderay'
 
 class ZuckerDoc
-  ORDER        = %w|summary why methods info spec source versions discussion|
+  ORDER        = %w|summary why methods info spec source|
   DESCRIPTIONS = {
     'summary'  => 'Summary',
     'why'      => 'Why?',
@@ -13,9 +13,7 @@ class ZuckerDoc
     'info'     => 'Information',
     'spec'     => 'Specification',
     'source'   => 'Source',
-    'versions' => 'Compatibility',
     'authors'  => 'Authors',
-    'discussion'  => 'Discussion',
   }
 
 

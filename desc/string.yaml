@@ -17,6 +17,4 @@ string:
       end # => String
   info:
   - "⇧constantize⇧ is an improved version of ActiveSupport's one."
-  versions:
-  - 1.9
-  - 1.8
+
