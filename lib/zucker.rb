@@ -1,11 +1,8 @@
-# documentation at http://rubyzucker.info or doc/zucker_doc.html
-
 module Zucker
   # version and date get modified by the :prepare_release rake task
   VERSION = '13.1'
   DATE = '2013-04-30'
   
-  # cube list
   PACKS = {
     :control    => %w|egonil iterate tap sandbox kernel|,
     :env        => %w|engine info os ruby_version|,
@@ -16,14 +13,10 @@ module Zucker
     :debug      => %w|binding cc dd mm oo qq regexp_visualize|,
   }
 
-  NON_1_8_CUBES = %w|not case|
-
   class << self
     # Zucker require helpers
     def require_cube(cube)
-      unless RUBY_VERSION < '1.9' && Zucker::NON_1_8_CUBES.include?(cube)
-        require "zucker/#{cube}"
-      end
+      require "zucker/#{cube}"
     end
 
     def require_pack(pack)

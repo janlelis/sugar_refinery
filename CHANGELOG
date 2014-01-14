@@ -1,4 +1,5 @@
 2014-04-14 | Zucker 14.1
+* Drop Ruby 1.8 support
 * Remove sandbox cube, since sandboxing is not recommended and removed from Ruby 2.1
 
 

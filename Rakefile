@@ -12,15 +12,7 @@ end
 
 task 'default' => 'spec'
 task 'test' => 'spec'
-RSpec::Core::RakeTask.new('spec') do |t|
-  t.ruby_opts = "-r " + File.join(@path, 'spec', 'spec_helper')
-
-  if RUBY_VERSION < '1.9'
-    t.pattern = File.join(@path, 'spec', '*_spec.rb')
-  else
-    t.pattern = File.join(@path, 'spec', '*.rb')
-  end
-end
+RSpec::Core::RakeTask.new('spec')
 
 # gem
 def gemspec

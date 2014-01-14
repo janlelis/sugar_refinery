@@ -1,5 +1,4 @@
 # Ruby 1.9, encoding: utf-8
-require 'rubygems' unless defined? Gem
 require File.dirname(__FILE__) + '/lib/zucker'
 
 Gem::Specification.new do |s|
@@ -10,9 +9,9 @@ Gem::Specification.new do |s|
   s.summary = "Many little helpers that sweeten your Ruby code."
   s.description = "Sweetens your Ruby code with syntactic sugar, which you do not want to miss again."
   s.homepage    = "http://rubyzucker.info"
-  s.files = Dir.glob( %w[{lib,spec}/**/*.rb desc/**/*.yaml] ) + %w{Rakefile zucker.gemspec MIT-LICENSE README CHANGELOG doc/zucker_doc.rb doc/zucker_doc.html .gemtest}
+  s.files = Dir.glob( %w[{lib,spec}/**/*.rb desc/**/*.yaml] ) + %w{Rakefile zucker.gemspec MIT-LICENSE README CHANGELOG doc/zucker_doc.rb doc/zucker_doc.html}
   s.require_paths = ["lib"]
-  s.required_ruby_version = '>= 1.8.7' # 1.9 recommended
+  s.required_ruby_version = '>= 1.9.2'
   s.license = 'MIT'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
@@ -20,11 +19,11 @@ Gem::Specification.new do |s|
 
   len = 24
   s.post_install_message = \
-   ("       ┌── " + "info ".ljust(len-2,'%')                                   + "─┐\n" +
+   ("       ┌── " + "info ".ljust(len-2,'─')                                   + "─┐\n" +
     " J-_-L │ "   + s.homepage.ljust(len,' ')                                  + " │\n" +
-    "       ├── " + "usage ".ljust(len-2,'%')                                  + "─┤\n" +
+    "       ├── " + "usage ".ljust(len-2,'─')                                  + "─┤\n" +
     "       │ "   + "require 'zucker/default'".ljust(len,' ')                  + " │\n" +
     "       │ "   + "# or".ljust(len,' ')                                      + " │\n" +
     "       │ "   + "require 'zucker/<name>".ljust(len,' ')                    + " │\n" +
-    "       └─"   + '─'*len                                                    + "─┘").gsub('%', '─') # 1.8 workaround
+    "       └─"   + '─'*len                                                    + "─┘")
 end
