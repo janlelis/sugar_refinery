@@ -13,9 +13,10 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.required_ruby_version = '>= 1.9.2'
   s.license = 'MIT'
-  s.add_development_dependency 'rake'
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'coderay'
+  s.add_dependency 'refine', '~> 0'
+  s.add_development_dependency 'rake', '~> 0'
+  s.add_development_dependency 'rspec', '~> 0'
+  s.add_development_dependency 'coderay', '~> 0'
 
   len = 24
   s.post_install_message = \

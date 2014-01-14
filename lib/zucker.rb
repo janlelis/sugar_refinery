@@ -1,3 +1,11 @@
+begin
+  require 'refine'
+rescue LoadError
+  if RUBY_VERSION < '2.0'
+    warn "The zucker library depends on refinements, which do not seem to be installed!"
+  end
+end
+
 module Zucker
   # version and date get modified by the :prepare_release rake task
   VERSION = '13.1'
