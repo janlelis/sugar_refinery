@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
   s.add_dependency 'refine', '~> 0'
   s.add_development_dependency 'rake', '~> 0'
-  s.add_development_dependency 'rspec', '~> 0'
+  s.add_development_dependency 'rspec', '~> 2.14'
   s.add_development_dependency 'coderay', '~> 0'
 
   len = 24

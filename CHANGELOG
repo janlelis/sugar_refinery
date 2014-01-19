@@ -1,10 +1,10 @@
 2014-04-14 | Zucker 14.1
 * drop Ruby 1.8 support
 * rewrite zucker to use refinements!
-* move all "debug" cubes to extra gem!
-* remove "ruby_version" cube, use "ruby_version" gem instead!
-* remove "engine" cube, use "ruby_engine" gem instead!
-* remove "info" cube, use "info" gem instead!
+* remove all "debug" cubes, use the "debugging" gem instead!
+* remove "ruby_version" cube, use the "ruby_version" gem instead!
+* remove "engine" cube, use the "ruby_engine" gem instead!
+* remove "info" cube, use the "ruby_info" gem instead!
 * remove "os" cube, use rdp's "os" gem instead!
 * remove "sandbox" cube, since sandboxing is not recommended and removed from Ruby 2.1
 * remove "kernel" and "not" cube completely

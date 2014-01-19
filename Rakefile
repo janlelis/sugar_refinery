@@ -1,4 +1,3 @@
-require 'rspec/core/rake_task'
 require 'fileutils'
 
 require File.dirname(__FILE__) + '/lib/zucker'
@@ -12,9 +11,11 @@ end
 
 task 'default' => 'spec'
 task 'test' => 'spec'
-RSpec::Core::RakeTask.new('spec')
+desc 'Run Spec'
+task 'spec' do
+  sh %[rspec spec]
+end
 
-# gem
 def gemspec
   @gemspec ||= eval(File.read( File.join(@path, 'zucker.gemspec') ), binding, 'zucker.gemspec')
 end
@@ -28,7 +29,7 @@ end
 
 desc "Install the gem locally"
 task :install => :gem do
-  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version} --no-rdoc --no-ri}
+  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}.gem --no-rdoc --no-ri}
 end
 
 desc "Validate the gemspec"
