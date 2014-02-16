@@ -1,8 +1,0 @@
-blank:
-  summary: Does pretty the same as in ActiveSupport (Every object can be asked if it is blank or present).
-  why: It's too familiar ;)
-  methods:
-    Object#blank?:
-    - "'an object'.blank? # => false"
-    - "nil.present? # => false"
-

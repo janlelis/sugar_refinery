@@ -1,0 +1,7 @@
+unary_conversion:
+  summary: "Easy conversion between strings and symbols. Sometimes, you do not care if you get a ⇧String⇧ or ⇧Symbol⇧ as input. Instead of using AS' HashWithIndifferentAccess you can just always convert to your preferred format"
+  methods:
+    String#+@: "+'was_string' # => 'was_string'"
+    String#-@: "-'was_string' # => :was_string"
+    Symbol#+@: "+:was_symbol  # => 'was_symbol'"
+    Symbol#-@: "-:was_symbol  # => :was_symbol"

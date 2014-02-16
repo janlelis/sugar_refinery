@@ -1,22 +1,15 @@
 require 'zucker'
-module Zucker AliasFor = true end
 
-def alias_for(m, *aliases)
-  aliases.each{ |a|
-    class_eval "alias :'#{ a.to_s }' :'#{ m.to_s }'"
-  }
-end
-alias aliases_for alias_for
+module Zucker
+  module AliasFor
+    refine Module do
+      private
 
-class Module
-  def alias_method_for(m, *alias_methods)
-    alias_methods.each{ |a|
-      class_eval do
-        alias_method a.to_sym, m.to_sym
+      def alias_for(m, *aliases)
+        aliases.each{ |a| class_eval "alias :'#{ a }' :'#{ m }'" }
       end
-    }
-  end
-  alias alias_methods_for alias_method_for
-end
 
-# J-_-L
+      alias aliases_for alias_for
+    end
+  end
+end

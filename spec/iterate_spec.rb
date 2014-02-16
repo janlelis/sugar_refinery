@@ -1,4 +1,6 @@
 require 'zucker/iterate'
+using Zucker::Iterate
+
 
 describe 'Object#iterate' do
   let :a   do [1, 2, 3]     end

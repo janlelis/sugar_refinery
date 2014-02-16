@@ -1,0 +1,1761 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+       "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+  <title>Ruby Zucker 13.1</title>
+  <script type="text/javascript">
+    var show = function(snippet){
+      document.getElementById( snippet ).style.display = 'block'
+      if( document.getElementById( 'show_'+snippet ) ){
+        document.getElementById( 'show_'+snippet ).style.display = 'none'
+      }
+    }
+  </script>
+  <style type="text/css">
+body{
+  background-color:#aaa;
+  color:#111;
+  font-family:sans-serif;
+}
+
+#world{
+  background:#fff;
+}
+
+h1, h2, h3, h4, h5, h6{
+  margin:0px;
+  padding:0px;
+}
+
+h1{
+  color:#222;
+  text-align:left;
+  padding:0.5em;
+}
+h2{
+  margin-left:0.5em;
+  margin-top:0.8em;
+  margin-bottom:0.5em;
+}
+
+th{
+  width:200px;
+  color:#444;
+}
+
+p{
+  margin:0px;
+  margin-bottom:0.5em;
+}
+
+p.text{
+  margin-left:1.5em;
+  margin-right:1em;
+}
+
+code{
+}
+
+.scode{
+  display:block;
+  margin:0.8em;
+#  margin-right:1.8em;
+  padding:0.5em;
+  border:1px solid black;
+  background:#eee;
+}
+
+#.cube_table{
+#  display:none;
+#}
+.cubes{
+  margin:0px;
+  margin-left:1.5em;
+  margin-right:1em;
+}
+
+a{
+  color:#111;
+}
+
+table{
+  margin:0.8em;
+  margin-top:0.2em;
+  padding:0.2em;
+  border:1px solid #111;
+  background:#eee;
+  overflow:auto;
+  display:block;
+}
+
+ul{
+  margin:5px 0px !important;
+  padding:none;
+}
+
+th{
+  text-align:left;
+  vertical-align:top;
+  padding-right:3em;
+}
+
+td{
+  width:100%;
+}
+
+li{
+  list-style:none;
+}
+
+
+#foot{
+  text-align:left;
+  padding:0.3em;
+  font-size:70%
+}
+#foot, #foot a{
+  color:#444;
+}
+#smile{
+  font-size:150%;
+  float:right;
+}
+#smile a{
+  text-decoration:none;
+}
+
+.small{
+  font-size:70%;
+}
+
+code, pre{
+  font-face:mono;
+  margin:0px;
+  padding:0px;
+}
+
+.source{
+  display:none;
+  width:98%;
+  padding: 3px 5px;
+  overflow: auto;
+  font-size: 12px;
+  background-color: #f8f8f8;
+  border:1px solid #005;
+  border: 1px solid silver;
+  font-family: 'Courier New', 'Terminal', monospace;
+  color: #000;
+}
+
+# http://coderay.rubychan.de/
+.source pre { margin: 0px; }
+
+span.source { white-space: pre; border: 0px; padding: 2px; }
+
+table.source { border-collapse: collapse; width: 100%; padding: 2px; }
+table.source td { padding: 2px 4px; vertical-align: top; }
+
+.source .line_numbers, .source .no {
+  background-color: #def;
+  color: gray;
+  text-align: right;
+}
+.source .line_numbers a:target, .source .no a:target { color: blue; }
+.source .line_numbers .highlighted, .source .no .highlighted { color: red; }
+.source .no { padding: 0px 4px; }
+.source .code { width: 100%; }
+.source .code pre { overflow: auto; }
+
+.source .debug { color:white ! important; background:blue ! important; }
+
+.source .an { color:#007 }
+.source .at { color:#f08 }
+.source .av { color:#700 }
+.source .bi { color:#509; font-weight:bold }
+.source .c  { color:#888; }
+.source .c .dl { color:#444; }
+.source .c .ch { color:#444; }
+
+.source .ch { color:#04D }
+.source .ch .k { color:#04D }
+.source .ch .dl { color:#039 }
+
+.source .cl { color:#B06; font-weight:bold }
+.source .cm { color:#A08; font-weight:bold }
+.source .co { color:#036; font-weight:bold }
+.source .cr { color:#0A0 }
+.source .cv { color:#369 }
+.source .de { color:#B0B; }
+.source .df { color:#099; font-weight:bold }
+.source .di { color:#088; font-weight:bold }
+.source .dl { color:black }
+.source .do { color:#970 }
+.source .dt { color:#34b }
+.source .ds { color:#D42; font-weight:bold }
+.source .e  { color:#666; font-weight:bold }
+.source .en { color:#800; font-weight:bold }
+.source .er { color:#F00; background-color:#FAA }
+.source .ex { color:#C00; font-weight:bold }
+.source .fl { color:#60E; font-weight:bold }
+.source .fu { color:#06B; font-weight:bold }
+.source .gv { color:#d70; font-weight:bold }
+.source .hx { color:#058; font-weight:bold }
+.source .i  { color:#00D; font-weight:bold }
+.source .ic { color:#B44; font-weight:bold }
+
+.source .il { background-color: hsla(0,0%,0%,0.1); color: black }
+.source .il .idl { font-weight: bold; color: #666 }
+.source .idl { font-weight: bold; background-color: hsla(0,0%,0%,0.1); color: #666; }
+
+.source .im { color:#f00; }
+.source .in { color:#B2B; font-weight:bold }
+.source .iv { color:#33B }
+.source .la { color:#970; font-weight:bold }
+.source .lv { color:#963 }
+.source .ns { color:#707; font-weight:bold }
+.source .oc { color:#40E; font-weight:bold }
+.source .op { }
+.source .pc { color:#058; font-weight:bold }
+.source .pd { color:#369; font-weight:bold }
+.source .pp { color:#579; }
+.source .ps { color:#00C; font-weight:bold }
+.source .pt { color:#074; font-weight:bold }
+.source .r, .kw  { color:#080; font-weight:bold }
+
+.source .ke { color: #808; }
+.source .ke .dl { color: #606; }
+.source .ke .ch { color: #80f; }
+.source .vl { color: #088; }
+
+.source .rx { background-color:hsla(300,100%,50%,0.1); }
+.source .rx .k { color:#808 }
+.source .rx .dl { color:#404 }
+.source .rx .mod { color:#C2C }
+.source .rx .fu  { color:#404; font-weight: bold }
+
+.source .s { background-color:hsla(0,100%,50%,0.1); }
+.source .s .k { color: #D20; }
+.source .s .ch { color: #b0b; }
+.source .s .dl { color: #710; }
+
+.source .sh { background-color:hsla(120,100%,50%,0.1); }
+.source .sh .k { color:#2B2 }
+.source .sh .dl { color:#161 }
+
+.source .sy { color:#A60 }
+.source .sy .k { color:#A60 }
+.source .sy .dl { color:#630 }
+
+.source .ta { color:#070 }
+.source .ts { color:#D70; font-weight:bold }
+.source .ty { color:#339; font-weight:bold }
+.source .v  { color:#036 }
+.source .xt { color:#444 }
+
+.source .ins { background: hsla(120,100%,50%,0.2) }
+.source .del { background: hsla(0,100%,50%,0.2) }
+.source .chg { color: #aaf; background: #007; }
+.source .head { color: #f8f; background: #505 }
+.source .head .filename { color: white; }
+
+.source .ins .eye { background-color: hsla(120,100%,50%,0.2) }
+.source .del .eye { background-color: hsla(0,100%,50%,0.2) }
+
+.source .ins .ins { color: #080; background:transparent; font-weight:bold }
+.source .del .del { color: #800; background:transparent; font-weight:bold }
+.source .chg .chg { color: #66f; }
+.source .head .head { color: #f4f; }
+
+.rubylogo{
+  margin-left:20px;
+  margin-top:10px;
+  margin-right:15px;
+  float:left;
+}
+
+  </style>
+</head>
+<body>
+  <div id="world">
+    <img class="rubylogo" alt="ruby" src="data:image/png;base64,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" />
+    <h1>Ruby Zucker 13.1</h1>
+    <br/>
+    <p class="text">Zucker (<a href="http://www.forvo.com/word/zucker/">pronunciation</a>) is the German word for sugar. It adds syntactic sugar in the form of independent, small scripts that sweeten Ruby even more. It uses Ruby's <a href="#123">refinements</a> feature, so you can actively choose, whether you want to include a feature in a Ruby source file. Core extensions will be used, if your Ruby version does not support refinements. The source is available at <a href="https://github.com/janlelis/zucker">github</a>.</p>
+
+    <h2>Install</h2>
+    <p class="text">
+      <code class="scode">$ gem install zucker</code>
+      Or in your Gemfile:
+      <code class="scode">gem 'zucker', require: 'zucker/all'</code>
+    </p>
+
+    <h2>Usage / Organization</h2>
+    <p class="text">
+      <code class="scode">require 'zucker/all'</code>
+    </p>
+
+    <p class="text">
+      You can then choose to use one feature ('sugar cube') in one Ruby file:
+      <code class="scode">using Zucker::CubeName</code>
+    </p>
+
+      <div class="cubes"><h3 title="require 'zucker/alias_for'" id="alias_for">alias_for</h3>
+         <table class="cube_table"
+                id="alias_for_cube"
+                title="require 'zucker/alias_for'"> <tr><th>Summary</th>    <td>A different way to create aliases: Reversed order and you can pass multiple alias names. The order feels more logical</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">AliasFor</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>Module#alias_for, Module#aliases_for</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777"># creates an alias for the method :methods with the name ms</span>
+<span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Object</span>
+  alias_for <span style="color:#A60">:methods</span>, <span style="color:#A60">:ms</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+<span style="color:#777"># creates multiple aliases</span>
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Enumerable</span>
+  aliases_for <span style="color:#A60">:zip</span>, <span style="color:#A60">:with</span>, <span style="color:#A60">:%</span>
+<span style="color:#080;font-weight:bold">end</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_alias_for_spec">(<a href="javascript:show('alias_for_spec')">show</a>)</span>
+         <div class="source" id="alias_for_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/alias_for</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">AliasFor</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">alias_for</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should create an alias for instance methods</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Array</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">m2</span>
+        <span style="color:#00D">2</span>
+      <span style="color:#080;font-weight:bold">end</span>
+      aliases_for <span style="color:#A60">:m2</span>, <span style="color:#A60">:a2</span>, <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">'</span><span style="color:#A60">a-2</span><span style="color:#740">'</span></span>
+    <span style="color:#080;font-weight:bold">end</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].a2.should == <span style="color:#00D">2</span>
+      [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].send(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a-2</span><span style="color:#710">'</span></span>).should == <span style="color:#00D">2</span>
+    <span style="color:#080;font-weight:bold">end</span>.should_not raise_exception
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should create an alias for class (singleton) methods</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Array</span>
+      <span style="color:#080;font-weight:bold">class</span> &lt;&lt; <span style="color:#B06;font-weight:bold">Array</span>
+        <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">m3</span>
+          <span style="color:#00D">3</span>
+        <span style="color:#080;font-weight:bold">end</span>
+        alias_for <span style="color:#A60">:m3</span>, <span style="color:#A60">:a3</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    proc{
+      <span style="color:#036;font-weight:bold">Array</span>.a3.should == <span style="color:#00D">3</span>
+    }.should_not raise_exception
+  <span style="color:#080;font-weight:bold">end</span>
+
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should create aliases for the first argument with all other arguments</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Object</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">m4</span>
+        <span style="color:#00D">4</span>
+      <span style="color:#080;font-weight:bold">end</span>
+      alias_for <span style="color:#A60">:m4</span>, <span style="color:#A60">:ma</span>, <span style="color:#A60">:mb</span>, <span style="color:#A60">:mc</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    proc{
+      <span style="color:#00D">1</span>.ma.should   == <span style="color:#00D">4</span>
+      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1</span><span style="color:#710">&quot;</span></span>.mb.should == <span style="color:#00D">4</span>
+      [<span style="color:#00D">1</span>].mc.should == <span style="color:#00D">4</span>
+    }.should_not raise_exception
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">works with uncommon chars</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Object</span>
+      alias_for <span style="color:#A60">:tainted?</span>, <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">&quot;</span><span style="color:#A60">tain-ted?</span><span style="color:#740">&quot;</span></span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_alias_for_source">(<a href="javascript:show('alias_for_source')">show</a>)</span>
+         <div class="source" id="alias_for_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">AliasFor</span>
+    refine <span style="color:#036;font-weight:bold">Module</span> <span style="color:#080;font-weight:bold">do</span>
+      private
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">alias_for</span>(m, *aliases)
+        aliases.each{ |a| class_eval <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">alias :'</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span> a <span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">' :'</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span> m <span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">'</span><span style="color:#710">&quot;</span></span> }
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">aliases_for</span> <span style="color:#06B;font-weight:bold">alias_for</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/array_op'" id="array_op">array_op</h3>
+         <table class="cube_table"
+                id="array_op_cube"
+                title="require 'zucker/array_op'"> <tr><th>Summary</th>    <td>Operators one could miss for <code>Array</code></td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">ArrayOp</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>Array#^</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>[<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>,<span style="color:#00D">4</span>] ^ [<span style="color:#00D">3</span>,<span style="color:#00D">4</span>,<span style="color:#00D">5</span>,<span style="color:#00D">6</span>]  <span style="color:#777"># =&gt; [1,2,5,6]</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_array_op_spec">(<a href="javascript:show('array_op_spec')">show</a>)</span>
+         <div class="source" id="array_op_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/array_op</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">ArrayOp</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Array#^</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">does an exclusive or</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    a = [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>,<span style="color:#00D">4</span>]
+    b = [<span style="color:#00D">3</span>,<span style="color:#00D">4</span>,<span style="color:#00D">5</span>,<span style="color:#00D">6</span>]
+    (a^b).should == [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">5</span>,<span style="color:#00D">6</span>]
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Array#**</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">returns the array product</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    ([<span style="color:#00D">1</span>,<span style="color:#00D">2</span>] ** <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w[</span><span style="color:#D20">a b</span><span style="color:#710">]</span></span>).should == [[<span style="color:#00D">1</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">a</span><span style="color:#710">&quot;</span></span>], [<span style="color:#00D">1</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">b</span><span style="color:#710">&quot;</span></span>], [<span style="color:#00D">2</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">a</span><span style="color:#710">&quot;</span></span>], [<span style="color:#00D">2</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">b</span><span style="color:#710">&quot;</span></span>]]
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_array_op_source">(<a href="javascript:show('array_op_source')">show</a>)</span>
+         <div class="source" id="array_op_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">ArrayOp</span>
+    refine <span style="color:#036;font-weight:bold">Array</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">^</span>(other)
+        (<span style="color:#069">self</span> - other) + (other - <span style="color:#069">self</span>)
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">**</span> <span style="color:#06B;font-weight:bold">product</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/blank'" id="blank">blank</h3>
+         <table class="cube_table"
+                id="blank_cube"
+                title="require 'zucker/blank'"> <tr><th>Summary</th>    <td>Does pretty the same as in ActiveSupport: Every object can be asked if it is blank or present</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Blank</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>Object#blank?</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">an object</span><span style="color:#710">'</span></span>.blank? <span style="color:#777"># =&gt; false</span>
+<span style="color:#069">nil</span>.present? <span style="color:#777"># =&gt; false</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_blank_spec">(<a href="javascript:show('blank_spec')">show</a>)</span>
+         <div class="source" id="blank_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/blank</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Blank</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object#blank?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should be blank for blank values</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    blank_values   = [ <span style="color:#069">nil</span>, <span style="color:#069">false</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">   </span><span style="color:#710">'</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">  </span><span style="color:#b0b">\n</span><span style="color:#b0b">\t</span><span style="color:#D20">  </span><span style="color:#b0b">\r</span><span style="color:#D20"> </span><span style="color:#710">&quot;</span></span>, [], {}, <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> ]
+
+    blank_values.each{ |blank|
+      blank.blank?.should == <span style="color:#069">true</span>
+    }
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should not be blank for non blank values</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    present_values = [ <span style="color:#036;font-weight:bold">Object</span>.new, <span style="color:#069">true</span>, <span style="color:#00D">0</span>, <span style="color:#00D">1</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>, [<span style="color:#069">nil</span>], { <span style="color:#069">nil</span> =&gt; <span style="color:#069">nil</span> } ]
+
+    present_values.each{ |present|
+      present.blank?.should == <span style="color:#069">false</span>
+    }
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_blank_source">(<a href="javascript:show('blank_source')">show</a>)</span>
+         <div class="source" id="blank_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Blank</span>
+    refine <span style="color:#036;font-weight:bold">Object</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>
+        <span style="color:#080;font-weight:bold">if</span> respond_to? <span style="color:#A60">:empty?</span> <span style="color:#080;font-weight:bold">then</span> empty? <span style="color:#080;font-weight:bold">else</span> !<span style="color:#069">self</span> <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">present?</span>
+        !blank?
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">NilClass</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">FalseClass</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">TrueClass</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">false</span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">Numeric</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">false</span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">Array</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() empty? <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">Hash</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() empty? <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">self</span> !~ <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#D20">\S</span><span style="color:#404">/</span></span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">Regexp</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">self</span> == <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/camel_snake'" id="camel_snake">camel_snake</h3>
+         <table class="cube_table"
+                id="camel_snake_cube"
+                title="require 'zucker/camel_snake'"> <tr><th>Summary</th>    <td>Provides <code>String#to_camel</code> and <code>String#to_snake</code>.</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">CamelSnake</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>String#to_camel</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_snake_string</span><span style="color:#710">'</span></span>.to_camel <span style="color:#777"># =&gt; 'WasSnakeString'</span></pre></div>
+</div>
+</div><h5>String#to_snake</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">WasCamelString</span><span style="color:#710">'</span></span> <span style="color:#777"># =&gt; 'was_camel_string'</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_camel_snake_spec">(<a href="javascript:show('camel_snake_spec')">show</a>)</span>
+         <div class="source" id="camel_snake_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/camel_snake</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">CamelSnake</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#to_camel</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should turn a snake_cased string to CamelCase</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_snake_case</span><span style="color:#710">'</span></span>.to_camel.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">WasSnakeCase</span><span style="color:#710">'</span></span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#to_snake</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should turn a CamelCased string to snake_case</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">WasCamelCase</span><span style="color:#710">'</span></span>.to_snake.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_camel_case</span><span style="color:#710">'</span></span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_camel_snake_source">(<a href="javascript:show('camel_snake_source')">show</a>)</span>
+         <div class="source" id="camel_snake_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">CamelSnake</span>
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_snake</span>
+        gsub(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">(?&lt;!^)[A-Z]</span><span style="color:#404">/</span></span>) <span style="color:#080;font-weight:bold">do</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">_</span><span style="color:#666">#</span><span style="color:#d70">$&amp;</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">end</span>.downcase
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_camel</span>
+        gsub(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">(?:^|_)([a-z])</span><span style="color:#404">/</span></span>) <span style="color:#080;font-weight:bold">do</span> <span style="color:#d70">$1</span>.upcase <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/constantize'" id="constantize">constantize</h3>
+         <table class="cube_table"
+                id="constantize_cube"
+                title="require 'zucker/constantize'"> <tr><th>Summary</th>    <td>Easier handling of dynamic constant names</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Constantize</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>String#constantize</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object</span><span style="color:#710">'</span></span>.constantize <span style="color:#777"># =&gt; Object</span>
+<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Spec::VERSION</span><span style="color:#710">'</span></span>.constantize <span style="color:#777"># =&gt; Spec::VERSION if rspec is loaded</span>
+<span style="color:#777"># you can also pass a parameter or block to define what happens, when constant does not exist</span>
+<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">IdontExist</span><span style="color:#710">'</span></span>.constantize(<span style="color:#036;font-weight:bold">Array</span>) <span style="color:#777"># =&gt; Array</span>
+<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String5</span><span style="color:#710">'</span></span>.constantize <span style="color:#080;font-weight:bold">do</span> |string|
+  string.chop.constantize
+<span style="color:#080;font-weight:bold">end</span> <span style="color:#777"># =&gt; String</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Information</th>    <td>An improved version of ActiveSupport's one"</td></tr><tr><th>Specification</th>    <td> <span id="show_constantize_spec">(<a href="javascript:show('constantize_spec')">show</a>)</span>
+         <div class="source" id="constantize_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/constantize</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Constantize</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#constantize</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return the constant with that name</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object</span><span style="color:#710">'</span></span>.constantize.should == <span style="color:#036;font-weight:bold">Object</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should also work for nested constants</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Zucker::VERSION</span><span style="color:#710">'</span></span>.constantize.should == <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">VERSION</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should throw name error if constant does not exist (and no parameter is given)</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ObfsefsefsefafesafaefRubyZuckerafdfselijfesject</span><span style="color:#710">'</span></span>.constantize
+    <span style="color:#080;font-weight:bold">end</span>.should raise_exception <span style="color:#036;font-weight:bold">NameError</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should call the block (and not raise an error) if constant does not exist and block given</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ObfsefsefsefafesafaefRubyZuckerafdfselijfesject</span><span style="color:#710">'</span></span>.constantize <span style="color:#080;font-weight:bold">do</span> |string|
+         <span style="color:#036;font-weight:bold">Default</span> = [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>]
+      <span style="color:#080;font-weight:bold">end</span>.should == [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>]
+    <span style="color:#080;font-weight:bold">end</span>.should_not raise_exception
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return the second parameter (and not raise an error) if constant does not exist and parameter given</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ObfsefsefsefafesafaefRubyZuckerafdfselijfesject</span><span style="color:#710">'</span></span>.constantize(<span style="color:#036;font-weight:bold">Array</span>).should == <span style="color:#036;font-weight:bold">Array</span>
+    <span style="color:#080;font-weight:bold">end</span>.should_not raise_exception
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_constantize_source">(<a href="javascript:show('constantize_source')">show</a>)</span>
+         <div class="source" id="constantize_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Constantize</span>
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">constantize</span>(default_value = <span style="color:#069">nil</span>) <span style="color:#777"># always uses global scope as in AS... is this good?</span>
+        get_constant = lambda{
+          <span style="color:#069">self</span>.split(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">::</span><span style="color:#404">/</span></span>).inject( <span style="color:#036;font-weight:bold">Object</span> ){ |base_constant, current_constant|
+            base_constant.const_get current_constant
+          }
+        }
+
+        <span style="color:#080;font-weight:bold">if</span> !default_value &amp;&amp; !block_given?
+          get_constant.call
+        <span style="color:#080;font-weight:bold">else</span>
+          <span style="color:#080;font-weight:bold">begin</span>
+            get_constant.call
+          <span style="color:#080;font-weight:bold">rescue</span> <span style="color:#036;font-weight:bold">NameError</span>
+            <span style="color:#080;font-weight:bold">if</span> block_given?
+              <span style="color:#080;font-weight:bold">yield</span> <span style="color:#069">self</span>
+            <span style="color:#080;font-weight:bold">else</span>
+              default_value
+            <span style="color:#080;font-weight:bold">end</span>
+          <span style="color:#080;font-weight:bold">end</span>
+        <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/dir_extras'" id="dir_extras">dir_extras</h3>
+         <table class="cube_table"
+                id="dir_extras_cube"
+                title="require 'zucker/dir_extras'"> <tr><th>Summary</th>    <td>Some shortcuts for working with directories</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">DirExtras</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>Dir.join</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">File</span>.join</pre></div>
+</div>
+</div><h5>Dir.split</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">File</span>.split</pre></div>
+</div>
+</div><h5>Dir.rm</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">FileUtils</span>.rm_r</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_dir_extras_spec">(<a href="javascript:show('dir_extras_spec')">show</a>)</span>
+         <div class="source" id="dir_extras_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/dir_extras</span><span style="color:#710">'</span></span>
+require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">securerandom</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">DirExtras</span>
+
+
+describe <span style="color:#036;font-weight:bold">Dir</span> <span style="color:#080;font-weight:bold">do</span>
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.join</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">delegates to File.join</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      a = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w[</span><span style="color:#D20">some file path</span><span style="color:#710">]</span></span>
+      expect( <span style="color:#036;font-weight:bold">Dir</span>.join(a) ).to be == <span style="color:#036;font-weight:bold">File</span>.join(a)
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.split</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">delegates to File.split</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      a = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">some/file/path</span><span style="color:#710">'</span></span>
+      expect( <span style="color:#036;font-weight:bold">Dir</span>.split(a) ).to be == <span style="color:#036;font-weight:bold">File</span>.split(a)
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.rm</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">removes directories with content</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      path = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">tmp_</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span><span style="color:#036;font-weight:bold">SecureRandom</span>.uuid<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>
+      <span style="color:#036;font-weight:bold">FileUtils</span>.mkdir path
+      <span style="color:#036;font-weight:bold">FileUtils</span>.touch <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>path<span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">/123</span><span style="color:#710">&quot;</span></span>
+      expect{
+        <span style="color:#036;font-weight:bold">Dir</span>.rm path
+      }.not_to raise_error
+      expect( <span style="color:#036;font-weight:bold">Dir</span>[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">*</span><span style="color:#710">'</span></span>] ).to_not include(path)
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_dir_extras_source">(<a href="javascript:show('dir_extras_source')">show</a>)</span>
+         <div class="source" id="dir_extras_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">fileutils</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">DirExtras</span>
+    refine <span style="color:#036;font-weight:bold">Dir</span>.singleton_class <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">join</span>(*args)
+        <span style="color:#036;font-weight:bold">File</span>.join(*args)
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">split</span>(*args)
+        <span style="color:#036;font-weight:bold">File</span>.split(*args)
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">rm</span>(*args)
+        <span style="color:#036;font-weight:bold">FileUtils</span>.rm_r(*args)
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/egonil'" id="egonil">egonil</h3>
+         <table class="cube_table"
+                id="egonil_cube"
+                title="require 'zucker/egonil'"> <tr><th>Summary</th>    <td>Creates a block, where <code>nil</code> does not raise <code>NoMethodError</code>s</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Egonil</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>egonil</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>egonil{
+  <span style="color:#069">nil</span>.some_methods.that[<span style="color:#A60">:do</span>].not.exist
+}
+</pre></div>
+</div>
+</div></td></tr><tr><th>Information</th>    <td>See <a href="http://rbjl.net/26-the-28-bytes-of-ruby-joy">this post</a> for more information and discussion.</td></tr><tr><th>Specification</th>    <td> <span id="show_egonil_spec">(<a href="javascript:show('egonil_spec')">show</a>)</span>
+         <div class="source" id="egonil_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/egonil</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Egonil</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">egonil</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should not raise nil exceptions in the block</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      egonil{ <span style="color:#069">nil</span>.some_methods.that[<span style="color:#A60">:do</span>].not.exist }
+    <span style="color:#080;font-weight:bold">end</span>.should_not raise_exception
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should restore default behaviour after the block</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      egonil{ <span style="color:#069">nil</span>.some_methods.that[<span style="color:#A60">:do</span>].not.exist }
+    <span style="color:#080;font-weight:bold">end</span>.should_not raise_exception
+
+    proc <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#069">nil</span>.a_method
+    <span style="color:#080;font-weight:bold">end</span>.should raise_exception <span style="color:#036;font-weight:bold">NoMethodError</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">raise NoMethodError for non-nil objects</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      egonil{ <span style="color:#00D">5</span>.a_method }
+    <span style="color:#080;font-weight:bold">end</span>.should raise_exception <span style="color:#036;font-weight:bold">NoMethodError</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should raise other Exceptions</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      egonil{ <span style="color:#00D">5</span> / <span style="color:#00D">0</span> }
+    <span style="color:#080;font-weight:bold">end</span>.should raise_exception <span style="color:#036;font-weight:bold">ZeroDivisionError</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_egonil_source">(<a href="javascript:show('egonil_source')">show</a>)</span>
+         <div class="source" id="egonil_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Egonil</span>
+    refine <span style="color:#036;font-weight:bold">Object</span> <span style="color:#080;font-weight:bold">do</span>
+      private
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">egonil</span>(&amp;block)
+        mm = <span style="color:#036;font-weight:bold">NilClass</span>.instance_method(<span style="color:#A60">:method_missing</span>)
+        <span style="color:#036;font-weight:bold">NilClass</span>.send <span style="color:#A60">:define_method</span>, <span style="color:#A60">:method_missing</span>, -&gt;(*){}
+        <span style="color:#080;font-weight:bold">yield</span>
+      <span style="color:#080;font-weight:bold">ensure</span>
+        <span style="color:#036;font-weight:bold">NilClass</span>.send <span style="color:#A60">:define_method</span>, <span style="color:#A60">:method_missing</span>, mm
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/file'" id="file">file</h3>
+         <table class="cube_table"
+                id="file_cube"
+                title="require 'zucker/file'"> <tr><th>Summary</th>    <td>Extensions for <code>File</code></td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">File</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>File.gsub</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">File</span>.gsub <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">some_filename</span><span style="color:#710">'</span></span>, <span style="color:#777"># will read the file and substitute the hash keys with their values</span>
+  <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">hi</span><span style="color:#404">/</span></span> =&gt; <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">cu</span><span style="color:#710">'</span></span>,
+  <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span> =&gt; proc{ |m| (m.to_i+<span style="color:#00D">1</span>).to_s }
+</pre></div>
+</div>
+</div><h5>File.delete!</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">File</span>.delete! <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">some_filename</span><span style="color:#710">'</span></span> <span style="color:#777"># will delete the file, don't care if it exist.</span></pre></div>
+</div>
+</div><h5>File.filename</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">File</span>.basename</pre></div>
+</div>
+</div></td></tr><tr><th>Information</th>    <td>Idea for <code>File.delete!</code> from sugar-high.</td></tr><tr><th>Specification</th>    <td> <span id="show_file_spec">(<a href="javascript:show('file_spec')">show</a>)</span>
+         <div class="source" id="file_spec"><em>FIXME: missing (please create a <a href="http://github.com/janlelis/zucker/issues">github issue</a>)</em></div> </td></tr><tr><th>Source</th>    <td> <span id="show_file_source">(<a href="javascript:show('file_source')">show</a>)</span>
+         <div class="source" id="file_source"><em>FIXME: missing (please create a <a href="http://github.com/janlelis/zucker/issues">github issue</a>)</em></div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/hash_extras'" id="hash_extras">hash_extras</h3>
+         <table class="cube_table"
+                id="hash_extras_cube"
+                title="require 'zucker/hash_extras'"> <tr><th>Summary</th>    <td>Sugar for dealing with hashes</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">HashExtras</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>Hash.zip</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">Hash</span>.zip [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>], [<span style="color:#00D">4</span>,<span style="color:#00D">5</span>,<span style="color:#00D">6</span>] <span style="color:#777"># =&gt; {1=&gt;4, 2=&gt;5, 3=&gt;6}</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_hash_extras_spec">(<a href="javascript:show('hash_extras_spec')">show</a>)</span>
+         <div class="source" id="hash_extras_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/hash_extras</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">HashExtras</span>
+
+
+describe <span style="color:#036;font-weight:bold">Hash</span> <span style="color:#080;font-weight:bold">do</span>
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.zip</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should zip together both given enumerables and take them as key=&gt;values for a new hash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#036;font-weight:bold">Hash</span>.zip( [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>], [<span style="color:#00D">4</span>,<span style="color:#00D">5</span>,<span style="color:#00D">6</span>] ).should == { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span> }
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_hash_extras_source">(<a href="javascript:show('hash_extras_source')">show</a>)</span>
+         <div class="source" id="hash_extras_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">HashExtras</span>
+    refine <span style="color:#036;font-weight:bold">Hash</span>.singleton_class <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">zip</span>(keys, values)
+        <span style="color:#036;font-weight:bold">Hash</span>[ *keys.zip(values).flatten ]
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/hash_op'" id="hash_op">hash_op</h3>
+         <table class="cube_table"
+                id="hash_op_cube"
+                title="require 'zucker/hash_op'"> <tr><th>Summary</th>    <td>Sugar for dealing with hashes</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">HashOp</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>Hash#&lt;&lt;</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>{<span style="color:#00D">1</span>=&gt;<span style="color:#00D">2</span>} &lt;&lt; [<span style="color:#00D">3</span>, <span style="color:#00D">4</span>]   <span style="color:#777"># =&gt; { 1=&gt;2, 3=&gt;4 }</span>
+{<span style="color:#00D">1</span>=&gt;<span style="color:#00D">2</span>} &lt;&lt; { <span style="color:#00D">5</span>=&gt;<span style="color:#00D">6</span> } <span style="color:#777"># =&gt; { 1=&gt;2, 5=&gt;6 }</span>
+</pre></div>
+</div>
+</div><h5>Hash#&amp;</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>{ <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span> } &amp; { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">7</span> } <span style="color:#777"># =&gt; { 1=&gt;4 }</span></pre></div>
+</div>
+</div></td></tr><tr><th>Information</th>    <td>Some of the operators are inspired by Ruby Facets.</td></tr><tr><th>Specification</th>    <td> <span id="show_hash_op_spec">(<a href="javascript:show('hash_op_spec')">show</a>)</span>
+         <div class="source" id="hash_op_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/hash_op</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">HashOp</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Hash#&lt;&lt;</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">appends new elements to the hash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    a =  { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span> }
+    a &lt;&lt; { <span style="color:#00D">4</span>=&gt;<span style="color:#00D">7</span> }
+    a &lt;&lt; [<span style="color:#00D">5</span>, <span style="color:#00D">8</span>]
+    a.should == { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span>, <span style="color:#00D">4</span>=&gt;<span style="color:#00D">7</span>, <span style="color:#00D">5</span>=&gt;<span style="color:#00D">8</span> }
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Hash#&amp;</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">selects a sub hash containt only equal key-value pairs</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    a = { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span> }
+    b = { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">7</span> }
+    (a &amp; b).should == { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span> }
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Hash#+</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">merges two hashes</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    a = { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span> }
+    b = { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">7</span>, <span style="color:#00D">4</span>=&gt;<span style="color:#00D">0</span> }
+    (a + b).should == { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">7</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span>, <span style="color:#00D">4</span>=&gt;<span style="color:#00D">0</span> }
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_hash_op_source">(<a href="javascript:show('hash_op_source')">show</a>)</span>
+         <div class="source" id="hash_op_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">HashOp</span>
+    refine <span style="color:#036;font-weight:bold">Hash</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">&lt;&lt;</span>(other)
+        <span style="color:#080;font-weight:bold">case</span>
+        <span style="color:#080;font-weight:bold">when</span> other.is_a?(<span style="color:#036;font-weight:bold">Hash</span>)
+          merge! other
+        <span style="color:#080;font-weight:bold">when</span> other.is_a?(<span style="color:#036;font-weight:bold">Enumerable</span>) || other.respond_to?(<span style="color:#A60">:to_splat</span>)
+          merge! <span style="color:#036;font-weight:bold">Hash</span>[*other]
+        <span style="color:#080;font-weight:bold">else</span>
+          raise <span style="color:#036;font-weight:bold">TypeError</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">can only append other Hashs and Enumerables (or Classes that implement to_splat)</span><span style="color:#710">'</span></span>
+        <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">&amp;</span>(other)
+        <span style="color:#036;font-weight:bold">Hash</span>[ *select{ |k,v|
+          other[k] == v
+        }.flatten ]
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">+</span> <span style="color:#06B;font-weight:bold">merge</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/instance_variables_from'" id="instance_variables_from">instance_variables_from</h3>
+         <table class="cube_table"
+                id="instance_variables_from_cube"
+                title="require 'zucker/instance_variables_from'"> <tr><th>Summary</th>    <td>Reduces boilerplate code assigning lots of instance variables:<br/><br/><code>def initialize(variable1, variable2)<br/>  @variable1, @variable2 = variable1, variable2<br/>end</code><br/></td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">InstanceVariablesFrom</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>instance_variables_from</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">some_method</span>(a = <span style="color:#00D">1</span>, b = <span style="color:#00D">2</span>)
+  instance_variables_from binding <span style="color:#777"># assigns @a and @b</span>
+
+  params = {<span style="color:#A60">:c</span> =&gt; <span style="color:#00D">3</span>, <span style="color:#A60">:d</span> =&gt; <span style="color:#00D">4</span>}
+  instance_variables_from params <span style="color:#777"># # assigns @c and @d</span>
+<span style="color:#080;font-weight:bold">end</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_instance_variables_from_spec">(<a href="javascript:show('instance_variables_from_spec')">show</a>)</span>
+         <div class="source" id="instance_variables_from_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/instance_variables_from</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">InstanceVariablesFrom</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">instance_variables_from</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">transforms the given parameter to instance variables when in it is a binding</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">example_method</span>(a = <span style="color:#00D">1</span>, b = <span style="color:#00D">2</span>)
+      instance_variables_from binding <span style="color:#777"># assigns @a and @b</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    example_method
+    <span style="color:#33B">@a</span>.should == <span style="color:#00D">1</span>
+    <span style="color:#33B">@b</span>.should == <span style="color:#00D">2</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">transforms the given parameter to instance variables when in it is a hash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    params = { <span style="color:#606">c</span>: <span style="color:#00D">3</span>, <span style="color:#606">d</span>: <span style="color:#00D">4</span> }
+    instance_variables_from params
+
+    <span style="color:#33B">@c</span>.should == <span style="color:#00D">3</span>
+    <span style="color:#33B">@d</span>.should == <span style="color:#00D">4</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_instance_variables_from_source">(<a href="javascript:show('instance_variables_from_source')">show</a>)</span>
+         <div class="source" id="instance_variables_from_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">InstanceVariablesFrom</span>
+    refine <span style="color:#036;font-weight:bold">Object</span> <span style="color:#080;font-weight:bold">do</span>
+      private
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">instance_variables_from</span>(obj, *only)
+        iter =
+          <span style="color:#080;font-weight:bold">if</span>    obj.is_a? <span style="color:#036;font-weight:bold">Binding</span>
+            obj.eval(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">local_variables</span><span style="color:#710">'</span></span>).map{|e| [obj.eval(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>e<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>), e] }
+          <span style="color:#080;font-weight:bold">elsif</span> obj.is_a? <span style="color:#036;font-weight:bold">Hash</span>
+            obj.map{|k,v| [v,k] }
+          <span style="color:#080;font-weight:bold">else</span>
+        <span style="color:#777">#  elsif obj.is_a? Enumerable</span>
+            obj.each.with_index
+          <span style="color:#080;font-weight:bold">end</span>
+
+        ret = []
+        iter.each{ |value, arg|
+          arg = arg.to_s
+          <span style="color:#080;font-weight:bold">if</span> only.include?(arg) || only.include?(arg.to_sym) || only.empty?
+            arg = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">_</span><span style="color:#710">'</span></span> + arg  <span style="color:#080;font-weight:bold">if</span> (<span style="color:#00D">48</span>..<span style="color:#00D">57</span>).member? arg.unpack(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">C</span><span style="color:#710">'</span></span>)[<span style="color:#00D">0</span>]  <span style="color:#777"># 1.8+1.9</span>
+            ret &lt;&lt; ivar = <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">&quot;</span><span style="color:#A60">@</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>arg<span style="font-weight:bold;color:#666">}</span></span><span style="color:#740">&quot;</span></span>
+            <span style="color:#069">self</span>.instance_variable_set ivar, value
+          <span style="color:#080;font-weight:bold">end</span>
+        }
+        ret
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/iterate'" id="iterate">iterate</h3>
+         <table class="cube_table"
+                id="iterate_cube"
+                title="require 'zucker/iterate'"> <tr><th>Summary</th>    <td>Iterate over one or more collections. It is like <code>.each</code> with two differences: It feels more like a control structure and you can easily iterate over multiple objects</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Iterate</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>iterate</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>iterate [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>], [<span style="color:#00D">3</span>,<span style="color:#00D">4</span>,<span style="color:#00D">5</span>] <span style="color:#080;font-weight:bold">do</span> |e,f|
+  puts <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>e<span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">,</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>f<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>
+<span style="color:#080;font-weight:bold">end</span>
+<span style="color:#777"># outputs</span>
+<span style="color:#777">#  1,3</span>
+<span style="color:#777">#  2,4</span>
+<span style="color:#777">#  ,5</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_iterate_spec">(<a href="javascript:show('iterate_spec')">show</a>)</span>
+         <div class="source" id="iterate_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/iterate</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Iterate</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object#iterate</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  let <span style="color:#A60">:a</span>   <span style="color:#080;font-weight:bold">do</span> [<span style="color:#00D">1</span>, <span style="color:#00D">2</span>, <span style="color:#00D">3</span>]     <span style="color:#080;font-weight:bold">end</span>
+  let <span style="color:#A60">:b</span>   <span style="color:#080;font-weight:bold">do</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w|</span><span style="color:#D20">a b c d</span><span style="color:#710">|</span></span>   <span style="color:#080;font-weight:bold">end</span>
+  let <span style="color:#A60">:res</span> <span style="color:#080;font-weight:bold">do</span> <span style="color:#036;font-weight:bold">Hash</span>.new {[]} <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should behave like Enumerable#each for a single argument</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    iterate a <span style="color:#080;font-weight:bold">do</span> |ele|
+      res[<span style="color:#A60">:iter</span>] &lt;&lt; ele
+    <span style="color:#080;font-weight:bold">end</span>
+
+    a.each <span style="color:#080;font-weight:bold">do</span> |ele|
+      res[<span style="color:#A60">:each</span>] &lt;&lt; ele
+    <span style="color:#080;font-weight:bold">end</span>
+
+    res[<span style="color:#A60">:iter</span>].should == res[<span style="color:#A60">:each</span>]
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should pass the right params to the block</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    res = <span style="color:#036;font-weight:bold">Hash</span>.new {[]} <span style="color:#777"># TODO: why?</span>
+    res[<span style="color:#A60">:iter_a_b</span>] = [] <span style="color:#777"># ....</span>
+    res[<span style="color:#A60">:iter_b_a</span>] = [] <span style="color:#777"># ....</span>
+
+
+    iterate a, b <span style="color:#080;font-weight:bold">do</span> |e,f|
+      res[<span style="color:#A60">:iter_a_b</span>] &lt;&lt; [e, f]
+    <span style="color:#080;font-weight:bold">end</span>
+
+    res[<span style="color:#A60">:iter_a_b</span>].should == [
+      [<span style="color:#00D">1</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>],
+      [<span style="color:#00D">2</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">b</span><span style="color:#710">'</span></span>],
+      [<span style="color:#00D">3</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">c</span><span style="color:#710">'</span></span>],
+      [<span style="color:#069">nil</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">d</span><span style="color:#710">'</span></span>],
+    ]
+
+    iterate b, a <span style="color:#080;font-weight:bold">do</span> |e,f|
+      res[<span style="color:#A60">:iter_b_a</span>] &lt;&lt; [e, f]
+    <span style="color:#080;font-weight:bold">end</span>
+
+    res[<span style="color:#A60">:iter_b_a</span>].should == [
+      [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>, <span style="color:#00D">1</span>],
+      [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">b</span><span style="color:#710">'</span></span>, <span style="color:#00D">2</span>],
+      [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">c</span><span style="color:#710">'</span></span>, <span style="color:#00D">3</span>],
+      [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">d</span><span style="color:#710">'</span></span>, <span style="color:#069">nil</span>],
+    ]
+
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return enumerators if no block is applied</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    res = <span style="color:#036;font-weight:bold">Hash</span>.new {[]} <span style="color:#777"># TODO: why?</span>
+    res[<span style="color:#A60">:iter_a_b</span>] = [] <span style="color:#777"># ....</span>
+    res[<span style="color:#A60">:iter_b_a</span>] = [] <span style="color:#777"># ....</span>
+
+    enumerator = iterate a,b
+    enumerator.should be_kind_of(<span style="color:#069">RUBY_VERSION</span> &lt; <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1.9</span><span style="color:#710">'</span></span> ? <span style="color:#036;font-weight:bold">Enumerable</span>::<span style="color:#036;font-weight:bold">Enumerator</span> : <span style="color:#036;font-weight:bold">Enumerator</span>)
+    enumerator.to_a.should == [[<span style="color:#00D">1</span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>], [<span style="color:#00D">2</span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">b</span><span style="color:#710">'</span></span>], [<span style="color:#00D">3</span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">c</span><span style="color:#710">'</span></span>], [<span style="color:#069">nil</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">d</span><span style="color:#710">'</span></span>]]
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_iterate_source">(<a href="javascript:show('iterate_source')">show</a>)</span>
+         <div class="source" id="iterate_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Iterate</span>
+    refine <span style="color:#036;font-weight:bold">Object</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">iterate</span>(*params)
+        <span style="color:#777"># params.shift.zip(*params).each{ |*elements| yield *elements }</span>
+        raise <span style="color:#036;font-weight:bold">ArgumentError</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">wrong number of arguments (0)</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">if</span> params.empty?
+
+        first = params.shift
+        <span style="color:#080;font-weight:bold">if</span> params.empty? <span style="color:#777"># single param - like each</span>
+          <span style="color:#080;font-weight:bold">if</span> block_given?
+            first.map{|e| <span style="color:#080;font-weight:bold">yield</span> e }
+          <span style="color:#080;font-weight:bold">else</span>
+            first.map.to_enum
+          <span style="color:#080;font-weight:bold">end</span>
+        <span style="color:#080;font-weight:bold">else</span> <span style="color:#777"># multiple params</span>
+          max_size = [first, *params].max_by(&amp;<span style="color:#A60">:count</span>).size
+          padded_first = first.to_a + [<span style="color:#069">nil</span>]*(max_size - first.count)  <span style="color:#777"># append nils</span>
+          obj = padded_first.zip(*params)
+          <span style="color:#080;font-weight:bold">if</span> block_given?
+            obj.map{|es| <span style="color:#080;font-weight:bold">yield</span>(*es) }
+          <span style="color:#080;font-weight:bold">else</span>
+            obj.map.to_enum
+          <span style="color:#080;font-weight:bold">end</span>
+        <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/marshal_copy'" id="marshal_copy">marshal_copy</h3>
+         <table class="cube_table"
+                id="marshal_copy_cube"
+                title="require 'zucker/marshal_copy'"> <tr><th>Summary</th>    <td>Adds <code>Object#marshal_copy</code> to create a deep copy using <code>Marshal</code>.</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">MarshalCopy</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>Object#marshal_copy</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>a = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w[</span><span style="color:#D20">hello world</span><span style="color:#710">]</span></span>
+b = a.mcopy
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_marshal_copy_spec">(<a href="javascript:show('marshal_copy_spec')">show</a>)</span>
+         <div class="source" id="marshal_copy_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/marshal_copy</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">MarshalCopy</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object#marshal_copy</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">create a (deep) copy via marshalling</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    a = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w[</span><span style="color:#D20">hello world</span><span style="color:#710">]</span></span>
+    b = a.marshal_copy
+    b.should == a
+
+    b[<span style="color:#00D">0</span>][<span style="color:#00D">1</span>,<span style="color:#00D">1</span>] = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>
+    b.should_not == a
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_marshal_copy_source">(<a href="javascript:show('marshal_copy_source')">show</a>)</span>
+         <div class="source" id="marshal_copy_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">MarshalCopy</span>
+    refine <span style="color:#036;font-weight:bold">Object</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">marshal_copy</span>
+        <span style="color:#036;font-weight:bold">Marshal</span>.load <span style="color:#036;font-weight:bold">Marshal</span>.dump <span style="color:#069">self</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/mash'" id="mash">mash</h3>
+         <table class="cube_table"
+                id="mash_cube"
+                title="require 'zucker/mash'"> <tr><th>Summary</th>    <td>mash: map(hash)</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Mash</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>Enumerable#mash</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>[<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].mash{|e| [e, e.to_s] } <span style="color:#777"># =&gt; {1=&gt;'1',2=&gt;'2',3=&gt;'3'}</span></pre></div>
+</div>
+</div></td></tr><tr><th>Information</th>    <td>Inspired by Ruby Facets' <code>mash</code>.</td></tr><tr><th>Specification</th>    <td> <span id="show_mash_spec">(<a href="javascript:show('mash_spec')">show</a>)</span>
+         <div class="source" id="mash_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/mash</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Mash</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Array#mash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should &quot;map&quot; a hash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].mash{|e| [e, e.to_s] }.should == {<span style="color:#00D">1</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1</span><span style="color:#710">'</span></span>,<span style="color:#00D">2</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">2</span><span style="color:#710">'</span></span>,<span style="color:#00D">3</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">3</span><span style="color:#710">'</span></span>,}
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Enumerator#mash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should &quot;map&quot; a hash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].each.mash{|e| [e, e.to_s] }.should == {<span style="color:#00D">1</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1</span><span style="color:#710">'</span></span>,<span style="color:#00D">2</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">2</span><span style="color:#710">'</span></span>,<span style="color:#00D">3</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">3</span><span style="color:#710">'</span></span>,}
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_mash_source">(<a href="javascript:show('mash_source')">show</a>)</span>
+         <div class="source" id="mash_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Mash</span>
+    refine <span style="color:#036;font-weight:bold">Enumerator</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">mash</span>
+        ret = {}
+        each{ |kv| ret.store( *(<span style="color:#080;font-weight:bold">yield</span>(kv)[<span style="color:#00D">0</span>,<span style="color:#00D">2</span>]) ) }
+        ret
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">Array</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">mash</span>
+        ret = {}
+        each{ |kv| ret.store( *(<span style="color:#080;font-weight:bold">yield</span>(kv)[<span style="color:#00D">0</span>,<span style="color:#00D">2</span>]) ) }
+        ret
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/regexp_union'" id="regexp_union">regexp_union</h3>
+         <table class="cube_table"
+                id="regexp_union_cube"
+                title="require 'zucker/regexp_union'"> <tr><th>Summary</th>    <td>Easy creation of a <code>Regexp.union</code></td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">RegexpUnion</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>Regexp#|, String#|</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">Ruby</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span> | <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">test</span><span style="color:#404">/</span><span style="color:#C2C">i</span></span> | <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">cheat</span><span style="color:#710">&quot;</span></span>
+<span style="color:#777"># creates a Regexp similar to:</span>
+<span style="color:#777"># /(Ruby\d|[tT][eE][sS][tT]|cheat)/</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_regexp_union_spec">(<a href="javascript:show('regexp_union_spec')">show</a>)</span>
+         <div class="source" id="regexp_union_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/regexp_union</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">RegexpUnion</span>
+
+
+shared_examples_for <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Regexp.union operator</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">creates a Regexp.union of both operands</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    (<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">Ruby</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span> | <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">test</span><span style="color:#404">/</span><span style="color:#C2C">i</span></span> | <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">cheat</span><span style="color:#710">&quot;</span></span>).should ==
+      <span style="color:#036;font-weight:bold">Regexp</span>.union( <span style="color:#036;font-weight:bold">Regexp</span>.union( <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">Ruby</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span>, <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">test</span><span style="color:#404">/</span><span style="color:#C2C">i</span></span> ), <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">cheat</span><span style="color:#710">&quot;</span></span> )
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Regexp#|</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it_should_behave_like <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Regexp.union operator</span><span style="color:#710">'</span></span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#|</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it_should_behave_like <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Regexp.union operator</span><span style="color:#710">'</span></span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_regexp_union_source">(<a href="javascript:show('regexp_union_source')">show</a>)</span>
+         <div class="source" id="regexp_union_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">RegexpUnion</span>
+    refine <span style="color:#036;font-weight:bold">Regexp</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">|</span>(arg)
+        <span style="color:#036;font-weight:bold">Regexp</span>.union <span style="color:#069">self</span>, arg.is_a?(<span style="color:#036;font-weight:bold">Regexp</span>) ? arg : arg.to_s
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">|</span>(arg)
+        <span style="color:#036;font-weight:bold">Regexp</span>.union <span style="color:#069">self</span>, arg.is_a?(<span style="color:#036;font-weight:bold">Regexp</span>) ? arg : arg.to_s
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/square_brackets_for'" id="square_brackets_for">square_brackets_for</h3>
+         <table class="cube_table"
+                id="square_brackets_for_cube"
+                title="require 'zucker/square_brackets_for'"> <tr><th>Summary</th>    <td>This helper methods defines <code>[]</code> and <code>[]=</code> for accesing an instance variable</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">SquareBracketsFor</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>square_brackets_for</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Klass</span>
+  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">initialize</span>
+    <span style="color:#33B">@var</span> = {
+      <span style="color:#A60">:a_key</span> =&gt; <span style="color:#00D">1</span>,
+      <span style="color:#A60">:another_one</span> =&gt; <span style="color:#00D">2</span>,
+    }
+  <span style="color:#080;font-weight:bold">end</span>
+
+  square_brackets_for <span style="color:#A60">:var</span> <span style="color:#777"># creates [] and []=</span>
+  <span style="color:#777"># square_brackets_for :var, false # would create only []</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+a = <span style="color:#036;font-weight:bold">Klass</span>.new
+a[<span style="color:#A60">:a_key</span>] <span style="color:#777"># =&gt; 1</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_square_brackets_for_spec">(<a href="javascript:show('square_brackets_for_spec')">show</a>)</span>
+         <div class="source" id="square_brackets_for_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/square_brackets_for</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">SquareBracketsFor</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">square_brackets_for</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  before <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Klass</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">initialize</span>
+        <span style="color:#33B">@var</span> = { <span style="color:#606">a_key</span>: <span style="color:#00D">1</span>, <span style="color:#606">another_one</span>: <span style="color:#00D">2</span> }
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#33B">@eigenvar</span> = { <span style="color:#606">a_key</span>: <span style="color:#00D">99</span> }
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should define a [] getter (not a setter) for an instance var, if the second parameter is false</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Klass</span>
+      square_brackets_for <span style="color:#A60">:var</span>, <span style="color:#069">nil</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    a = <span style="color:#036;font-weight:bold">Klass</span>.new
+    a[<span style="color:#A60">:a_key</span>].should == <span style="color:#00D">1</span>
+
+    proc <span style="color:#080;font-weight:bold">do</span>
+      a[<span style="color:#A60">:this_is</span>] = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">not possible</span><span style="color:#710">'</span></span>
+    <span style="color:#080;font-weight:bold">end</span>.should raise_exception <span style="color:#036;font-weight:bold">NoMethodError</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should define [] and []= for accessing an instance variable</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Klass</span>
+      square_brackets_for <span style="color:#A60">:var</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    a = <span style="color:#036;font-weight:bold">Klass</span>.new
+    a[<span style="color:#A60">:a_key</span>].should == <span style="color:#00D">1</span>
+
+    a[<span style="color:#A60">:this_is</span>] = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">useful</span><span style="color:#710">'</span></span>
+    a[<span style="color:#A60">:this_is</span>].should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">useful</span><span style="color:#710">'</span></span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should also work for class-instance variables</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Klass</span>
+      <span style="color:#080;font-weight:bold">class</span> &lt;&lt; <span style="color:#B06;font-weight:bold">Klass</span>
+        square_brackets_for <span style="color:#A60">:eigenvar</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    <span style="color:#036;font-weight:bold">Klass</span>[<span style="color:#A60">:a_key</span>].should == <span style="color:#00D">99</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_square_brackets_for_source">(<a href="javascript:show('square_brackets_for_source')">show</a>)</span>
+         <div class="source" id="square_brackets_for_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SquareBracketsFor</span>
+    refine <span style="color:#036;font-weight:bold">Object</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">square_brackets_for</span>(ivar, assignment = <span style="color:#069">true</span>)
+        define_method <span style="color:#A60">:[]</span> <span style="color:#080;font-weight:bold">do</span> |key|
+          (instance_variable_get <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">&quot;</span><span style="color:#A60">@</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>ivar<span style="font-weight:bold;color:#666">}</span></span><span style="color:#740">&quot;</span></span>)[key]
+        <span style="color:#080;font-weight:bold">end</span>
+
+        <span style="color:#080;font-weight:bold">if</span> assignment
+          define_method <span style="color:#A60">:[]=</span> <span style="color:#080;font-weight:bold">do</span> |key, value|
+            (instance_variable_get <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">&quot;</span><span style="color:#A60">@</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>ivar<span style="font-weight:bold;color:#666">}</span></span><span style="color:#740">&quot;</span></span>)[key] = value
+          <span style="color:#080;font-weight:bold">end</span>
+        <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/string_extras'" id="string_extras">string_extras</h3>
+         <table class="cube_table"
+                id="string_extras_cube"
+                title="require 'zucker/string_extras'"> <tr><th>Summary</th>    <td>Generic <code>String</code> extensions. Strings cannot be comfortable enough!</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">StringExtras</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>String#lchomp</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">  Yes</span><span style="color:#710">'</span></span>.lchomp  <span style="color:#777"># =&gt; ' Yes'</span></pre></div>
+</div>
+</div><h5>String#lchomp!</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777"># mutable lchomp version</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_string_extras_spec">(<a href="javascript:show('string_extras_spec')">show</a>)</span>
+         <div class="source" id="string_extras_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/string_extras</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">StringExtras</span>
+
+describe <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">#lchomp</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should chomp on the left side</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      string = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ameise</span><span style="color:#710">'</span></span>
+      expect( string.lchomp(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>) ).to eq <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">meise</span><span style="color:#710">'</span></span>
+      expect( string ).to eq <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ameise</span><span style="color:#710">'</span></span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">#lchomp!</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should chomp on the left side (mutating)</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      string = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ameise</span><span style="color:#710">'</span></span>
+      expect( string.lchomp!(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>) ).to eq <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">meise</span><span style="color:#710">'</span></span>
+      expect( string ).to eq <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">meise</span><span style="color:#710">'</span></span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_string_extras_source">(<a href="javascript:show('string_extras_source')">show</a>)</span>
+         <div class="source" id="string_extras_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">StringExtras</span>
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">lchomp</span>(arg = <span style="color:#d70">$/</span>)
+        reverse.chomp(arg).reverse
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">lchomp!</span>(arg = <span style="color:#d70">$/</span>)
+        replace reverse.chomp(arg).reverse
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/string_op'" id="string_op">string_op</h3>
+         <table class="cube_table"
+                id="string_op_cube"
+                title="require 'zucker/string_op'"> <tr><th>Summary</th>    <td>More <code>String</code> operators. Because Strings cannot be comfortable enough!</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">StringOp</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>String#-</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1234abc5678</span><span style="color:#710">'</span></span> - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">b</span><span style="color:#710">'</span></span> - <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span> <span style="color:#777"># =&gt; ac</span></pre></div>
+</div>
+</div><h5>String#^</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Yes vs No</span><span style="color:#710">'</span></span>^<span style="color:#00D">2</span> <span style="color:#777"># =&gt; 's vs No'</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_string_op_spec">(<a href="javascript:show('string_op_spec')">show</a>)</span>
+         <div class="source" id="string_op_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/string_op</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">StringOp</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#-</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should remove the applied Regexp or String from self via gsub</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    (<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1234abc5678</span><span style="color:#710">'</span></span> - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">b</span><span style="color:#710">'</span></span> - <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span>).should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ac</span><span style="color:#710">'</span></span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#^</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should give C-like substring access to strings</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    string = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Theoretische Informatik ist voll geil!</span><span style="color:#710">'</span></span>
+
+    (string^<span style="color:#00D">0</span>).should  == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Theoretische Informatik ist voll geil!</span><span style="color:#710">'</span></span>
+    (string^<span style="color:#00D">1</span>).should  == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">heoretische Informatik ist voll geil!</span><span style="color:#710">'</span></span>
+    (string^<span style="color:#00D">13</span>).should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Informatik ist voll geil!</span><span style="color:#710">'</span></span>
+    (string^<span style="color:#00D">-1</span>).should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Theoretische Informatik ist voll geil</span><span style="color:#710">'</span></span>
+    (string^<span style="color:#00D">38</span>).should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>
+    (string^<span style="color:#00D">99</span>).should == <span style="color:#069">nil</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_string_op_source">(<a href="javascript:show('string_op_source')">show</a>)</span>
+         <div class="source" id="string_op_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">StringOp</span>
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">-</span>(rem)
+        gsub( <span style="color:#036;font-weight:bold">Regexp</span> === rem ? rem : rem.to_s, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span> )
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">^</span>(pos)
+        pos = pos.to_i
+        <span style="color:#080;font-weight:bold">if</span> pos &gt;= <span style="color:#00D">0</span>
+          <span style="color:#069">self</span>[pos..<span style="color:#00D">-1</span>]
+        <span style="color:#080;font-weight:bold">else</span>
+          <span style="color:#069">self</span>[<span style="color:#00D">0</span>...pos]
+        <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/tap'" id="tap">tap</h3>
+         <table class="cube_table"
+                id="tap_cube"
+                title="require 'zucker/tap'"> <tr><th>Summary</th>    <td>Adds the two <code>tap</code> variants <code>tap_on</code> (formerly known as <code>returning</code> in ActiveSupport) and <code>make_new</code></td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Tap</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>tap_on</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>tap_on [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>] <span style="color:#080;font-weight:bold">do</span> |obj|
+  obj[<span style="color:#00D">4</span>] = <span style="color:#00D">5</span>
+<span style="color:#080;font-weight:bold">end</span> <span style="color:#777">#=&gt; [1, 2, nil, nil, 5]</span>
+</pre></div>
+</div>
+</div><h5>make_new</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>make_new <span style="color:#036;font-weight:bold">Hash</span> <span style="color:#080;font-weight:bold">do</span> |obj|
+  obj[<span style="color:#00D">1</span>] = <span style="color:#00D">2</span>
+<span style="color:#080;font-weight:bold">end</span> <span style="color:#777">#=&gt; {1 =&gt; 2}</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Information</th>    <td>Read more about using tap on the <a href="http://blog.rubybestpractices.com/posts/gregory/011-tap-that-hash.html">ruby best practices</a> blog.</td></tr><tr><th>Specification</th>    <td> <span id="show_tap_spec">(<a href="javascript:show('tap_spec')">show</a>)</span>
+         <div class="source" id="tap_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/tap</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">Tap</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">tap_on</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should call tap on the argument and apply the block</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    obj = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">an_object</span><span style="color:#710">&quot;</span></span>
+    block = <span style="color:#A60">:reverse</span>.to_proc
+
+    tap_on( obj, &amp;block ).should == obj.tap( &amp;block )
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">make_new</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should create a new instance of the class given as argument, apply the block on it and return result</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    make_new <span style="color:#036;font-weight:bold">Hash</span> <span style="color:#080;font-weight:bold">do</span> |obj|
+      obj[<span style="color:#00D">1</span>] = <span style="color:#00D">2</span>
+    <span style="color:#080;font-weight:bold">end</span>.should.send(<span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">'</span><span style="color:#A60">==</span><span style="color:#740">'</span></span>, { <span style="color:#00D">1</span> =&gt; <span style="color:#00D">2</span>})
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_tap_source">(<a href="javascript:show('tap_source')">show</a>)</span>
+         <div class="source" id="tap_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Tap</span>
+    refine <span style="color:#036;font-weight:bold">Object</span> <span style="color:#080;font-weight:bold">do</span>
+      private
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">tap_on</span>(obj, &amp;block)
+        obj.tap(&amp;block)
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">make_new</span>(what, *args, &amp;block)
+        what.new(*args).tap(&amp;block)
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'zucker/unary_conversion'" id="unary_conversion">unary_conversion</h3>
+         <table class="cube_table"
+                id="unary_conversion_cube"
+                title="require 'zucker/unary_conversion'"> <tr><th>Summary</th>    <td>Easy conversion between strings and symbols. Sometimes, you do not care if you get a <code>String</code> or <code>Symbol</code> as input. Instead of using AS' HashWithIndifferentAccess you can just always convert to your preferred format</td></tr><tr><th>Using</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">UnaryConversion</span></pre></div>
+</div>
+</div></td></tr><tr><th>Methods</th>    <td><h5>String#+@</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>+<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_string</span><span style="color:#710">'</span></span> <span style="color:#777"># =&gt; 'was_string'</span></pre></div>
+</div>
+</div><h5>String#-@</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>-<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_string</span><span style="color:#710">'</span></span> <span style="color:#777"># =&gt; :was_string</span></pre></div>
+</div>
+</div><h5>Symbol#+@</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>+<span style="color:#A60">:was_symbol</span>  <span style="color:#777"># =&gt; 'was_symbol'</span></pre></div>
+</div>
+</div><h5>Symbol#-@</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>-<span style="color:#A60">:was_symbol</span>  <span style="color:#777"># =&gt; :was_symbol</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_unary_conversion_spec">(<a href="javascript:show('unary_conversion_spec')">show</a>)</span>
+         <div class="source" id="unary_conversion_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker/unary_conversion</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">Zucker</span>::<span style="color:#036;font-weight:bold">UnaryConversion</span>
+
+
+describe <span style="color:#036;font-weight:bold">Symbol</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">#+@</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should convert to_s</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    +<span style="color:#A60">:matz</span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">matz</span><span style="color:#710">'</span></span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="color:#036;font-weight:bold">Symbol</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">#-@</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should do nothing</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    -<span style="color:#A60">:matz</span> == <span style="color:#A60">:matz</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="color:#036;font-weight:bold">String</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">#+@</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should do nothing</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    +<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">matz</span><span style="color:#710">'</span></span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">matz</span><span style="color:#710">'</span></span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="color:#036;font-weight:bold">String</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">#-@</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should convert to_sym</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    -<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">matz</span><span style="color:#710">'</span></span> == <span style="color:#A60">:matz</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_unary_conversion_source">(<a href="javascript:show('unary_conversion_source')">show</a>)</span>
+         <div class="source" id="unary_conversion_source"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">zucker</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Zucker</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">UnaryConversion</span>
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">+@</span>
+        <span style="color:#069">self</span>
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">-@</span>
+        to_sym
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">Symbol</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">+@</span>
+        to_s
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">-@</span>
+        <span style="color:#069">self</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div>
+
+    <h2>Changelog</h2>
+    <div class="cubes">
+      <pre class="scode">2014-02-16 | <a href="http://rubyzucker.info/14.1/">Zucker 14.1</a>
+* drop Ruby 1.8 support
+* rewrite zucker to use refinements!
+* remove all "debug" cubes, use the "debugging" gem instead!
+* remove "ruby_version" cube, use the "ruby_version" gem instead!
+* remove "engine" cube, use the "ruby_engine" gem instead!
+* remove "info" cube, use the "ruby_info" gem instead!
+* remove "os" cube, use rdp's "os" gem instead!
+* remove "*_to_proc" cubes, use the "procstar" gem instead!
+* remove "sandbox" cube, since sandboxing is not recommended and removed from Ruby 2.1
+* remove "kernel" and "not" cube completely
+* tweaks to most other cubes
+
+
+2013-04-30 | <a href="http://rubyzucker.info/13.1/">Zucker 13.1</a>
+* fix alias_for bug
+* let RubyVersion#inspect and RubyEngine#inspect map to #to_s
+* remove Array#sum
+* repackage (gh#4)
+
+
+2012-01-16 | <a href="http://rubyzucker.info/12.1/">Zucker 12.1</a>
+* fix a requiring bug
+* rename zucker/version cube to zucker/ruby_version and Zucker::PACKAGES to Zucker::PACKS
+* remove more_aliases! (keep it simple...)
+* add case cube: String#to_camel and String#to_snake
+
+
+2011-05-25 | <a href="http://rubyzucker.info/11/">Zucker 11</a>
+* add Zucker::constants to check if cube has been required (e.g. Zucker::AliasFor if 'zucker/alias_for' is loaded)
+* rbx tweaks
+  * don't define Binding#vars on rbx (prevent endless recursion)
+  * sandbox-not-working warning
+* add Kernel#ignore_sigquit!
+* fix warnings
+* doc tweaks
+
+
+2011-04-29 | <a href="http://rubyzucker.info/10/">Zucker 10</a>
+* doc/spec tweaks
+  * make test.rubygems.org-testable
+* fix zucker 9 permission issue
+
+
+2011-01-22 | <a href="http://rubyzucker.info/9/">Zucker 9</a>
+* remove history versions (sorry, it caused too much gem/rdoc troubles)
+* add file cube: File.delete! and File.gsub
+* debug pack improvements
+  * binding: typos + return nil
+  * cc: support for ripl + return nil
+  * mm: also show eigenclass for modules + nicer displaying + return nil
+  * added Regexp#visualize
+* remove optional sandbox param
+* rename xxx2proc to xxx_to_proc
+* change rakefile/rspec/gemspec structure
+* more minor fixes and improvements
+
+
+2010-10-06 | <a href="http://rubyzucker.info/8/">Zucker 8</a>
+* fix a little alias_for bug
+* disable rdoc creation when installing (in favour of the custom docs)
+* change Binding#inspect to Binding.variables (was too verbose and dangerous)
+
+
+2010-10-03 | <a href="http://rubyzucker.info/7/">Zucker 7</a>
+* fix critical OS.windows? bug
+
+
+2010-10-03 | <a href="http://rubyzucker.info/6/">Zucker 6</a>
+* no new cubes
+* bugfix for OS.posix?
+* small changes + bugfixes + doc improvements
+* add two user methods to Info
+* change egonil semantics ( using method_missing, see http://rbjl.net/26/catch_nil.rb )
+* bugfix for vv
+
+
+2010-09-04 | <a href="http://rubyzucker.info/5/">Zucker 5</a>
+* debug edition -  add two debug helpers: oo (output line, method, file) and cc (output method callstack)
+* rename cube D to dd add add more debug aliases (for mm and binding)
+* fix __SPECIAL_VARS__ in info and kernel cube and some minor bugfixes
+* Zucker.activate_more_aliases! option
+* add Hash#&amp;
+* add aliases: File.filename (for basename), Dir.join and Dir.split (for File.join, split)
+* add a flexible requiring mechansim in zucker.rb (no api changes)
+* restructure packages
+* add rake tasks for releasing
+* improve RubyVersion constant (cleaner and more flexible)
+
+
+2010-09-01 | <a href="http://rubyzucker.info/4/">Zucker 4</a>
+* fix Binding#inspect
+* add RubyEngine constant
+* add RubyVersion constant
+* add OS constant
+* add q debug method (like p but on one line)
+* add String#-
+
+
+2010-08-14 | <a href="http://rubyzucker.info/3/">Zucker 3</a>
+* add tap cube
+* add Object#not
+* add alias_for for an alternative alias syntax
+* add String#constantize (improved AS version)
+* improve Info module
+* make Array#sum Rails compatibile
+* improve docs
+* change directory layout (no changes for requiring)
+* more small changes
+
+
+2010-08-08 | <a href="http://rubyzucker.info/2/">Zucker 2</a>
+* add info cube
+* add chaining for array2proc
+* fix Hash.zip
+* fix instance_variables_from binding for 1.9
+* more specs
+
+
+2010-08-06 | <a href="http://rubyzucker.info/1/">Zucker 1</a>
+* initial release
+
+
+2010-08-05 | <a href="http://rubyzucker.info/rubyzucker.pdf">Zucker 0</a>
+* pre-release for rug-b talk
+
+</pre>
+    </div>
+    <br/>
+  </div>
+
+  <div id="foot">
+    <div id="smile"><a href="http://janlelis.de">J-_-L</a></div>
+    This is the Ruby Zucker 13.1 documentation (2013-04-30).
+    The current documentation is always available at <a href="http://rubyzucker.info">rubyzucker.info</a>.
+    Source at <a href="https://github.com/janlelis/zucker">github</a>.
+    Ruby Logo CC-BY-SA Yukihiro Matsumoto.
+  </div>
+
+</body>
+</html>
+

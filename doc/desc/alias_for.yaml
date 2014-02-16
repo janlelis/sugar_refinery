@@ -1,0 +1,13 @@
+alias_for:
+  summary: 'A different way to create aliases: Reversed order and you can pass multiple alias names. The order feels more logical'
+  methods:
+    Module#alias_for, Module#aliases_for: |
+      # creates an alias for the method :methods with the name ms
+      class Object
+        alias_for :methods, :ms
+      end
+
+      # creates multiple aliases
+      module Enumerable
+        aliases_for :zip, :with, :%
+      end

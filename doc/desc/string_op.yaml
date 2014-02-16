@@ -1,0 +1,5 @@
+string_op:
+  summary: "More ⇧String⇧ operators. Because Strings cannot be comfortable enough!"
+  methods:
+    String#-: "'1234abc5678' - 'b' - /\\d/ # => ac"
+    String#^: "'Yes vs No'^2 # => 's vs No'"

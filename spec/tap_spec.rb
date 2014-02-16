@@ -1,4 +1,6 @@
 require 'zucker/tap'
+using Zucker::Tap
+
 
 describe 'tap_on' do
   it 'should call tap on the argument and apply the block' do

@@ -17,14 +17,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake', '~> 0'
   s.add_development_dependency 'rspec', '~> 2.14'
   s.add_development_dependency 'coderay', '~> 0'
-
-  len = 24
-  s.post_install_message = \
-   ("       ┌── " + "info ".ljust(len-2,'─')                                   + "─┐\n" +
-    " J-_-L │ "   + s.homepage.ljust(len,' ')                                  + " │\n" +
-    "       ├── " + "usage ".ljust(len-2,'─')                                  + "─┤\n" +
-    "       │ "   + "require 'zucker/default'".ljust(len,' ')                  + " │\n" +
-    "       │ "   + "# or".ljust(len,' ')                                      + " │\n" +
-    "       │ "   + "require 'zucker/<name>".ljust(len,' ')                    + " │\n" +
-    "       └─"   + '─'*len                                                    + "─┘")
 end

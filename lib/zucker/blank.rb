@@ -1,29 +1,47 @@
 require 'zucker'
-module Zucker Blank = true end
 
-class Object
-  def blank?
-    if respond_to? :empty? then empty? else !self end
-  end
+module Zucker
+  module Blank
+    refine Object do
+      def blank?
+        if respond_to? :empty? then empty? else !self end
+      end
 
-  def present?
-    !blank?
+      def present?
+        !blank?
+      end
+    end
+
+    refine NilClass do
+      def blank?() true end
+    end
+
+    refine FalseClass do
+      def blank?() true end
+    end
+
+    refine TrueClass do
+      def blank?() false end
+    end
+
+    refine Numeric do
+      def blank?() false end
+    end
+
+    refine Array do
+      def blank?() empty? end
+    end
+
+    refine Hash do
+      def blank?() empty? end
+    end
+
+    refine String do
+      def blank?() self !~ /\S/ end
+    end
+
+    refine Regexp do
+      def blank?() self == // end
+    end
   end
 end
-
-
-{ # what to do              # for which classes
-  lambda{ true }         => [FalseClass, NilClass],
-  lambda{ false }        => [TrueClass, Numeric],
-  lambda{ empty? }       => [Array, Hash],
-  lambda{ self !~ /\S/ } => [String],
-  lambda{ self == //   } => [Regexp],
-
-}.each{ |action, klass_array|
-  klass_array.each{ |klass|
-    klass.send :define_method, :blank?, &action
-  }
-}
-
-# J-_-L
-

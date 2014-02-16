@@ -1,24 +1,19 @@
 require 'zucker/square_brackets_for'
+using Zucker::SquareBracketsFor
+
 
 describe 'square_brackets_for' do
-
   before do
     class Klass
       def initialize
-        @var = {
-          :a_key => 1,
-          :another_one => 2,
-        }
+        @var = { a_key: 1, another_one: 2 }
       end
 
-      @eigenvar = {
-        :a_key => 99
-      }
+      @eigenvar = { a_key: 99 }
     end
   end
 
   it 'should define a [] getter (not a setter) for an instance var, if the second parameter is false' do
-
     class Klass
       square_brackets_for :var, nil
     end
@@ -32,7 +27,6 @@ describe 'square_brackets_for' do
   end
 
   it 'should define [] and []= for accessing an instance variable' do
-
     class Klass
       square_brackets_for :var
     end
@@ -45,7 +39,6 @@ describe 'square_brackets_for' do
   end
 
   it 'should also work for class-instance variables' do
-
     class Klass
       class << Klass
         square_brackets_for :eigenvar
@@ -54,6 +47,5 @@ describe 'square_brackets_for' do
 
     Klass[:a_key].should == 99
   end
-
 end
 

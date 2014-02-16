@@ -6,7 +6,7 @@ require File.dirname(__FILE__) + '/lib/zucker'
 
 desc 'Build documentation'
 task 'doc' do
-  ruby File.join(@path, 'doc/zucker_doc.rb'), @path
+  ruby File.join(@path, 'doc/create_documentation.rb'), @path
 end
 
 task 'default' => 'spec'

@@ -1,0 +1,10 @@
+egonil:
+  summary: Creates a block, where ⇧nil⇧ does not raise ⇧NoMethodError⇧s
+  methods:
+    egonil: |
+      egonil{
+        nil.some_methods.that[:do].not.exist
+      }
+  info:
+  - See →this post→http://rbjl.net/26-the-28-bytes-of-ruby-joy→ for more information and discussion.
+

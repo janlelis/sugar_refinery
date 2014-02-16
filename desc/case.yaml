@@ -1,7 +1,0 @@
-case:
-  summary: Provides ⇧String#to_camel⇧ and ⇧String#to_snake⇧.
-  why: It kind of lies in the nature of Ruby.
-  methods:
-    String#to_camel: "'was_snake_string'.to_camel # => 'WasSnakeString'"
-    String#to_snake: "'WasCamelString' # => 'was_camel_string'"
-

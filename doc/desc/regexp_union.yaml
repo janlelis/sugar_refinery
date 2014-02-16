@@ -1,0 +1,8 @@
+regexp_union:
+  summary: Easy creation of a ⇧Regexp.union⇧
+  methods:
+    Regexp#|, String#|: |
+      /Ruby\d/ | /test/i | "cheat"
+      # creates a Regexp similar to:
+      # /(Ruby\d|[tT][eE][sS][tT]|cheat)/
+

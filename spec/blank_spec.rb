@@ -1,4 +1,6 @@
 require 'zucker/blank'
+using Zucker::Blank
+
 
 describe 'Object#blank?' do
   it 'should be blank for blank values' do

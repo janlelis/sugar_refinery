@@ -1,0 +1,6 @@
+camel_snake:
+  summary: Provides ⇧String#to_camel⇧ and ⇧String#to_snake⇧.
+  methods:
+    String#to_camel: "'was_snake_string'.to_camel # => 'WasSnakeString'"
+    String#to_snake: "'WasCamelString' # => 'was_camel_string'"
+

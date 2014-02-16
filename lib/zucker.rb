@@ -2,7 +2,7 @@ begin
   require 'refine'
 rescue LoadError
   if RUBY_VERSION < '2.0'
-    warn "The zucker library depends on refinements, which do not seem to be installed!"
+    warn "The zucker library depends on refinements, please install the refine gem, when running a RubyVersion < 2.0"
   end
 end
 
@@ -11,41 +11,13 @@ module Zucker
   VERSION = '13.1'
   DATE = '2013-04-30'
 
-  PACKS = {
-    :control    => %w|egonil iterate tap|,
-    :extensions => %w|array case enumerable file hash string unary union|,
-    :object     => %w|blank mcopy|,
-    :to_proc    => %w|array_to_proc class_to_proc hash_to_proc regexp_to_proc|,
-    :shortcuts  => %w|aliases alias_for square_brackets_for ivars|,
-  }
-
   class << self
-    # Zucker require helpers
-    def require_cube(cube)
-      require "zucker/#{cube}"
-    end
-
-    def require_pack(pack)
-      PACKS[pack.to_sym].each{ |cube|
-        require_cube cube
-      }
-    end
-
-    def require_this(filename) # pack shortcut
-      pack = ::File.basename( filename ).chomp( ::File.extname( filename ))
-      require_pack(pack)
-    end
-
-    def require_default
-      PACKS.map{ |pack, _|
-        require_pack pack
-      }.compact
+    def require(cube)
+      require_relative "zucker/#{cube}"
     end
 
     def require_all
-      require_default
+      Dir[File.dirname(__FILE__) + '/zucker/*'].each{ |f| self.require File.basename(f) }
     end
   end
 end
-
-# J-_-L

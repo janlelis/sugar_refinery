@@ -1,4 +1,5 @@
 require 'zucker/egonil'
+using Zucker::Egonil
 
 describe 'egonil' do
   it 'should not raise nil exceptions in the block' do
