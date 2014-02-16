@@ -6,10 +6,10 @@ Gem::Specification.new do |s|
   s.version     = Zucker::VERSION
   s.authors = ['Jan Lelis','others']
   s.email = 'mail@janlelis.de'
-  s.summary = "Many little helpers that sweeten your Ruby code."
-  s.description = "Sweetens your Ruby code with syntactic sugar, which you do not want to miss again."
+  s.summary = "Sweetens your Ruby code with syntactic sugar."
+  s.description = "Lots of refinements to sweeten your Ruby code"
   s.homepage    = "http://rubyzucker.info"
-  s.files = Dir.glob( %w[{lib,spec}/**/*.rb desc/**/*.yaml] ) + %w{Rakefile zucker.gemspec MIT-LICENSE README CHANGELOG doc/zucker_doc.rb doc/zucker_doc.html}
+  s.files = Dir.glob( %w[{lib,spec}/**/*.rb desc/**/*.yaml] ) + %w{Rakefile zucker.gemspec MIT-LICENSE README.md CHANGELOG doc/create_documentation.rb doc/zucker.html}
   s.require_paths = ["lib"]
   s.required_ruby_version = '>= 1.9.2'
   s.license = 'MIT'
