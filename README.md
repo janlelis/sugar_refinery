@@ -11,7 +11,7 @@ Lots of small refinements to sweeten your Ruby code. See http://rubyzucker.info 
 
 ## Changes
 
-Missing former functionality? Some has been extracted to separate gems:
+Missing former functionality? It might have been extracted to separate gems:
 
 * [debugging](https://github.com/janlelis/debugging)
 * [procstar](https://github.com/janlelis/procstar)
