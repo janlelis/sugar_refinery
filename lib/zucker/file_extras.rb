@@ -3,7 +3,9 @@ require 'zucker'
 module Zucker
   module FileExtras
     refine File.singleton_class do
-      alias filename basename
+      def filename(*args, &block)
+        basename(*args, &block)
+      end
 
       def gsub(filename, regex_hash)
         data = File.read filename

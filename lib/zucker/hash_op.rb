@@ -20,7 +20,9 @@ module Zucker
         }.flatten ]
       end
 
-      alias + merge
+      def +(*o, &block)
+        merge *o, &block
+      end
     end
   end
 end

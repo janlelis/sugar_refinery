@@ -7,7 +7,9 @@ module Zucker
         (self - other) + (other - self)
       end
 
-      alias ** product
+      def **(*o, &block)
+        product *o, &block
+      end
     end
   end
 end
