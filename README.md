@@ -1,6 +1,15 @@
 # Zucker [![travis](https://travis-ci.org/janlelis/zucker.png?branch=master)](https://travis-ci.org/janlelis/zucker)
 
-Lots of refinements to sweeten your Ruby code. See http://rubyzucker.info for documentation.
+Lots of small refinements to sweeten your Ruby code. See http://rubyzucker.info for more documentation.
+
+## Example
+
+    require 'zucker/camel_snake'
+    using Zucker::CamelSnake
+    'was_snake_string'.to_camel # => 'WasSnakeString'
+    'WasCamelString'.to_snake # => 'was_camel_string'
+
+## Changes
 
 Missing former functionality? Some has been extracted to separate gems:
 

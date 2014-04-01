@@ -1,6 +1,7 @@
-2014-02-16 | Zucker 14.1
+2014-04-01 | Zucker 100.0.0
 * drop Ruby 1.8 support
 * rewrite zucker to use refinements!
+* use usual semantic versioning
 * remove all "debug" cubes, use the "debugging" gem instead!
 * remove "ruby_version" cube, use the "ruby_version" gem instead!
 * remove "engine" cube, use the "ruby_engine" gem instead!
@@ -12,14 +13,14 @@
 * tweaks to most other cubes
 
 
-2013-04-30 | Zucker 13.1
+2013-04-30 | Zucker 13
 * fix alias_for bug
 * let RubyVersion#inspect and RubyEngine#inspect map to #to_s
 * remove Array#sum
 * repackage (gh#4)
 
 
-2012-01-16 | Zucker 12.1
+2012-01-16 | Zucker 12
 * fix a requiring bug
 * rename zucker/version cube to zucker/ruby_version and Zucker::PACKAGES to Zucker::PACKS
 * remove more_aliases! (keep it simple...)

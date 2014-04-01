@@ -7,9 +7,8 @@ rescue LoadError
 end
 
 module Zucker
-  # version and date get modified by the :prepare_release rake task
-  VERSION = '13.1'
-  DATE = '2013-04-30'
+  VERSION = '100.0.0'
+  DATE = '2014-04-01'
 
   class << self
     def require(cube)
