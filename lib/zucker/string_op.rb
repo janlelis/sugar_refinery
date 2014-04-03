@@ -15,6 +15,10 @@ module Zucker
           self[0...pos]
         end
       end
+
+      def palindrome?
+        self.downcase == self.downcase.reverse
+      end
     end
   end
 end

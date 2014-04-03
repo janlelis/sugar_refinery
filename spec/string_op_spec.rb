@@ -20,3 +20,15 @@ describe 'String#^' do
     (string^99).should == nil
   end
 end
+
+describe 'String#palindrome?' do
+  it 'should return true if the string is a palindrome' do
+    palindrome_string = 'Noon'
+    non_palindrome_string = 'whatever'
+    palindrome_string_with_spaces = 'Now I won'
+
+    expect(palindrome_string.palindrome?).to be true
+    expect(non_palindrome_string.palindrome?).to be false
+    expect(palindrome_string_with_spaces.palindrome?).to be true
+  end
+end
