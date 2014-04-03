@@ -10,6 +10,10 @@ module Zucker
       def **(*o, &block)
         product *o, &block
       end
+
+      def sum
+        self.inject(0, &:+)
+      end
     end
   end
 end
