@@ -4,10 +4,12 @@ Lots of small refinements to sweeten your Ruby code. See http://rubyzucker.info 
 
 ## Example
 
-    require 'zucker/camel_snake'
-    using Zucker::CamelSnake
-    'was_snake_string'.to_camel # => 'WasSnakeString'
-    'WasCamelString'.to_snake # => 'was_camel_string'
+```ruby
+require 'zucker/camel_snake'
+using Zucker::CamelSnake
+'was_snake_string'.to_camel # => 'WasSnakeString'
+'WasCamelString'.to_snake # => 'was_camel_string'
+```
 
 ## Changes
 
