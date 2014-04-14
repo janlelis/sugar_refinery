@@ -16,9 +16,7 @@ module Zucker
     end
 
     def require_all
-      Dir[File.join(File.dirname(__FILE__), "zucker", "*.rb")].each do |cube|
-        autoload(File.basename(cube, ".rb").split(?_).map(&:capitalize).join.to_sym, cube)
-      end and true
+      Dir[File.dirname(__FILE__) + '/zucker/*'].each{ |f| self.require File.basename(f) }
     end
   end
 end
