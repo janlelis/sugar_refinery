@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://rubyzucker.info"
   s.files = Dir.glob( %w[{lib,spec}/**/*.rb desc/**/*.yaml] ) + %w{Rakefile zucker.gemspec MIT-LICENSE README.md CHANGELOG doc/create_documentation.rb doc/zucker.html}
   s.require_paths = ["lib"]
-  s.required_ruby_version = '>= 1.9.2'
+  s.required_ruby_version = '~> 2.0'
   s.license = 'MIT'
   s.add_dependency 'refine', '~> 0'
   s.add_development_dependency 'rake', '~> 0'
