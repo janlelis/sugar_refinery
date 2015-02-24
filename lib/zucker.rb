@@ -1,10 +1,5 @@
-begin
-  require 'refine'
-rescue LoadError
-  if RUBY_VERSION < '2.0'
-    warn "The zucker library depends on refinements, please install the refine gem, when running a RubyVersion < 2.0"
-  end
-end
+require 'refine'
+
 
 module Zucker
   VERSION = '100.0.0'

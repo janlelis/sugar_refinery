@@ -13,7 +13,7 @@ describe File do
   describe '.gsub' do
     after{ File.delete! 'random_filename' }
     let :random_filename do
-      'test_' + (0..20).map{|e| [*'a'..'z'].send RUBY_VERSION > '1.9' ? :sample : :choice }*''
+      'test_' + (0..20).map{|e| [*'a'..'z'].sample }*''
     end
 
     it 'should read filename in arg1, substitute every key in the arg2 with its value and save the file' do
@@ -34,7 +34,7 @@ describe File do
   describe '.delete!' do
     after{ File.delete! 'random_filename' }
     let :random_filename do
-      'test_' + (0..20).map{|e| [*'a'..'z'].send RUBY_VERSION > '1.9' ? :sample : :choice }*''
+      'test_' + (0..20).map{|e| [*'a'..'z'].sample }*''
     end
 
     it 'should delete the filename given as argument if it exists + return non-nil' do

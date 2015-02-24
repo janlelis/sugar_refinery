@@ -55,7 +55,7 @@ describe 'Object#iterate' do
     res[:iter_b_a] = [] # ....
 
     enumerator = iterate a,b
-    enumerator.should be_kind_of(RUBY_VERSION < '1.9' ? Enumerable::Enumerator : Enumerator)
+    enumerator.should be_kind_of(Enumerator)
     enumerator.to_a.should == [[1,'a'], [2,'b'], [3,'c'], [nil, 'd']]
   end
 end
