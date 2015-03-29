@@ -43,7 +43,7 @@ describe File do
       proc do
         res = File.delete! random_filename
       end.should_not raise_exception
-      res.should be_true
+      res.should be_truthy
     end
 
     it 'should do nothing if the filename given as argument does not exist + return nil' do
@@ -51,7 +51,7 @@ describe File do
       proc do
         res = File.delete! random_filename
       end.should_not raise_exception
-      res.should be_false
+      res.should be_falsey
     end
   end
 end
