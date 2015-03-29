@@ -1,4 +1,4 @@
-# Zucker [![travis](https://travis-ci.org/janlelis/zucker.png?branch=master)](https://travis-ci.org/janlelis/zucker)
+# Ruby Zucker [![version](https://badge.fury.io/rb/zucker.svg)](http://badge.fury.io/rb/zucker) [![travis](https://travis-ci.org/janlelis/zucker.png?branch=master)](https://travis-ci.org/janlelis/zucker)
 
 Lots of small refinements to sweeten your Ruby code. See http://rubyzucker.info for more documentation.
 
@@ -21,4 +21,4 @@ Missing former functionality? It might have been extracted to separate gems:
 * [ruby_version](https://github.com/janlelis/ruby_version)
 * [ruby_engine](https://github.com/janlelis/ruby_engine)
 
-Copyright (c) 2010-2014 Jan Lelis | http://janlelis.de | Released under the MIT license
+Copyright (c) 2010-2015 Jan Lelis | http://janlelis.de | Released under the MIT license

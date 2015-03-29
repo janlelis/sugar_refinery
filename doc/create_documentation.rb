@@ -29,7 +29,7 @@ class ZuckerDoc
       @date    = Zucker::DATE
 
       # include + format changelog
-      @changelog = replace_html_special_chars File.read File.join( @path, 'CHANGELOG' )
+      @changelog = replace_html_special_chars File.read File.join( @path, 'CHANGELOG.txt' )
       @changelog.gsub! /\| Zucker (?<version>\d+(?:\.\d+)?)/ do
         version = $~[:version].to_f
         version = version.to_i if version == version.to_i # oO
