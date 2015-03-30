@@ -1,7 +1,7 @@
 require "zucker"
 
 module Zucker
-  module ArrayEnum
+  module InnerMap
     refine Array do
       def inner_map(&block)
         map { |object| object.map(&block) }

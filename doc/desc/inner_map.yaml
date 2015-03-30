@@ -1,4 +1,4 @@
-chain_map:
+inner_map:
   summary: Runs blocks on inner ⇧Array⇧ elements
   methods:
     Array#inner_map: "[[1, 2], [3, 4]].inner_map{ |i| i + 1 }  # => [[2, 3], [4, 5]]"

@@ -1,5 +1,5 @@
-require "zucker/array_enum"
-using Zucker::ArrayEnum
+require "zucker/inner_map"
+using Zucker::InnerMap
 
 describe "Array#inner_map" do
   it "should delegate map to inner lists" do
