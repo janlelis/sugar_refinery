@@ -1,0 +1,8 @@
+array_stats:
+  summary: Statistics for ⇧Array⇧
+  methods:
+    Array#mean: "# calculates mean (average)"
+    Array#stdev: "# calculates standard deviation (takes :sample or :population as argument)"
+    Array#stdev_sample: "# calculates sample standard deviation"
+    Array#stdev_population: "# calculates population standard deviation"
+    Array#z_score: "# calculates standard score"
