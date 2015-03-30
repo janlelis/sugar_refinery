@@ -1,5 +1,6 @@
 2015-04-01 | Zucker 100.0.1
 * drop Ruby 1.9 support
+* add float_extras: Float#same?
 
 2014-04-01 | Zucker 100.0.0
 * drop Ruby 1.8 support
