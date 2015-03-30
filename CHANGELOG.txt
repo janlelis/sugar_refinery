@@ -1,6 +1,9 @@
 2015-04-01 | Zucker 100.0.1
 * drop Ruby 1.9 support
-* add float_extras: Float#same?
+* add float_extras for Float#same?
+* add chain_map
+* add inner_map
+* add array_stats
 
 2014-04-01 | Zucker 100.0.0
 * drop Ruby 1.8 support
