@@ -1,4 +1,7 @@
-require 'refine'
+begin
+  require 'refine'
+rescue LoadError
+end
 
 
 module Zucker
