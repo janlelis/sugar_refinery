@@ -5,7 +5,7 @@ end
 
 
 module Zucker
-  VERSION = '100.0.0'
+  VERSION = '100.1.0'
   DATE = '2014-04-01'
 
   class << self
