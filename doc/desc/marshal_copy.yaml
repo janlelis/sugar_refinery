@@ -3,5 +3,5 @@ marshal_copy:
   methods:
     Object#marshal_copy: |
       a = %w[hello world]
-      b = a.mcopy
+      b = a.marshal_copy
 
