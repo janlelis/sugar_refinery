@@ -1,7 +1,7 @@
 require_relative 'version'
 
 module SugarRefinery
-  module HashExtras
+  module HashZip
     refine Hash.singleton_class do
       def zip(keys, values)
         Hash[ *keys.zip(values).flatten ]

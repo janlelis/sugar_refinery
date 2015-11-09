@@ -7,6 +7,7 @@
 * remove square_brackets_for
 * remove tap
 * rename string_extras to lchomp
+* rename hash_extras to hash_zip
 
 
 ## CHANGELOG FOR ZUCKER GEM
