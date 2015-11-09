@@ -1,4 +1,4 @@
-require 'sugar_refinery'
+require_relative 'version'
 require 'fileutils'
 
 module SugarRefinery

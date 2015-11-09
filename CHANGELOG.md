@@ -2,6 +2,8 @@
 
 ## 2016-01-01 | Sugar Refinery 1.0
 * Turn zucker gem into sugar_refinery
+* Remove 'Zucker#require' and 'Zucker#require_all'
+* Remove 'refine' gem dependency
 
 
 ## CHANGELOG FOR ZUCKER GEM
