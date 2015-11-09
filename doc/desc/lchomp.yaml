@@ -1,5 +1,5 @@
-string_extras:
-  summary: "Generic ⇧String⇧ extensions. Strings cannot be comfortable enough!"
+lchomp:
+  summary: "Adds ⇧String#chomp⇧ on the left side."
   methods:
     String#lchomp: "'  Yes'.lchomp  # => ' Yes'"
     String#lchomp!: "# mutable lchomp version"

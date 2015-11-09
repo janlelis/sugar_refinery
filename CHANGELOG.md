@@ -6,6 +6,7 @@
 * remove 'refine' gem dependency
 * remove square_brackets_for
 * remove tap
+* rename string_extras to lchomp
 
 
 ## CHANGELOG FOR ZUCKER GEM

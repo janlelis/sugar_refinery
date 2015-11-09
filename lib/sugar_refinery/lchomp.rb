@@ -1,7 +1,7 @@
 require_relative 'version'
 
 module SugarRefinery
-  module StringExtras
+  module Lchomp
     refine String do
       def lchomp(arg = $/)
         reverse.chomp(arg).reverse

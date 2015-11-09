@@ -1,5 +1,5 @@
-require 'sugar_refinery/string_extras'
-using SugarRefinery::StringExtras
+require 'sugar_refinery/lchomp'
+using SugarRefinery::Lchomp
 
 describe String do
   describe '#lchomp' do
