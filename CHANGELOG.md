@@ -5,6 +5,7 @@
 * remove 'Zucker#require' and 'Zucker#require_all'
 * remove 'refine' gem dependency
 * remove square_brackets_for
+* remove tap
 
 
 ## CHANGELOG FOR ZUCKER GEM
