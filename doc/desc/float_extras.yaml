@@ -1,4 +1,0 @@
-float_extras:
-  summary: "⇧Float⇧ extensions."
-  methods:
-    Float#same?: "(0.1 + 0.2).same? 0.3 # true"

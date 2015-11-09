@@ -1,5 +1,5 @@
-require 'sugar_refinery/float_extras'
-using SugarRefinery::FloatExtras
+require 'sugar_refinery/same'
+using SugarRefinery::Same
 
 describe Float do
   describe '#same?' do

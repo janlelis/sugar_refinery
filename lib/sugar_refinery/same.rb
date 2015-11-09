@@ -1,7 +1,7 @@
 require_relative 'version'
 
 module SugarRefinery
-  module FloatExtras
+  module Same
     refine Float do
       def same?(other)
         (self - other).abs < Float::EPSILON
