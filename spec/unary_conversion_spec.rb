@@ -1,5 +1,5 @@
-require 'zucker/unary_conversion'
-using Zucker::UnaryConversion
+require 'sugar_refinery/unary_conversion'
+using SugarRefinery::UnaryConversion
 
 
 describe Symbol, '#+@' do

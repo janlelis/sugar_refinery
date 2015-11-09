@@ -1,5 +1,5 @@
-require 'zucker/regexp_union'
-using Zucker::RegexpUnion
+require 'sugar_refinery/regexp_union'
+using SugarRefinery::RegexpUnion
 
 
 shared_examples_for "Regexp.union operator" do

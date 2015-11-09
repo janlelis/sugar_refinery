@@ -1,5 +1,5 @@
-require 'zucker/string_extras'
-using Zucker::StringExtras
+require 'sugar_refinery/string_extras'
+using SugarRefinery::StringExtras
 
 describe String do
   describe '#lchomp' do

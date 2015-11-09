@@ -1,5 +1,5 @@
-require 'zucker/hash_op'
-using Zucker::HashOp
+require 'sugar_refinery/hash_op'
+using SugarRefinery::HashOp
 
 
 describe 'Hash#<<' do

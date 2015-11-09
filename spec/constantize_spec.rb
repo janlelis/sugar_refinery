@@ -1,5 +1,5 @@
-require 'zucker/constantize'
-using Zucker::Constantize
+require 'sugar_refinery/constantize'
+using SugarRefinery::Constantize
 
 
 describe 'String#constantize' do
@@ -8,18 +8,18 @@ describe 'String#constantize' do
   end
 
   it 'should also work for nested constants' do
-    'Zucker::VERSION'.constantize.should == Zucker::VERSION
+    'SugarRefinery::VERSION'.constantize.should == SugarRefinery::VERSION
   end
 
   it 'should throw name error if constant does not exist (and no parameter is given)' do
     proc do
-      'ObfsefsefsefafesafaefRubyZuckerafdfselijfesject'.constantize
+      'ObfsefsefsefafesafaefRubySugarRefineryafdfselijfesject'.constantize
     end.should raise_exception NameError
   end
 
   it 'should call the block (and not raise an error) if constant does not exist and block given' do
     proc do
-      'ObfsefsefsefafesafaefRubyZuckerafdfselijfesject'.constantize do |string|
+      'ObfsefsefsefafesafaefRubySugarRefineryafdfselijfesject'.constantize do |string|
          Default = [1,2,3]
       end.should == [1,2,3]
     end.should_not raise_exception
@@ -27,7 +27,7 @@ describe 'String#constantize' do
 
   it 'should return the second parameter (and not raise an error) if constant does not exist and parameter given' do
     proc do
-      'ObfsefsefsefafesafaefRubyZuckerafdfselijfesject'.constantize(Array).should == Array
+      'ObfsefsefsefafesafaefRubySugarRefineryafdfselijfesject'.constantize(Array).should == Array
     end.should_not raise_exception
   end
 end

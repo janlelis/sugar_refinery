@@ -1,5 +1,5 @@
-require "zucker/chain_map"
-using Zucker::ChainMap
+require "sugar_refinery/chain_map"
+using SugarRefinery::ChainMap
 
 describe "Array#chain_map" do
   it "should repeatedly chain symbols as map calls" do

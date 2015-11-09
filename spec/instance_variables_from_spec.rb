@@ -1,5 +1,5 @@
-require 'zucker/instance_variables_from'
-using Zucker::InstanceVariablesFrom
+require 'sugar_refinery/instance_variables_from'
+using SugarRefinery::InstanceVariablesFrom
 
 
 describe 'instance_variables_from' do

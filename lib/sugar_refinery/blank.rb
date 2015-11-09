@@ -1,6 +1,6 @@
-require 'zucker'
+require 'sugar_refinery'
 
-module Zucker
+module SugarRefinery
   module Blank
     refine Object do
       def blank?

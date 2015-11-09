@@ -1,6 +1,6 @@
-require 'zucker'
+require 'sugar_refinery'
 
-module Zucker
+module SugarRefinery
   module InstanceVariablesFrom
     refine Object do
       private

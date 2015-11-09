@@ -1,10 +1,10 @@
 require 'fileutils'
-require File.dirname(__FILE__) + '/lib/zucker'
+require File.dirname(__FILE__) + '/lib/sugar_refinery'
 
 $path = Rake.application.find_rakefile_location[1]
 
 def gemspec
-  @gemspec ||= eval(File.read( File.join($path, 'zucker.gemspec') ), binding, 'zucker.gemspec')
+  @gemspec ||= eval(File.read( File.join($path, 'sugar_refinery.gemspec') ), binding, 'refinery.gemspec')
 end
 
 ## SPEC

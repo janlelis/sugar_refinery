@@ -1,5 +1,5 @@
-require 'zucker/marshal_copy'
-using Zucker::MarshalCopy
+require 'sugar_refinery/marshal_copy'
+using SugarRefinery::MarshalCopy
 
 
 describe 'Object#marshal_copy' do

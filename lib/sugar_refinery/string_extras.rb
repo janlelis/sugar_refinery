@@ -1,6 +1,6 @@
-require 'zucker'
+require 'sugar_refinery'
 
-module Zucker
+module SugarRefinery
   module StringExtras
     refine String do
       def lchomp(arg = $/)

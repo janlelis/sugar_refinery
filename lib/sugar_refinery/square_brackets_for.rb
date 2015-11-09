@@ -1,6 +1,6 @@
-require 'zucker'
+require 'sugar_refinery'
 
-module Zucker
+module SugarRefinery
   module SquareBracketsFor
     refine Object do
       def square_brackets_for(ivar, assignment = true)

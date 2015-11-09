@@ -1,5 +1,5 @@
-require 'zucker/array_op'
-using Zucker::ArrayOp
+require 'sugar_refinery/array_op'
+using SugarRefinery::ArrayOp
 
 
 describe 'Array#^' do

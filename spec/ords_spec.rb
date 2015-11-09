@@ -1,5 +1,5 @@
-require 'zucker/ords'
-using Zucker::Ords
+require 'sugar_refinery/ords'
+using SugarRefinery::Ords
 
 
 describe 'Array#chrs' do

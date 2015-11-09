@@ -1,6 +1,6 @@
-require 'zucker/dir_extras'
+require 'sugar_refinery/dir_extras'
 require 'securerandom'
-using Zucker::DirExtras
+using SugarRefinery::DirExtras
 
 
 describe Dir do

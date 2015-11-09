@@ -1,5 +1,5 @@
-require 'zucker/mash'
-using Zucker::Mash
+require 'sugar_refinery/mash'
+using SugarRefinery::Mash
 
 
 describe 'Array#mash' do

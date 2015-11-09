@@ -1,11 +1,11 @@
 # encoding: utf-8
-#  creates the documentation for Zucker
+#  creates the documentation for SugarRefinery
 
 require 'yaml'
 require 'coderay'
 
-require_relative '../lib/zucker/camel_snake'
-using Zucker::CamelSnake
+require_relative '../lib/sugar_refinery/camel_snake'
+using SugarRefinery::CamelSnake
 
 
 class ZuckerDoc
@@ -25,22 +25,11 @@ class ZuckerDoc
       @path = path
 
       # get version / date
-      @version = Zucker::VERSION
-      @date    = Zucker::DATE
+      @version = SugarRefinery::VERSION
+      @date    = SugarRefinery::DATE
 
       # include + format changelog
       @changelog = replace_html_special_chars File.read File.join( @path, 'CHANGELOG.txt' )
-      @changelog.gsub! /\| Zucker (?<version>\d+(?:\.\d+)*?)/ do
-        version = $~[:version].to_f
-        version = version.to_i if version == version.to_i # oO
-        if version && version > 0
-          %{| <a href="http://rubyzucker.info/#{version}/">Zucker #{version}</a>}
-        elsif version && version == 0
-          %{| <a href="http://rubyzucker.info/rubyzucker.pdf">Zucker 0</a>}
-        else
-          $& # no changes
-        end
-      end
 
       # collect description files and turn them into html
       @cubes = Dir[ File.join(path, 'doc', 'desc', '*.yaml') ].inject({}) do |res, cube_file; a|
@@ -56,7 +45,7 @@ class ZuckerDoc
         end
       end.sort.map{ |name, hash| cube name, hash }.join
 
-      output_path = File.join(path, 'doc', 'zucker.html')
+      output_path = File.join(path, 'doc', 'index.html')
       template = DATA.read
       template.gsub! /\.\.([a-z]+)\.\./i do eval "@#$1" end # substitute vars
       template.gsub! /⇧(.+?)⇧/, '<code>\1</code>'
@@ -64,7 +53,7 @@ class ZuckerDoc
       template.gsub! /→(.+?)→(.+?)→/, '<a href="\2">\1</a>'
       File.open(output_path, 'w'){ |file| file.puts(template) }
 
-      puts "Created Zucker documentation at #{File.expand_path(output_path)}"
+      puts "Created SugarRefinery documentation at #{File.expand_path(output_path)}"
     end
 
     private
@@ -85,7 +74,7 @@ class ZuckerDoc
     end
 
     def use(n)
-      "<div class=\"using source\" style=\"display:block\">#{ syntax_highlight "using Zucker::#{n.to_camel}" }</div>"
+      "<div class=\"using source\" style=\"display:block\">#{ syntax_highlight "using SugarRefinery::#{n.to_camel}" }</div>"
     end
 
     def methods(m)
@@ -159,7 +148,7 @@ __END__
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
-  <title>Ruby Zucker</title>
+  <title>Ruby Sugar Refinery</title>
   <script type="text/javascript">
     var show = function(snippet){
       document.getElementById( snippet ).style.display = 'block'
@@ -435,7 +424,7 @@ table.source td { padding: 2px 4px; vertical-align: top; }
 <body>
   <div id="world">
     <img class="rubylogo" alt="ruby" src="data:image/png;base64,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" />
-    <h1>Ruby Zucker</h1>
+    <h1>Ruby Sugar Refinery</h1>
     <br/>
     <p class="text">Zucker adds syntactic sugar in the form of independent, small scripts that sweeten Ruby even more. It is completely based on Ruby's <a href="#123">refinements</a> feature. You can actively choose for each source file, which features to include. If your Ruby version does not support refinements, plain old core extensions will be used. The source code is available at <a href="https://github.com/janlelis/zucker">github</a>.</p>
 
@@ -454,8 +443,8 @@ table.source td { padding: 2px 4px; vertical-align: top; }
     <p class="text">
       Choose which refinements (<em>sugar cubes</em>) you want to use in this Ruby file:
       <div class="cubes">
-        <pre class="scode">using Zucker::CamelSnake
-using Zucker::HashExtras
+        <pre class="scode">using SugarRefinery::CamelSnake
+using SugarRefinery::HashExtras
 
 "ClassName".to_snake # => "class_name"
 Hash.zip [1,2,3], [4,5,6] # => {1=>4, 2=>5, 3=>6}</pre>
@@ -475,7 +464,7 @@ Hash.zip [1,2,3], [4,5,6] # => {1=>4, 2=>5, 3=>6}</pre>
 
   <div id="foot">
     <div id="smile"><a href="http://janlelis.de">J-_-L</a></div>
-    This is the Ruby Zucker ..version.. documentation (..date..).
+    This is the Ruby Sugar Refinery ..version.. documentation (..date..).
     The current documentation is always available at <a href="http://rubyzucker.info">rubyzucker.info</a>.
     Source at <a href="https://github.com/janlelis/zucker">github</a>.
     Ruby Logo CC-BY-SA Yukihiro Matsumoto.

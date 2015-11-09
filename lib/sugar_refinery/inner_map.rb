@@ -1,6 +1,6 @@
-require "zucker"
+require "sugar_refinery"
 
-module Zucker
+module SugarRefinery
   module InnerMap
     refine Array do
       def inner_map(&block)

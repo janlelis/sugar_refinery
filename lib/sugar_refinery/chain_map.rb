@@ -1,6 +1,6 @@
-require "zucker"
+require "sugar_refinery"
 
-module Zucker
+module SugarRefinery
   module ChainMap
     refine Array do
       def chain_map(*args)

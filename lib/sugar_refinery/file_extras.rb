@@ -1,6 +1,6 @@
-require 'zucker'
+require 'sugar_refinery'
 
-module Zucker
+module SugarRefinery
   module FileExtras
     refine File.singleton_class do
       def filename(*args, &block)

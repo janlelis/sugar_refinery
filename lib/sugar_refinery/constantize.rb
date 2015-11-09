@@ -1,6 +1,6 @@
-require 'zucker'
+require 'sugar_refinery'
 
-module Zucker
+module SugarRefinery
   module Constantize
     refine String do
       def constantize(default_value = nil) # always uses global scope as in AS... is this good?

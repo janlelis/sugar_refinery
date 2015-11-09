@@ -1,6 +1,6 @@
-require "zucker"
+require "sugar_refinery"
 
-module Zucker
+module SugarRefinery
   module ArrayStats
     refine Array do
       def mean

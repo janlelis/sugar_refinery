@@ -1,5 +1,5 @@
-require 'zucker/camel_snake'
-using Zucker::CamelSnake
+require 'sugar_refinery/camel_snake'
+using SugarRefinery::CamelSnake
 
 
 describe 'String#to_camel' do

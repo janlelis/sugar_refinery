@@ -1,3 +1,11 @@
+# Sugar Refinery Changelog
+
+## 2016-01-01 | Sugar Refinery 1.0
+* Turn zucker gem into sugar_refinery
+
+
+## CHANGELOG FOR ZUCKER GEM
+
 2015-04-01 | Zucker 100.1.0
 * drop Ruby 1.9 support
 * add float_extras for Float#same?

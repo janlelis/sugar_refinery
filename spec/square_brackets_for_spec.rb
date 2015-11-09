@@ -1,5 +1,5 @@
-require 'zucker/square_brackets_for'
-using Zucker::SquareBracketsFor
+require 'sugar_refinery/square_brackets_for'
+using SugarRefinery::SquareBracketsFor
 
 
 describe 'square_brackets_for' do

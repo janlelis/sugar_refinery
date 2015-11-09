@@ -1,5 +1,5 @@
-require 'zucker/blank'
-using Zucker::Blank
+require 'sugar_refinery/blank'
+using SugarRefinery::Blank
 
 
 describe 'Object#blank?' do

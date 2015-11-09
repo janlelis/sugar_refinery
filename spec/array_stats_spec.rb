@@ -1,5 +1,5 @@
-require "zucker/array_stats"
-using Zucker::ArrayStats
+require "sugar_refinery/array_stats"
+using SugarRefinery::ArrayStats
 
 describe "doing statistics on arrays" do
   let(:list) { (2..5).to_a }

@@ -1,6 +1,6 @@
-require 'zucker'
+require 'sugar_refinery'
 
-module Zucker
+module SugarRefinery
   module HashExtras
     refine Hash.singleton_class do
       def zip(keys, values)

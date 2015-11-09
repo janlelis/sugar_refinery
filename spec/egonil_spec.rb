@@ -1,5 +1,5 @@
-require 'zucker/egonil'
-using Zucker::Egonil
+require 'sugar_refinery/egonil'
+using SugarRefinery::Egonil
 
 describe 'egonil' do
   it 'should not raise nil exceptions in the block' do

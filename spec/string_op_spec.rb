@@ -1,5 +1,5 @@
-require 'zucker/string_op'
-using Zucker::StringOp
+require 'sugar_refinery/string_op'
+using SugarRefinery::StringOp
 
 
 describe 'String#-' do

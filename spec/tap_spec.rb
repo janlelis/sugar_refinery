@@ -1,5 +1,5 @@
-require 'zucker/tap'
-using Zucker::Tap
+require 'sugar_refinery/tap'
+using SugarRefinery::Tap
 
 
 describe 'tap_on' do

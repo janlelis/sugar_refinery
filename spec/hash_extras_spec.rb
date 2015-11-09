@@ -1,5 +1,5 @@
-require 'zucker/hash_extras'
-using Zucker::HashExtras
+require 'sugar_refinery/hash_extras'
+using SugarRefinery::HashExtras
 
 
 describe Hash do

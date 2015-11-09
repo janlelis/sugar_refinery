@@ -1,5 +1,5 @@
-require 'zucker/alias_for'
-using Zucker::AliasFor
+require 'sugar_refinery/alias_for'
+using SugarRefinery::AliasFor
 
 
 describe 'alias_for' do

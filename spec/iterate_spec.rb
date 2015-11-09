@@ -1,5 +1,5 @@
-require 'zucker/iterate'
-using Zucker::Iterate
+require 'sugar_refinery/iterate'
+using SugarRefinery::Iterate
 
 
 describe 'Object#iterate' do

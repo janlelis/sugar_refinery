@@ -1,7 +1,7 @@
-require 'zucker'
+require 'sugar_refinery'
 require 'fileutils'
 
-module Zucker
+module SugarRefinery
   module DirExtras
     refine Dir.singleton_class do
       def join(*args)

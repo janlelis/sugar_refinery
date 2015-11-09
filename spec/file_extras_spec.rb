@@ -1,6 +1,6 @@
-require 'zucker/file_extras'
+require 'sugar_refinery/file_extras'
 require 'fileutils'
-using Zucker::FileExtras
+using SugarRefinery::FileExtras
 
 
 describe File do

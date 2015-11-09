@@ -1,5 +1,5 @@
-require "zucker/inner_map"
-using Zucker::InnerMap
+require "sugar_refinery/inner_map"
+using SugarRefinery::InnerMap
 
 describe "Array#inner_map" do
   it "should delegate map to inner lists" do
