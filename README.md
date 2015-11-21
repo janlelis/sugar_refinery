@@ -1,6 +1,8 @@
 # Ruby Zucker [![version](https://badge.fury.io/rb/zucker.svg)](http://badge.fury.io/rb/zucker) [![travis](https://travis-ci.org/janlelis/zucker.png?branch=master)](https://travis-ci.org/janlelis/zucker)
 
-Lots of small refinements to sweeten your Ruby code. See http://rubyzucker.info for more documentation.
+Lots of small refinements to sweeten your Ruby code.
+
+[Documentation](http://janlelis.github.io/zucker)
 
 ## Example
 

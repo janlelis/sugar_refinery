@@ -465,7 +465,7 @@ Hash.zip [1,2,3], [4,5,6] # => {1=>4, 2=>5, 3=>6}</pre>
   <div id="foot">
     <div id="smile"><a href="http://janlelis.de">J-_-L</a></div>
     This is the Ruby Sugar Refinery ..version.. documentation (..date..).
-    The current documentation is always available at <a href="http://rubyzucker.info">rubyzucker.info</a>.
+    The current documentation is always available at <a href="http://janlelis.github.io/zucker">janlelis.github.io/zucker</a>.
     Source at <a href="https://github.com/janlelis/zucker">github</a>.
     Ruby Logo CC-BY-SA Yukihiro Matsumoto.
   </div>
