@@ -4,6 +4,7 @@
 * turn zucker gem into sugar_refinery
 * remove 'Zucker#require' and 'Zucker#require_all'
 * remove 'refine' gem dependency
+* remove unary_conversion in favor of https://bugs.ruby-lang.org/issues/11782
 * remove square_brackets_for
 * remove tap
 * rename string_extras to lchomp
