@@ -1,6 +1,7 @@
-# Sugar Refinery Changelog
+# SUGAR REFINERY CHANGELOG
 
 ## 2016-01-01 | Sugar Refinery 1.0
+
 * turn zucker gem into sugar_refinery
 * remove 'Zucker#require' and 'Zucker#require_all'
 * remove 'refine' gem dependency
@@ -14,7 +15,7 @@
 * split file_extras into file_force_delete and file_gsub (remove filename)
 
 
-## CHANGELOG FOR ZUCKER GEM
+## OLD ZUCKER CHANGELOG
 
 2015-04-01 | Zucker 100.1.0
 * drop Ruby 1.9 support
