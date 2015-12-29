@@ -1,4 +1,4 @@
-dir_extras:
+dir_utils:
   summary: Some shortcuts for working with directories
   methods:
     Dir.join: File.join

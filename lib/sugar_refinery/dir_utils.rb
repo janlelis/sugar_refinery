@@ -2,7 +2,7 @@ require_relative 'version'
 require 'fileutils'
 
 module SugarRefinery
-  module DirExtras
+  module DirUtils
     refine Dir.singleton_class do
       def join(*args)
         File.join(*args)

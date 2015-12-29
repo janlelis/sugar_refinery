@@ -1,6 +1,6 @@
-require 'sugar_refinery/dir_extras'
+require 'sugar_refinery/dir_utils'
 require 'securerandom'
-using SugarRefinery::DirExtras
+using SugarRefinery::DirUtils
 
 
 describe Dir do
