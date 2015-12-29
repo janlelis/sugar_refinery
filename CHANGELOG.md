@@ -10,6 +10,7 @@
 * rename string_extras to lchomp
 * rename hash_extras to hash_zip
 * rename float_extras to same
+* split file_extras into file_force_delete and file_gsub (remove filename)
 
 
 ## CHANGELOG FOR ZUCKER GEM

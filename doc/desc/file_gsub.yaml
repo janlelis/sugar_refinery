@@ -1,0 +1,8 @@
+file_gsub:
+  summary: Will read the file and substitute the hash keys with their values
+  methods:
+    File.gsub: |
+      File.gsub 'some_filename',
+        /hi/ => 'cu',
+        /\d/ => proc{ |m| (m.to_i+1).to_s }
+

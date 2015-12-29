@@ -1,0 +1,7 @@
+file_force_delete:
+  summary: ⇧File.delete!⇧ (like `rm -f`)
+  methods:
+    File.delete!: "File.delete! 'some_filename' # will delete the file, don't care if it exist."
+  info:
+  - "Idea for ⇧File.delete!⇧ from sugar-high."
+

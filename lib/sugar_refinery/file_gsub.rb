@@ -1,12 +1,8 @@
 require_relative 'version'
 
 module SugarRefinery
-  module FileExtras
+  module FileGsub
     refine File.singleton_class do
-      def filename(*args, &block)
-        basename(*args, &block)
-      end
-
       def gsub(filename, regex_hash)
         data = File.read filename
         File.open(filename,'w'){ |file|
@@ -21,12 +17,6 @@ module SugarRefinery
           }
           file.print data
         }
-      end
-
-
-      def delete!(filename)
-        return nil if !File.exist?(filename)
-        File.delete filename
       end
     end
   end
