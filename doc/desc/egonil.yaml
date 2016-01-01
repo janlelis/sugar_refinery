@@ -6,5 +6,5 @@ egonil:
         nil.some_methods.that[:do].not.exist
       }
   info:
-  - See →this post→http://rbjl.net/26-the-28-bytes-of-ruby-joy→ for more information and discussion.
+  - See →this post→http://ruby.janlelis.de/26-the-28-bytes-of-ruby-joy→ for more information and discussion.
 

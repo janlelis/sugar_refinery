@@ -99,7 +99,7 @@
 * bugfix for OS.posix?
 * small changes + bugfixes + doc improvements
 * add two user methods to Info
-* change egonil semantics ( using method_missing, see http://rbjl.net/26/catch_nil.rb )
+* change egonil semantics ( using method_missing, see http://ruby.janlelis.de/26/catch_nil.rb )
 * bugfix for vv
 
 
