@@ -1,6 +1,6 @@
 # SUGAR REFINERY CHANGELOG
 
-## 2016-01-01 | Sugar Refinery 1.0
+## 2016-01-02 | Sugar Refinery 1.0
 
 * turn zucker gem into sugar_refinery
 * remove 'Zucker#require' and 'Zucker#require_all'
@@ -12,7 +12,7 @@
 * rename hash_extras to hash_zip
 * rename float_extras to same
 * rename dir_extras to dir_utils
-* split file_extras into file_force_delete and file_gsub (remove filename)
+* split file_extras into file_force_delete and file_gsub (also remove File.filename)
 
 
 ## OLD ZUCKER CHANGELOG

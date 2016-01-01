@@ -1,21 +1,32 @@
-# Ruby Zucker [![version](https://badge.fury.io/rb/zucker.svg)](http://badge.fury.io/rb/zucker) [![travis](https://travis-ci.org/janlelis/zucker.png?branch=master)](https://travis-ci.org/janlelis/zucker)
+# Ruby Sugar Refinery [![version](https://badge.fury.io/rb/sugar-refinery.svg)](http://badge.fury.io/rb/sugar-refinery) [![travis](https://travis-ci.org/janlelis/sugar-refinery.png?branch=master)](https://travis-ci.org/janlelis/sugar-refinery)
 
-Lots of small refinements to sweeten your Ruby code.
+The Ruby Sugar Refinery is a collection of tiny [refinements](http://ruby-doc.org/core-2.3.0/doc/syntax/refinements_rdoc.html) (declarative local core extensions) for Ruby.
 
-[Documentation](http://janlelis.github.io/zucker)
+## Setup & Usage
 
-## Example
+Add to Gemfile:
 
 ```ruby
-require 'zucker/camel_snake'
-using Zucker::CamelSnake
-'was_snake_string'.to_camel # => 'WasSnakeString'
-'WasCamelString'.to_snake # => 'was_camel_string'
+gem 'sugar_refinery', require: 'sugar_refinery/all'
 ```
 
-## Changes
+Then add refinements to the current Ruby file or module:
 
-Missing former functionality? It might have been extracted to separate gems:
+```ruby
+using SugarRefinery::CamelSnake
+using SugarRefinery::HashZip
+
+"ClassName".to_snake # => "class_name"
+Hash.zip [1,2,3], [4,5,6] # => {1=>4, 2=>5, 3=>6}
+```
+
+## Included Refinements
+
+[See the documentation!](http://janlelis.github.io/sugar-refinery)
+
+## Zucker Gems
+
+Missing former functionality? It might have been extracted into a separate gem:
 
 * [debugging](https://github.com/janlelis/debugging)
 * [procstar](https://github.com/janlelis/procstar)
@@ -23,4 +34,6 @@ Missing former functionality? It might have been extracted to separate gems:
 * [ruby_version](https://github.com/janlelis/ruby_version)
 * [ruby_engine](https://github.com/janlelis/ruby_engine)
 
-Copyright (c) 2010-2015 Jan Lelis | http://janlelis.de | Released under the MIT license
+## J-_-L
+
+Copyright (c) 2010-2016 [Jan Lelis](http://janlelis.com), released under the MIT license
