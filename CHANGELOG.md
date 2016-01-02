@@ -3,6 +3,7 @@
 ## 2016-01-02 | Sugar Refinery 1.0
 
 * turn zucker gem into sugar_refinery
+* move instance_variable_from into its own gem
 * move egonil into its own gem
 * remove 'Zucker#require' and 'Zucker#require_all'
 * remove 'refine' gem dependency

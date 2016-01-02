@@ -1212,82 +1212,6 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
   <span style="color:#080;font-weight:bold">end</span>
 <span style="color:#080;font-weight:bold">end</span></pre></div>
 </div>
-</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/instance_variables_from'" id="instance_variables_from">instance_variables_from</h3>
-         <table class="cube_table"
-                id="instance_variables_from_cube"
-                title="require 'sugar_refinery/instance_variables_from'"> <tr><th>Summary</th>    <td>Reduces boilerplate code assigning lots of instance variables:<br/><br/><code>def initialize(variable1, variable2)<br/>  @variable1, @variable2 = variable1, variable2<br/>end</code><br/></td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">InstanceVariablesFrom</span></pre></div>
-</div>
-</div></td></tr><tr><th>Usage</th>    <td><h5>instance_variables_from</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">some_method</span>(a = <span style="color:#00D">1</span>, b = <span style="color:#00D">2</span>)
-  instance_variables_from binding <span style="color:#777"># assigns @a and @b</span>
-
-  params = {<span style="color:#A60">:c</span> =&gt; <span style="color:#00D">3</span>, <span style="color:#A60">:d</span> =&gt; <span style="color:#00D">4</span>}
-  instance_variables_from params <span style="color:#777"># # assigns @c and @d</span>
-<span style="color:#080;font-weight:bold">end</span>
-</pre></div>
-</div>
-</div></td></tr><tr><th>Specification</th>    <td> <span id="show_instance_variables_from_spec">(<a href="javascript:show('instance_variables_from_spec')">show</a>)</span>
-         <div class="source" id="instance_variables_from_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/instance_variables_from</span><span style="color:#710">'</span></span>
-using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">InstanceVariablesFrom</span>
-
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">instance_variables_from</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">transforms the given parameter to instance variables when in it is a binding</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">example_method</span>(a = <span style="color:#00D">1</span>, b = <span style="color:#00D">2</span>)
-      instance_variables_from binding <span style="color:#777"># assigns @a and @b</span>
-    <span style="color:#080;font-weight:bold">end</span>
-
-    example_method
-    <span style="color:#33B">@a</span>.should == <span style="color:#00D">1</span>
-    <span style="color:#33B">@b</span>.should == <span style="color:#00D">2</span>
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">transforms the given parameter to instance variables when in it is a hash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    params = { <span style="color:#606">c</span>: <span style="color:#00D">3</span>, <span style="color:#606">d</span>: <span style="color:#00D">4</span> }
-    instance_variables_from params
-
-    <span style="color:#33B">@c</span>.should == <span style="color:#00D">3</span>
-    <span style="color:#33B">@d</span>.should == <span style="color:#00D">4</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_instance_variables_from_source">(<a href="javascript:show('instance_variables_from_source')">show</a>)</span>
-         <div class="source" id="instance_variables_from_source"><div class="CodeRay">
-  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
-  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">InstanceVariablesFrom</span>
-    refine <span style="color:#036;font-weight:bold">Object</span> <span style="color:#080;font-weight:bold">do</span>
-      private
-
-      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">instance_variables_from</span>(obj, *only)
-        iter =
-          <span style="color:#080;font-weight:bold">if</span>    obj.is_a? <span style="color:#036;font-weight:bold">Binding</span>
-            obj.eval(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">local_variables</span><span style="color:#710">'</span></span>).map{|e| [obj.eval(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>e<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>), e] }
-          <span style="color:#080;font-weight:bold">elsif</span> obj.is_a? <span style="color:#036;font-weight:bold">Hash</span>
-            obj.map{|k,v| [v,k] }
-          <span style="color:#080;font-weight:bold">else</span>
-        <span style="color:#777">#  elsif obj.is_a? Enumerable</span>
-            obj.each.with_index
-          <span style="color:#080;font-weight:bold">end</span>
-
-        ret = []
-        iter.each{ |value, arg|
-          arg = arg.to_s
-          <span style="color:#080;font-weight:bold">if</span> only.include?(arg) || only.include?(arg.to_sym) || only.empty?
-            arg = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">_</span><span style="color:#710">'</span></span> + arg  <span style="color:#080;font-weight:bold">if</span> (<span style="color:#00D">48</span>..<span style="color:#00D">57</span>).member? arg.unpack(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">C</span><span style="color:#710">'</span></span>)[<span style="color:#00D">0</span>]  <span style="color:#777"># 1.8+1.9</span>
-            ret &lt;&lt; ivar = <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">&quot;</span><span style="color:#A60">@</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>arg<span style="font-weight:bold;color:#666">}</span></span><span style="color:#740">&quot;</span></span>
-            <span style="color:#069">self</span>.instance_variable_set ivar, value
-          <span style="color:#080;font-weight:bold">end</span>
-        }
-        ret
-      <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
 </div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/iterate'" id="iterate">iterate</h3>
          <table class="cube_table"
                 id="iterate_cube"
@@ -1706,6 +1630,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 ## 2016-01-02 | Sugar Refinery 1.0
 
 * turn zucker gem into sugar_refinery
+* move instance_variable_from into its own gem
 * move egonil into its own gem
 * remove 'Zucker#require' and 'Zucker#require_all'
 * remove 'refine' gem dependency
