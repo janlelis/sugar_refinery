@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.authors = ['Jan Lelis']
   s.email = 'mail@janlelis.de'
   s.summary = "Sweetens your Ruby code with syntactic sugar."
-  s.description = "Lots of refinements to sweeten your Ruby code."
-  s.homepage    = "http://rubyzucker.info"
+  s.description = "DEPRECATED! Please use the sugar refinery: http://github.com/janlelis/sugar_refinery"
+  s.homepage    = "http://github.com/janlelis/sugar_refinery"
   s.files = Dir.glob( %w[{lib,spec}/**/*.rb desc/**/*.yaml] ) + %w{Rakefile zucker.gemspec MIT-LICENSE.txt README.md CHANGELOG.txt doc/create_documentation.rb doc/zucker.html}
   s.require_paths = ["lib"]
   s.license = 'MIT'
@@ -18,4 +18,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake', '~> 10.4'
   s.add_development_dependency 'rspec', '~> 2.99'
   s.add_development_dependency 'coderay', '~> 1.1'
+
+  s.post_install_message = "The zucker gem has been deprecated. Please use the sugar_refinery gem instead!"
 end

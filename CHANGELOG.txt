@@ -1,3 +1,7 @@
+2016-01-03 | Zucker 100.2.0
+* deprecate in favor of the sugar refinery
+
+
 2015-04-01 | Zucker 100.1.0
 * drop Ruby 1.9 support
 * add float_extras for Float#same?

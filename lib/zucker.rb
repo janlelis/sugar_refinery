@@ -5,8 +5,10 @@ end
 
 
 module Zucker
-  VERSION = '100.1.0'
-  DATE = '2014-04-01'
+  VERSION = '100.2.0'
+  DATE = '2016-01-03'
+
+  warn "The zucker gem has been deprecated. Please use the sugar_refinery gem instead!"
 
   class << self
     def require(cube)
