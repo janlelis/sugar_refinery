@@ -3,6 +3,7 @@
 ## 2016-01-02 | Sugar Refinery 1.0
 
 * turn zucker gem into sugar_refinery
+* move egonil into its own gem
 * remove 'Zucker#require' and 'Zucker#require_all'
 * remove 'refine' gem dependency
 * remove unary_conversion in favor of https://bugs.ruby-lang.org/issues/11782

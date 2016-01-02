@@ -28,6 +28,7 @@ Hash.zip [1,2,3], [4,5,6] # => {1=>4, 2=>5, 3=>6}
 
 Missing former functionality? It might have been extracted into a separate gem:
 
+* [egonil](https://github.com/janlelis/egonil)
 * [debugging](https://github.com/janlelis/debugging)
 * [procstar](https://github.com/janlelis/procstar)
 * [ruby_info](https://github.com/janlelis/ruby_info)
