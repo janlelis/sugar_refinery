@@ -1212,119 +1212,6 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
   <span style="color:#080;font-weight:bold">end</span>
 <span style="color:#080;font-weight:bold">end</span></pre></div>
 </div>
-</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/iterate'" id="iterate">iterate</h3>
-         <table class="cube_table"
-                id="iterate_cube"
-                title="require 'sugar_refinery/iterate'"> <tr><th>Summary</th>    <td>Iterate over one or more collections. It is like <code>.each</code> with two differences: It feels more like a control structure and you can easily iterate over multiple objects</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Iterate</span></pre></div>
-</div>
-</div></td></tr><tr><th>Usage</th>    <td><h5>iterate</h5><div class="usage source" style="display:block"><div class="CodeRay">
-  <div class="code"><pre>iterate [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>], [<span style="color:#00D">3</span>,<span style="color:#00D">4</span>,<span style="color:#00D">5</span>] <span style="color:#080;font-weight:bold">do</span> |e,f|
-  puts <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>e<span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">,</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>f<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>
-<span style="color:#080;font-weight:bold">end</span>
-<span style="color:#777"># outputs</span>
-<span style="color:#777">#  1,3</span>
-<span style="color:#777">#  2,4</span>
-<span style="color:#777">#  ,5</span>
-</pre></div>
-</div>
-</div></td></tr><tr><th>Specification</th>    <td> <span id="show_iterate_spec">(<a href="javascript:show('iterate_spec')">show</a>)</span>
-         <div class="source" id="iterate_spec"><div class="CodeRay">
-  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/iterate</span><span style="color:#710">'</span></span>
-using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Iterate</span>
-
-
-describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object#iterate</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-  let <span style="color:#A60">:a</span>   <span style="color:#080;font-weight:bold">do</span> [<span style="color:#00D">1</span>, <span style="color:#00D">2</span>, <span style="color:#00D">3</span>]     <span style="color:#080;font-weight:bold">end</span>
-  let <span style="color:#A60">:b</span>   <span style="color:#080;font-weight:bold">do</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w|</span><span style="color:#D20">a b c d</span><span style="color:#710">|</span></span>   <span style="color:#080;font-weight:bold">end</span>
-  let <span style="color:#A60">:res</span> <span style="color:#080;font-weight:bold">do</span> <span style="color:#036;font-weight:bold">Hash</span>.new {[]} <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should behave like Enumerable#each for a single argument</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    iterate a <span style="color:#080;font-weight:bold">do</span> |ele|
-      res[<span style="color:#A60">:iter</span>] &lt;&lt; ele
-    <span style="color:#080;font-weight:bold">end</span>
-
-    a.each <span style="color:#080;font-weight:bold">do</span> |ele|
-      res[<span style="color:#A60">:each</span>] &lt;&lt; ele
-    <span style="color:#080;font-weight:bold">end</span>
-
-    res[<span style="color:#A60">:iter</span>].should == res[<span style="color:#A60">:each</span>]
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should pass the right params to the block</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    res = <span style="color:#036;font-weight:bold">Hash</span>.new {[]} <span style="color:#777"># TODO: why?</span>
-    res[<span style="color:#A60">:iter_a_b</span>] = [] <span style="color:#777"># ....</span>
-    res[<span style="color:#A60">:iter_b_a</span>] = [] <span style="color:#777"># ....</span>
-
-
-    iterate a, b <span style="color:#080;font-weight:bold">do</span> |e,f|
-      res[<span style="color:#A60">:iter_a_b</span>] &lt;&lt; [e, f]
-    <span style="color:#080;font-weight:bold">end</span>
-
-    res[<span style="color:#A60">:iter_a_b</span>].should == [
-      [<span style="color:#00D">1</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>],
-      [<span style="color:#00D">2</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">b</span><span style="color:#710">'</span></span>],
-      [<span style="color:#00D">3</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">c</span><span style="color:#710">'</span></span>],
-      [<span style="color:#069">nil</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">d</span><span style="color:#710">'</span></span>],
-    ]
-
-    iterate b, a <span style="color:#080;font-weight:bold">do</span> |e,f|
-      res[<span style="color:#A60">:iter_b_a</span>] &lt;&lt; [e, f]
-    <span style="color:#080;font-weight:bold">end</span>
-
-    res[<span style="color:#A60">:iter_b_a</span>].should == [
-      [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>, <span style="color:#00D">1</span>],
-      [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">b</span><span style="color:#710">'</span></span>, <span style="color:#00D">2</span>],
-      [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">c</span><span style="color:#710">'</span></span>, <span style="color:#00D">3</span>],
-      [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">d</span><span style="color:#710">'</span></span>, <span style="color:#069">nil</span>],
-    ]
-
-  <span style="color:#080;font-weight:bold">end</span>
-
-  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return enumerators if no block is applied</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
-    res = <span style="color:#036;font-weight:bold">Hash</span>.new {[]} <span style="color:#777"># TODO: why?</span>
-    res[<span style="color:#A60">:iter_a_b</span>] = [] <span style="color:#777"># ....</span>
-    res[<span style="color:#A60">:iter_b_a</span>] = [] <span style="color:#777"># ....</span>
-
-    enumerator = iterate a,b
-    enumerator.should be_kind_of(<span style="color:#036;font-weight:bold">Enumerator</span>)
-    enumerator.to_a.should == [[<span style="color:#00D">1</span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>], [<span style="color:#00D">2</span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">b</span><span style="color:#710">'</span></span>], [<span style="color:#00D">3</span>,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">c</span><span style="color:#710">'</span></span>], [<span style="color:#069">nil</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">d</span><span style="color:#710">'</span></span>]]
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
-</div> </td></tr><tr><th>Source</th>    <td> <span id="show_iterate_source">(<a href="javascript:show('iterate_source')">show</a>)</span>
-         <div class="source" id="iterate_source"><div class="CodeRay">
-  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
-
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
-  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Iterate</span>
-    refine <span style="color:#036;font-weight:bold">Object</span> <span style="color:#080;font-weight:bold">do</span>
-      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">iterate</span>(*params)
-        <span style="color:#777"># params.shift.zip(*params).each{ |*elements| yield *elements }</span>
-        raise <span style="color:#036;font-weight:bold">ArgumentError</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">wrong number of arguments (0)</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">if</span> params.empty?
-
-        first = params.shift
-        <span style="color:#080;font-weight:bold">if</span> params.empty? <span style="color:#777"># single param - like each</span>
-          <span style="color:#080;font-weight:bold">if</span> block_given?
-            first.map{|e| <span style="color:#080;font-weight:bold">yield</span> e }
-          <span style="color:#080;font-weight:bold">else</span>
-            first.map.to_enum
-          <span style="color:#080;font-weight:bold">end</span>
-        <span style="color:#080;font-weight:bold">else</span> <span style="color:#777"># multiple params</span>
-          max_size = [first, *params].max_by(&amp;<span style="color:#A60">:count</span>).size
-          padded_first = first.to_a + [<span style="color:#069">nil</span>]*(max_size - first.count)  <span style="color:#777"># append nils</span>
-          obj = padded_first.zip(*params)
-          <span style="color:#080;font-weight:bold">if</span> block_given?
-            obj.map{|es| <span style="color:#080;font-weight:bold">yield</span>(*es) }
-          <span style="color:#080;font-weight:bold">else</span>
-            obj.map.to_enum
-          <span style="color:#080;font-weight:bold">end</span>
-        <span style="color:#080;font-weight:bold">end</span>
-      <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span></pre></div>
-</div>
 </div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/lchomp'" id="lchomp">lchomp</h3>
          <table class="cube_table"
                 id="lchomp_cube"
@@ -1630,6 +1517,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 ## 2016-01-02 | Sugar Refinery 1.0
 
 * turn zucker gem into sugar_refinery
+* move iterate into its own gem
 * move instance_variable_from into its own gem
 * move egonil into its own gem
 * remove 'Zucker#require' and 'Zucker#require_all'
