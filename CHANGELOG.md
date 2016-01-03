@@ -1,6 +1,6 @@
 # SUGAR REFINERY CHANGELOG
 
-## 2016-01-02 | Sugar Refinery 1.0
+## 2016-01-03 | Sugar Refinery 1.0.0
 
 * turn zucker gem into sugar_refinery
 * move iterate into its own gem
