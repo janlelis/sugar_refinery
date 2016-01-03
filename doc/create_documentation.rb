@@ -22,7 +22,7 @@ class SugarRefineryDoc
 
 
   class << self
-    def generate(path = '../')
+    def generate(path = File.dirname(__FILE__) + '/../')
       @path = path
 
       # get version / date

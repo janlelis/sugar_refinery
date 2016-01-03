@@ -1,44 +1,49 @@
-require 'fileutils'
-require File.dirname(__FILE__) + '/lib/sugar_refinery'
+# # #
+# Get gemspec info
 
-$path = Rake.application.find_rakefile_location[1]
+gemspec_file = Dir['*.gemspec'].first
+gemspec = eval File.read(gemspec_file), binding, gemspec_file
+info = "#{gemspec.name} | #{gemspec.version} | " \
+       "#{gemspec.runtime_dependencies.size} dependencies | " \
+       "#{gemspec.files.size} files"
 
-def gemspec
-  @gemspec ||= eval(File.read( File.join($path, 'sugar_refinery.gemspec') ), binding, 'refinery.gemspec')
+
+# # #
+# Gem build and install task
+
+desc info
+task :gem do
+  puts info + "\n\n"
+  print "  "; sh "gem build #{gemspec_file}"
+  FileUtils.mkdir_p 'pkg'
+  FileUtils.mv "#{gemspec.name}-#{gemspec.version}.gem", 'pkg'
+  puts; sh %{gem install --no-document pkg/#{gemspec.name}-#{gemspec.version}.gem}
 end
 
-## SPEC
 
-task 'default' => 'spec'
-task 'test'    => 'spec'
+# # #
+# Start an IRB session with the gem loaded
 
-desc 'Run Spec'
+desc "#{gemspec.name} | IRB"
+task :irb do
+  sh "irb -I ./lib -r #{gemspec.name.gsub '-','/'}"
+end
+
+
+# # #
+# Run Specs
+
+desc "#{gemspec.name} | Spec"
 task 'spec' do
   sh %[rspec spec]
 end
+task default: :spec
 
-## DOC
 
-desc 'Build documentation'
+# # #
+# Documentation
+
+desc "#{gemspec.name} | Documentation"
 task 'doc' do
-  ruby File.join($path, 'doc/create_documentation.rb'), $path
-end
-
-## BUILD
-
-desc "Build the gem"
-task :gem => :gemspec do
-  sh "gem build zucker.gemspec"
-  FileUtils.mkdir_p 'pkg'
-  FileUtils.mv "#{gemspec.name}-#{gemspec.version}.gem", 'pkg'
-end
-
-desc "Install the gem locally"
-task :install => :gem do
-  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}.gem --no-rdoc --no-ri}
-end
-
-desc "Validate the gemspec"
-task :gemspec do
-  gemspec.validate
+  ruby 'doc/create_documentation.rb'
 end
