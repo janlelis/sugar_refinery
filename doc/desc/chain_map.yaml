@@ -1,4 +1,0 @@
-chain_map:
-  summary: Chain multiple procs on ⇧Array⇧ elements
-  methods:
-    Array#chain_map: '[-3, -2, -1].chain_map(:abs, :to_s)  # => ["3", "2", "1"]'

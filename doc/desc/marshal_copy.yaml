@@ -1,7 +1,0 @@
-marshal_copy:
-  summary: Adds ⇧Object#marshal_copy⇧ to create a deep copy using ⇧Marshal⇧.
-  methods:
-    Object#marshal_copy: |
-      a = %w[hello world]
-      b = a.marshal_copy
-

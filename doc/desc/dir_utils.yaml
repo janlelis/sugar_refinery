@@ -1,7 +1,0 @@
-dir_utils:
-  summary: Some shortcuts for working with directories
-  methods:
-    Dir.join: File.join
-    Dir.split: File.split
-    Dir.rm: FileUtils.rm_r
-

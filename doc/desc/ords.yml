@@ -1,5 +1,0 @@
-ords:
-  summary: Easy way to pack and unpack your characters
-  methods:
-    Array#chrs: "[72, 97, 108, 108, 111].chrs  # => 'Hallo'"
-    String#ords: "'Hallo'.ords # => [72, 97, 108, 108, 111]"
