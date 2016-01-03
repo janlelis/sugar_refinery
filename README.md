@@ -1,4 +1,4 @@
-# Ruby Sugar Refinery [![version](https://badge.fury.io/rb/sugar-refinery.svg)](http://badge.fury.io/rb/sugar-refinery) [![travis](https://travis-ci.org/janlelis/sugar-refinery.png?branch=master)](https://travis-ci.org/janlelis/sugar-refinery)
+# Ruby Sugar Refinery [![version](https://badge.fury.io/rb/sugar_refinery.svg)](http://badge.fury.io/rb/sugar_refinery) [![travis](https://travis-ci.org/janlelis/sugar_refinery.png?branch=master)](https://travis-ci.org/janlelis/sugar_refinery)
 
 The Ruby Sugar Refinery is a collection of tiny [refinements](http://ruby-doc.org/core-2.3.0/doc/syntax/refinements_rdoc.html) (declarative local core extensions) for Ruby.
 
@@ -22,7 +22,7 @@ Hash.zip [1,2,3], [4,5,6] # => {1=>4, 2=>5, 3=>6}
 
 ## Included Refinements
 
-[See the documentation!](http://janlelis.github.io/sugar-refinery)
+[See the documentation!](http://janlelis.github.io/sugar_refinery)
 
 ## Zucker Gems
 
