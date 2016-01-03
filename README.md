@@ -2,7 +2,7 @@
 
 The Ruby Sugar Refinery is a collection of tiny [refinements](http://ruby-doc.org/core-2.3.0/doc/syntax/refinements_rdoc.html) (declarative local core extensions) for Ruby.
 
-## Setup & Usage
+## Setup & usage
 
 Add to Gemfile:
 
@@ -20,22 +20,24 @@ using SugarRefinery::HashZip
 Hash.zip [1,2,3], [4,5,6] # => {1=>4, 2=>5, 3=>6}
 ```
 
-## Included Refinements
+## List of included refinements
 
-[See the documentation!](http://janlelis.github.io/sugar_refinery)
+Please see [the documentation](http://janlelis.github.io/sugar_refinery), [the code](https://github.com/janlelis/sugar_refinery/tree/master/lib/sugar_refinery) or [the specs](https://github.com/janlelis/sugar_refinery/tree/master/spec)!
 
-## Zucker Gems
+## The Sugar Refinery was Zucker before
 
-Missing former functionality? It might have been extracted into a separate gem:
+This collection of core extensions used to be called **zucker**.
 
-* [iterate](https://github.com/janlelis/iterate)
-* [instance_variable_from](https://github.com/janlelis/instance_variable_from)
-* [egonil](https://github.com/janlelis/egonil)
-* [debugging](https://github.com/janlelis/debugging)
-* [procstar](https://github.com/janlelis/procstar)
-* [ruby_info](https://github.com/janlelis/ruby_info)
-* [ruby_version](https://github.com/janlelis/ruby_version)
-* [ruby_engine](https://github.com/janlelis/ruby_engine)
+Missing former functionality? It might have been extracted into a separate micro gem:
+
+* [iterate](https://github.com/janlelis/iterate) | Control structure-like iteration
+* [instance_variable_from](https://github.com/janlelis/instance_variable_from) | Auto-assign instance variables
+* [egonil](https://github.com/janlelis/egonil) | Egocentric nil
+* [debugging](https://github.com/janlelis/debugging) | Print debugging helpers
+* [procstar](https://github.com/janlelis/procstar) | Beyond symbol2proc
+* [ruby_info](https://github.com/janlelis/ruby_info) | Misc information about the Ruby environment
+* [ruby_version](https://github.com/janlelis/ruby_version) | Smart Ruby version accessor
+* [ruby_engine](https://github.com/janlelis/ruby_engine) | Smar Ruby engine accessor
 
 ## J-_-L
 
