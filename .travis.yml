@@ -7,14 +7,13 @@ rvm:
 - 2.2
 - 2.1
 - 2.0
-- rbx-2
-- jruby-head
 - jruby-9000
+- rbx-2
 
 cache:
 - bundler
 
 matrix:
   allow_failures:
-    - rvm: jruby-head
     - rvm: jruby-9000
+    - rvm: rbx-2
