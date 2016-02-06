@@ -31,7 +31,7 @@ This collection of core extensions used to be called **zucker**.
 Missing former functionality? It might have been extracted into a separate micro gem:
 
 * [iterate](https://github.com/janlelis/iterate) | Control structure-like iteration
-* [instance_variable_from](https://github.com/janlelis/instance_variable_from) | Auto-assign instance variables
+* [instance_variables_from](https://github.com/janlelis/instance_variables_from) | Auto-assign instance variables
 * [egonil](https://github.com/janlelis/egonil) | Egocentric nil
 * [debugging](https://github.com/janlelis/debugging) | Print debugging helpers
 * [procstar](https://github.com/janlelis/procstar) | Beyond symbol2proc
