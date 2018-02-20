@@ -3,19 +3,17 @@ language: ruby
 
 rvm:
 - ruby-head
-- 2.3.0
+- 2.5.0
+- 2.4.3
+- 2.3.6
 - 2.2
 - 2.1
 - 2.0
-#- jruby-9000
-- jruby-9.0.4.0
-- rbx-2
-
-cache:
-- bundler
+- jruby-head
+- jruby-9.1.15.0
 
 matrix:
   allow_failures:
-#    - rvm: jruby-9000
-    - rvm: jruby-9.0.4.0
-    - rvm: rbx-2
+    - rvm: 2.1
+    - rvm: 2.0
+    - rvm: jruby-head
