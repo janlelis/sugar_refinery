@@ -1,6 +1,6 @@
-# Ruby Sugar Refinery [![version](https://badge.fury.io/rb/sugar_refinery.svg)](http://badge.fury.io/rb/sugar_refinery) [![travis](https://travis-ci.org/janlelis/sugar_refinery.png?branch=master)](https://travis-ci.org/janlelis/sugar_refinery)
+# Ruby Sugar Refinery [![version](https://badge.fury.io/rb/sugar_refinery.svg)](https://badge.fury.io/rb/sugar_refinery) [![[ci]](https://github.com/janlelis/sugar_refinery/workflows/Test/badge.svg)](https://github.com/janlelis/sugar_refinery/actions?query=workflow%3ATest)
 
-The Ruby Sugar Refinery is a collection of tiny [refinements](http://ruby-doc.org/core-2.3.0/doc/syntax/refinements_rdoc.html) (declarative local core extensions) for Ruby.
+The Ruby Sugar Refinery is a collection of tiny [refinements](https://ruby-doc.org/core/doc/syntax/refinements_rdoc.html) (declarative local core extensions) for Ruby.
 
 ## Setup & usage
 
@@ -41,4 +41,4 @@ Missing former functionality? It might have been extracted into a separate micro
 
 ## J-_-L
 
-Copyright (c) 2010-2016 [Jan Lelis](http://janlelis.com), released under the MIT license
+Copyright (c) 2010-2016 [Jan Lelis](https://janlelis.com), released under the MIT license
