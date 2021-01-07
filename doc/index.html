@@ -483,27 +483,27 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
   describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#stdev_sample</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
     it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should return the standard deviation of the sample</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
-      list.stdev_sample.should be_close(<span style="color:#60E">1.2909944487358056</span>, <span style="color:#60E">1e-8</span>)
+      list.stdev_sample.should be_within(<span style="color:#60E">1e-8</span>).of(<span style="color:#60E">1.2909944487358056</span>)
     <span style="color:#080;font-weight:bold">end</span>
   <span style="color:#080;font-weight:bold">end</span>
 
   describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#stdev_population</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
     it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should return the standard deviation of the population</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
-      list.stdev_population.should be_close(<span style="color:#60E">1.118033988749895</span>, <span style="color:#60E">1e-8</span>)
+      list.stdev_population.should be_within(<span style="color:#60E">1e-8</span>).of(<span style="color:#60E">1.118033988749895</span>)
     <span style="color:#080;font-weight:bold">end</span>
   <span style="color:#080;font-weight:bold">end</span>
 
   describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#stdev</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
     it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should default to population</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
-      list.stdev.should be_close(list.stdev_population, <span style="color:#60E">1e-8</span>)
+      list.stdev.should be_within(<span style="color:#60E">1e-8</span>).of(list.stdev_population)
     <span style="color:#080;font-weight:bold">end</span>
 
     it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should delegate sample correctly</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
-      list.stdev(<span style="color:#A60">:sample</span>).should be_close(list.stdev_sample, <span style="color:#60E">1e-8</span>)
+      list.stdev(<span style="color:#A60">:sample</span>).should be_within(<span style="color:#60E">1e-8</span>).of(list.stdev_sample)
     <span style="color:#080;font-weight:bold">end</span>
 
     it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should delegate population correctly</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
-      list.stdev(<span style="color:#A60">:population</span>).should be_close(list.stdev_population, <span style="color:#60E">1e-8</span>)
+      list.stdev(<span style="color:#A60">:population</span>).should be_within(<span style="color:#60E">1e-8</span>).of(list.stdev_population)
     <span style="color:#080;font-weight:bold">end</span>
 
     it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should raise an error with any other key</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
@@ -514,7 +514,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
   describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#z_score</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
     it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should default to population</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
       list.z_score.zip(list.z_score(<span style="color:#A60">:population</span>)).each <span style="color:#080;font-weight:bold">do</span> |value, actual|
-        value.should be_close(actual, <span style="color:#60E">1e-8</span>)
+        value.should be_within(<span style="color:#60E">1e-8</span>).of(actual)
       <span style="color:#080;font-weight:bold">end</span>
     <span style="color:#080;font-weight:bold">end</span>
 
@@ -529,7 +529,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
       p list
 
       list.z_score(<span style="color:#A60">:sample</span>).zip(sample_z_score).each <span style="color:#080;font-weight:bold">do</span> |value, actual|
-        value.should be_close(actual, <span style="color:#60E">1e-8</span>)
+        value.should be_within(<span style="color:#60E">1e-8</span>).of(actual)
       <span style="color:#080;font-weight:bold">end</span>
     <span style="color:#080;font-weight:bold">end</span>
 
@@ -542,7 +542,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
       ]
 
       list.z_score(<span style="color:#A60">:population</span>).zip(population_z_score).each <span style="color:#080;font-weight:bold">do</span> |value, actual|
-        value.should be_close(actual, <span style="color:#60E">1e-8</span>)
+        value.should be_within(<span style="color:#60E">1e-8</span>).of(actual)
       <span style="color:#080;font-weight:bold">end</span>
     <span style="color:#080;font-weight:bold">end</span>
 
@@ -1514,6 +1514,11 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
     <div class="cubes">
       <pre class="scode"># SUGAR REFINERY CHANGELOG
 
+## 2021-01-07 | Sugar Refinery 1.0.1
+
+* Relax Ruby version requirement to allow Ruby 3.0
+
+
 ## 2016-01-03 | Sugar Refinery 1.0.0
 
 * turn zucker gem into sugar_refinery
@@ -1676,7 +1681,7 @@ describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color
 
   <div id="foot">
     <div id="smile"><a href="http://janlelis.com">J-_-L</a></div>
-    This is the Ruby Sugar Refinery 1.0.0 documentation (2016-01-03).
+    This is the Ruby Sugar Refinery 1.0.1 documentation (2021-01-07).
     It is available at <a href="http://janlelis.github.io/sugar_refinery">janlelis.github.io/sugar_refinery</a>.
     Ruby Logo CC-BY-SA Yukihiro Matsumoto.
   </div>

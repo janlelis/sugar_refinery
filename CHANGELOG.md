@@ -1,6 +1,6 @@
 # SUGAR REFINERY CHANGELOG
 
-## 2021-01-07 | Sugar Refinery 1.0.1 (unreleased)
+## 2021-01-07 | Sugar Refinery 1.0.1
 
 * Relax Ruby version requirement to allow Ruby 3.0
 
