@@ -1,0 +1,1692 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+       "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+  <title>Ruby Sugar Refinery</title>
+  <script type="text/javascript">
+    var show = function(snippet){
+      document.getElementById( snippet ).style.display = 'block'
+      if( document.getElementById( 'show_'+snippet ) ){
+        document.getElementById( 'show_'+snippet ).style.display = 'none'
+      }
+    }
+  </script>
+  <style type="text/css">
+body{
+  background-color:#aaa;
+  color:#111;
+  font-family:sans-serif;
+}
+
+#world{
+  background:#fff;
+}
+
+h1, h2, h3, h4, h5, h6{
+  margin:0px;
+  padding:0px;
+}
+
+h1{
+  color:#222;
+  text-align:left;
+  padding:0.7em;
+}
+h2{
+  margin-left:1em;
+  margin-top:0.8em;
+  margin-bottom:0.5em;
+}
+
+th{
+  width:200px;
+  color:#444;
+}
+
+p{
+  margin:0px;
+  margin-bottom:0.5em;
+}
+
+p.text{
+  margin-left:1.5em;
+  margin-right:1em;
+}
+
+code{
+}
+
+.scode{
+  display:block;
+  margin:0.8em;
+  margin-left:0;
+  padding:0.5em;
+  border:1px solid black;
+  background:#eee;
+}
+
+.cubes{
+  margin:0px;
+  margin-left:1.65em;
+  margin-right:1em;
+}
+
+a{
+  color:#111;
+}
+
+table{
+  margin:0.8em;
+  margin-top:0.2em;
+  margin-left:0;
+  padding:0.2em;
+  border:1px solid #111;
+  background:#eee;
+  overflow:auto;
+  display:block;
+}
+
+ul{
+  margin:5px 0px !important;
+  padding:none;
+}
+
+th{
+  text-align:left;
+  vertical-align:top;
+  padding-right:3em;
+}
+
+td{
+  width:100%;
+}
+
+li{
+  list-style:none;
+}
+
+
+#foot{
+  text-align:left;
+  padding:0.3em;
+  font-size:70%
+}
+#foot, #foot a{
+  color:#444;
+}
+#smile{
+  font-size:150%;
+  float:right;
+}
+#smile a{
+  text-decoration:none;
+}
+
+.small{
+  font-size:70%;
+}
+
+code, pre{
+  font-face:mono;
+  margin:0px;
+  padding:0px;
+}
+
+.source{
+  display:none;
+  width:98%;
+  padding: 3px 5px;
+  overflow: auto;
+  font-size: 12px;
+  background-color: #f8f8f8;
+  border:1px solid #005;
+  border: 1px solid silver;
+  font-family: 'Courier New', 'Terminal', monospace;
+  color: #000;
+}
+
+# http://coderay.rubychan.de/
+.source pre { margin: 0px; }
+
+span.source { white-space: pre; border: 0px; padding: 2px; }
+
+table.source { border-collapse: collapse; width: 100%; padding: 2px; }
+table.source td { padding: 2px 4px; vertical-align: top; }
+
+.source .line_numbers, .source .no {
+  background-color: #def;
+  color: gray;
+  text-align: right;
+}
+.source .line_numbers a:target, .source .no a:target { color: blue; }
+.source .line_numbers .highlighted, .source .no .highlighted { color: red; }
+.source .no { padding: 0px 4px; }
+.source .code { width: 100%; }
+.source .code pre { overflow: auto; }
+
+.source .debug { color:white ! important; background:blue ! important; }
+
+.source .an { color:#007 }
+.source .at { color:#f08 }
+.source .av { color:#700 }
+.source .bi { color:#509; font-weight:bold }
+.source .c  { color:#888; }
+.source .c .dl { color:#444; }
+.source .c .ch { color:#444; }
+
+.source .ch { color:#04D }
+.source .ch .k { color:#04D }
+.source .ch .dl { color:#039 }
+
+.source .cl { color:#B06; font-weight:bold }
+.source .cm { color:#A08; font-weight:bold }
+.source .co { color:#036; font-weight:bold }
+.source .cr { color:#0A0 }
+.source .cv { color:#369 }
+.source .de { color:#B0B; }
+.source .df { color:#099; font-weight:bold }
+.source .di { color:#088; font-weight:bold }
+.source .dl { color:black }
+.source .do { color:#970 }
+.source .dt { color:#34b }
+.source .ds { color:#D42; font-weight:bold }
+.source .e  { color:#666; font-weight:bold }
+.source .en { color:#800; font-weight:bold }
+.source .er { color:#F00; background-color:#FAA }
+.source .ex { color:#C00; font-weight:bold }
+.source .fl { color:#60E; font-weight:bold }
+.source .fu { color:#06B; font-weight:bold }
+.source .gv { color:#d70; font-weight:bold }
+.source .hx { color:#058; font-weight:bold }
+.source .i  { color:#00D; font-weight:bold }
+.source .ic { color:#B44; font-weight:bold }
+
+.source .il { background-color: hsla(0,0%,0%,0.1); color: black }
+.source .il .idl { font-weight: bold; color: #666 }
+.source .idl { font-weight: bold; background-color: hsla(0,0%,0%,0.1); color: #666; }
+
+.source .im { color:#f00; }
+.source .in { color:#B2B; font-weight:bold }
+.source .iv { color:#33B }
+.source .la { color:#970; font-weight:bold }
+.source .lv { color:#963 }
+.source .ns { color:#707; font-weight:bold }
+.source .oc { color:#40E; font-weight:bold }
+.source .op { }
+.source .pc { color:#058; font-weight:bold }
+.source .pd { color:#369; font-weight:bold }
+.source .pp { color:#579; }
+.source .ps { color:#00C; font-weight:bold }
+.source .pt { color:#074; font-weight:bold }
+.source .r, .kw  { color:#080; font-weight:bold }
+
+.source .ke { color: #808; }
+.source .ke .dl { color: #606; }
+.source .ke .ch { color: #80f; }
+.source .vl { color: #088; }
+
+.source .rx { background-color:hsla(300,100%,50%,0.1); }
+.source .rx .k { color:#808 }
+.source .rx .dl { color:#404 }
+.source .rx .mod { color:#C2C }
+.source .rx .fu  { color:#404; font-weight: bold }
+
+.source .s { background-color:hsla(0,100%,50%,0.1); }
+.source .s .k { color: #D20; }
+.source .s .ch { color: #b0b; }
+.source .s .dl { color: #710; }
+
+.source .sh { background-color:hsla(120,100%,50%,0.1); }
+.source .sh .k { color:#2B2 }
+.source .sh .dl { color:#161 }
+
+.source .sy { color:#A60 }
+.source .sy .k { color:#A60 }
+.source .sy .dl { color:#630 }
+
+.source .ta { color:#070 }
+.source .ts { color:#D70; font-weight:bold }
+.source .ty { color:#339; font-weight:bold }
+.source .v  { color:#036 }
+.source .xt { color:#444 }
+
+.source .ins { background: hsla(120,100%,50%,0.2) }
+.source .del { background: hsla(0,100%,50%,0.2) }
+.source .chg { color: #aaf; background: #007; }
+.source .head { color: #f8f; background: #505 }
+.source .head .filename { color: white; }
+
+.source .ins .eye { background-color: hsla(120,100%,50%,0.2) }
+.source .del .eye { background-color: hsla(0,100%,50%,0.2) }
+
+.source .ins .ins { color: #080; background:transparent; font-weight:bold }
+.source .del .del { color: #800; background:transparent; font-weight:bold }
+.source .chg .chg { color: #66f; }
+.source .head .head { color: #f4f; }
+
+.rubylogo{
+  margin-left:1.4em;
+  margin-top:0.6em;
+  margin-right:1em;
+  float:left;
+}
+
+  </style>
+</head>
+<body>
+  <div id="world">
+    <img class="rubylogo" alt="ruby" src="data:image/png;base64,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" />
+    <h1>Ruby Sugar Refinery</h1>
+    <br/>
+    <p class="text">The Ruby Sugar Refinery is a collection of tiny <a href="http://ruby-doc.org/core-2.3.0/doc/syntax/refinements_rdoc.html">refinements</a> (declarative local core extensions) for Ruby.</p>
+
+    <h2>Setup &amp; Usage</h2>
+    <p class="text">
+      Add to Gemfile:
+    </p>
+
+    <div class="cubes">
+      <code class="scode">gem 'sugar_refinery', require: 'sugar_refinery/all'</code>
+    </div>
+
+    <p class="text">
+      Then add refinements to the current Ruby file or module:
+      <div class="cubes">
+        <pre class="scode">using SugarRefinery::CamelSnake
+using SugarRefinery::HashZip
+
+"ClassName".to_snake # => "class_name"
+Hash.zip [1,2,3], [4,5,6] # => {1=>4, 2=>5, 3=>6}</pre>
+      </div>
+    </p>
+
+    <h2>List of Refinements</h2>
+
+      <div class="cubes"><h3 title="require 'sugar_refinery/alias_for'" id="alias_for">alias_for</h3>
+         <table class="cube_table"
+                id="alias_for_cube"
+                title="require 'sugar_refinery/alias_for'"> <tr><th>Summary</th>    <td>A different way to create aliases: Reversed order and you can pass multiple alias names. The order feels more logical</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">AliasFor</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Module#alias_for, Module#aliases_for</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777"># creates an alias for the method :methods with the name ms</span>
+<span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Object</span>
+  alias_for <span style="color:#A60">:methods</span>, <span style="color:#A60">:ms</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+<span style="color:#777"># creates multiple aliases</span>
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Enumerable</span>
+  aliases_for <span style="color:#A60">:zip</span>, <span style="color:#A60">:with</span>, <span style="color:#A60">:%</span>
+<span style="color:#080;font-weight:bold">end</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_alias_for_spec">(<a href="javascript:show('alias_for_spec')">show</a>)</span>
+         <div class="source" id="alias_for_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/alias_for</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">AliasFor</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">alias_for</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should create an alias for instance methods</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Array</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">m2</span>
+        <span style="color:#00D">2</span>
+      <span style="color:#080;font-weight:bold">end</span>
+      aliases_for <span style="color:#A60">:m2</span>, <span style="color:#A60">:a2</span>, <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">'</span><span style="color:#A60">a-2</span><span style="color:#740">'</span></span>
+    <span style="color:#080;font-weight:bold">end</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].a2.should == <span style="color:#00D">2</span>
+      [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].send(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a-2</span><span style="color:#710">'</span></span>).should == <span style="color:#00D">2</span>
+    <span style="color:#080;font-weight:bold">end</span>.should_not raise_exception
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should create an alias for class (singleton) methods</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Array</span>
+      <span style="color:#080;font-weight:bold">class</span> &lt;&lt; <span style="color:#B06;font-weight:bold">Array</span>
+        <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">m3</span>
+          <span style="color:#00D">3</span>
+        <span style="color:#080;font-weight:bold">end</span>
+        alias_for <span style="color:#A60">:m3</span>, <span style="color:#A60">:a3</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    proc{
+      <span style="color:#036;font-weight:bold">Array</span>.a3.should == <span style="color:#00D">3</span>
+    }.should_not raise_exception
+  <span style="color:#080;font-weight:bold">end</span>
+
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should create aliases for the first argument with all other arguments</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Object</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">m4</span>
+        <span style="color:#00D">4</span>
+      <span style="color:#080;font-weight:bold">end</span>
+      alias_for <span style="color:#A60">:m4</span>, <span style="color:#A60">:ma</span>, <span style="color:#A60">:mb</span>, <span style="color:#A60">:mc</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    proc{
+      <span style="color:#00D">1</span>.ma.should   == <span style="color:#00D">4</span>
+      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1</span><span style="color:#710">&quot;</span></span>.mb.should == <span style="color:#00D">4</span>
+      [<span style="color:#00D">1</span>].mc.should == <span style="color:#00D">4</span>
+    }.should_not raise_exception
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">works with uncommon chars</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Object</span>
+      alias_for <span style="color:#A60">:tainted?</span>, <span style="color:#A60"><span style="color:#A60">:</span><span style="color:#740">&quot;</span><span style="color:#A60">tain-ted?</span><span style="color:#740">&quot;</span></span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_alias_for_source">(<a href="javascript:show('alias_for_source')">show</a>)</span>
+         <div class="source" id="alias_for_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">AliasFor</span>
+    refine <span style="color:#036;font-weight:bold">Module</span> <span style="color:#080;font-weight:bold">do</span>
+      private
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">alias_for</span>(m, *aliases)
+        aliases.each{ |a| class_eval <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">alias :'</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span> a <span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">' :'</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span> m <span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">'</span><span style="color:#710">&quot;</span></span> }
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">alias</span> <span style="color:#06B;font-weight:bold">aliases_for</span> <span style="color:#06B;font-weight:bold">alias_for</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/array_op'" id="array_op">array_op</h3>
+         <table class="cube_table"
+                id="array_op_cube"
+                title="require 'sugar_refinery/array_op'"> <tr><th>Summary</th>    <td>Operators one could miss for <code>Array</code></td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">ArrayOp</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Array#^</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>[<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>,<span style="color:#00D">4</span>] ^ [<span style="color:#00D">3</span>,<span style="color:#00D">4</span>,<span style="color:#00D">5</span>,<span style="color:#00D">6</span>]  <span style="color:#777"># =&gt; [1,2,5,6]</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_array_op_spec">(<a href="javascript:show('array_op_spec')">show</a>)</span>
+         <div class="source" id="array_op_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/array_op</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">ArrayOp</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Array#^</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">does an exclusive or</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    a = [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>,<span style="color:#00D">4</span>]
+    b = [<span style="color:#00D">3</span>,<span style="color:#00D">4</span>,<span style="color:#00D">5</span>,<span style="color:#00D">6</span>]
+    (a^b).should == [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">5</span>,<span style="color:#00D">6</span>]
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Array#**</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">returns the array product</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    ([<span style="color:#00D">1</span>,<span style="color:#00D">2</span>] ** <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w[</span><span style="color:#D20">a b</span><span style="color:#710">]</span></span>).should == [[<span style="color:#00D">1</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">a</span><span style="color:#710">&quot;</span></span>], [<span style="color:#00D">1</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">b</span><span style="color:#710">&quot;</span></span>], [<span style="color:#00D">2</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">a</span><span style="color:#710">&quot;</span></span>], [<span style="color:#00D">2</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">b</span><span style="color:#710">&quot;</span></span>]]
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_array_op_source">(<a href="javascript:show('array_op_source')">show</a>)</span>
+         <div class="source" id="array_op_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">ArrayOp</span>
+    refine <span style="color:#036;font-weight:bold">Array</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">^</span>(other)
+        (<span style="color:#069">self</span> - other) + (other - <span style="color:#069">self</span>)
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">**</span>(*o, &amp;block)
+        product *o, &amp;block
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/array_stats'" id="array_stats">array_stats</h3>
+         <table class="cube_table"
+                id="array_stats_cube"
+                title="require 'sugar_refinery/array_stats'"> <tr><th>Summary</th>    <td>Statistics for <code>Array</code></td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">ArrayStats</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Array#mean</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777"># calculates mean (average)</span></pre></div>
+</div>
+</div><h5>Array#stdev</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777"># calculates standard deviation (takes :sample or :population as argument)</span></pre></div>
+</div>
+</div><h5>Array#stdev_sample</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777"># calculates sample standard deviation</span></pre></div>
+</div>
+</div><h5>Array#stdev_population</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777"># calculates population standard deviation</span></pre></div>
+</div>
+</div><h5>Array#z_score</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777"># calculates standard score</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_array_stats_spec">(<a href="javascript:show('array_stats_spec')">show</a>)</span>
+         <div class="source" id="array_stats_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">sugar_refinery/array_stats</span><span style="color:#710">&quot;</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">ArrayStats</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">doing statistics on arrays</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+  let(<span style="color:#A60">:list</span>) { (<span style="color:#00D">2</span>..<span style="color:#00D">5</span>).to_a }
+
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#mean</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should return the average</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+      list.mean.should == <span style="color:#60E">3.5</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#stdev_sample</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should return the standard deviation of the sample</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+      list.stdev_sample.should be_within(<span style="color:#60E">1e-8</span>).of(<span style="color:#60E">1.2909944487358056</span>)
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#stdev_population</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should return the standard deviation of the population</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+      list.stdev_population.should be_within(<span style="color:#60E">1e-8</span>).of(<span style="color:#60E">1.118033988749895</span>)
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#stdev</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should default to population</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+      list.stdev.should be_within(<span style="color:#60E">1e-8</span>).of(list.stdev_population)
+    <span style="color:#080;font-weight:bold">end</span>
+
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should delegate sample correctly</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+      list.stdev(<span style="color:#A60">:sample</span>).should be_within(<span style="color:#60E">1e-8</span>).of(list.stdev_sample)
+    <span style="color:#080;font-weight:bold">end</span>
+
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should delegate population correctly</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+      list.stdev(<span style="color:#A60">:population</span>).should be_within(<span style="color:#60E">1e-8</span>).of(list.stdev_population)
+    <span style="color:#080;font-weight:bold">end</span>
+
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should raise an error with any other key</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+      expect { list.stdev(<span style="color:#A60">:pony</span>) }.to raise_error(<span style="color:#036;font-weight:bold">ArgumentError</span>)
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#z_score</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should default to population</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+      list.z_score.zip(list.z_score(<span style="color:#A60">:population</span>)).each <span style="color:#080;font-weight:bold">do</span> |value, actual|
+        value.should be_within(<span style="color:#60E">1e-8</span>).of(actual)
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should delegate sample correctly</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+      sample_z_score = [
+        <span style="color:#60E">-1.161895003862225</span>,
+        <span style="color:#60E">-0.3872983346207417</span>,
+        <span style="color:#60E">0.3872983346207417</span>,
+        <span style="color:#60E">1.161895003862225</span>
+      ]
+
+      p list
+
+      list.z_score(<span style="color:#A60">:sample</span>).zip(sample_z_score).each <span style="color:#080;font-weight:bold">do</span> |value, actual|
+        value.should be_within(<span style="color:#60E">1e-8</span>).of(actual)
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should delegate population correctly</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+      population_z_score = [
+        <span style="color:#60E">-1.3416407864998738</span>,
+        <span style="color:#60E">-0.4472135954999579</span>,
+        <span style="color:#60E">0.4472135954999579</span>,
+        <span style="color:#60E">1.3416407864998738</span>
+      ]
+
+      list.z_score(<span style="color:#A60">:population</span>).zip(population_z_score).each <span style="color:#080;font-weight:bold">do</span> |value, actual|
+        value.should be_within(<span style="color:#60E">1e-8</span>).of(actual)
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should raise an error with any other key</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+      expect { list.z_score(<span style="color:#A60">:pony</span>) }.to raise_error(<span style="color:#036;font-weight:bold">ArgumentError</span>)
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_array_stats_source">(<a href="javascript:show('array_stats_source')">show</a>)</span>
+         <div class="source" id="array_stats_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">ArrayStats</span>
+    refine <span style="color:#036;font-weight:bold">Array</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">mean</span>
+        inject(&amp;<span style="color:#A60">:+</span>) / length.to_f
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">stdev</span>(type = <span style="color:#A60">:population</span>)
+        <span style="color:#080;font-weight:bold">case</span> type
+        <span style="color:#080;font-weight:bold">when</span> <span style="color:#A60">:population</span> <span style="color:#080;font-weight:bold">then</span> stdev_population
+        <span style="color:#080;font-weight:bold">when</span> <span style="color:#A60">:sample</span>     <span style="color:#080;font-weight:bold">then</span> stdev_sample
+        <span style="color:#080;font-weight:bold">else</span> raise <span style="color:#036;font-weight:bold">ArgumentError</span>.new(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">%s is not a valid argument</span><span style="color:#710">&quot;</span></span> % type)
+        <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">stdev_sample</span>
+        <span style="color:#036;font-weight:bold">Math</span>.sqrt(inject(<span style="color:#60E">0.0</span>) { |sum, x| sum + (mean - x) ** <span style="color:#00D">2</span> } / (length - <span style="color:#00D">1</span>))
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">stdev_population</span>
+        <span style="color:#036;font-weight:bold">Math</span>.sqrt(inject(<span style="color:#60E">0.0</span>) { |sum, x| sum + (mean - x) ** <span style="color:#00D">2</span> } / length)
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">z_score</span>(type = <span style="color:#A60">:population</span>)
+        map { |x| (x - mean) / stdev(type) }
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/blank'" id="blank">blank</h3>
+         <table class="cube_table"
+                id="blank_cube"
+                title="require 'sugar_refinery/blank'"> <tr><th>Summary</th>    <td>Does pretty the same as in ActiveSupport: Every object can be asked if it is blank or present</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Blank</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Object#blank?</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">an object</span><span style="color:#710">'</span></span>.blank? <span style="color:#777"># =&gt; false</span>
+<span style="color:#069">nil</span>.present? <span style="color:#777"># =&gt; false</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_blank_spec">(<a href="javascript:show('blank_spec')">show</a>)</span>
+         <div class="source" id="blank_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/blank</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Blank</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object#blank?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should be blank for blank values</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    blank_values   = [ <span style="color:#069">nil</span>, <span style="color:#069">false</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">   </span><span style="color:#710">'</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">  </span><span style="color:#b0b">\n</span><span style="color:#b0b">\t</span><span style="color:#D20">  </span><span style="color:#b0b">\r</span><span style="color:#D20"> </span><span style="color:#710">&quot;</span></span>, [], {}, <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> ]
+
+    blank_values.each{ |blank|
+      blank.blank?.should == <span style="color:#069">true</span>
+    }
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should not be blank for non blank values</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    present_values = [ <span style="color:#036;font-weight:bold">Object</span>.new, <span style="color:#069">true</span>, <span style="color:#00D">0</span>, <span style="color:#00D">1</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>, [<span style="color:#069">nil</span>], { <span style="color:#069">nil</span> =&gt; <span style="color:#069">nil</span> } ]
+
+    present_values.each{ |present|
+      present.blank?.should == <span style="color:#069">false</span>
+    }
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_blank_source">(<a href="javascript:show('blank_source')">show</a>)</span>
+         <div class="source" id="blank_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Blank</span>
+    refine <span style="color:#036;font-weight:bold">Object</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>
+        <span style="color:#080;font-weight:bold">if</span> respond_to? <span style="color:#A60">:empty?</span> <span style="color:#080;font-weight:bold">then</span> empty? <span style="color:#080;font-weight:bold">else</span> !<span style="color:#069">self</span> <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">present?</span>
+        !blank?
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">NilClass</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">FalseClass</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">true</span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">TrueClass</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">false</span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">Numeric</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">false</span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">Array</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() empty? <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">Hash</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() empty? <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">self</span> !~ <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#D20">\S</span><span style="color:#404">/</span></span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">Regexp</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">blank?</span>() <span style="color:#069">self</span> == <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#404">/</span></span> <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/camel_snake'" id="camel_snake">camel_snake</h3>
+         <table class="cube_table"
+                id="camel_snake_cube"
+                title="require 'sugar_refinery/camel_snake'"> <tr><th>Summary</th>    <td>Provides <code>String#to_camel</code> and <code>String#to_snake</code>.</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">CamelSnake</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>String#to_camel</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_snake_string</span><span style="color:#710">'</span></span>.to_camel <span style="color:#777"># =&gt; 'WasSnakeString'</span></pre></div>
+</div>
+</div><h5>String#to_snake</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">WasCamelString</span><span style="color:#710">'</span></span>.to_snake <span style="color:#777"># =&gt; 'was_camel_string'</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_camel_snake_spec">(<a href="javascript:show('camel_snake_spec')">show</a>)</span>
+         <div class="source" id="camel_snake_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/camel_snake</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">CamelSnake</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#to_camel</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should turn a snake_cased string to CamelCase</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_snake_case</span><span style="color:#710">'</span></span>.to_camel.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">WasSnakeCase</span><span style="color:#710">'</span></span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#to_snake</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should turn a CamelCased string to snake_case</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">WasCamelCase</span><span style="color:#710">'</span></span>.to_snake.should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">was_camel_case</span><span style="color:#710">'</span></span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_camel_snake_source">(<a href="javascript:show('camel_snake_source')">show</a>)</span>
+         <div class="source" id="camel_snake_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">CamelSnake</span>
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_snake</span>
+        gsub(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">(?&lt;!^)[A-Z]</span><span style="color:#404">/</span></span>) <span style="color:#080;font-weight:bold">do</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">_</span><span style="color:#666">#</span><span style="color:#d70">$&amp;</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">end</span>.downcase
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">to_camel</span>
+        gsub(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">(?:^|_)([a-z])</span><span style="color:#404">/</span></span>) <span style="color:#080;font-weight:bold">do</span> <span style="color:#d70">$1</span>.upcase <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/chain_map'" id="chain_map">chain_map</h3>
+         <table class="cube_table"
+                id="chain_map_cube"
+                title="require 'sugar_refinery/chain_map'"> <tr><th>Summary</th>    <td>Chain multiple procs on <code>Array</code> elements</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">ChainMap</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Array#chain_map</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>[<span style="color:#00D">-3</span>, <span style="color:#00D">-2</span>, <span style="color:#00D">-1</span>].chain_map(<span style="color:#A60">:abs</span>, <span style="color:#A60">:to_s</span>)  <span style="color:#777"># =&gt; [&quot;3&quot;, &quot;2&quot;, &quot;1&quot;]</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_chain_map_spec">(<a href="javascript:show('chain_map_spec')">show</a>)</span>
+         <div class="source" id="chain_map_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">sugar_refinery/chain_map</span><span style="color:#710">&quot;</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">ChainMap</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#chain_map</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should repeatedly chain symbols as map calls</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    list = [<span style="color:#00D">-3</span>, <span style="color:#00D">-2</span>, <span style="color:#00D">-1</span>]
+
+    list.chain_map(<span style="color:#A60">:abs</span>, <span style="color:#A60">:to_s</span>) == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w{</span><span style="color:#D20">3 2 1</span><span style="color:#710">}</span></span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should repeatedly chain blocks as map calls</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    list = [<span style="color:#00D">-3</span>, <span style="color:#00D">-2</span>, <span style="color:#00D">-1</span>]
+
+    list.chain_map(-&gt;(e) { e ** <span style="color:#00D">2</span> }, -&gt;(e) { e * <span style="color:#00D">-1</span> }) == [<span style="color:#00D">-9</span>, <span style="color:#00D">-4</span>, <span style="color:#00D">-1</span>]
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_chain_map_source">(<a href="javascript:show('chain_map_source')">show</a>)</span>
+         <div class="source" id="chain_map_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">ChainMap</span>
+    refine <span style="color:#036;font-weight:bold">Array</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">chain_map</span>(*args)
+        args.inject(<span style="color:#069">self</span>) { |collection, action| collection.map(&amp;action) }
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/constantize'" id="constantize">constantize</h3>
+         <table class="cube_table"
+                id="constantize_cube"
+                title="require 'sugar_refinery/constantize'"> <tr><th>Summary</th>    <td>Easier handling of dynamic constant names</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Constantize</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>String#constantize</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object</span><span style="color:#710">'</span></span>.constantize <span style="color:#777"># =&gt; Object</span>
+<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Spec::VERSION</span><span style="color:#710">'</span></span>.constantize <span style="color:#777"># =&gt; Spec::VERSION if rspec is loaded</span>
+<span style="color:#777"># you can also pass a parameter or block to define what happens, when constant does not exist</span>
+<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">IdontExist</span><span style="color:#710">'</span></span>.constantize(<span style="color:#036;font-weight:bold">Array</span>) <span style="color:#777"># =&gt; Array</span>
+<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String5</span><span style="color:#710">'</span></span>.constantize <span style="color:#080;font-weight:bold">do</span> |string|
+  string.chop.constantize
+<span style="color:#080;font-weight:bold">end</span> <span style="color:#777"># =&gt; String</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Information</th>    <td>An improved version of ActiveSupport's one</td></tr><tr><th>Specification</th>    <td> <span id="show_constantize_spec">(<a href="javascript:show('constantize_spec')">show</a>)</span>
+         <div class="source" id="constantize_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/constantize</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Constantize</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#constantize</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return the constant with that name</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object</span><span style="color:#710">'</span></span>.constantize.should == <span style="color:#036;font-weight:bold">Object</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should also work for nested constants</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">SugarRefinery::VERSION</span><span style="color:#710">'</span></span>.constantize.should == <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">VERSION</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should throw name error if constant does not exist (and no parameter is given)</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ObfsefsefsefafesafaefRubySugarRefineryafdfselijfesject</span><span style="color:#710">'</span></span>.constantize
+    <span style="color:#080;font-weight:bold">end</span>.should raise_exception <span style="color:#036;font-weight:bold">NameError</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should call the block (and not raise an error) if constant does not exist and block given</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ObfsefsefsefafesafaefRubySugarRefineryafdfselijfesject</span><span style="color:#710">'</span></span>.constantize <span style="color:#080;font-weight:bold">do</span> |string|
+         <span style="color:#036;font-weight:bold">Default</span> = [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>]
+      <span style="color:#080;font-weight:bold">end</span>.should == [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>]
+    <span style="color:#080;font-weight:bold">end</span>.should_not raise_exception
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should return the second parameter (and not raise an error) if constant does not exist and parameter given</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    proc <span style="color:#080;font-weight:bold">do</span>
+      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ObfsefsefsefafesafaefRubySugarRefineryafdfselijfesject</span><span style="color:#710">'</span></span>.constantize(<span style="color:#036;font-weight:bold">Array</span>).should == <span style="color:#036;font-weight:bold">Array</span>
+    <span style="color:#080;font-weight:bold">end</span>.should_not raise_exception
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_constantize_source">(<a href="javascript:show('constantize_source')">show</a>)</span>
+         <div class="source" id="constantize_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Constantize</span>
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">constantize</span>(default_value = <span style="color:#069">nil</span>) <span style="color:#777"># always uses global scope as in AS... is this good?</span>
+        get_constant = lambda{
+          <span style="color:#069">self</span>.split(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">::</span><span style="color:#404">/</span></span>).inject( <span style="color:#036;font-weight:bold">Object</span> ){ |base_constant, current_constant|
+            base_constant.const_get current_constant
+          }
+        }
+
+        <span style="color:#080;font-weight:bold">if</span> !default_value &amp;&amp; !block_given?
+          get_constant.call
+        <span style="color:#080;font-weight:bold">else</span>
+          <span style="color:#080;font-weight:bold">begin</span>
+            get_constant.call
+          <span style="color:#080;font-weight:bold">rescue</span> <span style="color:#036;font-weight:bold">NameError</span>
+            <span style="color:#080;font-weight:bold">if</span> block_given?
+              <span style="color:#080;font-weight:bold">yield</span> <span style="color:#069">self</span>
+            <span style="color:#080;font-weight:bold">else</span>
+              default_value
+            <span style="color:#080;font-weight:bold">end</span>
+          <span style="color:#080;font-weight:bold">end</span>
+        <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/dir_utils'" id="dir_utils">dir_utils</h3>
+         <table class="cube_table"
+                id="dir_utils_cube"
+                title="require 'sugar_refinery/dir_utils'"> <tr><th>Summary</th>    <td>Some shortcuts for working with directories</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">DirUtils</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Dir.join</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">File</span>.join</pre></div>
+</div>
+</div><h5>Dir.split</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">File</span>.split</pre></div>
+</div>
+</div><h5>Dir.rm</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">FileUtils</span>.rm_r</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_dir_utils_spec">(<a href="javascript:show('dir_utils_spec')">show</a>)</span>
+         <div class="source" id="dir_utils_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/dir_utils</span><span style="color:#710">'</span></span>
+require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">securerandom</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">DirUtils</span>
+
+
+describe <span style="color:#036;font-weight:bold">Dir</span> <span style="color:#080;font-weight:bold">do</span>
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.join</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">delegates to File.join</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      a = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w[</span><span style="color:#D20">some file path</span><span style="color:#710">]</span></span>
+      expect( <span style="color:#036;font-weight:bold">Dir</span>.join(a) ).to be == <span style="color:#036;font-weight:bold">File</span>.join(a)
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.split</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">delegates to File.split</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      a = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">some/file/path</span><span style="color:#710">'</span></span>
+      expect( <span style="color:#036;font-weight:bold">Dir</span>.split(a) ).to be == <span style="color:#036;font-weight:bold">File</span>.split(a)
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.rm</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">removes directories with content</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      path = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">tmp_</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span><span style="color:#036;font-weight:bold">SecureRandom</span>.uuid<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>
+      <span style="color:#036;font-weight:bold">FileUtils</span>.mkdir path
+      <span style="color:#036;font-weight:bold">FileUtils</span>.touch <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">#{</span>path<span style="font-weight:bold;color:#666">}</span></span><span style="color:#D20">/123</span><span style="color:#710">&quot;</span></span>
+      expect{
+        <span style="color:#036;font-weight:bold">Dir</span>.rm path
+      }.not_to raise_error
+      expect( <span style="color:#036;font-weight:bold">Dir</span>[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">*</span><span style="color:#710">'</span></span>] ).to_not include(path)
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_dir_utils_source">(<a href="javascript:show('dir_utils_source')">show</a>)</span>
+         <div class="source" id="dir_utils_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">fileutils</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">DirUtils</span>
+    refine <span style="color:#036;font-weight:bold">Dir</span>.singleton_class <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">join</span>(*args)
+        <span style="color:#036;font-weight:bold">File</span>.join(*args)
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">split</span>(*args)
+        <span style="color:#036;font-weight:bold">File</span>.split(*args)
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">rm</span>(*args)
+        <span style="color:#036;font-weight:bold">FileUtils</span>.rm_r(*args)
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/file_force_delete'" id="file_force_delete">file_force_delete</h3>
+         <table class="cube_table"
+                id="file_force_delete_cube"
+                title="require 'sugar_refinery/file_force_delete'"> <tr><th>Summary</th>    <td><code>File.delete!</code> (like `rm -f`)</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">FileForceDelete</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>File.delete!</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">File</span>.delete! <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">some_filename</span><span style="color:#710">'</span></span> <span style="color:#777"># will delete the file, don't care if it exist.</span></pre></div>
+</div>
+</div></td></tr><tr><th>Information</th>    <td>Idea for <code>File.delete!</code> from sugar-high.</td></tr><tr><th>Specification</th>    <td> <span id="show_file_force_delete_spec">(<a href="javascript:show('file_force_delete_spec')">show</a>)</span>
+         <div class="source" id="file_force_delete_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/file_force_delete</span><span style="color:#710">'</span></span>
+require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">fileutils</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">FileForceDelete</span>
+
+
+describe <span style="color:#036;font-weight:bold">File</span> <span style="color:#080;font-weight:bold">do</span>
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.delete!</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    after{ <span style="color:#036;font-weight:bold">File</span>.delete! <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">random_filename</span><span style="color:#710">'</span></span> }
+    let <span style="color:#A60">:random_filename</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">test_</span><span style="color:#710">'</span></span> + (<span style="color:#00D">0</span>..<span style="color:#00D">20</span>).map{|e| [*<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>..<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">z</span><span style="color:#710">'</span></span>].sample }*<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should delete the filename given as argument if it exists + return non-nil</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#036;font-weight:bold">FileUtils</span>.touch random_filename
+      res = <span style="color:#069">false</span>
+      proc <span style="color:#080;font-weight:bold">do</span>
+        res = <span style="color:#036;font-weight:bold">File</span>.delete! random_filename
+      <span style="color:#080;font-weight:bold">end</span>.should_not raise_exception
+      res.should be_truthy
+    <span style="color:#080;font-weight:bold">end</span>
+
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should do nothing if the filename given as argument does not exist + return nil</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      res = <span style="color:#069">false</span>
+      proc <span style="color:#080;font-weight:bold">do</span>
+        res = <span style="color:#036;font-weight:bold">File</span>.delete! random_filename
+      <span style="color:#080;font-weight:bold">end</span>.should_not raise_exception
+      res.should be_falsey
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_file_force_delete_source">(<a href="javascript:show('file_force_delete_source')">show</a>)</span>
+         <div class="source" id="file_force_delete_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">FileForceDelete</span>
+    refine <span style="color:#036;font-weight:bold">File</span>.singleton_class <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">delete!</span>(filename)
+        <span style="color:#080;font-weight:bold">return</span> <span style="color:#069">nil</span> <span style="color:#080;font-weight:bold">if</span> !<span style="color:#036;font-weight:bold">File</span>.exist?(filename)
+        <span style="color:#036;font-weight:bold">File</span>.delete filename
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/file_gsub'" id="file_gsub">file_gsub</h3>
+         <table class="cube_table"
+                id="file_gsub_cube"
+                title="require 'sugar_refinery/file_gsub'"> <tr><th>Summary</th>    <td>Will read the file and substitute the hash keys with their values</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">FileGsub</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>File.gsub</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">File</span>.gsub <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">some_filename</span><span style="color:#710">'</span></span>,
+  <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">hi</span><span style="color:#404">/</span></span> =&gt; <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">cu</span><span style="color:#710">'</span></span>,
+  <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span> =&gt; proc{ |m| (m.to_i+<span style="color:#00D">1</span>).to_s }
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_file_gsub_spec">(<a href="javascript:show('file_gsub_spec')">show</a>)</span>
+         <div class="source" id="file_gsub_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/file_gsub</span><span style="color:#710">'</span></span>
+require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">fileutils</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">FileGsub</span>
+
+
+describe <span style="color:#036;font-weight:bold">File</span> <span style="color:#080;font-weight:bold">do</span>
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.gsub</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    let <span style="color:#A60">:random_filename</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">test_</span><span style="color:#710">'</span></span> + (<span style="color:#00D">0</span>..<span style="color:#00D">20</span>).map{|e| [*<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>..<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">z</span><span style="color:#710">'</span></span>].sample }*<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should read filename in arg1, substitute every key in the arg2 with its value and save the file</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#036;font-weight:bold">File</span>.open(random_filename,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">w</span><span style="color:#710">'</span></span>){ |file|
+        file.print <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should read filename in arg1, substitute every key in the arg2 with its value and save the file</span><span style="color:#710">'</span></span>
+      }
+      <span style="color:#036;font-weight:bold">File</span>.gsub random_filename,
+        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">read</span><span style="color:#404">/</span></span> =&gt; <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">write</span><span style="color:#710">'</span></span>,
+        <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#D20">\d</span><span style="color:#808">+</span><span style="color:#404">/</span></span>  =&gt; proc{|m| (m.to_i+<span style="color:#00D">1</span>).to_s }
+
+      <span style="color:#036;font-weight:bold">File</span>.read(random_filename).should ==
+        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should write filename in arg2, substitute every key in the arg3 with its value and save the file</span><span style="color:#710">'</span></span>
+
+      <span style="color:#036;font-weight:bold">FileUtils</span>.rm random_filename
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_file_gsub_source">(<a href="javascript:show('file_gsub_source')">show</a>)</span>
+         <div class="source" id="file_gsub_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">FileGsub</span>
+    refine <span style="color:#036;font-weight:bold">File</span>.singleton_class <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">gsub</span>(filename, regex_hash)
+        data = <span style="color:#036;font-weight:bold">File</span>.read filename
+        <span style="color:#036;font-weight:bold">File</span>.open(filename,<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">w</span><span style="color:#710">'</span></span>){ |file|
+          regex_hash.each{ |regex, new_string|
+            regex = regex.to_s <span style="color:#080;font-weight:bold">unless</span> regex.is_a? <span style="color:#036;font-weight:bold">Regexp</span>
+
+            <span style="color:#080;font-weight:bold">if</span> new_string.is_a? <span style="color:#036;font-weight:bold">Proc</span>
+              data.gsub! regex, &amp;new_string
+            <span style="color:#080;font-weight:bold">else</span>
+              data.gsub! regex, new_string
+            <span style="color:#080;font-weight:bold">end</span>
+          }
+          file.print data
+        }
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/hash_op'" id="hash_op">hash_op</h3>
+         <table class="cube_table"
+                id="hash_op_cube"
+                title="require 'sugar_refinery/hash_op'"> <tr><th>Summary</th>    <td>Sugar for dealing with hashes</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">HashOp</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Hash#&lt;&lt;</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>{<span style="color:#00D">1</span>=&gt;<span style="color:#00D">2</span>} &lt;&lt; [<span style="color:#00D">3</span>, <span style="color:#00D">4</span>]   <span style="color:#777"># =&gt; { 1=&gt;2, 3=&gt;4 }</span>
+{<span style="color:#00D">1</span>=&gt;<span style="color:#00D">2</span>} &lt;&lt; { <span style="color:#00D">5</span>=&gt;<span style="color:#00D">6</span> } <span style="color:#777"># =&gt; { 1=&gt;2, 5=&gt;6 }</span>
+</pre></div>
+</div>
+</div><h5>Hash#&amp;</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>{ <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span> } &amp; { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">7</span> } <span style="color:#777"># =&gt; { 1=&gt;4 }</span></pre></div>
+</div>
+</div></td></tr><tr><th>Information</th>    <td>Some of the operators are inspired by Ruby Facets.</td></tr><tr><th>Specification</th>    <td> <span id="show_hash_op_spec">(<a href="javascript:show('hash_op_spec')">show</a>)</span>
+         <div class="source" id="hash_op_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/hash_op</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">HashOp</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Hash#&lt;&lt;</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">appends new elements to the hash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    a =  { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span> }
+    a &lt;&lt; { <span style="color:#00D">4</span>=&gt;<span style="color:#00D">7</span> }
+    a &lt;&lt; [<span style="color:#00D">5</span>, <span style="color:#00D">8</span>]
+    a.should == { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span>, <span style="color:#00D">4</span>=&gt;<span style="color:#00D">7</span>, <span style="color:#00D">5</span>=&gt;<span style="color:#00D">8</span> }
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Hash#&amp;</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">selects a sub hash containt only equal key-value pairs</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    a = { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span> }
+    b = { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">7</span> }
+    (a &amp; b).should == { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span> }
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Hash#+</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">merges two hashes</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    a = { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span> }
+    b = { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">7</span>, <span style="color:#00D">4</span>=&gt;<span style="color:#00D">0</span> }
+    (a + b).should == { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">7</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span>, <span style="color:#00D">4</span>=&gt;<span style="color:#00D">0</span> }
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_hash_op_source">(<a href="javascript:show('hash_op_source')">show</a>)</span>
+         <div class="source" id="hash_op_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">HashOp</span>
+    refine <span style="color:#036;font-weight:bold">Hash</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">&lt;&lt;</span>(other)
+        <span style="color:#080;font-weight:bold">case</span>
+        <span style="color:#080;font-weight:bold">when</span> other.is_a?(<span style="color:#036;font-weight:bold">Hash</span>)
+          merge! other
+        <span style="color:#080;font-weight:bold">when</span> other.is_a?(<span style="color:#036;font-weight:bold">Enumerable</span>) || other.respond_to?(<span style="color:#A60">:to_splat</span>)
+          merge! <span style="color:#036;font-weight:bold">Hash</span>[*other]
+        <span style="color:#080;font-weight:bold">else</span>
+          raise <span style="color:#036;font-weight:bold">TypeError</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">can only append other Hashs and Enumerables (or Classes that implement to_splat)</span><span style="color:#710">'</span></span>
+        <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">&amp;</span>(other)
+        <span style="color:#036;font-weight:bold">Hash</span>[ *select{ |k,v|
+          other[k] == v
+        }.flatten ]
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">+</span>(*o, &amp;block)
+        merge *o, &amp;block
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/hash_zip'" id="hash_zip">hash_zip</h3>
+         <table class="cube_table"
+                id="hash_zip_cube"
+                title="require 'sugar_refinery/hash_zip'"> <tr><th>Summary</th>    <td>Adds a <code>Hash.zip</code> method, which makes sense.</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">HashZip</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Hash.zip</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#036;font-weight:bold">Hash</span>.zip [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>], [<span style="color:#00D">4</span>,<span style="color:#00D">5</span>,<span style="color:#00D">6</span>] <span style="color:#777"># =&gt; {1=&gt;4, 2=&gt;5, 3=&gt;6}</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_hash_zip_spec">(<a href="javascript:show('hash_zip_spec')">show</a>)</span>
+         <div class="source" id="hash_zip_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/hash_zip</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">HashZip</span>
+
+
+describe <span style="color:#036;font-weight:bold">Hash</span> <span style="color:#080;font-weight:bold">do</span>
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.zip</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should zip together both given enumerables and take them as key=&gt;values for a new hash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#036;font-weight:bold">Hash</span>.zip( [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>], [<span style="color:#00D">4</span>,<span style="color:#00D">5</span>,<span style="color:#00D">6</span>] ).should == { <span style="color:#00D">1</span>=&gt;<span style="color:#00D">4</span>, <span style="color:#00D">2</span>=&gt;<span style="color:#00D">5</span>, <span style="color:#00D">3</span>=&gt;<span style="color:#00D">6</span> }
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_hash_zip_source">(<a href="javascript:show('hash_zip_source')">show</a>)</span>
+         <div class="source" id="hash_zip_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">HashZip</span>
+    refine <span style="color:#036;font-weight:bold">Hash</span>.singleton_class <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">zip</span>(keys, values)
+        <span style="color:#036;font-weight:bold">Hash</span>[ *keys.zip(values).flatten ]
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/inner_map'" id="inner_map">inner_map</h3>
+         <table class="cube_table"
+                id="inner_map_cube"
+                title="require 'sugar_refinery/inner_map'"> <tr><th>Summary</th>    <td>Runs blocks on inner <code>Array</code> elements</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">InnerMap</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Array#inner_map</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>[[<span style="color:#00D">1</span>, <span style="color:#00D">2</span>], [<span style="color:#00D">3</span>, <span style="color:#00D">4</span>]].inner_map{ |i| i + <span style="color:#00D">1</span> }  <span style="color:#777"># =&gt; [[2, 3], [4, 5]]</span></pre></div>
+</div>
+</div><h5>Array#inner_inject</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>[[<span style="color:#00D">1</span>, <span style="color:#00D">2</span>], [<span style="color:#00D">3</span>, <span style="color:#00D">4</span>]].inner_inject(&amp;<span style="color:#A60">:+</span>)  <span style="color:#777"># =&gt; [3, 7]</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_inner_map_spec">(<a href="javascript:show('inner_map_spec')">show</a>)</span>
+         <div class="source" id="inner_map_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">sugar_refinery/inner_map</span><span style="color:#710">&quot;</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">InnerMap</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#inner_map</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should delegate map to inner lists</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    list = [[<span style="color:#00D">1</span>, <span style="color:#00D">2</span>], [<span style="color:#00D">3</span>, <span style="color:#00D">4</span>]]
+
+    list.inner_map { |i| i + <span style="color:#00D">1</span> }.should == [[<span style="color:#00D">2</span>, <span style="color:#00D">3</span>], [<span style="color:#00D">4</span>, <span style="color:#00D">5</span>]]
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Array#inner_inject</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should delegate inject to inner lists</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    list = [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w{</span><span style="color:#D20">a b c</span><span style="color:#710">}</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w{</span><span style="color:#D20">d e f</span><span style="color:#710">}</span></span>]
+
+    list.inner_inject(&amp;<span style="color:#A60">:+</span>).should == list.map(&amp;<span style="color:#A60">:join</span>)
+  <span style="color:#080;font-weight:bold">end</span>
+
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">should take default values</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    list = [[<span style="color:#00D">3</span>, <span style="color:#00D">2</span>, <span style="color:#00D">1</span>], [<span style="color:#00D">-4</span>]]
+
+    list.inner_inject(<span style="color:#00D">4</span>, &amp;<span style="color:#A60">:+</span>).should == [<span style="color:#00D">10</span>, <span style="color:#00D">0</span>]
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_inner_map_source">(<a href="javascript:show('inner_map_source')">show</a>)</span>
+         <div class="source" id="inner_map_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">InnerMap</span>
+    refine <span style="color:#036;font-weight:bold">Array</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">inner_map</span>(&amp;block)
+        map { |object| object.map(&amp;block) }
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">inner_inject</span>(default = <span style="color:#A60">:not_used</span>, &amp;block)
+        map { |object| default == <span style="color:#A60">:not_used</span> ? object.inject(&amp;block) : object.inject(default, &amp;block) }
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/lchomp'" id="lchomp">lchomp</h3>
+         <table class="cube_table"
+                id="lchomp_cube"
+                title="require 'sugar_refinery/lchomp'"> <tr><th>Summary</th>    <td>Adds <code>String#chomp</code> on the left side.</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Lchomp</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>String#lchomp</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">  Yes</span><span style="color:#710">'</span></span>.lchomp  <span style="color:#777"># =&gt; ' Yes'</span></pre></div>
+</div>
+</div><h5>String#lchomp!</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777"># mutable lchomp version</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_lchomp_spec">(<a href="javascript:show('lchomp_spec')">show</a>)</span>
+         <div class="source" id="lchomp_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/lchomp</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Lchomp</span>
+
+describe <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">#lchomp</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should chomp on the left side</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      string = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ameise</span><span style="color:#710">'</span></span>
+      expect( string.lchomp(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>) ).to eq <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">meise</span><span style="color:#710">'</span></span>
+      expect( string ).to eq <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ameise</span><span style="color:#710">'</span></span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">#lchomp!</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should chomp on the left side (mutating)</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      string = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ameise</span><span style="color:#710">'</span></span>
+      expect( string.lchomp!(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">a</span><span style="color:#710">'</span></span>) ).to eq <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">meise</span><span style="color:#710">'</span></span>
+      expect( string ).to eq <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">meise</span><span style="color:#710">'</span></span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_lchomp_source">(<a href="javascript:show('lchomp_source')">show</a>)</span>
+         <div class="source" id="lchomp_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Lchomp</span>
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">lchomp</span>(arg = <span style="color:#d70">$/</span>)
+        reverse.chomp(arg).reverse
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">lchomp!</span>(arg = <span style="color:#d70">$/</span>)
+        replace reverse.chomp(arg).reverse
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/marshal_copy'" id="marshal_copy">marshal_copy</h3>
+         <table class="cube_table"
+                id="marshal_copy_cube"
+                title="require 'sugar_refinery/marshal_copy'"> <tr><th>Summary</th>    <td>Adds <code>Object#marshal_copy</code> to create a deep copy using <code>Marshal</code>.</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">MarshalCopy</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Object#marshal_copy</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>a = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w[</span><span style="color:#D20">hello world</span><span style="color:#710">]</span></span>
+b = a.marshal_copy
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_marshal_copy_spec">(<a href="javascript:show('marshal_copy_spec')">show</a>)</span>
+         <div class="source" id="marshal_copy_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/marshal_copy</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">MarshalCopy</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Object#marshal_copy</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">create a (deep) copy via marshalling</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    a = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%w[</span><span style="color:#D20">hello world</span><span style="color:#710">]</span></span>
+    b = a.marshal_copy
+    b.should == a
+
+    b[<span style="color:#00D">0</span>][<span style="color:#00D">1</span>,<span style="color:#00D">1</span>] = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>
+    b.should_not == a
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_marshal_copy_source">(<a href="javascript:show('marshal_copy_source')">show</a>)</span>
+         <div class="source" id="marshal_copy_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">MarshalCopy</span>
+    refine <span style="color:#036;font-weight:bold">Object</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">marshal_copy</span>
+        <span style="color:#036;font-weight:bold">Marshal</span>.load <span style="color:#036;font-weight:bold">Marshal</span>.dump <span style="color:#069">self</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/mash'" id="mash">mash</h3>
+         <table class="cube_table"
+                id="mash_cube"
+                title="require 'sugar_refinery/mash'"> <tr><th>Summary</th>    <td>mash: map(hash)</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Mash</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Enumerable#mash</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>[<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].mash{|e| [e, e.to_s] } <span style="color:#777"># =&gt; {1=&gt;'1',2=&gt;'2',3=&gt;'3'}</span></pre></div>
+</div>
+</div></td></tr><tr><th>Information</th>    <td>Inspired by Ruby Facets' <code>mash</code>.</td></tr><tr><th>Specification</th>    <td> <span id="show_mash_spec">(<a href="javascript:show('mash_spec')">show</a>)</span>
+         <div class="source" id="mash_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/mash</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Mash</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Array#mash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should &quot;map&quot; a hash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].mash{|e| [e, e.to_s] }.should == {<span style="color:#00D">1</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1</span><span style="color:#710">'</span></span>,<span style="color:#00D">2</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">2</span><span style="color:#710">'</span></span>,<span style="color:#00D">3</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">3</span><span style="color:#710">'</span></span>,}
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Enumerator#mash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should &quot;map&quot; a hash</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    [<span style="color:#00D">1</span>,<span style="color:#00D">2</span>,<span style="color:#00D">3</span>].each.mash{|e| [e, e.to_s] }.should == {<span style="color:#00D">1</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1</span><span style="color:#710">'</span></span>,<span style="color:#00D">2</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">2</span><span style="color:#710">'</span></span>,<span style="color:#00D">3</span>=&gt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">3</span><span style="color:#710">'</span></span>,}
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_mash_source">(<a href="javascript:show('mash_source')">show</a>)</span>
+         <div class="source" id="mash_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Mash</span>
+    refine <span style="color:#036;font-weight:bold">Enumerator</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">mash</span>
+        ret = {}
+        each{ |kv| ret.store( *(<span style="color:#080;font-weight:bold">yield</span>(kv)[<span style="color:#00D">0</span>,<span style="color:#00D">2</span>]) ) }
+        ret
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">Array</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">mash</span>
+        ret = {}
+        each{ |kv| ret.store( *(<span style="color:#080;font-weight:bold">yield</span>(kv)[<span style="color:#00D">0</span>,<span style="color:#00D">2</span>]) ) }
+        ret
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/regexp_union'" id="regexp_union">regexp_union</h3>
+         <table class="cube_table"
+                id="regexp_union_cube"
+                title="require 'sugar_refinery/regexp_union'"> <tr><th>Summary</th>    <td>Easy creation of a <code>Regexp.union</code></td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">RegexpUnion</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Regexp#|, String#|</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">Ruby</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span> | <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">test</span><span style="color:#404">/</span><span style="color:#C2C">i</span></span> | <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">cheat</span><span style="color:#710">&quot;</span></span>
+<span style="color:#777"># creates a Regexp similar to:</span>
+<span style="color:#777"># /(Ruby\d|[tT][eE][sS][tT]|cheat)/</span>
+</pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_regexp_union_spec">(<a href="javascript:show('regexp_union_spec')">show</a>)</span>
+         <div class="source" id="regexp_union_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/regexp_union</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">RegexpUnion</span>
+
+
+shared_examples_for <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Regexp.union operator</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">creates a Regexp.union of both operands</span><span style="color:#710">&quot;</span></span> <span style="color:#080;font-weight:bold">do</span>
+    (<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">Ruby</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span> | <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">test</span><span style="color:#404">/</span><span style="color:#C2C">i</span></span> | <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">cheat</span><span style="color:#710">&quot;</span></span>).should ==
+      <span style="color:#036;font-weight:bold">Regexp</span>.union( <span style="color:#036;font-weight:bold">Regexp</span>.union( <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">Ruby</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span>, <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">test</span><span style="color:#404">/</span><span style="color:#C2C">i</span></span> ), <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">cheat</span><span style="color:#710">&quot;</span></span> )
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Regexp#|</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it_should_behave_like <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Regexp.union operator</span><span style="color:#710">'</span></span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#|</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it_should_behave_like <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Regexp.union operator</span><span style="color:#710">'</span></span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_regexp_union_source">(<a href="javascript:show('regexp_union_source')">show</a>)</span>
+         <div class="source" id="regexp_union_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">RegexpUnion</span>
+    refine <span style="color:#036;font-weight:bold">Regexp</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">|</span>(arg)
+        <span style="color:#036;font-weight:bold">Regexp</span>.union <span style="color:#069">self</span>, arg.is_a?(<span style="color:#036;font-weight:bold">Regexp</span>) ? arg : arg.to_s
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">|</span>(arg)
+        <span style="color:#036;font-weight:bold">Regexp</span>.union <span style="color:#069">self</span>, arg.is_a?(<span style="color:#036;font-weight:bold">Regexp</span>) ? arg : arg.to_s
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/same'" id="same">same</h3>
+         <table class="cube_table"
+                id="same_cube"
+                title="require 'sugar_refinery/same'"> <tr><th>Summary</th>    <td>Adds <code>Float#same?</code> for correct number comparisons.</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Same</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>Float#same?</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>(<span style="color:#60E">0.1</span> + <span style="color:#60E">0.2</span>).same? <span style="color:#60E">0.3</span> <span style="color:#777"># true</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_same_spec">(<a href="javascript:show('same_spec')">show</a>)</span>
+         <div class="source" id="same_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/same</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">Same</span>
+
+describe <span style="color:#036;font-weight:bold">Float</span> <span style="color:#080;font-weight:bold">do</span>
+  describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">#same?</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">returns true if other float represents the same number</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+      expect( <span style="color:#60E">0.3</span>.same?(<span style="color:#60E">0.1</span> + <span style="color:#60E">0.2</span>) ).to be <span style="color:#069">true</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_same_source">(<a href="javascript:show('same_source')">show</a>)</span>
+         <div class="source" id="same_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">Same</span>
+    refine <span style="color:#036;font-weight:bold">Float</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">same?</span>(other)
+        (<span style="color:#069">self</span> - other).abs &lt; <span style="color:#036;font-weight:bold">Float</span>::<span style="color:#036;font-weight:bold">EPSILON</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div> <div class="cubes"><h3 title="require 'sugar_refinery/string_op'" id="string_op">string_op</h3>
+         <table class="cube_table"
+                id="string_op_cube"
+                title="require 'sugar_refinery/string_op'"> <tr><th>Summary</th>    <td>More <code>String</code> operators. Because Strings cannot be comfortable enough!</td></tr><tr><th>Activate</th>    <td><div class="using source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre>using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">StringOp</span></pre></div>
+</div>
+</div></td></tr><tr><th>Usage</th>    <td><h5>String#-</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1234abc5678</span><span style="color:#710">'</span></span> - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">b</span><span style="color:#710">'</span></span> - <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span> <span style="color:#777"># =&gt; ac</span></pre></div>
+</div>
+</div><h5>String#^</h5><div class="usage source" style="display:block"><div class="CodeRay">
+  <div class="code"><pre><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Yes vs No</span><span style="color:#710">'</span></span>^<span style="color:#00D">2</span> <span style="color:#777"># =&gt; 's vs No'</span></pre></div>
+</div>
+</div></td></tr><tr><th>Specification</th>    <td> <span id="show_string_op_spec">(<a href="javascript:show('string_op_spec')">show</a>)</span>
+         <div class="source" id="string_op_spec"><div class="CodeRay">
+  <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">sugar_refinery/string_op</span><span style="color:#710">'</span></span>
+using <span style="color:#036;font-weight:bold">SugarRefinery</span>::<span style="color:#036;font-weight:bold">StringOp</span>
+
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#-</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should remove the applied Regexp or String from self via gsub</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    (<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">1234abc5678</span><span style="color:#710">'</span></span> - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">b</span><span style="color:#710">'</span></span> - <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#D20">\d</span><span style="color:#404">/</span></span>).should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">ac</span><span style="color:#710">'</span></span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+describe <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">String#^</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+  it <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">should give C-like substring access to strings</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+    string = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Theoretische Informatik ist voll geil!</span><span style="color:#710">'</span></span>
+
+    (string^<span style="color:#00D">0</span>).should  == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Theoretische Informatik ist voll geil!</span><span style="color:#710">'</span></span>
+    (string^<span style="color:#00D">1</span>).should  == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">heoretische Informatik ist voll geil!</span><span style="color:#710">'</span></span>
+    (string^<span style="color:#00D">13</span>).should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Informatik ist voll geil!</span><span style="color:#710">'</span></span>
+    (string^<span style="color:#00D">-1</span>).should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">Theoretische Informatik ist voll geil</span><span style="color:#710">'</span></span>
+    (string^<span style="color:#00D">38</span>).should == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>
+    (string^<span style="color:#00D">99</span>).should == <span style="color:#069">nil</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr><tr><th>Source</th>    <td> <span id="show_string_op_source">(<a href="javascript:show('string_op_source')">show</a>)</span>
+         <div class="source" id="string_op_source"><div class="CodeRay">
+  <div class="code"><pre>require_relative <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">version</span><span style="color:#710">'</span></span>
+
+<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">SugarRefinery</span>
+  <span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">StringOp</span>
+    refine <span style="color:#036;font-weight:bold">String</span> <span style="color:#080;font-weight:bold">do</span>
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">-</span>(rem)
+        gsub( <span style="color:#036;font-weight:bold">Regexp</span> === rem ? rem : rem.to_s, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span> )
+      <span style="color:#080;font-weight:bold">end</span>
+
+      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">^</span>(pos)
+        pos = pos.to_i
+        <span style="color:#080;font-weight:bold">if</span> pos &gt;= <span style="color:#00D">0</span>
+          <span style="color:#069">self</span>[pos..<span style="color:#00D">-1</span>]
+        <span style="color:#080;font-weight:bold">else</span>
+          <span style="color:#069">self</span>[<span style="color:#00D">0</span>...pos]
+        <span style="color:#080;font-weight:bold">end</span>
+      <span style="color:#080;font-weight:bold">end</span>
+    <span style="color:#080;font-weight:bold">end</span>
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>
+</div> </td></tr></table></div>
+
+    <h2>Changelog</h2>
+    <div class="cubes">
+      <pre class="scode"># SUGAR REFINERY CHANGELOG
+
+## 2021-01-07 | Sugar Refinery 1.0.1
+
+* Relax Ruby version requirement to allow Ruby 3.0
+
+
+## 2016-01-03 | Sugar Refinery 1.0.0
+
+* turn zucker gem into sugar_refinery
+* move iterate into its own gem
+* move instance_variable_from into its own gem
+* move egonil into its own gem
+* remove 'Zucker#require' and 'Zucker#require_all'
+* remove 'refine' gem dependency
+* remove unary_conversion in favor of https://bugs.ruby-lang.org/issues/11782
+* remove square_brackets_for
+* remove tap
+* rename string_extras to lchomp
+* rename hash_extras to hash_zip
+* rename float_extras to same
+* rename dir_extras to dir_utils
+* split file_extras into file_force_delete and file_gsub (also remove File.filename)
+
+
+## OLD ZUCKER CHANGELOG
+
+2015-04-01 | Zucker 100.1.0
+* drop Ruby 1.9 support
+* add float_extras for Float#same?
+* add chain_map
+* add inner_map
+* add array_stats
+
+
+2014-04-01 | Zucker 100.0.0
+* drop Ruby 1.8 support
+* rewrite zucker to use refinements!
+* use usual semantic versioning
+* remove all "debug" cubes, use the "debugging" gem instead!
+* remove "ruby_version" cube, use the "ruby_version" gem instead!
+* remove "engine" cube, use the "ruby_engine" gem instead!
+* remove "info" cube, use the "ruby_info" gem instead!
+* remove "os" cube, use rdp's "os" gem instead!
+* remove "*_to_proc" cubes, use the "procstar" gem instead!
+* remove "sandbox" cube, since sandboxing is not recommended and removed from Ruby 2.1
+* remove "kernel" and "not" cube completely
+* tweaks to most other cubes
+
+
+2013-04-30 | Zucker 13
+* fix alias_for bug
+* let RubyVersion#inspect and RubyEngine#inspect map to #to_s
+* remove Array#sum
+* repackage (gh#4)
+
+
+2012-01-16 | Zucker 12
+* fix a requiring bug
+* rename zucker/version cube to zucker/ruby_version and Zucker::PACKAGES to Zucker::PACKS
+* remove more_aliases! (keep it simple...)
+* add case cube: String#to_camel and String#to_snake
+
+
+2011-05-25 | Zucker 11
+* add Zucker::constants to check if cube has been required (e.g. Zucker::AliasFor if 'zucker/alias_for' is loaded)
+* rbx tweaks
+  * don't define Binding#vars on rbx (prevent endless recursion)
+  * sandbox-not-working warning
+* add Kernel#ignore_sigquit!
+* fix warnings
+* doc tweaks
+
+
+2011-04-29 | Zucker 10
+* doc/spec tweaks
+  * make test.rubygems.org-testable
+* fix zucker 9 permission issue
+
+
+2011-01-22 | Zucker 9
+* remove history versions (sorry, it caused too much gem/rdoc troubles)
+* add file cube: File.delete! and File.gsub
+* debug pack improvements
+  * binding: typos + return nil
+  * cc: support for ripl + return nil
+  * mm: also show eigenclass for modules + nicer displaying + return nil
+  * added Regexp#visualize
+* remove optional sandbox param
+* rename xxx2proc to xxx_to_proc
+* change rakefile/rspec/gemspec structure
+* more minor fixes and improvements
+
+
+2010-10-06 | Zucker 8
+* fix a little alias_for bug
+* disable rdoc creation when installing (in favour of the custom docs)
+* change Binding#inspect to Binding.variables (was too verbose and dangerous)
+
+
+2010-10-03 | Zucker 7
+* fix critical OS.windows? bug
+
+
+2010-10-03 | Zucker 6
+* no new cubes
+* bugfix for OS.posix?
+* small changes + bugfixes + doc improvements
+* add two user methods to Info
+* change egonil semantics ( using method_missing, see http://ruby.janlelis.de/26/catch_nil.rb )
+* bugfix for vv
+
+
+2010-09-04 | Zucker 5
+* debug edition -  add two debug helpers: oo (output line, method, file) and cc (output method callstack)
+* rename cube D to dd add add more debug aliases (for mm and binding)
+* fix __SPECIAL_VARS__ in info and kernel cube and some minor bugfixes
+* Zucker.activate_more_aliases! option
+* add Hash#&amp;
+* add aliases: File.filename (for basename), Dir.join and Dir.split (for File.join, split)
+* add a flexible requiring mechansim in zucker.rb (no api changes)
+* restructure packages
+* add rake tasks for releasing
+* improve RubyVersion constant (cleaner and more flexible)
+
+
+2010-09-01 | Zucker 4
+* fix Binding#inspect
+* add RubyEngine constant
+* add RubyVersion constant
+* add OS constant
+* add q debug method (like p but on one line)
+* add String#-
+
+
+2010-08-14 | Zucker 3
+* add tap cube
+* add Object#not
+* add alias_for for an alternative alias syntax
+* add String#constantize (improved AS version)
+* improve Info module
+* make Array#sum Rails compatibile
+* improve docs
+* change directory layout (no changes for requiring)
+* more small changes
+
+
+2010-08-08 | Zucker 2
+* add info cube
+* add chaining for array2proc
+* fix Hash.zip
+* fix instance_variables_from binding for 1.9
+* more specs
+
+
+2010-08-06 | Zucker 1
+* initial release
+
+
+2010-08-05 | Zucker 0
+* pre-release for rug-b talk
+
+</pre>
+    </div>
+    <br/>
+  </div>
+
+  <div id="foot">
+    <div id="smile"><a href="http://janlelis.com">J-_-L</a></div>
+    This is the Ruby Sugar Refinery 1.0.1 documentation (2021-01-07).
+    It is available at <a href="http://janlelis.github.io/sugar_refinery">janlelis.github.io/sugar_refinery</a>.
+    Ruby Logo CC-BY-SA Yukihiro Matsumoto.
+  </div>
+
+  <a href="https://github.com/janlelis/sugar_refinery"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+</body>
+</html>
+
