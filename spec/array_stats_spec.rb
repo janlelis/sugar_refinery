@@ -12,27 +12,27 @@ describe "doing statistics on arrays" do
 
   describe "Array#stdev_sample" do
     it "should return the standard deviation of the sample" do
-      list.stdev_sample.should be_close(1.2909944487358056, 1e-8)
+      list.stdev_sample.should be_within(1e-8).of(1.2909944487358056)
     end
   end
 
   describe "Array#stdev_population" do
     it "should return the standard deviation of the population" do
-      list.stdev_population.should be_close(1.118033988749895, 1e-8)
+      list.stdev_population.should be_within(1e-8).of(1.118033988749895)
     end
   end
 
   describe "Array#stdev" do
     it "should default to population" do
-      list.stdev.should be_close(list.stdev_population, 1e-8)
+      list.stdev.should be_within(1e-8).of(list.stdev_population)
     end
 
     it "should delegate sample correctly" do
-      list.stdev(:sample).should be_close(list.stdev_sample, 1e-8)
+      list.stdev(:sample).should be_within(1e-8).of(list.stdev_sample)
     end
 
     it "should delegate population correctly" do
-      list.stdev(:population).should be_close(list.stdev_population, 1e-8)
+      list.stdev(:population).should be_within(1e-8).of(list.stdev_population)
     end
 
     it "should raise an error with any other key" do
@@ -43,7 +43,7 @@ describe "doing statistics on arrays" do
   describe "Array#z_score" do
     it "should default to population" do
       list.z_score.zip(list.z_score(:population)).each do |value, actual|
-        value.should be_close(actual, 1e-8)
+        value.should be_within(1e-8).of(actual)
       end
     end
 
@@ -58,7 +58,7 @@ describe "doing statistics on arrays" do
       p list
 
       list.z_score(:sample).zip(sample_z_score).each do |value, actual|
-        value.should be_close(actual, 1e-8)
+        value.should be_within(1e-8).of(actual)
       end
     end
 
@@ -71,7 +71,7 @@ describe "doing statistics on arrays" do
       ]
 
       list.z_score(:population).zip(population_z_score).each do |value, actual|
-        value.should be_close(actual, 1e-8)
+        value.should be_within(1e-8).of(actual)
       end
     end
 
